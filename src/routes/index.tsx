@@ -1,26 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/site/sections/Hero";
+import { Positioning } from "@/components/site/sections/Positioning";
+import { Services } from "@/components/site/sections/Services";
+import { Process } from "@/components/site/sections/Process";
+import { Numbers } from "@/components/site/sections/Numbers";
+import { Portfolio } from "@/components/site/sections/Portfolio";
+import { FinalCTA } from "@/components/site/sections/FinalCTA";
+import { Contact } from "@/components/site/sections/Contact";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Vtech Soluções — Sites e sistemas inteligentes com IA" },
+      {
+        name: "description",
+        content:
+          "Empresa de tecnologia B2B. Entregamos sites e sistemas com IA embarcada — 3× mais rápido que agências tradicionais. Projeto fechado, sem mensalidade.",
+      },
+      {
+        property: "og:title",
+        content: "Vtech Soluções — Sites e sistemas inteligentes com IA",
+      },
+      {
+        property: "og:description",
+        content:
+          "Boutique de tecnologia B2B com IA no processo e no produto. Mais rápido, mais moderno, mais acessível.",
+      },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <Positioning />
+      <Services />
+      <Process />
+      <Numbers />
+      <Portfolio />
+      <FinalCTA />
+      <Contact />
+    </>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
