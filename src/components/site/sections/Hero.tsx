@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useSpotlight } from "@/hooks/use-spotlight";
 import { MagneticButton } from "@/components/site/MagneticButton";
+import Spline from "@splinetool/react-spline";
 
 export function Hero() {
   const ref = useSpotlight<HTMLElement>();
@@ -12,20 +13,16 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
     >
       {/* Background layers */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
-      <div className="absolute inset-0 bg-spotlight" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-0 z-0 opacity-80">
+        <Spline scene="https://prod.spline.design/r8pO59-gkjQnGYlQ/scene.splinecode" />
+      </div>
+      <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-spotlight pointer-events-none z-0" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10">
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/40 px-4 py-1.5 text-xs text-muted-foreground backdrop-blur">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-          Aceitando projetos para Q2 2026
-        </div>
-
-        <h1 className="text-display-xl font-display text-foreground">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10 pointer-events-none">
+        
+        <h1 className="text-display-xl font-display text-foreground mt-8">
           Sites e sistemas
           <br />
           <span className="text-shimmer">construídos com IA.</span>
@@ -36,7 +33,7 @@ export function Hero() {
           embarcada no produto final.
         </p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row pointer-events-auto">
           <Link to="/contato">
             <MagneticButton variant="primary">
               Iniciar projeto
