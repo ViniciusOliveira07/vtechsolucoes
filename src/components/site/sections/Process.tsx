@@ -27,14 +27,14 @@ export function Process() {
   return (
     <section className="relative bg-background py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mb-20 max-w-3xl">
+        <div className="mb-20 mx-auto max-w-3xl text-center flex flex-col items-center">
           <p className="text-eyebrow mb-6">03 — Processo</p>
           <h2 className="text-display-md font-display">
             Quatro etapas. Sem ruído<span className="text-primary">.</span>
           </h2>
         </div>
 
-        <div className="relative">
+        <div className="relative mx-auto max-w-5xl">
           {/* timeline line */}
           <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border md:left-1/2 md:-translate-x-1/2" />
 

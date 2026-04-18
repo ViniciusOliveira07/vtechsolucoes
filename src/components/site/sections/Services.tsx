@@ -34,15 +34,15 @@ export function Services() {
 
   return (
     <section className="relative bg-background py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mb-20 max-w-3xl">
+      <div className="mx-auto max-w-5xl px-6 lg:px-10">
+        <div className="mb-20 mx-auto max-w-3xl text-center flex flex-col items-center">
           <p className="text-eyebrow mb-6">02 — Serviços</p>
           <h2 className="text-display-md font-display">
             O que entregamos<span className="text-primary">.</span>
           </h2>
         </div>
 
-        <ul className="border-t border-border">
+        <ul className="border-t border-border mx-auto max-w-4xl">
           {SERVICES.map((s, i) => (
             <li
               key={s.n}
