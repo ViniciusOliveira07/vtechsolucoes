@@ -13,14 +13,12 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
     >
       {/* Background layers */}
-      <div className="absolute inset-0 z-0 opacity-80">
+      <div className="absolute inset-0 z-0">
         <Spline scene="https://prod.spline.design/r8pO59-gkjQnGYlQ/scene.splinecode" />
       </div>
-      <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none z-0" />
-      <div className="absolute inset-0 bg-spotlight pointer-events-none z-0" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10 pointer-events-none">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10 pointer-events-none mt-[20vh]">
         
         <h1 className="text-display-xl font-display text-foreground mt-8">
           Sites e sistemas
