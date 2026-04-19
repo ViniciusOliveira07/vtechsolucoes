@@ -1,91 +1,92 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { Globe, Laptop, Bot, Blocks, Compass } from "lucide-react";
+import { useSpotlight } from "@/hooks/use-spotlight";
 
 const SERVICES = [
   {
     n: "01",
     title: "Sites institucionais",
-    desc: "Presença digital premium. Performance, SEO e identidade visual de estúdio — entregue em semanas, não meses.",
+    desc: "Presença digital premium. Performance, SEO e identidade estúdio.",
+    icon: Globe,
+    colSpan: "md:col-span-8",
   },
   {
     n: "02",
     title: "Sistemas web",
-    desc: "Plataformas internas, dashboards e ferramentas sob medida. Stack moderna, deploy contínuo, manutenção simples.",
+    desc: "Plataformas internas completas. Stack moderna e deploy contínuo.",
+    icon: Laptop,
+    colSpan: "md:col-span-4",
   },
   {
     n: "03",
     title: "Automações com IA",
-    desc: "Agentes, processamento de documentos, atendimento inteligente. IA aplicada a problemas reais do seu negócio.",
+    desc: "Agentes inteligentes e RAG aplicados a problemas reais.",
+    icon: Bot,
+    colSpan: "md:col-span-4",
   },
   {
     n: "04",
     title: "Integrações",
-    desc: "ERPs, CRMs, gateways de pagamento, APIs externas. Conectamos seus sistemas sem dor de cabeça.",
+    desc: "ERPs, gateways. Conectamos seus sistemas sem dor de cabeça.",
+    icon: Blocks,
+    colSpan: "md:col-span-4",
   },
   {
     n: "05",
     title: "Consultoria tech",
-    desc: "Auditoria de stack, planejamento de produto e arquitetura. Acompanhamos decisões críticas com perspectiva técnica sênior.",
+    desc: "Perspectiva sênior em decisões de produto.",
+    icon: Compass,
+    colSpan: "md:col-span-4",
   },
 ];
 
 export function Services() {
-  const [active, setActive] = useState<number | null>(null);
+  const ref = useSpotlight<HTMLDivElement>();
 
   return (
-    <section className="relative bg-background py-32">
-      <div className="mx-auto max-w-5xl px-6 lg:px-10">
-        <div className="mb-20 mx-auto max-w-3xl text-center flex flex-col items-center">
-          <p className="text-eyebrow mb-6">02 — Serviços</p>
+    <section className="relative bg-background py-12 md:py-16 z-10 w-full overflow-visible">
+      {/* Spotlight wrapper from our custom hook */}
+      <div ref={ref} className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10">
+        <div className="mb-12 mx-auto text-center flex flex-col items-center">
+          <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">02 — Serviços</p>
           <h2 className="text-display-md font-display">
-            O que entregamos<span className="text-primary">.</span>
+            Acelerando sua operação<span className="text-primary">.</span>
           </h2>
         </div>
 
-        <ul className="border-t border-border mx-auto max-w-4xl">
-          {SERVICES.map((s, i) => (
-            <li
-              key={s.n}
-              className="group border-b border-border"
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-            >
-              <div className="flex cursor-pointer items-baseline gap-6 py-8 transition-colors lg:py-10">
-                <span className="w-10 shrink-0 text-sm tabular-nums text-muted-foreground">
-                  {s.n}
-                </span>
-                <h3
-                  className={cn(
-                    "flex-1 text-3xl font-display font-semibold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl lg:text-5xl",
-                    active === i
-                      ? "text-foreground translate-x-2"
-                      : "text-foreground/60 group-hover:text-foreground",
-                  )}
-                >
-                  {s.title}
-                </h3>
-                <span
-                  className={cn(
-                    "hidden h-2 w-2 shrink-0 rounded-full transition-all duration-500 lg:block",
-                    active === i ? "bg-primary scale-125" : "bg-border-strong",
-                  )}
-                />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
+          {SERVICES.map((s) => {
+            const Icon = s.icon;
+            return (
               <div
-                className={cn(
-                  "grid transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  active === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
-                )}
+                key={s.n}
+                className={`group relative glass rounded-3xl border border-border-strong p-8 hover:border-primary/50 transition-all duration-500 overflow-hidden shadow-elevated ${s.colSpan}`}
               >
-                <div className="overflow-hidden">
-                  <p className="max-w-2xl pb-8 pl-16 text-base text-muted-foreground lg:text-lg">
-                    {s.desc}
-                  </p>
+                {/* Subtle highlight gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-transparent pointer-events-none group-hover:from-primary/10 transition-colors duration-500" />
+                
+                <div className="flex flex-col h-full relative z-10 justify-between">
+                  <div className="flex justify-between items-start mb-12">
+                    <div className="h-14 w-14 rounded-2xl border border-border-strong bg-background/50 flex items-center justify-center text-foreground group-hover:text-primary group-hover:border-primary/50 group-hover:scale-110 transition-all duration-500">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className="text-xl font-display font-bold text-muted-foreground/30">
+                      {s.n}
+                    </span>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-2xl font-display font-semibold mb-3 tracking-tight text-foreground transition-colors">
+                      {s.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {s.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

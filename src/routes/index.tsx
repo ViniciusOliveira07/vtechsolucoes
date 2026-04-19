@@ -4,7 +4,6 @@ import { Positioning } from "@/components/site/sections/Positioning";
 import { Services } from "@/components/site/sections/Services";
 import { Process } from "@/components/site/sections/Process";
 import { Numbers } from "@/components/site/sections/Numbers";
-import { Portfolio } from "@/components/site/sections/Portfolio";
 import { FinalCTA } from "@/components/site/sections/FinalCTA";
 import { Contact } from "@/components/site/sections/Contact";
 
@@ -39,7 +38,6 @@ function HomePage() {
       <Services />
       <Process />
       <Numbers />
-      <Portfolio />
       <FinalCTA />
       <Contact />
     </>

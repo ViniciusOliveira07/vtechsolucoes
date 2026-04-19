@@ -4,83 +4,56 @@ const STEPS = [
   {
     n: "01",
     title: "Diagnóstico",
-    desc: "Conversa técnica para entender objetivo, restrições e contexto. Sem pitch, sem proposta genérica.",
+    desc: "Conversa técnica para entender objetivo e contexto.",
   },
   {
     n: "02",
-    title: "Proposta fechada",
-    desc: "Escopo, prazo e investimento definidos por escrito. Sem mensalidade, sem fidelização — você paga e recebe.",
+    title: "Proposta",
+    desc: "Escopo, prazo e investimento definidos por escrito.",
   },
   {
     n: "03",
     title: "Build com IA",
-    desc: "Desenvolvimento acelerado com nossa stack proprietária. Atualizações semanais com preview funcional.",
+    desc: "Desenvolvimento rápido com nossa stack proprietária.",
   },
   {
     n: "04",
     title: "Entrega",
-    desc: "Deploy em produção, documentação técnica e handoff. Suporte garantido nos primeiros 30 dias.",
+    desc: "Deploy, documentação técnica e handoff. Suporte incluso.",
   },
 ];
 
 export function Process() {
   return (
-    <section className="relative bg-background py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mb-20 mx-auto max-w-3xl text-center flex flex-col items-center">
-          <p className="text-eyebrow mb-6">03 — Processo</p>
+    <section className="relative bg-background py-16 md:py-20 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10 w-full">
+        
+        <div className="mb-12 text-center flex flex-col items-center">
+          <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">03 — Processo</p>
           <h2 className="text-display-md font-display">
             Quatro etapas. Sem ruído<span className="text-primary">.</span>
           </h2>
         </div>
 
-        <div className="relative mx-auto max-w-5xl">
-          {/* timeline line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border md:left-1/2 md:-translate-x-1/2" />
-
-          <div className="space-y-16 md:space-y-24">
-            {STEPS.map((step, i) => (
-              <motion.div
-                key={step.n}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15%" }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative grid grid-cols-[32px_1fr] gap-8 md:grid-cols-2 md:gap-16"
-              >
-                {/* dot */}
-                <div className="absolute left-0 top-2 flex h-4 w-4 items-center justify-center md:left-1/2 md:-translate-x-1/2">
-                  <div className="h-4 w-4 rounded-full border-2 border-primary bg-background" />
-                </div>
-
-                {i % 2 === 0 ? (
-                  <>
-                    <div className="md:text-right md:pr-16 col-start-2 md:col-start-1">
-                      <p className="text-sm tabular-nums text-primary">{step.n}</p>
-                      <h3 className="mt-2 text-2xl font-display font-semibold sm:text-3xl">
-                        {step.title}
-                      </h3>
-                      <p className="mt-3 max-w-md text-muted-foreground md:ml-auto">
-                        {step.desc}
-                      </p>
-                    </div>
-                    <div className="hidden md:block" />
-                  </>
-                ) : (
-                  <>
-                    <div className="hidden md:block" />
-                    <div className="md:pl-16 col-start-2">
-                      <p className="text-sm tabular-nums text-primary">{step.n}</p>
-                      <h3 className="mt-2 text-2xl font-display font-semibold sm:text-3xl">
-                        {step.title}
-                      </h3>
-                      <p className="mt-3 max-w-md text-muted-foreground">{step.desc}</p>
-                    </div>
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {/* Subtle connecting line */}
+          <div className="hidden lg:block absolute top-[44px] left-[10%] right-[10%] h-[1px] bg-border-strong -z-10" />
+          
+          {STEPS.map((step) => (
+            <div 
+              key={step.n} 
+              className="relative w-full glass rounded-3xl p-8 border border-border-strong overflow-hidden flex flex-col group transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
+            >
+              <div className="h-16 w-16 rounded-full border-[6px] border-background bg-border-strong flex items-center justify-center text-foreground text-xl font-display font-bold mb-8 mx-auto lg:mx-0 shadow-lg group-hover:bg-primary group-hover:text-background transition-colors duration-500">
+                {step.n}
+              </div>
+              
+              <div className="relative z-10 text-center lg:text-left">
+                <h3 className="text-2xl font-display font-semibold mb-4 text-foreground group-hover:text-primary transition-colors duration-500">{step.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

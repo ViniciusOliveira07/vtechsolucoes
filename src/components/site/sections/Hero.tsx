@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useSpotlight } from "@/hooks/use-spotlight";
 import { MagneticButton } from "@/components/site/MagneticButton";
-import Spline from "@splinetool/react-spline";
 
 export function Hero() {
   const ref = useSpotlight<HTMLElement>();
@@ -13,14 +12,11 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
     >
       {/* Background layers */}
-      <div className="absolute inset-0 z-0">
-        <Spline scene="https://prod.spline.design/r8pO59-gkjQnGYlQ/scene.splinecode" />
-      </div>
       <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10 pointer-events-none mt-[20vh]">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10 pointer-events-none">
         
-        <h1 className="text-display-xl font-display text-foreground mt-8">
+        <h1 className="text-display-xl font-display text-foreground">
           Sites e sistemas
           <br />
           <span className="text-shimmer">construídos com IA.</span>
@@ -35,11 +31,8 @@ export function Hero() {
           <Link to="/contato">
             <MagneticButton variant="primary">
               Iniciar projeto
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 ml-2" />
             </MagneticButton>
-          </Link>
-          <Link to="/portfolio">
-            <MagneticButton variant="ghost">Ver trabalhos</MagneticButton>
           </Link>
         </div>
       </div>

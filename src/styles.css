@@ -247,11 +247,4 @@
   .transition-smooth {
     transition-timing-function: var(--transition-smooth);
   }
-
-  /* Hide Spline Logo */
-  div[id="logo"], a[href*="spline.design"] {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
 }
