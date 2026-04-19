@@ -37,30 +37,33 @@ export function Header() {
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-[880px] -translate-x-1/2"
+        className="fixed top-6 left-1/2 z-50 w-[calc(100%-2rem)] max-w-[1040px] -translate-x-1/2"
       >
         <div
           className={cn(
-            "rounded-full border border-white/10 bg-black/60 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-500",
+            "relative rounded-full border border-white/10 bg-black/55 backdrop-blur-2xl backdrop-saturate-150 transition-shadow duration-500",
             scrolled
-              ? "shadow-[0_12px_40px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.08)]"
-              : "shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]",
+              ? "shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_rgba(255,255,255,0.1)]"
+              : "shadow-[0_14px_48px_-12px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.08)]",
           )}
         >
-          <div className="flex h-14 items-center justify-between pl-4 pr-2 md:pl-5 md:pr-2">
-            <Link to="/" className="group flex items-center gap-2.5">
-              <div className="relative h-6 w-6">
-                <div className="absolute inset-0 rounded-md bg-primary transition-transform duration-500 group-hover:rotate-45" />
-                <div className="absolute inset-[4px] rounded-sm bg-background" />
-                <div className="absolute inset-[8px] rounded-[2px] bg-primary" />
+          {/* sutil top highlight line */}
+          <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+          <div className="flex h-[68px] items-center justify-between pl-5 pr-3 md:pl-7 md:pr-3">
+            <Link to="/" className="group flex items-center gap-3">
+              <div className="relative h-8 w-8">
+                <div className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-transform duration-500 group-hover:rotate-45" />
+                <div className="absolute inset-[5px] rounded-md bg-background" />
+                <div className="absolute inset-[10px] rounded-[3px] bg-primary" />
               </div>
-              <span className="text-[14px] font-semibold tracking-tight">
+              <span className="text-[15px] font-semibold tracking-tight">
                 Vtech<span className="text-primary"> Soluções</span>
               </span>
             </Link>
 
             <nav
-              className="relative hidden items-center md:flex"
+              className="relative hidden items-center gap-1 md:flex"
               onMouseLeave={() => setHovered(null)}
             >
               {NAV.map((item) => {
@@ -72,7 +75,7 @@ export function Header() {
                     to={item.to}
                     onMouseEnter={() => setHovered(item.to)}
                     className={cn(
-                      "relative rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors duration-300",
+                      "relative rounded-full px-5 py-2.5 text-[13.5px] font-medium transition-colors duration-300",
                       isActive
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground",
@@ -81,7 +84,7 @@ export function Header() {
                     {isHighlighted && (
                       <motion.span
                         layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-white/[0.06]"
+                        className="absolute inset-0 rounded-full bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                         transition={{
                           type: "spring",
                           stiffness: 380,
@@ -98,14 +101,15 @@ export function Header() {
             <div className="hidden md:block">
               <Link
                 to="/contato"
-                className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-[13px] font-medium text-background transition-transform duration-300 hover:scale-[1.03]"
+                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-[13.5px] font-medium text-background transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(255,255,255,0.25)]"
               >
                 Iniciar projeto
+                <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </Link>
             </div>
 
             <button
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground transition-colors hover:bg-white/[0.06]"
+              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-white/[0.08]"
               onClick={() => setOpen(true)}
               aria-label="Abrir menu"
             >
