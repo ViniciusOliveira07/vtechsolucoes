@@ -1,50 +1,35 @@
 
-# Vtech Soluções — site corporativo Apple-like
+# Novo Header — pílula flutuante estilo "Teku AI"
 
-Site institucional B2B em rota única (`/`) com 8 seções cinematográficas de 100vh, navegação por âncora suave e rotas separadas para páginas que precisam de SEO próprio (`/servicos`, `/portfolio`, `/contato`). Tudo em SSR no TanStack Start.
+Substituir o header atual (full-width com glassmorphism) por uma **pill bar flutuante centralizada** no topo, inspirada na referência mas elevada em qualidade.
 
-## Identidade visual
+## Visual
 
-- **Paleta**: preto absoluto `#000`, branco puro `#FFF`, cinza muito escuro para superfícies, **azul elétrico `#0A84FF`** como acento único — usado com parcimônia (CTAs, hover states, glow do spotlight).
-- **Tipografia**: stack neo-grotesque estilo Söhne/Neue Haas — usar **Inter Tight** (Google Fonts, com `font-feature-settings` ajustado e `letter-spacing` negativo agressivo). Display até ~120px com peso 600/700, corpo em 400.
-- **Mood**: preto profundo, hierarquia tipográfica como protagonista, micro-interações refinadas.
+- **Container**: pílula (`rounded-full`) flutuando a ~16px do topo, centralizada horizontalmente, com largura máxima ~880px (auto-shrink no mobile).
+- **Fundo**: glassmorphism real — preto com 60% de opacidade, `backdrop-blur(24px) saturate(180%)`, borda de 1px em `white/10`, e um leve **inner glow** (box-shadow interno azul muito sutil) para dar a sensação premium que falta na referência.
+- **Logo (esquerda)**: mantém o ícone geométrico azul + wordmark "Vtech **Soluções**" (Soluções em azul elétrico, como o "AI" da referência).
+- **Nav (centro)**: links Início, Serviços, Contato. Item ativo recebe **cor azul + um pill highlight animado** que desliza entre os itens no hover (efeito "magic line" estilo Linear/Vercel) — supera a referência que só muda a cor.
+- **CTA (direita)**: botão pílula branco "Iniciar projeto" com texto preto, hover com leve scale.
 
-## Recursos visuais "wow"
+## Comportamento
 
-- **Spotlight do cursor**: gradiente radial azul que segue o mouse no fundo do hero e seções escuras. Hook reutilizável `useSpotlight`.
-- **Cursor customizado**: ponto + halo que cresce sobre elementos interativos.
-- **Scroll reveals**: stagger nas palavras/linhas (Framer Motion + IntersectionObserver) — frase de posicionamento se revela palavra a palavra.
-- **Counters animados** nos diferenciais ("3×", "10+ projetos", etc.).
-- **Hover magnético** nos botões e itens da lista de serviços.
-- **Shimmer text** sutil no headline principal.
-- **Linhas de grade animadas** no fundo do CTA final.
-- **Glassmorphism real** (blur + borda de luz) no header sticky.
+- **Sempre flutuante** (não muda no scroll — a pílula já é visualmente destacada por design). Apenas adiciona uma sombra mais forte ao rolar para reforçar elevação.
+- **Entrada**: fade + slide-down de 8px no mount (300ms).
+- **Hover na nav**: o "pill highlight" (background sutil branco/5%) faz morph entre os itens com `layoutId` do Framer Motion — transição suave em ~300ms.
+- **Mobile (<768px)**: pílula vira só logo + ícone hamburger; CTA e nav vão pro overlay full-screen (já existente, mantido com pequenos ajustes visuais).
 
-## Arquitetura de seções (home)
+## Detalhes técnicos
 
-1. **Hero (100vh)** — headline em 2 linhas com letter-spacing negativo, sub em 1 linha, dois CTAs (`Iniciar projeto` / `Ver trabalhos`), fundo preto com spotlight do cursor + grid sutil.
-2. **Posicionamento** — uma frase enorme centralizada, revelada palavra-por-palavra no scroll: *"Não somos uma agência. Somos uma empresa de tecnologia que resolve problemas reais com IA."*
-3. **Serviços** — lista numerada vertical editorial (01 → 05), cada item com peso tipográfico forte; hover expande descrição com transição suave. Itens: Sites institucionais, Sistemas web, Automações com IA, Integrações, Consultoria tech.
-4. **Como funciona** — timeline vertical com 4 etapas (Diagnóstico → Proposta fechada → Build com IA → Entrega), revelada em cascata no scroll.
-5. **Diferenciais / Números** — 3 métricas em tipografia gigante, sem cards: **3× mais rápido**, **IA embarcada**, **Projeto fechado**. Números contam ao entrar na viewport.
-6. **Portfólio** — 3 projetos fictícios com mockups gerados (cards grandes, full-bleed, hover com overlay azul + info do case). Setores: SaaS B2B, e-commerce industrial, plataforma logística.
-7. **CTA final (100vh)** — frase única "Pronto para construir algo que funcione de verdade?" + botão único, fundo preto com aurora sutil.
-8. **Contato + Footer** — formulário minimalista à esquerda (nome, empresa, email, mensagem) com validação visual elegante, infos de contato à direita (email, LinkedIn, localização). Footer tipográfico minimalista.
+- Reescrever `src/components/site/Header.tsx`:
+  - Trocar `fixed inset-x-0` por `fixed top-4 left-1/2 -translate-x-1/2` + `max-w-[880px] w-[calc(100%-2rem)]`.
+  - Container com classes: `rounded-full border border-white/10 bg-black/60 backdrop-blur-xl backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]`.
+  - Implementar magic-pill com `framer-motion` (já instalado): `motion.div` com `layoutId="nav-pill"` posicionado no item em hover/active.
+  - Wordmark com "Soluções" em `text-primary` (azul) para espelhar o "AI" azul-ciano da referência.
+- Ajustar `src/styles.css` se necessário (adicionar utilitário `.pill-glass` opcional — provavelmente não preciso, classes inline bastam).
+- `main` no `__root.tsx` não precisa de mudança — o header já era `fixed`. O Hero atual já tem `padding-top` suficiente, mas vou verificar e ajustar se a pílula precisar de mais respiro (~24px extra no topo).
 
-## Estrutura de rotas (SSR/SEO)
+## O que NÃO fazer
 
-- `/` — home com todas as seções acima
-- `/servicos` — página dedicada com detalhamento dos serviços (head meta próprio)
-- `/portfolio` — grade dos cases (head meta próprio)
-- `/contato` — formulário em página própria (head meta próprio)
-
-Header sticky com glassmorphism aparece após scroll do hero, com indicador de seção ativa (bolinha que desliza). Menu mobile com animação de abertura cinematográfica (overlay full-screen).
-
-## Componentização
-
-- `Spotlight`, `MagneticButton`, `CustomCursor`, `RevealText`, `AnimatedCounter`, `SectionShell` (wrapper 100vh padrão), `Header`, `Footer`, `ContactForm`.
-- Mockups de portfólio gerados como SVG/PNG estilizados (interfaces dark fictícias) — sem stock photos.
-
-## O que NÃO faremos (regras travadas)
-
-- Nada de cards uniformes com bordas finas, emojis como ícones, bento grids rasos, gradientes de acento espalhados, tipografia system pura, espaçamento apertado.
+- Não usar borda colorida grossa nem gradiente de fundo na pílula (manteria o ar premium discreto).
+- Não animar o hamburger com algo gritante — fade simples.
+- Não mexer no overlay mobile existente além de pequenos ajustes de cor pra combinar.
