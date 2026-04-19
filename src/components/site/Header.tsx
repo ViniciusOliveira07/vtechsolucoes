@@ -33,10 +33,7 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className="fixed top-6 left-1/2 z-50 w-[calc(100%-2rem)] max-w-[1040px] -translate-x-1/2"
       >
         <div
