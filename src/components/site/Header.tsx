@@ -114,7 +114,7 @@ export function Header() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile menu */}
       <AnimatePresence>
