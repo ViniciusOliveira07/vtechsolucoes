@@ -64,7 +64,7 @@ export function Services() {
                 {/* Subtle highlight gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-transparent pointer-events-none group-hover:from-primary/10 transition-colors duration-500" />
                 
-                <div className="flex flex-col h-full relative z-10 gap-8 sm:gap-10 md:justify-between md:gap-12">
+                <div className="flex flex-col h-full relative z-10 gap-8 sm:gap-10 md:gap-16">
                   <div className="flex justify-between items-start">
                     <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl border border-border-strong bg-background/50 flex items-center justify-center text-foreground group-hover:text-primary group-hover:border-primary/50 group-hover:scale-110 transition-all duration-500">
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
