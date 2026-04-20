@@ -22,18 +22,8 @@ export const Route = createFileRoute("/contato")({
 
 function ContatoPage() {
   return (
-    <>
-      <section className="relative flex min-h-[50vh] items-end bg-background pt-32 pb-8">
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-10">
-          <p className="text-eyebrow mb-6">Contato</p>
-          <h1 className="text-display-xl font-display max-w-4xl">
-            Vamos<br />
-            <span className="text-shimmer">conversar.</span>
-          </h1>
-        </div>
-      </section>
+    <div className="pt-24">
       <Contact />
-    </>
+    </div>
   );
 }
