@@ -92,8 +92,8 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      <div className="grid gap-6 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} noValidate className="w-full space-y-5 sm:space-y-6">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <Field
           label="Nome"
           name="name"
@@ -147,7 +147,7 @@ export function ContactForm() {
           type="submit"
           disabled={loading || sent}
           className={cn(
-            "group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-foreground px-7 py-4 text-sm font-medium text-background transition-all duration-300",
+            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-all duration-300 sm:w-auto sm:px-7 sm:py-4",
             "hover:scale-[1.02] hover:shadow-[0_12px_32px_-8px_rgba(255,255,255,0.3)]",
             "disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100",
           )}
@@ -215,7 +215,7 @@ function Field({
   const hasError = Boolean(error);
 
   const baseClass = cn(
-    "peer w-full bg-transparent border-0 border-b px-0 pt-7 pb-3 text-base text-foreground outline-none transition-colors duration-300",
+    "peer w-full bg-transparent border-0 border-b px-0 pt-6 pb-3 text-base text-foreground outline-none transition-colors duration-300 sm:pt-7",
     hasError
       ? "border-destructive focus:border-destructive"
       : "border-border-strong focus:border-primary",
@@ -228,8 +228,8 @@ function Field({
         className={cn(
           "pointer-events-none absolute left-0 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
           isFloating
-            ? "top-1 text-xs"
-            : "top-7 text-base",
+            ? "top-0.5 text-xs sm:top-1"
+            : "top-6 text-[15px] sm:top-7 sm:text-base",
           hasError
             ? "text-destructive"
             : isFloating && focused

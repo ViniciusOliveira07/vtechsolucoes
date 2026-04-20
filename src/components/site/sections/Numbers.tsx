@@ -16,7 +16,7 @@ export function Numbers() {
           </h2>
         </div>
 
-        <div className="grid gap-16 md:grid-cols-3">
+        <div className="grid gap-10 sm:gap-12 md:grid-cols-3 md:gap-16">
           <Stat value={3} suffix="×" label="Mais rápido que agências tradicionais. IA nativa no processo de desenvolvimento." />
           <Stat value={100} suffix="%" label="IA embarcada no produto final. Não só no processo, mas também na entrega." />
           <Stat value={0} suffix="" label="Mensalidades fantasmas. Escopo fechado, entrega contínua. Você paga e recebe." />
@@ -28,11 +28,11 @@ export function Numbers() {
 
 function Stat({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   return (
-    <div className="group border-l-2 border-border-strong pl-10 hover:border-primary transition-colors duration-500">
-      <div className="text-[clamp(5rem,12vw,10rem)] font-display font-semibold leading-[0.8] tracking-[-0.05em] text-foreground/50 group-hover:text-primary transition-colors duration-500">
+    <div className="group border-l-2 border-border-strong pl-6 sm:pl-8 md:pl-10 hover:border-primary transition-colors duration-500">
+      <div className="text-[clamp(3.5rem,12vw,10rem)] font-display font-semibold leading-[0.85] tracking-[-0.05em] text-foreground/50 group-hover:text-primary transition-colors duration-500">
         <AnimatedCounter to={value} suffix={suffix} />
       </div>
-      <p className="mt-8 max-w-xs text-lg text-muted-foreground leading-relaxed">{label}</p>
+      <p className="mt-5 max-w-xs text-base text-muted-foreground leading-relaxed sm:mt-6 sm:text-lg md:mt-8">{label}</p>
     </div>
   );
 }

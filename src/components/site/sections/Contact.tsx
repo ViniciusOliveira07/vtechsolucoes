@@ -27,7 +27,7 @@ const infoItems = [
 
 export function Contact() {
   return (
-    <section className="relative overflow-hidden bg-background py-20 sm:py-24 md:py-32">
+    <section className="relative overflow-hidden bg-background py-14 sm:py-20 md:py-28 lg:py-32">
       {/* ambient blue glow */}
       <div
         aria-hidden
@@ -48,34 +48,34 @@ export function Contact() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[11px] font-medium text-muted-foreground backdrop-blur sm:text-xs">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
             Disponível para novos projetos
           </div>
-          <h2 className="text-display-lg font-display tracking-tight">
+          <h2 className="text-display-lg font-display tracking-tight text-balance">
             Vamos conversar<span className="text-primary">.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-5 max-w-xl text-sm text-muted-foreground sm:mt-6 sm:text-base md:text-lg">
             Conte sobre o desafio. Respondemos com um diagnóstico e proposta
             fechada em até 24 horas úteis.
           </p>
         </div>
 
         {/* Card */}
-        <div className="mx-auto mt-16 max-w-6xl">
-          <div className="relative rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-px shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+        <div className="mx-auto mt-10 w-full max-w-6xl sm:mt-14 md:mt-16">
+          <div className="relative rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-px shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:rounded-3xl">
             {/* top edge highlight */}
-            <div className="pointer-events-none absolute inset-x-20 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent sm:inset-x-20" />
 
-            <div className="grid overflow-hidden rounded-3xl bg-background/40 backdrop-blur-xl lg:grid-cols-12">
+            <div className="grid overflow-hidden rounded-2xl bg-background/40 backdrop-blur-xl sm:rounded-3xl lg:grid-cols-12">
               {/* Form side */}
-              <div className="p-8 sm:p-12 lg:col-span-7 lg:p-14">
+              <div className="p-5 sm:p-8 md:p-10 lg:col-span-7 lg:p-14">
                 <ContactForm />
               </div>
 
@@ -83,7 +83,7 @@ export function Contact() {
               <div className="hidden lg:col-span-5 lg:block">
                 <div className="relative h-full">
                   <div className="absolute inset-y-12 left-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-                  <div className="flex h-full flex-col justify-center gap-8 p-12 lg:p-14">
+                  <div className="flex h-full flex-col justify-center gap-7 p-10 lg:p-14">
                     {infoItems.map((item) => (
                       <InfoRow key={item.label} {...item} />
                     ))}
@@ -92,8 +92,8 @@ export function Contact() {
               </div>
 
               {/* Mobile info */}
-              <div className="border-t border-white/[0.06] p-8 sm:p-12 lg:hidden">
-                <div className="grid gap-8 sm:grid-cols-2">
+              <div className="border-t border-white/[0.06] p-5 sm:p-8 md:p-10 lg:hidden">
+                <div className="grid gap-6 sm:grid-cols-2 sm:gap-7">
                   {infoItems.map((item) => (
                     <InfoRow key={item.label} {...item} />
                   ))}
