@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useSpotlight } from "@/hooks/use-spotlight";
 import { MagneticButton } from "@/components/site/MagneticButton";
+import { motion } from "framer-motion";
 
 export function Hero() {
   const ref = useSpotlight<HTMLElement>();
@@ -37,8 +38,24 @@ export function Hero() {
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
-        Role para descobrir
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+        <div className="w-[18px] h-[30px] rounded-full border border-muted-foreground/30 flex justify-center p-1">
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="w-1 h-1 rounded-full bg-muted-foreground/60"
+          />
+        </div>
+        <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
+          Role para descobrir
+        </div>
       </div>
     </section>
   );
