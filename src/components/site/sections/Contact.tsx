@@ -27,14 +27,14 @@ const infoItems = [
 
 export function Contact() {
   return (
-    <section className="relative overflow-hidden bg-background py-32">
+    <section className="relative overflow-hidden bg-background py-20 sm:py-24 md:py-32">
       {/* ambient blue glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.18] blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] max-w-[120vw] -translate-x-1/2 rounded-full opacity-[0.18] blur-3xl"
         style={{
           background:
-            "radial-gradient(closest-side, hsl(var(--primary) / 0.7), transparent)",
+            "radial-gradient(closest-side, oklch(0.62 0.21 258 / 0.7), transparent)",
         }}
       />
       {/* subtle grid */}
