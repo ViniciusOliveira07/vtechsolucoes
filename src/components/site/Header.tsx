@@ -47,7 +47,7 @@ export function Header() {
           {/* sutil top highlight line */}
           <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="flex h-[68px] items-center justify-between pl-5 pr-3 md:pl-7 md:pr-3">
+          <div className="flex h-[60px] items-center justify-between pl-4 pr-2 md:h-[68px] md:pl-7 md:pr-3">
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-8 w-8">
                 <div className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-transform duration-500 group-hover:rotate-45" />
