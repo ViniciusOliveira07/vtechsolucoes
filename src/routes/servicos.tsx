@@ -6,7 +6,7 @@ import { FinalCTA } from "@/components/site/sections/FinalCTA";
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
-      { title: "Serviços — Vtech Soluções" },
+      { title: "Vtech Soluções" },
       {
         name: "description",
         content:

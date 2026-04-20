@@ -4,7 +4,7 @@ import { Contact } from "@/components/site/sections/Contact";
 export const Route = createFileRoute("/contato")({
   head: () => ({
     meta: [
-      { title: "Contato — Vtech Soluções" },
+      { title: "Vtech Soluções" },
       {
         name: "description",
         content:

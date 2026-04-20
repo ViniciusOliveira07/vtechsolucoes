@@ -4,7 +4,7 @@ import { LegalPage } from "@/components/site/LegalPage";
 export const Route = createFileRoute("/termos-e-condicoes")({
   head: () => ({
     meta: [
-      { title: "Termos e Condições — Vtech Soluções" },
+      { title: "Vtech Soluções" },
       {
         name: "description",
         content:
