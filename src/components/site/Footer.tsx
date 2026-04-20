@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-16 lg:px-10">
         <div className="grid gap-10 sm:gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <div className="flex items-center gap-2.5">
               <div className="relative h-7 w-7">
                 <div className="absolute inset-0 rounded-md bg-primary" />
@@ -41,13 +41,51 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
+            <p className="text-eyebrow">Legal</p>
+            <ul className="mt-5 space-y-3 text-sm">
+              <li>
+                <Link
+                  to="/politica-de-privacidade"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Política de Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/politica-de-cookies"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Política de Cookies
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/termos-e-condicoes"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Termos e Condições
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/politica-de-seguranca"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Política de Segurança
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Contato</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
                 <a
                   href="mailto:contato@vtechsolucoes.com"
-                  className="text-foreground hover:text-primary"
+                  className="text-foreground hover:text-primary break-all"
                 >
                   contato@vtechsolucoes.com
                 </a>
