@@ -9,13 +9,13 @@ export function FinalCTA() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-background"
+      className="relative flex items-center justify-center overflow-hidden bg-background py-24 md:py-32 lg:py-40"
     >
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="absolute inset-0 bg-aurora" />
       <div className="absolute inset-0 bg-spotlight" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-10">
+      <div className="relative z-10 mx-auto max-w-[1100px] px-5 text-center sm:px-8 lg:px-12 xl:px-16">
         <h2 className="text-display-lg font-display">
           Pronto para construir algo
           <br />

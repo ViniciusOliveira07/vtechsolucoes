@@ -15,7 +15,7 @@ export function Hero() {
       {/* Background layers */}
       <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center sm:px-8 lg:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-5 text-center sm:px-8 lg:px-12 xl:px-16">
         <h1 className="text-display-xl font-display text-foreground text-balance">
           Sites e sistemas
           <br />

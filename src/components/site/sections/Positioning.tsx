@@ -1,6 +1,6 @@
 export function Positioning() {
   return (
-    <section className="relative w-full bg-background py-12 md:py-16 overflow-hidden px-6 lg:px-10">
+    <section className="relative w-full bg-background py-16 md:py-20 lg:py-24 overflow-hidden px-5 sm:px-8 lg:px-12 xl:px-16">
       <div className="mx-auto max-w-5xl w-full flex flex-col items-center text-center">
         
         {/* Padronizado com as outras seções */}

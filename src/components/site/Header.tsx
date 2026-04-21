@@ -34,7 +34,7 @@ export function Header() {
   return (
     <>
       <header
-        className="fixed top-6 left-1/2 z-50 w-[calc(100%-2rem)] max-w-[1040px] -translate-x-1/2"
+        className="fixed top-5 md:top-7 left-1/2 z-50 w-[calc(100%-2rem)] max-w-[1180px] -translate-x-1/2"
       >
         <div
           className={cn(
@@ -47,14 +47,14 @@ export function Header() {
           {/* sutil top highlight line */}
           <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="flex h-[60px] items-center justify-between pl-4 pr-2 md:h-[68px] md:pl-7 md:pr-3">
+          <div className="flex h-[72px] items-center justify-between pl-5 pr-3 md:h-[84px] md:pl-8 md:pr-4">
             <Link to="/" className="group flex items-center gap-3">
-              <div className="relative h-8 w-8">
+              <div className="relative h-9 w-9">
                 <div className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-transform duration-500 group-hover:rotate-45" />
                 <div className="absolute inset-[5px] rounded-md bg-background" />
                 <div className="absolute inset-[10px] rounded-[3px] bg-primary" />
               </div>
-              <span className="text-[15px] font-semibold tracking-tight">
+              <span className="text-[16px] font-semibold tracking-tight">
                 Vtech<span className="text-primary"> Soluções</span>
               </span>
             </Link>
@@ -72,7 +72,7 @@ export function Header() {
                     to={item.to}
                     onMouseEnter={() => setHovered(item.to)}
                     className={cn(
-                      "relative rounded-full px-5 py-2.5 text-[13.5px] font-medium transition-colors duration-300",
+                      "relative rounded-full px-6 py-3 text-[14.5px] font-medium transition-colors duration-300",
                       isActive
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground",
@@ -98,7 +98,7 @@ export function Header() {
             <div className="hidden md:block">
               <Link
                 to="/contato"
-                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-[13.5px] font-medium text-background transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(255,255,255,0.25)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-[14.5px] font-medium text-background transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(255,255,255,0.25)]"
               >
                 Iniciar projeto
                 <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -106,7 +106,7 @@ export function Header() {
             </div>
 
             <button
-              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-white/[0.08]"
+              className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-full text-foreground transition-colors hover:bg-white/[0.08]"
               onClick={() => setOpen(true)}
               aria-label="Abrir menu"
             >
