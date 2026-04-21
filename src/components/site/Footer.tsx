@@ -3,9 +3,9 @@ import { Link } from "@tanstack/react-router";
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-16 lg:px-10">
-        <div className="grid gap-10 sm:gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
+      <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 py-14 sm:px-8 md:py-16 lg:px-12 xl:px-16">
+        <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-12">
+          <div className="sm:col-span-2 md:col-span-4">
             <div className="flex items-center gap-2.5">
               <div className="relative h-7 w-7">
                 <div className="absolute inset-0 rounded-md bg-primary" />
@@ -20,7 +20,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Navegação</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
@@ -79,13 +79,13 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <p className="text-eyebrow">Contato</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
                 <a
                   href="mailto:contato@vtechsolucoes.com"
-                  className="text-foreground hover:text-primary break-all"
+                  className="text-foreground hover:text-primary"
                 >
                   contato@vtechsolucoes.com
                 </a>
@@ -105,7 +105,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:mt-16 sm:pt-8 md:flex-row md:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-[11px] text-muted-foreground sm:mt-16 sm:pt-8 sm:text-xs md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} Vtech Soluções. Todos os direitos reservados.</p>
           <p>Empresa de tecnologia B2B · CNPJ sob consulta</p>
         </div>

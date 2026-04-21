@@ -25,8 +25,8 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section className="relative bg-background py-16 md:py-20 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10 w-full">
+    <section className="relative bg-background py-16 md:py-20 lg:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16 relative z-10 w-full">
         
         <div className="mb-12 text-center flex flex-col items-center">
           <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">03 — Processo</p>

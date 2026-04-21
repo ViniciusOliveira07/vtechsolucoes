@@ -43,9 +43,9 @@ export function Services() {
   const ref = useSpotlight<HTMLDivElement>();
 
   return (
-    <section className="relative bg-background py-12 md:py-16 z-10 w-full overflow-visible">
+    <section className="relative bg-background py-16 md:py-20 lg:py-24 z-10 w-full overflow-visible">
       {/* Spotlight wrapper from our custom hook */}
-      <div ref={ref} className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10">
+      <div ref={ref} className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         <div className="mb-12 mx-auto text-center flex flex-col items-center">
           <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">02 — Serviços</p>
           <h2 className="text-display-md font-display">
