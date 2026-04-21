@@ -1,12 +1,12 @@
-import { Mail, MapPin, Briefcase, Clock, ArrowUpRight } from "lucide-react";
+import { MessageCircle, MapPin, Briefcase, Clock, ArrowUpRight } from "lucide-react";
 import { ContactForm } from "@/components/site/ContactForm";
 
 const infoItems = [
   {
-    icon: Mail,
-    label: "Email",
-    value: "contato@vtechsolucoes.com",
-    href: "mailto:contato@vtechsolucoes.com",
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: "+55 11 5444-1926",
+    href: "https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Vtech%20Solu%C3%A7%C3%B5es%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.",
   },
   {
     icon: MapPin,

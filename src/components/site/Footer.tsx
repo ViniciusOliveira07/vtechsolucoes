@@ -84,10 +84,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm">
               <li>
                 <a
-                  href="mailto:contato@vtechsolucoes.com"
+                  href="https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Vtech%20Solu%C3%A7%C3%B5es%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-foreground hover:text-primary"
                 >
-                  contato@vtechsolucoes.com
+                  WhatsApp · +55 11 5444-1926
                 </a>
               </li>
               <li className="text-muted-foreground">São Paulo · Brasil</li>
