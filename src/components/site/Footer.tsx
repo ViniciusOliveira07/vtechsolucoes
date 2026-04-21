@@ -93,16 +93,6 @@ export function Footer() {
                 </a>
               </li>
               <li className="text-muted-foreground">São Paulo · Brasil</li>
-              <li>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  LinkedIn ↗
-                </a>
-              </li>
             </ul>
           </div>
         </div>
