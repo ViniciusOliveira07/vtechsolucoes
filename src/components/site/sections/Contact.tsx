@@ -135,8 +135,13 @@ function InfoRow({ icon: Icon, label, value, href }: InfoRowProps) {
   );
 
   if (href) {
+    const isExternal = href.startsWith("http");
     return (
-      <a href={href} className="group flex items-center gap-4">
+      <a
+        href={href}
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="group flex items-center gap-4"
+      >
         {content}
       </a>
     );
