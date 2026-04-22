@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 py-14 sm:px-8 md:py-16 lg:px-12 xl:px-16">
         <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-12">
-          <div className="sm:col-span-2 md:col-span-4">
+          <div className="sm:col-span-2 md:col-span-3">
             <div className="flex items-center gap-2.5">
               <div className="relative h-7 w-7">
                 <div className="absolute inset-0 rounded-md bg-primary" />
@@ -20,7 +20,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Navegação</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
@@ -72,7 +72,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Legal</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
@@ -110,7 +110,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Contato</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
