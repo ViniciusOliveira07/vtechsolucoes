@@ -16,6 +16,11 @@ import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos.sites-institucionais'
+import { Route as ServicosSistemasWebRouteImport } from './routes/servicos.sistemas-web'
+import { Route as ServicosIntegracoesRouteImport } from './routes/servicos.integracoes'
+import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos.consultoria-tech'
+import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos.automacoes-com-ia'
 
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
   id: '/termos-e-condicoes',
@@ -52,6 +57,32 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosSitesInstitucionaisRoute =
+  ServicosSitesInstitucionaisRouteImport.update({
+    id: '/sites-institucionais',
+    path: '/sites-institucionais',
+    getParentRoute: () => ServicosRoute,
+  } as any)
+const ServicosSistemasWebRoute = ServicosSistemasWebRouteImport.update({
+  id: '/sistemas-web',
+  path: '/sistemas-web',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosIntegracoesRoute = ServicosIntegracoesRouteImport.update({
+  id: '/integracoes',
+  path: '/integracoes',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosConsultoriaTechRoute = ServicosConsultoriaTechRouteImport.update({
+  id: '/consultoria-tech',
+  path: '/consultoria-tech',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosAutomacoesComIaRoute = ServicosAutomacoesComIaRouteImport.update({
+  id: '/automacoes-com-ia',
+  path: '/automacoes-com-ia',
+  getParentRoute: () => ServicosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,8 +90,13 @@ export interface FileRoutesByFullPath {
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRoute
+  '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
+  '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
+  '/servicos/integracoes': typeof ServicosIntegracoesRoute
+  '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
+  '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +104,13 @@ export interface FileRoutesByTo {
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRoute
+  '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
+  '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
+  '/servicos/integracoes': typeof ServicosIntegracoesRoute
+  '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
+  '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +119,13 @@ export interface FileRoutesById {
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRoute
+  '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
+  '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
+  '/servicos/integracoes': typeof ServicosIntegracoesRoute
+  '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
+  '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +137,11 @@ export interface FileRouteTypes {
     | '/politica-de-seguranca'
     | '/servicos'
     | '/termos-e-condicoes'
+    | '/servicos/automacoes-com-ia'
+    | '/servicos/consultoria-tech'
+    | '/servicos/integracoes'
+    | '/servicos/sistemas-web'
+    | '/servicos/sites-institucionais'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +151,11 @@ export interface FileRouteTypes {
     | '/politica-de-seguranca'
     | '/servicos'
     | '/termos-e-condicoes'
+    | '/servicos/automacoes-com-ia'
+    | '/servicos/consultoria-tech'
+    | '/servicos/integracoes'
+    | '/servicos/sistemas-web'
+    | '/servicos/sites-institucionais'
   id:
     | '__root__'
     | '/'
@@ -109,6 +165,11 @@ export interface FileRouteTypes {
     | '/politica-de-seguranca'
     | '/servicos'
     | '/termos-e-condicoes'
+    | '/servicos/automacoes-com-ia'
+    | '/servicos/consultoria-tech'
+    | '/servicos/integracoes'
+    | '/servicos/sistemas-web'
+    | '/servicos/sites-institucionais'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,7 +178,7 @@ export interface RootRouteChildren {
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PoliticaDeSegurancaRoute: typeof PoliticaDeSegurancaRoute
-  ServicosRoute: typeof ServicosRoute
+  ServicosRoute: typeof ServicosRouteWithChildren
   TermosECondicoesRoute: typeof TermosECondicoesRoute
 }
 
@@ -172,8 +233,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos/sites-institucionais': {
+      id: '/servicos/sites-institucionais'
+      path: '/sites-institucionais'
+      fullPath: '/servicos/sites-institucionais'
+      preLoaderRoute: typeof ServicosSitesInstitucionaisRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/sistemas-web': {
+      id: '/servicos/sistemas-web'
+      path: '/sistemas-web'
+      fullPath: '/servicos/sistemas-web'
+      preLoaderRoute: typeof ServicosSistemasWebRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/integracoes': {
+      id: '/servicos/integracoes'
+      path: '/integracoes'
+      fullPath: '/servicos/integracoes'
+      preLoaderRoute: typeof ServicosIntegracoesRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/consultoria-tech': {
+      id: '/servicos/consultoria-tech'
+      path: '/consultoria-tech'
+      fullPath: '/servicos/consultoria-tech'
+      preLoaderRoute: typeof ServicosConsultoriaTechRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/automacoes-com-ia': {
+      id: '/servicos/automacoes-com-ia'
+      path: '/automacoes-com-ia'
+      fullPath: '/servicos/automacoes-com-ia'
+      preLoaderRoute: typeof ServicosAutomacoesComIaRouteImport
+      parentRoute: typeof ServicosRoute
+    }
   }
 }
+
+interface ServicosRouteChildren {
+  ServicosAutomacoesComIaRoute: typeof ServicosAutomacoesComIaRoute
+  ServicosConsultoriaTechRoute: typeof ServicosConsultoriaTechRoute
+  ServicosIntegracoesRoute: typeof ServicosIntegracoesRoute
+  ServicosSistemasWebRoute: typeof ServicosSistemasWebRoute
+  ServicosSitesInstitucionaisRoute: typeof ServicosSitesInstitucionaisRoute
+}
+
+const ServicosRouteChildren: ServicosRouteChildren = {
+  ServicosAutomacoesComIaRoute: ServicosAutomacoesComIaRoute,
+  ServicosConsultoriaTechRoute: ServicosConsultoriaTechRoute,
+  ServicosIntegracoesRoute: ServicosIntegracoesRoute,
+  ServicosSistemasWebRoute: ServicosSistemasWebRoute,
+  ServicosSitesInstitucionaisRoute: ServicosSitesInstitucionaisRoute,
+}
+
+const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
+  ServicosRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -181,7 +297,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PoliticaDeSegurancaRoute: PoliticaDeSegurancaRoute,
-  ServicosRoute: ServicosRoute,
+  ServicosRoute: ServicosRouteWithChildren,
   TermosECondicoesRoute: TermosECondicoesRoute,
 }
 export const routeTree = rootRouteImport
