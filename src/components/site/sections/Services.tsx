@@ -84,15 +84,16 @@ export function Services() {
                   </div>
                   
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-display font-semibold mb-2 sm:mb-3 tracking-tight text-foreground transition-colors group-hover:text-primary duration-500">
+                    <h3 className="text-xl sm:text-2xl font-display font-semibold mb-2 sm:mb-3 tracking-tight text-foreground transition-colors group-hover:text-primary duration-500 flex items-center gap-2">
                       {s.title}
+                      <ArrowUpRight className="h-4 w-4 opacity-0 -translate-x-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0" />
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       {s.desc}
                     </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
