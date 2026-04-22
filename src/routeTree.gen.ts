@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosECondicoesRouteImport } from './routes/termos-e-condicoes'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as PoliticaDeSegurancaRouteImport } from './routes/politica-de-seguranca'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
@@ -26,11 +25,6 @@ import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos.a
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
   id: '/termos-e-condicoes',
   path: '/termos-e-condicoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosRoute = ServicosRouteImport.update({
@@ -97,7 +91,6 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
   '/servicos': typeof ServicosRouteWithChildren
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -112,7 +105,6 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
   '/servicos': typeof ServicosRouteWithChildren
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -128,7 +120,6 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
   '/servicos': typeof ServicosRouteWithChildren
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -145,7 +136,6 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
     | '/servicos'
-    | '/sitemap.xml'
     | '/termos-e-condicoes'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -160,7 +150,6 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
     | '/servicos'
-    | '/sitemap.xml'
     | '/termos-e-condicoes'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -175,7 +164,6 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
     | '/servicos'
-    | '/sitemap.xml'
     | '/termos-e-condicoes'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -191,7 +179,6 @@ export interface RootRouteChildren {
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PoliticaDeSegurancaRoute: typeof PoliticaDeSegurancaRoute
   ServicosRoute: typeof ServicosRouteWithChildren
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermosECondicoesRoute: typeof TermosECondicoesRoute
 }
 
@@ -202,13 +189,6 @@ declare module '@tanstack/react-router' {
       path: '/termos-e-condicoes'
       fullPath: '/termos-e-condicoes'
       preLoaderRoute: typeof TermosECondicoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos': {
@@ -318,7 +298,6 @@ const rootRouteChildren: RootRouteChildren = {
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PoliticaDeSegurancaRoute: PoliticaDeSegurancaRoute,
   ServicosRoute: ServicosRouteWithChildren,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermosECondicoesRoute: TermosECondicoesRoute,
 }
 export const routeTree = rootRouteImport
