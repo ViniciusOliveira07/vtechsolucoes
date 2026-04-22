@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 py-14 sm:px-8 md:py-16 lg:px-12 xl:px-16">
         <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-12">
-          <div className="sm:col-span-2 md:col-span-4">
+          <div className="sm:col-span-2 md:col-span-3">
             <div className="flex items-center gap-2.5">
               <div className="relative h-7 w-7">
                 <div className="absolute inset-0 rounded-md bg-primary" />
@@ -42,6 +42,37 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
+            <p className="text-eyebrow">Serviços</p>
+            <ul className="mt-5 space-y-3 text-sm">
+              <li>
+                <Link to="/servicos/sites-institucionais" className="text-muted-foreground hover:text-foreground">
+                  Sites institucionais
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/sistemas-web" className="text-muted-foreground hover:text-foreground">
+                  Sistemas web
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/automacoes-com-ia" className="text-muted-foreground hover:text-foreground">
+                  Automações com IA
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/integracoes" className="text-muted-foreground hover:text-foreground">
+                  Integrações
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/consultoria-tech" className="text-muted-foreground hover:text-foreground">
+                  Consultoria tech
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Legal</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
@@ -79,7 +110,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className="text-eyebrow">Contato</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>

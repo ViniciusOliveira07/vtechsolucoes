@@ -1,3 +1,5 @@
+import { Events } from "@/lib/analytics";
+
 const WHATSAPP_NUMBER = "551154441926";
 const WHATSAPP_MESSAGE = "Olá! Vim pelo site da Vtech Soluções e gostaria de conversar sobre um projeto.";
 
@@ -10,6 +12,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Conversar no WhatsApp"
+      onClick={() => Events.whatsappClick(typeof window !== "undefined" ? window.location.pathname : "")}
       className="group fixed bottom-6 right-6 z-40 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_40px_-6px_rgba(37,211,102,0.65)] transition-all duration-300 hover:scale-110 hover:shadow-[0_18px_50px_-8px_rgba(37,211,102,0.85)] sm:bottom-7 sm:right-7 sm:h-[68px] sm:w-[68px]"
     >
       {/* pulse ring with larger halo */}

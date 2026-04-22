@@ -3,22 +3,24 @@ import { Services } from "@/components/site/sections/Services";
 import { Process } from "@/components/site/sections/Process";
 import { FinalCTA } from "@/components/site/sections/FinalCTA";
 
+const URL = "https://vtechsolucoes.com.br/servicos";
+const TITLE = "Serviços de Tecnologia B2B | Vtech Soluções";
+const DESCRIPTION =
+  "Sites institucionais, sistemas web sob medida, automações com IA, integrações de sistemas e consultoria técnica. Projeto fechado, entrega rápida.";
+
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Sites institucionais, sistemas web, automações com IA, integrações e consultoria técnica. Projeto fechado, entregue rápido.",
-      },
-      { property: "og:title", content: "Serviços — Vtech Soluções" },
-      {
-        property: "og:description",
-        content:
-          "O que entregamos: sites, sistemas, automações com IA, integrações e consultoria técnica B2B.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: URL },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: ServicosPage,
 });
