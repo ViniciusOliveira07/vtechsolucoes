@@ -47,6 +47,27 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "dns-prefetch", href: "https://wa.me" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Vtech Soluções",
+          url: "https://vtechsolucoes.com.br",
+          description:
+            "Empresa de tecnologia B2B. Sites institucionais, sistemas web sob medida, automações com IA, integrações e consultoria técnica.",
+          areaServed: { "@type": "Country", name: "Brasil" },
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+55-11-5444-1926",
+            contactType: "sales",
+            availableLanguage: ["Portuguese"],
+          },
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
