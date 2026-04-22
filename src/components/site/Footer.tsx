@@ -20,7 +20,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <p className="text-eyebrow">Navegação</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
@@ -36,6 +36,37 @@ export function Footer() {
               <li>
                 <Link to="/contato" className="text-muted-foreground hover:text-foreground">
                   Contato
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <p className="text-eyebrow">Serviços</p>
+            <ul className="mt-5 space-y-3 text-sm">
+              <li>
+                <Link to="/servicos/sites-institucionais" className="text-muted-foreground hover:text-foreground">
+                  Sites institucionais
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/sistemas-web" className="text-muted-foreground hover:text-foreground">
+                  Sistemas web
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/automacoes-com-ia" className="text-muted-foreground hover:text-foreground">
+                  Automações com IA
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/integracoes" className="text-muted-foreground hover:text-foreground">
+                  Integrações
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos/consultoria-tech" className="text-muted-foreground hover:text-foreground">
+                  Consultoria tech
                 </Link>
               </li>
             </ul>
