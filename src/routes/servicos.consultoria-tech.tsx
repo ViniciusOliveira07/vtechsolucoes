@@ -14,101 +14,201 @@ const SLUG = "consultoria-tech";
 const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
 const TITLE = "Consultoria de Tecnologia para Empresas | Vtech";
 const DESCRIPTION =
-  "Consultoria sênior em arquitetura, escolha de stack e roadmap técnico. Decisões certas antes de gastar R$100k em código.";
-
-const data: ServicePageData = {
+  "Consultoria sênior em arquitetura, escolha de stack e roadmap técnico. Decisões certas antes de gastar R$100k em código.";const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Consultoria tech",
-  h1: "Consultoria de tecnologia que evita decisões caras de reverter.",
+  h1: "Consultoria de Tecnologia B2B: Estratégia, Arquitetura e Inovação para o seu Negócio.",
   subheadline:
-    "Arquitetura, escolha de stack, roadmap técnico, due diligence e CTO as a service. Perspectiva sênior na hora certa.",
-  trust: ["Engajamento por sprint", "Sem amarração longa", "Output em documento"],
+    "Apoio técnico especializado para decisões críticas de tecnologia. Oferecemos consultoria sênior em arquitetura de software, escolha de stack, roadmap tecnológico e CTO as a Service para empresas em crescimento.",
+  trust: ["Consultores com vivência sênior", "Metodologia orientada a resultados", "Entregas baseadas em evidências"],
   oQueE: {
-    title: "O que é consultoria de tecnologia para empresas",
+    title: "O que é consultoria de tecnologia e estratégia digital",
     paragrafos: [
-      "Consultoria de tecnologia (também chamada de IT consulting, consultoria em TI, consultoria em desenvolvimento de software ou advisory técnico) é o serviço de trazer uma perspectiva sênior independente para decisões que vão custar caro de reverter: escolher stack, contratar fábrica de software, modernizar legado, definir arquitetura, fazer due diligence técnica para investimento ou M&A, montar roadmap tecnológico, hiring de líder técnico ou avaliar fornecedor.",
-      "Diferente de uma consultoria de implementação (que executa), a consultoria estratégica entrega diagnóstico, análise comparativa, recomendação justificada e roadmap. Os formatos mais comuns são CTO as a Service (acompanhamento contínuo para fundadores não-técnicos), Fractional CTO (CTO fracionado dividido entre poucas empresas), assessment pontual de arquitetura, due diligence técnica para fundos e M&A, e mentoring sênior para times de engenharia.",
-      "O valor está na economia: uma decisão técnica errada custa centenas de milhares em reescrita, atraso de roadmap e turnover de time. Uma boa consultoria custa uma fração disso e devolve clareza de decisão em semanas. É indicado quando você está prestes a investir alto em tecnologia, contratar líder técnico, modernizar sistema legado, fazer aquisição de empresa de tech ou simplesmente precisa de sparring sênior para validar caminho.",
+      "A consultoria de tecnologia — frequentemente referida como consultoria de TI, assessoria técnica ou advisory de software — é um serviço especializado que provê visão estratégica e técnica para empresas que enfrentam desafios complexos de desenvolvimento e infraestrutura. No ambiente B2B, a consultoria atua como um parceiro de confiança que ajuda a diretoria a tomar decisões tecnológicas que impactam diretamente a lucratividade, a segurança e a capacidade de escala da organização a longo prazo.",
+      "Muitas vezes, as empresas encontram-se em um dilema: investir em uma nova tecnologia, modernizar um sistema legado ou contratar uma equipe interna de engenharia. Nossa consultoria remove a incerteza desse processo. Atuamos em frentes que vão desde o 'CTO as a Service' (provendo liderança técnica fracionada para empresas que ainda não possuem um CTO full-time) até a realização de Due Diligence Técnica para fundos de investimento e processos de fusão e aquisição (M&A).",
+      "Um pilar fundamental da nossa consultoria é o Assessment de Arquitetura. Analisamos profundamente o código, os bancos de dados e a infraestrutura de nuvem existentes para identificar gargalos de performance, dívidas técnicas acumuladas e riscos de segurança. Com base nesse diagnóstico, construímos um Roadmap Tecnológico claro e prioritário, que serve como o guia para os próximos 12 a 24 meses de desenvolvimento da empresa, garantindo que o investimento em tech seja aplicado onde gera mais valor real.",
+      "Além da parte técnica, focamos na Transformação Digital holística. Isso inclui a otimização de processos de engenharia, implementação de métricas de produtividade (como as métricas DORA) e mentoria para líderes técnicos. Nosso objetivo é garantir que a tecnologia não seja apenas um centro de custo, mas um motor de inovação que permita à empresa adaptar-se rapidamente às mudanças do mercado e superar a concorrência através da excelência digital.",
     ],
     sinonimos: [
-      "consultoria em TI",
-      "IT consulting",
-      "CTO as a Service",
-      "Fractional CTO",
-      "consultoria em desenvolvimento de software",
+      "consultoria de TI empresarial",
+      "CTO as a Service para startups",
       "consultoria em arquitetura de software",
-      "advisory técnico",
-      "due diligence técnica",
-      "assessment de tecnologia",
-      "consultoria em transformação digital",
-      "mentoria técnica para CTOs",
-      "auditoria de software",
+      "estratégia de transformação digital B2B",
+      "due diligence técnica para M&A",
+      "mentoria técnica para líderes",
+      "advisory de tecnologia e inovação",
+      "roadmap tecnológico corporativo",
+      "auditoria de sistemas e código",
     ],
   },
   paraQuem: [
-    { perfil: "Fundadores não-técnicos com SaaS", descricao: "Quem precisa de sparring sênior para validar decisão técnica do time, sem virar CTO de fato." },
-    { perfil: "Empresas contratando fábrica de software", descricao: "Avaliação de proposta, contrato, escopo e stack antes de assinar — evita escolher fornecedor errado." },
-    { perfil: "Fundos de investimento e M&A", descricao: "Due diligence técnica em rodadas seed, series A/B/C ou aquisição: código, time, dívida, escalabilidade." },
-    { perfil: "Empresas com sistema legado caro", descricao: "Diagnóstico com roadmap incremental de modernização, sem rewrite suicida do tudo-de-uma-vez." },
-    { perfil: "CTOs e líderes de engenharia", descricao: "Code review estratégico, escolha de stack para novo produto, organização de time, métricas DORA." },
-    { perfil: "Empresas em transformação digital", descricao: "Quem está saindo do mundo offline / planilha e precisa de roadmap tecnológico de 12-24 meses." },
+    {
+      perfil: "Fundadores e CEOs Não-Técnicos",
+      descricao:
+        "Lideranças que precisam de um braço direito técnico para validar decisões, contratar fornecedores e gerir o roadmap de produto.",
+    },
+    {
+      perfil: "Empresas com Sistemas Legados",
+      descricao:
+        "Organizações que sofrem com sistemas lentos e caros de manter, e precisam de um plano de modernização seguro e incremental.",
+    },
+    {
+      perfil: "Investidores e Fundos de VC/PE",
+      descricao:
+        "Fundos que precisam de uma auditoria técnica profunda antes de realizar aportes em startups ou adquirir empresas de tecnologia.",
+    },
+    {
+      perfil: "Times de Engenharia em Escala",
+      descricao:
+        "Departamentos de TI que precisam de uma visão externa sênior para resolver problemas complexos de arquitetura ou cultura ágil.",
+    },
   ],
   casosDeUso: [
-    { title: "Due diligence técnica pré-investimento", desc: "Análise de código, arquitetura, dívida técnica, equipe e escalabilidade. Relatório executivo para o investidor." },
-    { title: "CTO as a Service para startup early-stage", desc: "4 a 16 horas/mês para apoiar fundador não-técnico em hiring, escolha de stack, priorização e revisão de PRs." },
-    { title: "Assessment de arquitetura para escala", desc: "Diagnóstico de gargalos antes de escalar 10x: banco, cache, fila, observabilidade, custo de infra." },
-    { title: "Avaliação de fornecedor de software", desc: "Análise de proposta comercial, contrato, escopo, stack proposta e capacidade de entrega da fábrica." },
-    { title: "Roadmap de modernização de legado", desc: "Plano incremental para sair de sistema legado (PHP/Cobol/Delphi) sem parar a operação durante a transição." },
-    { title: "Consultoria de adoção de IA generativa", desc: "Estratégia para integrar LLMs no produto e operação com ROI claro, sem virar piloto eterno." },
+    {
+      title: "Due Diligence Técnica para Investimento",
+      desc: "Auditoria completa de código, equipe e processos técnicos para mitigar riscos antes de uma transação de capital.",
+    },
+    {
+      title: "Modernização de Legado (Legacy Modernization)",
+      desc: "Estratégia para substituir sistemas antigos por arquiteturas modernas em nuvem sem interromper a operação comercial.",
+    },
   ],
   glossario: [
-    { termo: "CTO as a Service", definicao: "CTO contratado por hora ou retainer mensal, sem vínculo CLT. Ideal para empresas que ainda não justificam um CTO full-time." },
-    { termo: "Fractional CTO", definicao: "CTO que divide tempo entre poucas empresas (2 a 4), com profundidade de envolvimento maior que advisor tradicional." },
-    { termo: "Due diligence técnica", definicao: "Auditoria completa antes de investimento ou M&A: código, equipe, processos, dívida, segurança, escalabilidade." },
-    { termo: "ADR (Architecture Decision Record)", definicao: "Documento curto que registra uma decisão técnica importante, alternativas consideradas e justificativa." },
-    { termo: "Métricas DORA", definicao: "Quatro métricas de elite (deploy frequency, lead time, MTTR, change failure rate) que medem maturidade de engenharia." },
-    { termo: "Dívida técnica", definicao: "Custo futuro de manter código que foi feito rápido em vez de bem. Pode quebrar produto ou paralisar evolução." },
-    { termo: "Stack", definicao: "Conjunto de tecnologias usadas (linguagem, framework, banco, infra). Decisão estratégica que dura anos." },
-    { termo: "Roadmap técnico", definicao: "Planejamento trimestral/semestral de iniciativas técnicas com esforço, impacto e dependências mapeados." },
-    { termo: "Tech debt audit", definicao: "Auditoria focada em identificar e priorizar dívida técnica para inclusão no roadmap de evolução." },
+    {
+      termo: "CTO as a Service",
+      definicao:
+        "Acesso a um Chief Technology Officer sênior de forma fracionada, permitindo liderança técnica de alto nível com custo reduzido.",
+    },
+    {
+      termo: "Dívida Técnica",
+      definicao:
+        "Custo futuro acumulado por decisões técnicas rápidas ou subótimas feitas no passado que agora dificultam a evolução do software.",
+    },
   ],
   problemas: [
-    { dor: "Vamos contratar fábrica X — é boa escolha?", solucao: "Avaliamos escopo, contrato, stack proposta e identificamos riscos antes de você assinar." },
-    { dor: "Sistema legado ficou caro de manter", solucao: "Diagnóstico técnico com roadmap de modernização incremental, sem big-bang." },
-    { dor: "Fundador técnico precisa de sparring sênior", solucao: "Sessões quinzenais de revisão de arquitetura, hiring técnico e priorização." },
-    { dor: "Vamos investir / fazer M&A em uma startup", solucao: "Due diligence técnica: código, equipe, dívida técnica, escalabilidade real." },
+    {
+      dor: "Dúvida sobre qual tecnologia (stack) escolher",
+      solucao:
+        "Analisamos seus objetivos de negócio e recomendamos a stack com melhor custo-benefício, facilidade de contratação e longevidade técnica.",
+    },
+    {
+      dor: "Dificuldade em gerir fornecedores de software",
+      solucao:
+        "Atuamos na fiscalização técnica, garantindo que o que está sendo entregue pela fábrica de software tenha qualidade e segurança.",
+    },
+    {
+      dor: "Sistemas que não aguentam o crescimento (escala)",
+      solucao:
+        "Redesenhamos a arquitetura para suportar alta carga, utilizando padrões de microsserviços, cache e infraestrutura resiliente.",
+    },
+    {
+      dor: "Falta de um roadmap claro para a tecnologia",
+      solucao:
+        "Transformamos a visão de negócio em um plano de execução técnica estruturado em trimestres, com metas e KPIs claros.",
+    },
   ],
   entregaveis: [
-    { title: "Diagnóstico de arquitetura", desc: "Mapa atual, gargalos, riscos e plano de evolução priorizado.", icon: Map },
-    { title: "Escolha de stack", desc: "Comparativo objetivo, custo total e adequação ao time atual.", icon: Compass },
-    { title: "Roadmap técnico 12 meses", desc: "Iniciativas trimestrais com esforço, impacto e dependências.", icon: TrendingUp },
-    { title: "Code review estratégico", desc: "Revisão de qualidade, segurança e arquitetura por sênior externo.", icon: GitBranch },
-    { title: "Hiring técnico", desc: "Definição de perfil, JD, prova técnica e participação em entrevistas.", icon: Users },
-    { title: "Due diligence técnica", desc: "Relatório executivo para investidores e M&A.", icon: ShieldCheck },
+    {
+      title: "Diagnóstico e Assessment Técnico",
+      desc: "Relatório detalhado sobre o estado atual da tecnologia, riscos e oportunidades de melhoria.",
+      icon: Map,
+    },
+    {
+      title: "Desenho de Arquitetura de Solução",
+      desc: "Documentação técnica de como o sistema deve ser construído para garantir performance e segurança.",
+      icon: Compass,
+    },
+    {
+      title: "Roadmap Tecnológico 24 meses",
+      desc: "Planejamento estratégico de longo prazo alinhado aos objetivos de crescimento da empresa.",
+      icon: TrendingUp,
+    },
+    {
+      title: "Processo de Hiring Técnico",
+      desc: "Auxílio na definição de perfis, entrevistas técnicas e montagem de times de engenharia de alta performance.",
+      icon: Users,
+    },
+    {
+      title: "Relatório de Due Diligence",
+      desc: "Auditoria para investidores com análise de código, dívida técnica e escalabilidade da solução analisada.",
+      icon: ShieldCheck,
+    },
+    {
+      title: "Acompanhamento CTO as a Service",
+      desc: "Participação em reuniões estratégicas, mentorias e decisões de arquitetura de forma contínua.",
+      icon: GitBranch,
+    },
   ],
   stack: [
-    { title: "Discovery estruturado", desc: "Entrevistas, leitura de código, análise de métricas." },
-    { title: "Frameworks de decisão", desc: "ADRs, RFC, comparativos com critérios ponderados." },
-    { title: "Métricas DORA", desc: "Lead time, frequência de deploy, MTTR como linha base." },
-    { title: "Output documentado", desc: "Tudo em Notion/PDF — não se perde quando a sessão acaba." },
+    { title: "Metodologias Ágeis", desc: "Adoção de Scrum, Kanban e práticas de entrega contínua para maior previsibilidade." },
+    { title: "Métricas DORA", desc: "Uso de indicadores de elite para medir a eficiência e saúde do time de engenharia." },
+    { title: "Arquiteturas Cloud-Native", desc: "Foco em soluções que aproveitam ao máximo o potencial de AWS, Azure e Google Cloud." },
+    { title: "Padrões de Projeto (Design Patterns)", desc: "Aplicação das melhores práticas de mercado para código limpo e manutenível." },
   ],
   processo: [
-    { n: "01", title: "Briefing", desc: "Conversa de 1h para entender o problema e o contexto de decisão." },
-    { n: "02", title: "Imersão", desc: "1 a 2 semanas analisando código, contratos, time e dados." },
-    { n: "03", title: "Recomendação", desc: "Documento com diagnóstico, opções e recomendação justificada." },
-    { n: "04", title: "Acompanhamento", desc: "Sessões quinzenais opcionais durante a execução." },
+    {
+      n: "01",
+      title: "Imersão e Entrevistas",
+      desc: "Conversamos com stakeholders e time técnico para entender o contexto, as dores e os objetivos do negócio.",
+    },
+    {
+      n: "02",
+      title: "Auditoria e Análise",
+      desc: "Mergulhamos no código, infraestrutura e processos atuais para identificar a realidade técnica da empresa.",
+    },
+    {
+      n: "03",
+      title: "Elaboração de Estratégia",
+      desc: "Consolidamos os achados em recomendações práticas, roadmaps e desenhos de arquitetura.",
+    },
+    {
+      n: "04",
+      title: "Execução e Acompanhamento",
+      desc: "Apoiamos o time na implementação das mudanças, garantindo que a estratégia saia do papel e gere resultados.",
+    },
   ],
   faq: [
-    { q: "Qual o engajamento mínimo?", a: "Diagnóstico pontual a partir de 2 semanas. Acompanhamento contínuo a partir de 4h/mês." },
-    { q: "Vocês implementam o que recomendam?", a: "Sim, mas não é obrigatório. Você pode contratar outro fornecedor para executar — entregamos o roadmap independente." },
-    { q: "Atendem M&A e fundos de investimento?", a: "Sim. Fazemos due diligence técnica para investimento seed até late-stage e operações de M&A." },
-    { q: "Vocês assinam NDA?", a: "Sempre. Templates próprios ou os seus. Confidencialidade é pré-requisito." },
-    { q: "Conflito de interesse: vocês recomendam vocês mesmos?", a: "Não. A recomendação é independente. Quando faz sentido, sugerimos parceiros ou execução interna do cliente." },
+    {
+      q: "O que faz exatamente um CTO as a Service?",
+      a: "Um CTO as a Service fornece toda a liderança técnica de um Diretor de Tecnologia sênior, mas em regime fracionado. Ele ajuda em decisões de arquitetura, contratação de time, escolha de fornecedores e alinhamento da tecnologia com os objetivos de negócio, sem o custo de um executivo full-time.",
+    },
+    {
+      q: "A consultoria apenas dá conselhos ou também coloca a mão no código?",
+      a: "Nosso foco principal na consultoria é estratégico e arquitetural. No entanto, realizamos provas de conceito (PoCs) e revisões de código (code reviews) profundas. Caso a empresa precise de execução completa, podemos transitar para o nosso modelo de desenvolvimento de sistemas.",
+    },
+    {
+      q: "Como a consultoria pode ajudar na redução de custos de TI?",
+      a: "Identificamos desperdícios em infraestrutura de nuvem, eliminamos redundâncias de software, sugerimos stacks com menor custo de manutenção e evitamos que a empresa gaste em soluções que não trazem ROI, focando o investimento no que é essencial.",
+    },
+    {
+      q: "Qual a duração média de um projeto de consultoria técnica?",
+      a: "Projetos de diagnóstico e due diligence costumam durar de 2 a 4 semanas. Já o modelo de acompanhamento estratégico (CTO as a Service) costuma ter contratos de médio a longo prazo, variando de 6 a 12 meses conforme a necessidade de evolução da empresa.",
+    },
+    {
+      q: "Vocês atendem empresas que já possuem uma equipe de TI interna?",
+      a: "Sim, com frequência. Atuamos como um braço de apoio sênior para o líder de TI ou CTO da casa, trazendo uma visão externa e experiência de múltiplos outros projetos para resolver desafios específicos que o time interno ainda não enfrentou.",
+    },
+    {
+      q: "Como é garantida a imparcialidade nas recomendações tecnológicas?",
+      a: "Nossas recomendações são baseadas em dados, custos de mercado e adequação técnica. Não temos parcerias exclusivas com fornecedores que enviesem nossas escolhas; nosso único compromisso é com o sucesso e a longevidade tecnológica da sua empresa.",
+    },
   ],
   relacionados: [
-    { slug: "sistemas-web", title: "Sistemas web sob medida", href: "/servicos/sistemas-web", desc: "Quando a recomendação é construir, executamos com squad sênior." },
-    { slug: "integracoes", title: "Integrações", href: "/servicos/integracoes", desc: "Modernização do legado começa pela camada de integração." },
-    { slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "Estratégia de IA empresarial com ROI mensurável." },
+    {
+      slug: "sistemas-web",
+      title: "Sistemas Web Personalizados",
+      href: "/servicos/sistemas-web",
+      desc: "Transforme as recomendações da consultoria em um software de alta performance e escalabilidade.",
+    },
+    {
+      slug: "automacoes-com-ia",
+      title: "Automações com IA",
+      href: "/servicos/automacoes-com-ia",
+      desc: "Estratégia e implementação de inteligência artificial para otimizar sua operação corporativa.",
+    },
+  ],
+  ctaFinalTitle: "Pronto para profissionalizar sua estratégia tecnológica com especialistas",
+}; slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "Estratégia de IA empresarial com ROI mensurável." },
   ],
   ctaFinalTitle: "Pronto para tomar a próxima decisão técnica com clareza",
 };

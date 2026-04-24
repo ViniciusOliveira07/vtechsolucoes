@@ -19,96 +19,197 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Sistemas web",
-  h1: "Sistemas web sob medida para operações que não cabem em planilha.",
+  h1: "Desenvolvimento de Sistemas Web sob Medida: Eficiência, Escalabilidade e ROI para sua Operação.",
   subheadline:
-    "Painéis internos, ERPs leves, portais de cliente e SaaS B2B. Construímos com stack moderna, autenticação robusta e deploy contínuo desde o dia um.",
-  trust: ["MVP em 6 a 12 semanas", "Código é seu", "Auth e RLS prontos"],
+    "Soluções de software personalizadas que eliminam gargalos operacionais e automatizam processos complexos. Sistemas web robustos com foco em produtividade corporativa e integração total.",
+  trust: ["MVP entregue em tempo recorde", "Código 100% proprietário", "Segurança de dados nível enterprise"],
   oQueE: {
-    title: "O que é um sistema web sob medida (custom software)",
+    title: "O que é um sistema web sob medida para empresas",
     paragrafos: [
-      "Sistema web sob medida — também chamado de software customizado, aplicação web personalizada ou web application — é um sistema acessado pelo navegador, construído sob a regra de negócio específica da sua empresa. Diferente de um SaaS pronto (Salesforce, Pipedrive, Bling), o sistema web sob medida modela exatamente o seu fluxo: campos certos, permissões certas, automações certas. Sem adaptação forçada, sem mensalidade por usuário e sem teto de funcionalidade.",
-      "Os usos mais comuns são ERPs internos enxutos, painéis administrativos (back-office), portais de cliente, marketplaces verticais B2B, plataformas SaaS proprietárias, ferramentas internas de operação (operations tooling) e dashboards executivos. A stack moderna combina React no frontend, API REST ou GraphQL no backend, banco PostgreSQL com Row Level Security, autenticação robusta (e-mail+senha, MFA, SSO corporativo) e deploy contínuo em infraestrutura serverless ou edge.",
-      "O grande diferencial é controle: o código fica no seu repositório, o banco na sua conta, a infra no seu nome. Você pode trocar de fornecedor de desenvolvimento sem perder nada, evoluir a aplicação no ritmo do negócio e auditar segurança a qualquer momento. É o caminho recomendado quando uma planilha não dá mais conta, um no-code virou um Frankenstein caro ou um SaaS de prateleira não cobre 100% do seu processo.",
+      "Um sistema web sob medida — também conhecido como software personalizado ou aplicação web customizada — é uma plataforma digital desenvolvida especificamente para atender às regras de negócio e fluxos operacionais únicos da sua empresa. Diferente de softwares de prateleira (off-the-shelf), que exigem que sua equipe se adapte à ferramenta, o sistema sob medida é moldado ao seu processo, garantindo que cada funcionalidade entregue valor real e elimine redundâncias manuais.",
+      "No mercado corporativo atual, a agilidade operacional é um diferencial competitivo crítico. Desenvolvemos sistemas web utilizando stacks modernas que permitem acessibilidade total via navegador, sem necessidade de instalações locais complexas. Isso facilita o trabalho híbrido e a gestão centralizada de dados, permitindo que gestores tenham visibilidade em tempo real sobre KPIs, finanças, logística ou qualquer outro pilar crítico do negócio através de dashboards intuitivos e seguros.",
+      "A construção de um sistema web personalizado pela Vtech Soluções envolve uma análise profunda de arquitetura de software e experiência do usuário (UX). Utilizamos tecnologias como React e bancos de dados escaláveis para garantir que o sistema cresça junto com sua empresa (escalabilidade horizontal). Além disso, priorizamos a segurança da informação através de protocolos de autenticação robustos, criptografia de ponta a ponta e controle de acesso granular (RBAC), protegendo o ativo mais valioso da sua corporação: os dados.",
+      "Investir em um sistema próprio significa livrar-se de mensalidades abusivas por usuário e limitações técnicas de plataformas genéricas. O código-fonte é um ativo da sua empresa, garantindo independência tecnológica e liberdade para evoluir a solução conforme as demandas do mercado mudam. É o passo definitivo para a transformação digital completa de organizações que buscam liderança em seus setores através da inovação tecnológica.",
     ],
     sinonimos: [
-      "software sob medida",
-      "desenvolvimento de software personalizado",
-      "aplicação web customizada",
-      "sistema web personalizado",
-      "ERP sob medida",
-      "painel administrativo customizado",
-      "portal do cliente",
-      "back-office sob medida",
-      "SaaS interno",
-      "plataforma B2B personalizada",
-      "ferramenta interna de operação",
+      "software sob medida B2B",
+      "desenvolvimento de aplicações web personalizadas",
+      "sistema de gestão customizado",
+      "plataforma web corporativa",
+      "ERP personalizado para empresas",
+      "soluções de software enterprise",
+      "desenvolvimento ágil de sistemas",
+      "arquitetura de sistemas web",
+      "aplicativos web de alta performance",
     ],
   },
   paraQuem: [
-    { perfil: "Operações que cresceram em planilha", descricao: "Quando o Excel já tem macro, abas escondidas e o financeiro implora por uma solução melhor." },
-    { perfil: "Empresas com processo único", descricao: "Negócios cujo fluxo não cabe em SaaS pronto e perdem dinheiro adaptando o time à ferramenta." },
-    { perfil: "Indústrias com chão de fábrica", descricao: "Apontamento de produção, controle de qualidade, OEE — sistemas que conversam com PCP e ERP." },
-    { perfil: "E-commerces e marketplaces B2B", descricao: "Painéis de fornecedor, gestão de pedidos atacado, regras de comissionamento e tabelas de preço por cliente." },
-    { perfil: "Empresas de serviço com agendamento", descricao: "Clínicas, escritórios, prestadores que precisam de portal de cliente, agenda e cobrança recorrente." },
-    { perfil: "Startups validando SaaS", descricao: "Quem precisa do MVP rápido, com auth, billing e multi-tenancy desde o dia um, sem reescrever depois." },
+    {
+      perfil: "Empresas com Processos Únicos",
+      descricao:
+        "Negócios que possuem fluxos que não se encaixam em softwares prontos e precisam de flexibilidade total.",
+    },
+    {
+      perfil: "Operações em Crescimento Acelerado",
+      descricao:
+        "Empresas que precisam de escalabilidade para suportar o aumento no volume de dados e usuários sem perda de performance.",
+    },
+    {
+      perfil: "Sectores com Alta Regulação de Dados",
+      descricao:
+        "Organizações financeiras, de saúde ou logística que exigem controle total sobre a segurança e privacidade das informações.",
+    },
+    {
+      perfil: "Startups e Scaleups",
+      descricao:
+        "Negócios que estão validando novos modelos e precisam de MVPs robustos que possam evoluir rapidamente para produtos finais.",
+    },
   ],
   casosDeUso: [
-    { title: "ERP interno para distribuidora", desc: "Cadastro de produtos, gestão de pedidos, integração com Bling/Omie, faturamento, comissão de vendedor e relatórios gerenciais." },
-    { title: "Portal do cliente B2B", desc: "Login do cliente, visualização de pedidos, segunda via de boleto, suporte e download de notas fiscais." },
-    { title: "Sistema de gestão de obra", desc: "Diário de obra, medições, RDO, fotos georreferenciadas e aprovação por engenheiro responsável." },
-    { title: "Plataforma de white-label SaaS", desc: "Multi-tenant com customização visual por cliente, billing por uso e painel administrativo central." },
-    { title: "Back-office para operação logística", desc: "Roteirização, expedição, conferência por código de barras e dashboard de SLA por região." },
-    { title: "Painel de gestão para franquias", desc: "Indicadores por unidade, ranking, comunicação interna, treinamento e auditoria de padrões." },
+    {
+      title: "ERP e Gestão Operacional Interna",
+      desc: "Centralização de finanças, estoque, RH e vendas em uma única plataforma integrada e sem redundâncias.",
+    },
+    {
+      title: "Portais do Cliente e Partner Portals",
+      desc: "Ambientes seguros para que seus clientes e parceiros acessem documentos, pedidos e suporte de forma autônoma.",
+    },
   ],
   glossario: [
-    { termo: "MVP (Minimum Viable Product)", definicao: "Versão enxuta do sistema com as funcionalidades essenciais para validar uso real antes de escalar investimento." },
-    { termo: "Multi-tenancy", definicao: "Arquitetura que serve múltiplos clientes (tenants) na mesma aplicação, com isolamento de dados garantido." },
-    { termo: "RLS (Row Level Security)", definicao: "Segurança a nível de linha no banco PostgreSQL: cada usuário só enxerga os dados que tem permissão." },
-    { termo: "RBAC (Role-Based Access Control)", definicao: "Modelo de permissões baseado em papéis (admin, gerente, operador), em vez de configurar acesso por usuário." },
-    { termo: "API REST / GraphQL", definicao: "Camadas de comunicação entre frontend e backend. REST é padrão estável; GraphQL dá flexibilidade ao consumidor." },
-    { termo: "CI/CD (Integração e Deploy Contínuos)", definicao: "Automação que testa e publica o código a cada alteração, reduzindo bug em produção." },
-    { termo: "Webhook", definicao: "Notificação HTTP que um sistema envia para outro quando algo acontece — base de integrações reativas." },
-    { termo: "PWA (Progressive Web App)", definicao: "Aplicação web que se comporta como app no celular: ícone, offline, push, sem precisar de app store." },
+    {
+      termo: "Escalabilidade",
+      definicao:
+        "Capacidade de um sistema de lidar com uma carga crescente de trabalho adicionando recursos à infraestrutura.",
+    },
+    {
+      termo: "API (Application Programming Interface)",
+      definicao:
+        "Conjunto de normas que permite a comunicação entre diferentes plataformas e serviços de software.",
+    },
   ],
   problemas: [
-    { dor: "Operação travada em planilhas e processos manuais", solucao: "Modelamos os fluxos críticos e entregamos um sistema com regras de negócio explícitas, auditáveis e rápidas." },
-    { dor: "Ferramenta no-code virou um Frankenstein caro", solucao: "Migramos para um sistema próprio com a mesma agilidade do no-code e nenhum dos seus tetos." },
-    { dor: "Time de TI sobrecarregado, sem capacity para sob medida", solucao: "Atuamos como squad externo sênior, entregando releases semanais com PR review compartilhado." },
-    { dor: "Medo de perder dados ou virar refém de fornecedor", solucao: "Banco de dados na sua conta, código no seu repositório, deploy na sua infra. Sempre." },
+    {
+      dor: "Gargalos em planilhas e processos manuais",
+      solucao:
+        "Digitalizamos e automatizamos fluxos inteiros, reduzindo o erro humano e liberando seu time para tarefas estratégicas.",
+    },
+    {
+      dor: "Dados descentralizados e falta de visibilidade",
+      solucao:
+        "Centralizamos toda a informação em um único banco de dados com dashboards de BI para tomadas de decisão baseadas em fatos.",
+    },
+    {
+      dor: "Custo elevado com licenças 'por usuário'",
+      solucao:
+        "Desenvolvemos seu sistema proprietário onde você tem controle total sobre o número de acessos sem custos adicionais de licença.",
+    },
+    {
+      dor: "Dificuldade de integração entre ferramentas",
+      solucao:
+        "Construímos sistemas com arquitetura aberta que se conectam via API com qualquer ferramenta que sua empresa já utilize.",
+    },
   ],
   entregaveis: [
-    { title: "Painel administrativo completo", desc: "CRUDs, filtros, busca, paginação e exportação CSV.", icon: Laptop },
-    { title: "Autenticação e permissões", desc: "Login, MFA, papéis (RBAC) e Row Level Security no banco.", icon: Lock },
-    { title: "Banco de dados modelado", desc: "PostgreSQL com migrações versionadas e backup automático.", icon: Database },
-    { title: "Workflows e automações", desc: "Cron jobs, webhooks e filas para tarefas assíncronas.", icon: Workflow },
-    { title: "Dashboards e relatórios", desc: "Métricas-chave da operação em tempo real, exportáveis.", icon: BarChart3 },
-    { title: "Portal multi-usuário", desc: "Times, convites, billing por organização quando necessário.", icon: Users },
+    {
+      title: "Arquitetura de Software Sólida",
+      desc: "Estrutura planejada para suportar alta carga e facilitar manutenções futuras sem dívida técnica.",
+      icon: Database,
+    },
+    {
+      title: "Interface Intuitiva (UI/UX)",
+      desc: "Design focado na produtividade do usuário final, reduzindo o tempo de treinamento e erros de operação.",
+      icon: Laptop,
+    },
+    {
+      title: "Segurança Nível Bancário",
+      desc: "Implementação de logs de auditoria, MFA (autenticação de dois fatores) e proteção contra ataques OWASP.",
+      icon: Lock,
+    },
+    {
+      title: "Automação de Workflows",
+      desc: "Motores de regras que executam tarefas repetitivas automaticamente com base em gatilhos específicos.",
+      icon: Workflow,
+    },
+    {
+      title: "BI e Dashboards em Tempo Real",
+      desc: "Visualização clara de indicadores de desempenho para monitoramento contínuo da saúde do negócio.",
+      icon: BarChart3,
+    },
+    {
+      title: "Suporte e Manutenção Proativa",
+      desc: "Monitoramento 24/7 para garantir que o sistema esteja sempre disponível e performando no máximo.",
+      icon: Users,
+    },
   ],
   stack: [
-    { title: "React 19 + TanStack", desc: "SSR, type-safety end-to-end, roteamento file-based." },
-    { title: "PostgreSQL + RLS", desc: "Segurança no banco, não só na aplicação." },
-    { title: "Edge functions", desc: "Lógica server-side próxima do usuário, baixa latência." },
-    { title: "CI/CD contínuo", desc: "Deploy a cada PR. Preview environments para validação." },
+    { title: "Frontend React/Next.js", desc: "Interfaces rápidas, ricas em interatividade e otimizadas para o usuário." },
+    { title: "Backend em Node.js/Go", desc: "Processamento de alta performance e escalabilidade de servidores." },
+    { title: "PostgreSQL Corporativo", desc: "Banco de dados relacional robusto para integridade absoluta da informação." },
+    { title: "Docker & Kubernetes", desc: "Infraestrutura moderna para deploys seguros e escalonamento automático." },
   ],
   processo: [
-    { n: "01", title: "Discovery técnico", desc: "Mapeamos fluxos, papéis, integrações e prioridades." },
-    { n: "02", title: "MVP em sprints", desc: "Entregas semanais navegáveis. Feedback contínuo." },
-    { n: "03", title: "Hardening", desc: "Testes, monitoring, observabilidade e documentação." },
-    { n: "04", title: "Handoff & evolução", desc: "Treinamento da equipe ou contrato de evolução mensal." },
+    {
+      n: "01",
+      title: "Levantamento de Requisitos",
+      desc: "Reuniões detalhadas para entender cada nuance do seu negócio e definir o escopo funcional do sistema.",
+    },
+    {
+      n: "02",
+      title: "Prototipagem e Validação",
+      desc: "Criação de protótipos navegáveis para que você valide a experiência antes da codificação final.",
+    },
+    {
+      n: "03",
+      title: "Desenvolvimento e Integração",
+      desc: "Codificação em sprints ágeis com demonstrações frequentes para garantir alinhamento total.",
+    },
+    {
+      n: "04",
+      title: "Implantação e Treinamento",
+      desc: "Migração de dados, treinamento das equipes e suporte assistido durante a fase de lançamento.",
+    },
   ],
   faq: [
-    { q: "Vocês fazem ERPs completos ou só sistemas pequenos?", a: "Fazemos ambos. Para escopo grande dividimos em módulos com releases frequentes em vez de big bang." },
-    { q: "Posso ter login com Google e SSO corporativo?", a: "Sim. Suportamos OAuth (Google, Microsoft, Apple) e SAML para SSO corporativo quando necessário." },
-    { q: "E se eu precisar de app mobile depois?", a: "A API que construímos serve mobile. Encaminhamos parceiros de mobile ou expandimos para PWA, conforme o caso." },
-    { q: "Como funciona a manutenção depois do lançamento?", a: "Oferecemos contrato mensal opcional ou sustentação por bolsa de horas. Você escolhe o nível de envolvimento." },
-    { q: "Os dados ficam onde?", a: "Em infra que você controla — Lovable Cloud, Supabase ou AWS na sua conta. Migramos a qualquer momento sem custo de saída." },
+    {
+      q: "Qual a diferença entre um sistema web e um aplicativo desktop?",
+      a: "Sistemas web são acessados via navegador e não requerem instalação em cada máquina, facilitando atualizações centrais e acesso de qualquer lugar com internet. Isso reduz custos de TI e aumenta a agilidade corporativa.",
+    },
+    {
+      q: "Quanto tempo demora o desenvolvimento de um software personalizado?",
+      a: "O tempo varia conforme a complexidade. Projetos típicos de MVP (Produto Mínimo Viável) levam entre 8 a 16 semanas. Trabalhamos com entregas incrementais para que você já possa usar partes do sistema durante o desenvolvimento.",
+    },
+    {
+      q: "O sistema web pode ser integrado ao meu ERP atual (ex: SAP, Totvs)?",
+      a: "Sim. Especializamos em criar camadas de integração que conectam seu novo sistema web aos seus legados via APIs ou webhooks, garantindo que os dados fluam sem interrupções entre as plataformas.",
+    },
+    {
+      q: "Como é garantida a segurança dos dados no sistema web?",
+      a: "Implementamos múltiplas camadas de proteção, incluindo firewalls de aplicação, criptografia SSL/TLS, e controles rígidos de acesso. Realizamos testes de vulnerabilidade constantes para garantir a integridade total do software.",
+    },
+    {
+      q: "O software pertencerá à minha empresa após o pagamento?",
+      a: "Sim. Ao final do projeto, o código-fonte e todos os ativos de propriedade intelectual são transferidos para sua empresa. Você não fica refém da Vtech Soluções e tem total liberdade tecnológica.",
+    },
+    {
+      q: "Como o sistema web ajuda no ROI (Retorno sobre Investimento)?",
+      a: "Através da redução de erros manuais, economia de tempo da equipe e centralização de dados que permitem melhores decisões. Na maioria dos casos, o sistema se paga em poucos meses através da eficiência operacional gerada.",
+    },
   ],
   relacionados: [
-    { slug: "integracoes", title: "Integrações", href: "/servicos/integracoes", desc: "Conecte o sistema novo aos ERPs, CRMs e gateways que você já usa." },
-    { slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "Adicione agentes que automatizam tarefas dentro do sistema." },
-    { slug: "consultoria-tech", title: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Valide arquitetura e stack antes de começar a construir." },
+    {
+      slug: "integracoes",
+      title: "Integrações de Sistemas",
+      href: "/servicos/integracoes",
+      desc: "Conecte seu novo sistema a todas as outras ferramentas que sua empresa já utiliza.",
+    },
+    {
+      slug: "automacoes-com-ia",
+      title: "Automações com IA",
+      href: "/servicos/automacoes-com-ia",
+      desc: "Potencialize seu software com inteligência artificial para análise de dados e automação inteligente.",
+    },
   ],
-  ctaFinalTitle: "Pronto para tirar a operação da planilha",
+  ctaFinalTitle: "Pronto para modernizar sua operação com software de alto nível",
 };
 
 export const Route = createFileRoute("/servicos/sistemas-web")({

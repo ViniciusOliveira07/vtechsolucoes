@@ -19,126 +19,196 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Sites institucionais",
-  h1: "Sites institucionais que vendem confiança antes da primeira reunião.",
+  h1: "Sites Institucionais B2B: Transformação Digital e Autoridade para sua Empresa.",
   subheadline:
-    "Para empresas B2B que precisam de presença digital à altura do ticket que cobram. SEO técnico, performance e copy persuasiva — não só design bonito.",
-  trust: ["Entrega em 30 dias", "SEO técnico nativo", "Sem mensalidade refém"],
+    "Desenvolvemos sites institucionais premium focados em conversão, performance Core Web Vitals e autoridade de marca. A solução ideal para empresas B2B que buscam expansão digital e credibilidade no mercado corporativo.",
+  trust: ["Entrega em até 30 dias", "Otimização SEO de alta performance", "Código proprietário e seguro"],
   oQueE: {
-    title: "O que é um site institucional B2B de alto padrão",
+    title: "O que é um site institucional B2B de alta performance",
     paragrafos: [
-      "Um site institucional é o endereço digital oficial da sua empresa — a página corporativa que apresenta marca, posicionamento, soluções, cases e canais de contato para clientes, parceiros, investidores e candidatos. No B2B, ele é frequentemente o primeiro ponto de contato antes de uma reunião comercial e por isso precisa transmitir maturidade, autoridade e clareza de proposta de valor em segundos.",
-      "Diferente de um site de e-commerce ou de um SaaS, o site institucional não vende um produto direto: ele vende confiança e qualifica oportunidade. As páginas típicas incluem Home, Sobre, Serviços ou Soluções, Cases, Conteúdo (blog), Carreiras e Contato. A estrutura precisa equilibrar storytelling, prova social, SEO técnico (sitemap, schema, meta tags) e performance (Core Web Vitals em verde) para ranquear bem no Google e converter visitantes em leads qualificados.",
-      "Construir um site institucional moderno em 2025 envolve stack atual (React, SSR, edge), design system próprio, identidade visual coesa e medição via GA4. É o tipo de projeto que costuma ser entregue por agências digitais, web designers, desenvolvedores freelancers ou estúdios de produto — com qualidade, prazos e preços muito diferentes entre si.",
+      "Um site institucional B2B é muito mais do que um cartão de visitas digital; é a base da sua estratégia de marketing e vendas no ambiente corporativo. Em 2024 e 2025, a presença digital de uma empresa tornou-se o principal critério de desempate em negociações de alto ticket. Um site bem estruturado comunica maturidade, solidez e clareza de proposta de valor, sendo o ponto central de contato entre sua marca e parceiros estratégicos, investidores e clientes em potencial.",
+      "O desenvolvimento de um site institucional moderno exige a integração de design de ponta com tecnologia de última geração. Na Vtech Soluções, utilizamos stacks como React 19 e SSR (Server-Side Rendering) para garantir que sua empresa não apenas tenha um visual impressionante, mas também carregue instantaneamente em qualquer dispositivo. A arquitetura de informação é pensada para guiar o usuário em uma jornada de confiança, desde o primeiro impacto no Hero até a conversão final em nossos formulários otimizados.",
+      "Além da estética, focamos intensamente no SEO técnico (Search Engine Optimization). Isso significa que cada página é construída para ser facilmente indexada pelo Google, utilizando marcações de dados estruturados (Schema.org), sitemaps dinâmicos e otimização de metadados. Um site institucional de alto padrão deve ser uma ferramenta ativa de geração de demanda, servindo como o pilar de autoridade que sustenta sua reputação no mercado brasileiro e global.",
+      "Através da transformação digital, ajudamos empresas a saírem de sistemas obsoletos e limitados, como WordPress mal configurado, para ecossistemas digitais ágeis, seguros e escaláveis. Nosso foco é garantir que sua infraestrutura web suporte o crescimento do seu negócio, oferecendo flexibilidade para atualizações constantes sem comprometer a estabilidade ou a velocidade do sistema.",
     ],
     sinonimos: [
-      "site corporativo",
-      "site empresarial",
-      "página institucional",
-      "website B2B",
-      "site para empresa",
-      "criação de site profissional",
-      "desenvolvimento de site corporativo",
-      "site para indústria",
-      "site para escritório de advocacia",
-      "site para consultoria",
+      "site corporativo de alto padrão",
+      "desenvolvimento de site empresarial",
+      "criação de website B2B",
+      "página institucional para empresas",
+      "soluções web corporativas",
+      "estúdio de criação de sites premium",
+      "consultoria em presença digital B2B",
+      "plataforma institucional escalável",
     ],
   },
   paraQuem: [
-    { perfil: "Indústrias e fabricantes B2B", descricao: "Empresas com ciclo de venda longo que precisam educar o comprador antes da reunião comercial." },
-    { perfil: "Escritórios de advocacia e consultorias", descricao: "Negócios baseados em autoridade e reputação, onde o site é prova de credibilidade." },
-    { perfil: "SaaS e tech companies", descricao: "Empresas de tecnologia que precisam de presença premium para parcerias enterprise e investidores." },
-    { perfil: "Holdings, gestoras e family offices", descricao: "Marcas que comunicam discrição, solidez e governança — design e copy precisam refletir isso." },
-    { perfil: "Empresas em rebranding ou fusão", descricao: "Quem está renovando posicionamento e precisa de presença digital nova alinhada à marca atualizada." },
-    { perfil: "Startups em rodada de captação", descricao: "Site é vitrine para investidores, parceiros e talentos. Precisa transmitir maturidade desde o domínio.com." },
+    {
+      perfil: "Indústrias e Manufaturas",
+      descricao:
+        "Para fábricas que precisam apresentar catálogos técnicos complexos e gerar leads qualificados em feiras e buscas orgânicas.",
+    },
+    {
+      perfil: "Escritórios de Advocacia e Consultorias",
+      descricao:
+        "Profissionais que vendem conhecimento e autoridade, onde o design do site é a prova social imediata de competência.",
+    },
+    {
+      perfil: "Empresas de Tecnologia e SaaS",
+      descricao:
+        "Negócios que precisam demonstrar inovação constante através de uma interface moderna, rápida e integrada.",
+    },
+    {
+      perfil: "Holdings e Grupos Empresariais",
+      descricao:
+        "Corporações que buscam uma comunicação unificada e robusta para investidores e stakeholders de diversos setores.",
+    },
   ],
   casosDeUso: [
-    { title: "Site para indústria com catálogo técnico", desc: "Multi-idioma, área de downloads de fichas técnicas, integração com RD Station/HubSpot e SEO para termos técnicos do segmento." },
-    { title: "Site de escritório de advocacia", desc: "Áreas de atuação, equipe, publicações e blog jurídico com schema Article, dentro das normas da OAB." },
-    { title: "Landing page para captação de leads", desc: "Página de campanha enxuta, com formulário, prova social, FAQ e tracking de conversão GA4 + Meta Ads." },
-    { title: "Site institucional para holding", desc: "Apresentação do grupo, empresas controladas, governança e sustentabilidade — visual sóbrio e premium." },
-    { title: "Hotsite para lançamento de produto", desc: "Página de produto com hero cinematográfico, vídeo, especificações, formulário de pré-venda e contagem regressiva." },
-    { title: "Migração de WordPress para stack moderna", desc: "Saída de CMS instável para arquitetura headless rápida, mantendo URLs e ranking SEO existente." },
+    {
+      title: "Migração e Rebranding Digital",
+      desc: "Atualização completa de sites antigos para novas identidades visuais, mantendo o ranking de SEO acumulado por anos.",
+    },
+    {
+      title: "Portais de Conteúdo e Liderança de Pensamento",
+      desc: "Criação de áreas de blog e notícias com alta performance para atrair tráfego qualificado via marketing de conteúdo.",
+    },
   ],
   glossario: [
-    { termo: "Core Web Vitals", definicao: "Métricas de performance do Google (LCP, INP, CLS) que impactam diretamente o ranking de busca e a experiência do usuário." },
-    { termo: "SEO on-page", definicao: "Otimizações dentro da página: títulos, descrições, headings, alt text, links internos e palavras-chave bem distribuídas." },
-    { termo: "Schema.org / JSON-LD", definicao: "Marcação estruturada que ajuda o Google a entender o conteúdo (organização, FAQ, breadcrumb) e gerar rich snippets." },
-    { termo: "SSR (Server-Side Rendering)", definicao: "Renderização da página no servidor antes de enviar ao navegador. Crucial para indexação rápida e performance percebida." },
-    { termo: "Sitemap.xml", definicao: "Arquivo que lista todas as URLs do site para os buscadores rastrearem com eficiência." },
-    { termo: "Open Graph", definicao: "Meta tags que controlam como o site aparece quando compartilhado no LinkedIn, WhatsApp, Slack e redes sociais." },
-    { termo: "Design system", definicao: "Conjunto reutilizável de tokens (cores, tipografia, espaçamentos) e componentes que garantem consistência visual." },
-    { termo: "Headless CMS", definicao: "CMS que entrega só conteúdo via API (Sanity, Contentful, Strapi), separado da camada de apresentação." },
+    {
+      termo: "Core Web Vitals",
+      definicao:
+        "Conjunto de métricas do Google que medem a velocidade de carregamento, interatividade e estabilidade visual do site.",
+    },
+    {
+      termo: "Schema Markup",
+      definicao:
+        "Código adicionado ao site para ajudar os motores de busca a entender o conteúdo e exibir resultados mais ricos (Rich Snippets).",
+    },
   ],
   problemas: [
     {
-      dor: "Site bonito que não traz lead nenhum",
+      dor: "Site ultrapassado que afasta clientes premium",
       solucao:
-        "Construímos cada página com intenção de busca clara, copy de conversão e CTAs medidos por evento no GA4.",
+        "Implementamos um design contemporâneo e editorial que reflete a real qualidade e o valor dos seus serviços B2B.",
     },
     {
-      dor: "Carregamento lento que derruba o ranking no Google",
+      dor: "Baixa visibilidade no Google (SEO deficiente)",
       solucao:
-        "Stack moderna (TanStack Start + edge), Core Web Vitals em verde e imagens otimizadas no build.",
+        "Realizamos uma auditoria completa de palavras-chave e implementamos SEO on-page técnico para ranqueamento superior.",
     },
     {
-      dor: "Identidade visual genérica, igual à do concorrente",
+      dor: "Dificuldade de navegação em dispositivos móveis",
       solucao:
-        "Direção de arte estúdio: tipografia editorial, motion sutil e sistema de design proprietário por projeto.",
+        "Desenvolvimento Mobile-First, garantindo que a experiência do seu cliente seja perfeita tanto no smartphone quanto no desktop.",
     },
     {
-      dor: "Refém de WordPress, plugin e mensalidade",
+      dor: "Lentidão extrema e erros de carregamento",
       solucao:
-        "Código é seu. Sem CMS instável, sem plugin que quebra. Deploy contínuo na sua conta.",
+        "Utilizamos infraestrutura em Edge Computing para entregar seu site em milissegundos, reduzindo a taxa de rejeição.",
     },
   ],
   entregaveis: [
-    { title: "Design system dedicado", desc: "Cores, tipografia e tokens semânticos pensados para sua marca.", icon: Sparkles },
-    { title: "SEO técnico on-page", desc: "Meta tags por rota, sitemap, schema.org, canonical e Open Graph.", icon: Search },
-    { title: "Performance Core Web Vitals", desc: "LCP, INP e CLS em verde. SSR + edge para carregar instantâneo.", icon: Gauge },
-    { title: "Responsivo de verdade", desc: "Mobile-first com breakpoints fluidos e tipografia escalável.", icon: Smartphone },
-    { title: "Acessibilidade AA", desc: "Contraste, aria-labels e navegação por teclado validados.", icon: ShieldCheck },
-    { title: "Integrações de captação", desc: "Formulário com validação, WhatsApp, GA4 e CRM se necessário.", icon: Globe },
+    {
+      title: "Design Exclusivo e Autoral",
+      desc: "Nada de templates prontos. Criamos uma interface única alinhada ao seu manual de marca e posicionamento.",
+      icon: Sparkles,
+    },
+    {
+      title: "Performance e Velocidade Máxima",
+      desc: "Otimização rigorosa de imagens e scripts para atingir notas máximas no Google PageSpeed Insights.",
+      icon: Gauge,
+    },
+    {
+      title: "Segurança de Nível Corporativo",
+      desc: "Proteção contra ataques, SSL nativo e código limpo, eliminando vulnerabilidades comuns de plataformas populares.",
+      icon: ShieldCheck,
+    },
+    {
+      title: "SEO Técnico e Estruturado",
+      desc: "Implementação de sitemaps, robots.txt, canonical tags e microdados para domínio total das buscas orgânicas.",
+      icon: Search,
+    },
+    {
+      title: "Gestão de Conteúdo Simplificada",
+      desc: "Painel intuitivo para sua equipe atualizar textos, imagens e posts sem depender de desenvolvedores.",
+      icon: Smartphone,
+    },
+    {
+      title: "Integração com Ecossistema de Vendas",
+      desc: "Conectamos seu site ao CRM (Salesforce, HubSpot, RD Station) para rastrear cada lead gerado.",
+      icon: Globe,
+    },
   ],
   stack: [
-    { title: "TanStack Start + React 19", desc: "SSR moderno, type-safe e edge-ready." },
-    { title: "Tailwind v4", desc: "Tokens semânticos, dark-mode nativo, zero CSS legado." },
-    { title: "Cloudflare / Edge", desc: "Latência global baixa, deploy em segundos." },
-    { title: "GA4 + eventos", desc: "Mede o que importa: cliques, scroll, leads gerados." },
+    { title: "React 19 + TanStack Start", desc: "A tecnologia mais moderna para sites ultra-rápidos e dinâmicos." },
+    { title: "Tailwind CSS v4", desc: "Design consistente e carregamento de estilos otimizado." },
+    { title: "Cloudflare Edge", desc: "Seu site hospedado na rede mais rápida e segura do mundo." },
+    { title: "TypeScript", desc: "Código robusto, livre de erros e fácil de manter a longo prazo." },
   ],
   processo: [
-    { n: "01", title: "Diagnóstico", desc: "Entendemos posicionamento, ICP e palavras-chave alvo." },
-    { n: "02", title: "Wireframe + copy", desc: "Estrutura validada antes de qualquer pixel ser desenhado." },
-    { n: "03", title: "Build com IA", desc: "Desenvolvimento acelerado, mas com revisão sênior em cada commit." },
-    { n: "04", title: "Lançamento", desc: "Deploy, GA4, Search Console, sitemap submetido. Handoff completo." },
+    {
+      n: "01",
+      title: "Imersão e Diagnóstico",
+      desc: "Analisamos seu mercado, concorrentes e objetivos de negócio para traçar a melhor estratégia digital.",
+    },
+    {
+      n: "02",
+      title: "Arquitetura e UX Design",
+      desc: "Desenhamos a jornada do usuário e a estrutura de conteúdo focada em usabilidade e conversão de leads.",
+    },
+    {
+      n: "03",
+      title: "Desenvolvimento Ágil",
+      desc: "Codificamos o site utilizando as melhores práticas de engenharia de software e otimização SEO.",
+    },
+    {
+      n: "04",
+      title: "QA e Lançamento",
+      desc: "Testes rigorosos em múltiplos dispositivos seguidos pelo deploy monitorado e indexação nos motores de busca.",
+    },
   ],
   faq: [
     {
-      q: "Quanto tempo leva para entregar um site institucional?",
-      a: "O prazo padrão é de 30 dias úteis a partir da aprovação do escopo, incluindo design, desenvolvimento, conteúdo e deploy.",
+      q: "Qual a importância de um site institucional para o SEO da minha empresa?",
+      a: "Um site institucional bem otimizado é a âncora da sua presença digital. Ele permite que sua empresa seja encontrada por termos específicos do seu setor (long tail keywords), estabelecendo autoridade e reduzindo custos com anúncios pagos a longo prazo através do tráfego orgânico qualificado.",
     },
     {
-      q: "Vocês cobram mensalidade?",
-      a: "Não. O projeto é fechado por escopo. Você só paga hospedagem (geralmente abaixo de R$ 50/mês) e contrata manutenção opcional se quiser.",
+      q: "Como a Vtech Soluções garante a velocidade de carregamento do site?",
+      a: "Utilizamos Server-Side Rendering (SSR) e otimização automática de ativos. Isso garante que o conteúdo principal seja entregue instantaneamente, o que é um fator crítico para o ranking no Google e para evitar que potenciais clientes abandonem a página devido à lentidão.",
     },
     {
-      q: "Já tenho identidade visual. Vocês trabalham com ela?",
-      a: "Sim. Adaptamos seu manual de marca para um design system web e mantemos consistência com seus materiais offline.",
+      q: "O site institucional é compatível com dispositivos móveis (responsivo)?",
+      a: "Sim, todos os nossos projetos são desenvolvidos sob a filosofia Mobile-First. Isso garante que a experiência do usuário seja fluida e profissional em qualquer tamanho de tela, o que é essencial visto que a maioria das buscas B2B hoje começa no celular.",
     },
     {
-      q: "O site sai indexado no Google?",
-      a: "Sim. Entregamos com sitemap.xml, robots.txt, schema.org, Open Graph e submetemos ao Search Console no lançamento.",
+      q: "É possível integrar o site com ferramentas de automação de marketing?",
+      a: "Com certeza. Integramos nativamente com plataformas como RD Station, HubSpot, Mailchimp e CRMs diversos. Isso permite que os leads gerados no site entrem automaticamente no seu fluxo de vendas, aumentando a eficiência comercial.",
     },
     {
-      q: "Posso editar o conteúdo depois sem chamar vocês?",
-      a: "Sim. Acoplamos um CMS leve (Sanity ou similar) quando faz sentido, ou mantemos o conteúdo versionado no repositório com edição direta.",
+      q: "Vocês oferecem suporte após o lançamento do site?",
+      a: "Sim, oferecemos planos de manutenção evolutiva e suporte técnico para garantir que o site continue seguro, atualizado e performando no máximo das suas capacidades tecnológicas ao longo do tempo.",
+    },
+    {
+      q: "Quanto custa o desenvolvimento de um site institucional B2B?",
+      a: "Os valores variam conforme a complexidade do projeto, número de páginas e integrações necessárias. Trabalhamos com orçamentos fechados e transparentes, focados no retorno sobre o investimento (ROI) que a nova plataforma trará para sua corporação.",
     },
   ],
   relacionados: [
-    { slug: "sistemas-web", title: "Sistemas web sob medida", href: "/servicos/sistemas-web", desc: "Quando o site precisa virar plataforma com login, dados e regras." },
-    { slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "Adicione chatbot inteligente ou geração de conteúdo automatizada." },
-    { slug: "consultoria-tech", title: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Decida arquitetura e roadmap antes de investir em código." },
+    {
+      slug: "sistemas-web",
+      title: "Sistemas Web Personalizados",
+      href: "/servicos/sistemas-web",
+      desc: "Expanda as funcionalidades do seu site para uma plataforma de gestão ou operação interna.",
+    },
+    {
+      slug: "consultoria-tech",
+      title: "Consultoria de Tecnologia",
+      href: "/servicos/consultoria-tech",
+      desc: "Alinhamento estratégico para suas decisões de infraestrutura e desenvolvimento de software.",
+    },
   ],
-  ctaFinalTitle: "Pronto para um site que trabalha pela sua empresa",
+  ctaFinalTitle: "Pronto para elevar o patamar digital da sua empresa",
 };
 
 export const Route = createFileRoute("/servicos/sites-institucionais")({

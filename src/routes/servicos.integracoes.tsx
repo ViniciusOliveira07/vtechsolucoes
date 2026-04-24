@@ -19,98 +19,197 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Integrações",
-  h1: "Integrações entre sistemas que finalmente conversam entre si.",
+  h1: "Integração de Sistemas e APIs: Conectividade e Eficiência Operacional para sua Empresa.",
   subheadline:
-    "ERPs, CRMs, gateways, APIs internas e webhooks. Acabe com a digitação dupla, planilhas intermediárias e dados desencontrados.",
-  trust: ["Diagnóstico em 7 dias", "Idempotência garantida", "Logs auditáveis"],
+    "Elimine o retrabalho manual e a inconsistência de dados integrando seus ERPs, CRMs e gateways. Soluções robustas de middleware que garantem fluxos de informação contínuos e seguros.",
+  trust: ["Diagnóstico técnico em 7 dias", "Idempotência e segurança de dados", "Suporte a grandes volumes de requisição"],
   oQueE: {
-    title: "O que é integração de sistemas (system integration)",
+    title: "O que é integração de sistemas e APIs corporativas",
     paragrafos: [
-      "Integração de sistemas — também conhecida como system integration, integração de APIs, middleware empresarial ou EAI (Enterprise Application Integration) — é o trabalho de fazer dois ou mais softwares conversarem automaticamente, trocando dados sem intervenção humana. É o que elimina a digitação dupla entre e-commerce e ERP, sincroniza CRM com plataforma de marketing, conecta gateway de pagamento ao financeiro e faz o WhatsApp Business virar canal oficial dentro do seu sistema interno.",
-      "As técnicas mais usadas são integração via API REST/GraphQL, webhooks (notificações reativas), filas e mensageria (SQS, RabbitMQ, PgBoss), ETL/CDC para sincronização de bancos, iPaaS (Zapier, Make, n8n) para casos simples e middleware sob medida quando o cenário exige idempotência, retry exponencial, dead-letter queue e dashboard de eventos. A escolha depende de volume, criticidade e SLA exigidos pelo negócio.",
-      "Integrações bem feitas têm três pilares: confiabilidade (nada se perde, nada duplica), observabilidade (você vê tudo que rodou e o que falhou) e manutenibilidade (quando a API do parceiro muda, você descobre antes do cliente reclamar). É um serviço que parece invisível quando funciona — e custa caro quando quebra silenciosamente por dias.",
+      "A integração de sistemas — também conhecida como system integration ou middleware empresarial — é o processo tecnológico de conectar diferentes softwares e plataformas para que trabalhem de forma unificada. No cenário B2B, onde as empresas utilizam diversas ferramentas para gestão (ERP), vendas (CRM), logística e pagamentos, a integração é o 'tecido conectivo' que permite que a informação flua automaticamente, sem a necessidade de intervenção humana ou redigitação de dados.",
+      "Através da utilização de APIs (Application Programming Interfaces), webhooks e barramentos de serviços, criamos ecossistemas onde um evento em um sistema (como uma venda no e-commerce) dispara automaticamente ações em outros sistemas (como a emissão de nota fiscal no ERP e a atualização de estoque no WMS). Isso não apenas acelera a operação, mas elimina drasticamente o erro humano, garantindo que a base de dados da sua empresa seja única, íntegra e confiável para tomadas de decisão estratégica.",
+      "Na Vtech Soluções, desenvolvemos integrações de alta confiabilidade utilizando técnicas de idempotência (garantindo que uma transação nunca seja processada em duplicidade) e filas de mensagens com retry automático. Isso significa que, mesmo se um sistema de terceiro ficar temporariamente fora do ar, nossa arquitetura de integração retém a informação e a processa assim que a conexão for restabelecida, evitando perda de pedidos ou falhas financeiras críticas.",
+      "A integração moderna também envolve a segurança rigorosa dos dados em trânsito. Utilizamos protocolos de autenticação avançados e criptografia de ponta a ponta, garantindo que informações sensíveis de clientes e da própria empresa estejam protegidas contra acessos não autorizados. Integrar sistemas é, em última análise, investir na escalabilidade do negócio, permitindo que a operação cresça em volume sem a necessidade de aumentar proporcionalmente a equipe administrativa.",
     ],
     sinonimos: [
-      "integração de APIs",
-      "integração de ERP",
-      "integração de CRM",
-      "system integration",
-      "middleware empresarial",
-      "EAI Enterprise Application Integration",
-      "iPaaS sob medida",
-      "integração via webhook",
-      "automação entre sistemas",
-      "conector ERP",
-      "integração Bling Omie Tiny",
-      "integração TOTVS SAP",
+      "consultoria em integração de sistemas",
+      "desenvolvimento de middleware personalizado",
+      "conectividade de APIs B2B",
+      "integração de ERP e CRM",
+      "automação de fluxos de dados",
+      "sincronização de bancos de dados",
+      "integração com gateways de pagamento",
+      "middleware para transformação digital",
+      "orquestração de serviços web",
     ],
   },
   paraQuem: [
-    { perfil: "E-commerces multicanal", descricao: "Lojas que vendem em Mercado Livre, Shopee, Amazon e site próprio e perdem pedido na sincronização de estoque." },
-    { perfil: "Empresas com múltiplos ERPs / sistemas legados", descricao: "Pós-fusão ou crescimento por aquisição: cada filial usa um sistema, e o consolidado vive na planilha." },
-    { perfil: "Operações com cobrança e recorrência", descricao: "Quem precisa conciliar gateway, asaas, banco e financeiro sem perder transação ou duplicar lançamento." },
-    { perfil: "Indústrias e logística", descricao: "Apontamento de chão de fábrica, WMS, TMS e ERP corporativo precisando de orquestração confiável." },
-    { perfil: "SaaS B2B precisando integrar com clientes", descricao: "Sua plataforma precisa receber dados via API, planilha, FTP ou webhook do ERP do cliente final." },
-    { perfil: "Empresas com WhatsApp como canal oficial", descricao: "Integração com WhatsApp Business API, roteamento de atendimento e gravação no CRM." },
+    {
+      perfil: "E-commerces e Marketplaces B2B",
+      descricao:
+        "Lojas virtuais que precisam sincronizar estoque, preços e pedidos em múltiplos canais de venda simultaneamente.",
+    },
+    {
+      perfil: "Empresas em Fase de Expansão",
+      descricao:
+        "Organizações que estão adotando novas ferramentas e precisam que o ecossistema atual converse com as novas soluções sem atritos.",
+    },
+    {
+      perfil: "Indústrias e Operações Logísticas",
+      descricao:
+        "Negócios que exigem que o chão de fábrica esteja conectado ao PCP e ao faturamento para visibilidade total da produção.",
+    },
+    {
+      perfil: "Gestoras de Cobrança e Recorrência",
+      descricao:
+        "Empresas financeiras que precisam integrar gateways de pagamento com sistemas de conciliação bancária e ERPs.",
+    },
   ],
   casosDeUso: [
-    { title: "Integração e-commerce ↔ Bling/Omie/Tiny", desc: "Sincronização de produto, estoque, pedido e nota fiscal bidirecional, com tratamento de SKU diferente entre sistemas." },
-    { title: "Conciliação de pagamento Stripe/Asaas/Mercado Pago", desc: "Webhook validado, baixa automática no ERP, alerta de falha e relatório diário de divergências." },
-    { title: "Integração Salesforce/HubSpot ↔ ERP interno", desc: "Conta e oportunidade no CRM viram cliente e pedido no ERP, com status sincronizado em tempo real." },
-    { title: "Conector WhatsApp Business API", desc: "Recebimento de mensagem, roteamento por menu, integração com sistema de tickets e gravação de histórico." },
-    { title: "Sincronização de catálogo entre marketplaces", desc: "Update de preço e estoque em Mercado Livre, Amazon, Shopee e B2W disparado por mudança no ERP." },
-    { title: "Migração de dados entre ERPs", desc: "ETL de cliente, produto, histórico de pedido e financeiro de sistema legado para novo ERP, com validação." },
+    {
+      title: "Integração Bidirecional ERP ↔ CRM",
+      desc: "Sincronização em tempo real de clientes e oportunidades, garantindo que o time comercial veja o que o financeiro já faturou.",
+    },
+    {
+      title: "Automação de Checkout e Pagamentos",
+      desc: "Conexão de gateways como Stripe, Mercado Pago ou Asaas diretamente ao seu sistema de gestão para baixa automática.",
+    },
   ],
   glossario: [
-    { termo: "API REST", definicao: "Padrão de comunicação HTTP entre sistemas. A maioria das integrações modernas usa REST com JSON." },
-    { termo: "Webhook", definicao: "Notificação HTTP que um sistema envia para outro quando algo acontece (pedido criado, pagamento aprovado)." },
-    { termo: "iPaaS", definicao: "Integration Platform as a Service (Zapier, Make, n8n). Bom para casos simples; limita em volume e regra complexa." },
-    { termo: "Middleware", definicao: "Camada intermediária que conecta sistemas heterogêneos, aplica regras e padroniza formato de dado." },
-    { termo: "Idempotência", definicao: "Propriedade que garante: se a mesma operação rodar duas vezes, o resultado é o mesmo. Evita pedido duplicado." },
-    { termo: "Dead-letter queue (DLQ)", definicao: "Fila onde caem eventos que falharam todas as tentativas, para inspeção manual e re-processamento." },
-    { termo: "Retry exponencial / backoff", definicao: "Estratégia de re-tentar operação falha com intervalo crescente (1s, 2s, 4s, 8s) para não sobrecarregar o destino." },
-    { termo: "ETL / CDC", definicao: "ETL (Extract-Transform-Load) move dado em lote. CDC (Change Data Capture) replica mudanças em tempo real." },
-    { termo: "OAuth 2.0", definicao: "Padrão de autenticação para APIs de terceiros (Google, Meta, HubSpot). Usa token em vez de senha." },
+    {
+      termo: "Webhook",
+      definicao:
+        "Notificação automática enviada de um servidor para outro quando um evento específico ocorre (ex: pagamento aprovado).",
+    },
+    {
+      termo: "Idempotência",
+      definicao:
+        "Garantia técnica de que repetir uma operação várias vezes terá o mesmo resultado que executá-la uma única vez, evitando duplicidade.",
+    },
   ],
   problemas: [
-    { dor: "Pedido entra no e-commerce, alguém digita no ERP", solucao: "Integração bidirecional com retry, idempotência e dashboard de eventos." },
-    { dor: "Cobrança quebra entre gateway e financeiro", solucao: "Webhook validado, conciliação automática e alerta proativo de falha." },
-    { dor: "CRM e marketing têm bases divergentes", solucao: "Sincronização contínua com source of truth definido por campo." },
-    { dor: "API antiga sem documentação", solucao: "Engenharia reversa, contrato OpenAPI gerado e camada de adapter estável por cima." },
+    {
+      dor: "Digitação dupla e retrabalho manual constante",
+      solucao:
+        "Automatizamos a transferência de dados entre sistemas, liberando horas de trabalho da sua equipe e eliminando erros de digitação.",
+    },
+    {
+      dor: "Dados divergentes entre diferentes departamentos",
+      solucao:
+        "Implementamos sincronização em tempo real para que todos os setores trabalhem com a mesma versão da verdade.",
+    },
+    {
+      dor: "Lentidão para processar pedidos e informações",
+      solucao:
+        "Integrações de alta performance que executam tarefas em milissegundos, acelerando o ciclo de vendas e entrega.",
+    },
+    {
+      dor: "Dificuldade de visibilidade consolidada do negócio",
+      solucao:
+        "Centralizamos informações de múltiplos sistemas em um único ponto de consulta ou dashboard gerencial.",
+    },
   ],
   entregaveis: [
-    { title: "Integração ERP ↔ aplicação", desc: "Bling, Omie, Tiny, TOTVS, SAP. Bidirecional, com mapping configurável.", icon: Blocks },
-    { title: "Webhooks robustos", desc: "Assinatura validada, retry com backoff, dead-letter queue.", icon: Webhook },
-    { title: "Gateways de pagamento", desc: "Stripe, Mercado Pago, Pagar.me, Asaas com conciliação automática.", icon: CreditCard },
-    { title: "Middleware de orquestração", desc: "Camada que unifica APIs heterogêneas em contrato único.", icon: Boxes },
-    { title: "Sincronização de dados", desc: "ETL/CDC entre bancos com latência baixa e consistência clara.", icon: RefreshCw },
-    { title: "Monitoramento e alertas", desc: "Dashboard de saúde, falhas notificadas no Slack/e-mail em tempo real.", icon: ShieldCheck },
+    {
+      title: "Conectores de ERP Customizados",
+      desc: "Integração com SAP, TOTVS, Bling, Omie e outros sistemas de gestão líderes de mercado.",
+      icon: Blocks,
+    },
+    {
+      title: "Webhooks e Listeners de Eventos",
+      desc: "Arquitetura reativa que processa informações no instante em que elas acontecem na origem.",
+      icon: Webhook,
+    },
+    {
+      title: "Integração de Meios de Pagamento",
+      desc: "Checkout transparente e conciliação automática com os principais gateways nacionais e internacionais.",
+      icon: CreditCard,
+    },
+    {
+      title: "Middleware de Orquestração",
+      desc: "Camada lógica que traduz e padroniza dados entre sistemas com formatos diferentes.",
+      icon: Boxes,
+    },
+    {
+      title: "Sincronização de Dados em Lote (ETL)",
+      desc: "Processamento de grandes volumes de dados para migrações ou relatórios periódicos complexos.",
+      icon: RefreshCw,
+    },
+    {
+      title: "Logging e Monitoramento de Falhas",
+      desc: "Sistema de alerta proativo que avisa sua equipe se qualquer integração apresentar instabilidade.",
+      icon: ShieldCheck,
+    },
   ],
   stack: [
-    { title: "Node.js / Edge runtime", desc: "Workers serverless para baixa latência e escala automática." },
-    { title: "Filas (PgBoss / SQS)", desc: "Processamento assíncrono confiável com retry." },
-    { title: "OpenAPI + Zod", desc: "Contratos tipados, validação rigorosa em runtime." },
-    { title: "Observability completa", desc: "Logs estruturados, traces, métricas e alertas." },
+    { title: "Node.js & TypeScript", desc: "Desenvolvimento de integrações type-safe e de alta confiabilidade." },
+    { title: "Redis & Message Queues", desc: "Gestão de filas para garantir que nenhuma mensagem seja perdida em caso de instabilidade." },
+    { title: "REST & GraphQL", desc: "Protocolos modernos de comunicação para máxima flexibilidade e performance." },
+    { title: "Docker & Cloud Functions", desc: "Deploy escalável e isolado para cada componente da integração." },
   ],
   processo: [
-    { n: "01", title: "Mapa de integração", desc: "Listamos sistemas, fluxos, eventos e pontos de falha atuais." },
-    { n: "02", title: "Contrato de dados", desc: "Definimos source of truth, mapping de campos e regras de conflito." },
-    { n: "03", title: "Build incremental", desc: "Uma integração por sprint, com migração faseada do legado." },
-    { n: "04", title: "Operação", desc: "Monitoramento ativo, runbook e SLA de resposta a falhas." },
+    {
+      n: "01",
+      title: "Mapeamento de Fluxos",
+      desc: "Identificamos todos os sistemas envolvidos e como a informação deve trafegar entre eles.",
+    },
+    {
+      n: "02",
+      title: "Definição de Contratos de API",
+      desc: "Padronizamos o formato dos dados para garantir que a conversa entre os sistemas seja perfeita.",
+    },
+    {
+      n: "03",
+      title: "Desenvolvimento e Testes de Stress",
+      desc: "Construímos a integração e realizamos testes de carga para garantir estabilidade em cenários reais.",
+    },
+    {
+      n: "04",
+      title: "Monitoramento em Produção",
+      desc: "Lançamento assistido com ferramentas de observabilidade para acompanhar cada transação integrada.",
+    },
   ],
   faq: [
-    { q: "Vocês integram com qualquer sistema?", a: "Sim, desde que ele exponha API, webhook, banco acessível ou arquivo. Sistemas totalmente fechados raramente — mas até esses contornamos com RPA quando preciso." },
-    { q: "E se a API do parceiro cair?", a: "Construímos com retry exponencial, dead-letter queue e alerta. Nada se perde, nada duplica." },
-    { q: "Posso ver o que rodou e o que falhou?", a: "Sim. Entregamos um dashboard de eventos com filtro por status, retry manual e re-processamento." },
-    { q: "Quanto tempo leva integrar dois sistemas?", a: "Integrações simples: 1 a 2 semanas. Bidirecionais com regras complexas: 4 a 8 semanas." },
-    { q: "Preciso trocar meu ERP?", a: "Quase nunca. A integração se adapta ao que você tem. Trocar ERP é decisão de negócio, não de integração." },
+    {
+      q: "É possível integrar sistemas antigos que não têm API?",
+      a: "Sim. Muitas vezes conseguimos integrar via acesso direto ao banco de dados ou utilizando técnicas de RPA (Robotic Process Automation) para ler e escrever dados onde não há uma interface de programação disponível.",
+    },
+    {
+      q: "O que acontece se a internet ou um dos sistemas cair?",
+      a: "Nossas integrações utilizam sistemas de filas. Se o destino estiver fora do ar, a informação fica retida com segurança e a integração tenta novamente de forma automática assim que o sistema retornar, sem perda de dados.",
+    },
+    {
+      q: "Vocês integram com ERPs brasileiros como Bling, Omie e Totvs?",
+      a: "Sim, temos vasta experiência com as APIs dos principais ERPs do mercado brasileiro. Conhecemos as particularidades fiscais e de estoque necessárias para uma integração bem-sucedida no Brasil.",
+    },
+    {
+      q: "Como é garantida a segurança das informações integradas?",
+      a: "Utilizamos criptografia SSL/TLS em todas as comunicações, além de autenticação via tokens seguros (OAuth2). Também implementamos logs de auditoria para que você saiba exatamente o que foi alterado e por quem.",
+    },
+    {
+      q: "Quanto tempo demora para implementar uma integração?",
+      a: "Integrações pontuais podem ser feitas em poucos dias. Projetos mais complexos, que envolvem múltiplos sistemas e regras de negócio profundas, podem levar de 2 a 6 semanas para serem concluídos com segurança total.",
+    },
+    {
+      q: "Qual o benefício real de integrar em vez de fazer manualmente?",
+      a: "O benefício é a escala e a precisão. Um humano leva minutos para processar um pedido manualmente; a integração faz isso em segundos, 24 horas por dia, 7 dias por semana, com 0% de erro de digitação.",
+    },
   ],
   relacionados: [
-    { slug: "sistemas-web", title: "Sistemas web sob medida", href: "/servicos/sistemas-web", desc: "O sistema novo que precisa conversar com o ERP existente." },
-    { slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "IA dentro do fluxo de integração: classificação, extração, decisão." },
-    { slug: "consultoria-tech", title: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Avalie se vale integrar, refatorar ou trocar." },
+    {
+      slug: "sistemas-web",
+      title: "Sistemas Web Personalizados",
+      href: "/servicos/sistemas-web",
+      desc: "Crie a plataforma central que irá orquestrar todas as suas integrações de negócio.",
+    },
+    {
+      slug: "automacoes-com-ia",
+      title: "Automações com IA",
+      href: "/servicos/automacoes-com-ia",
+      desc: "Adicione camadas de inteligência artificial para processar e classificar os dados integrados.",
+    },
   ],
-  ctaFinalTitle: "Pronto para acabar com o retrabalho entre sistemas",
+  ctaFinalTitle: "Pronto para conectar sua empresa e eliminar o trabalho manual",
 };
 
 export const Route = createFileRoute("/servicos/integracoes")({

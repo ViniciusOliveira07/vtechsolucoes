@@ -6,7 +6,7 @@ const SERVICES = [
   {
     n: "01",
     title: "Sites institucionais",
-    desc: "Presença digital premium. Performance, SEO e identidade estúdio.",
+    desc: "Presença digital premium de alta performance. Desenvolvimento focado em autoridade de marca, conversão e SEO técnico para empresas B2B.",
     icon: Globe,
     href: "/servicos/sites-institucionais",
     colSpan: "md:col-span-8",
@@ -14,7 +14,7 @@ const SERVICES = [
   {
     n: "02",
     title: "Sistemas web",
-    desc: "Plataformas internas completas. Stack moderna e deploy contínuo.",
+    desc: "Plataformas web sob medida e escaláveis. Transformamos processos complexos em softwares eficientes que eliminam gargalos e aumentam o ROI.",
     icon: Laptop,
     href: "/servicos/sistemas-web",
     colSpan: "md:col-span-4",
@@ -22,7 +22,7 @@ const SERVICES = [
   {
     n: "03",
     title: "Automações com IA",
-    desc: "Agentes inteligentes e RAG aplicados a problemas reais.",
+    desc: "Inteligência Artificial aplicada ao negócio. Implementamos agentes autônomos e RAG para automação de processos e análise inteligente de dados.",
     icon: Bot,
     href: "/servicos/automacoes-com-ia",
     colSpan: "md:col-span-4",
@@ -30,7 +30,7 @@ const SERVICES = [
   {
     n: "04",
     title: "Integrações",
-    desc: "ERPs, gateways. Conectamos seus sistemas sem dor de cabeça.",
+    desc: "Conectividade total entre seu ecossistema. Integramos ERPs, CRMs e gateways de pagamento com arquitetura robusta e segura.",
     icon: Blocks,
     href: "/servicos/integracoes",
     colSpan: "md:col-span-4",
@@ -38,7 +38,7 @@ const SERVICES = [
   {
     n: "05",
     title: "Consultoria tech",
-    desc: "Perspectiva sênior em decisões de produto.",
+    desc: "Estratégia tecnológica e CTO as a Service. Perspectiva sênior em arquitetura, escolha de stack e roadmap para decisões seguras.",
     icon: Compass,
     href: "/servicos/consultoria-tech",
     colSpan: "md:col-span-4",

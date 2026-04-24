@@ -14,100 +14,201 @@ const SLUG = "automacoes-com-ia";
 const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
 const TITLE = "Automação com IA para Empresas | Agentes e RAG | Vtech";
 const DESCRIPTION =
-  "Automatize processos com agentes de IA, RAG e integração com seus dados. Reduza custo operacional em semanas, não meses.";
-
-const data: ServicePageData = {
+  "Automatize processos com agentes de IA, RAG e integração com seus dados. Reduza custo operacional em semanas, não meses."const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Automações com IA",
-  h1: "Automações com IA que substituem horas de trabalho repetitivo.",
+  h1: "Automação com Inteligência Artificial para Empresas: Inovação e Eficiência B2B.",
   subheadline:
-    "Agentes inteligentes, RAG sobre sua base de conhecimento e fluxos automatizados. Aplicações reais — não demo de LinkedIn.",
-  trust: ["POC em 2 semanas", "ROI medido", "Privacidade preservada"],
+    "Implementamos agentes inteligentes e pipelines de IA generativa (RAG) que automatizam processos complexos, reduzem custos operacionais e potencializam a tomada de decisão corporativa.",
+  trust: ["Prova de Conceito (POC) em 15 dias", "Privacidade e segurança de dados", "Integração total via API"],
   oQueE: {
-    title: "O que é automação com IA generativa para empresas",
+    title: "O que é automação com IA generativa empresarial",
     paragrafos: [
-      "Automação com IA é o uso de modelos de inteligência artificial generativa (LLMs como GPT-4o, Claude, Gemini, Llama) para executar tarefas que antes exigiam tempo humano: responder perguntas, classificar documentos, extrair dados, gerar conteúdo, atender clientes, triar leads, resumir reuniões. Diferente da automação tradicional baseada em regras (RPA, Zapier, Make), a IA generativa entende linguagem natural, contexto e nuance — o que permite automatizar tarefas antes consideradas exclusivamente humanas.",
-      "Os formatos mais comuns em B2B são chatbots inteligentes, agentes de IA com function calling (capazes de executar ações em APIs internas), pipelines RAG (Retrieval-Augmented Generation) que respondem usando a base de conhecimento da empresa com citação de fontes, copilotos integrados a sistemas internos e workflows automatizados que combinam IA com lógica de negócio. Tudo com guardrails, logging, controle de custo e privacidade dos dados.",
-      "Implementar IA bem feita exige mais que prompt engineering: envolve embeddings, vetorização (pgvector, Pinecone), orquestração (LangGraph), observabilidade (Langfuse), avaliação contínua e fallback para humano. O ROI vem de horas-time economizadas, ticket de suporte resolvido sem agente humano, lead qualificado automaticamente e processos batch que rodam em segundos em vez de horas.",
+      "A automação com Inteligência Artificial (IA) para empresas representa a evolução definitiva da produtividade corporativa. Diferente das automações tradicionais baseadas em regras rígidas, a IA generativa — utilizando modelos de linguagem de larga escala (LLMs) como GPT-4, Claude e Gemini — é capaz de compreender contexto, interpretar linguagem natural e executar tarefas cognitivas complexas. Na Vtech Soluções, transformamos essa tecnologia de ponta em ferramentas práticas para o dia a dia do mercado B2B.",
+      "Um dos pilares das nossas soluções é o RAG (Retrieval-Augmented Generation), um pipeline que conecta a inteligência da IA à base de conhecimento específica da sua empresa. Isso significa que criamos sistemas que respondem perguntas, geram relatórios e analisam dados utilizando exclusivamente os manuais, contratos, históricos de atendimento e documentos internos da sua organização. O resultado é uma IA personalizada que não alucina e fornece informações precisas com citação direta de fontes, garantindo compliance e segurança.",
+      "Além de responder dúvidas, desenvolvemos Agentes de IA capazes de agir. Através da técnica de 'function calling', nossos agentes podem interagir com seu ERP, CRM ou banco de dados para realizar tarefas como agendar reuniões, emitir segunda via de boletos, qualificar leads em tempo real ou processar pedidos de compra sem intervenção humana. É a transformação digital aplicada para liberar seu capital humano de tarefas repetitivas e burocráticas, permitindo que sua equipe foque em inovação e estratégia.",
+      "A implementação de IA empresarial na Vtech Soluções segue rigorosos padrões de segurança de dados. Garantimos que suas informações confidenciais não sejam utilizadas para treinamento de modelos públicos, mantendo o isolamento total do seu ecossistema digital. Com o monitoramento contínuo de performance e custos (LLMOps), sua empresa tem controle total sobre o investimento e o retorno gerado pelas automações inteligentes.",
     ],
     sinonimos: [
-      "automação com inteligência artificial",
-      "agente de IA",
-      "chatbot com IA",
-      "IA generativa para empresas",
-      "consultoria em IA empresarial",
-      "RAG sob medida",
-      "implementação de LLM",
-      "automação inteligente B2B",
-      "copiloto empresarial",
-      "atendimento automatizado com IA",
-      "GPT empresarial",
+      "consultoria em inteligência artificial B2B",
+      "implementação de agentes de IA",
+      "automação inteligente de processos",
+      "soluções RAG customizadas",
+      "IA generativa para negócios",
+      "chatbots inteligentes com GPT",
+      "agentes autônomos para empresas",
+      "integração de IA em sistemas legados",
+      "transformação digital com IA",
     ],
   },
   paraQuem: [
-    { perfil: "Operações com alto volume de atendimento", descricao: "SAC, suporte técnico, pré-venda — onde o ticket repete e o time queima energia em pergunta básica." },
-    { perfil: "Empresas com base de conhecimento densa", descricao: "Manuais, contratos, normas, procedimentos: ideal para RAG responder com citação de fonte." },
-    { perfil: "Times comerciais B2B", descricao: "Qualificação de lead, enriquecimento de conta, pesquisa de prospect e geração de proposta." },
-    { perfil: "Backoffice e operações repetitivas", descricao: "Triagem de currículo, conferência de nota, leitura de boleto, preenchimento de formulário." },
-    { perfil: "Marketing e conteúdo", descricao: "Geração de copy, tradução, resumo de reunião, brief automatizado e personalização em escala." },
-    { perfil: "Empresas regulamentadas (jurídico, saúde, financeiro)", descricao: "Casos onde precisão, citação de fonte e compliance importam — IA com guardrail estrito." },
+    {
+      perfil: "Setores de Atendimento e Suporte",
+      descricao:
+        "Empresas com alto volume de interações que precisam de resolução rápida de problemas e triagem inteligente de tickets.",
+    },
+    {
+      perfil: "Departamentos Jurídicos e Compliance",
+      descricao:
+        "Organizações que lidam com grandes volumes de contratos e documentos que exigem análise semântica e extração de dados.",
+    },
+    {
+      perfil: "Equipes Comerciais e de Marketing",
+      descricao:
+        "Times que buscam qualificação automática de leads e personalização de comunicação em escala para prospecção B2B.",
+    },
+    {
+      perfil: "Operações Logísticas e Administrativas",
+      descricao:
+        "Negócios que precisam automatizar o processamento de pedidos, notas fiscais e fluxos de aprovação complexos.",
+    },
   ],
   casosDeUso: [
-    { title: "Chatbot RAG no site institucional", desc: "Responde dúvidas usando manuais, FAQ e documentação interna. Encaminha para humano quando não tem certeza." },
-    { title: "Atendimento WhatsApp com IA", desc: "Bot que entende intenção, consulta pedido no ERP, envia segunda via, agenda visita técnica." },
-    { title: "Triagem automática de currículos", desc: "Lê PDF, estrutura experiência, pontua aderência à vaga e justifica nota com trecho do CV." },
-    { title: "Análise de contrato com IA", desc: "Extrai cláusulas-chave, sinaliza riscos, compara com template padrão e gera resumo executivo." },
-    { title: "Resumo de reuniões com action items", desc: "Transcreve áudio, gera ata, identifica responsáveis, prazos e cria tarefas no Notion/Asana." },
-    { title: "Agente comercial de qualificação", desc: "Conversa com lead inbound 24/7, faz BANT, agenda reunião com SDR e enriquece dados no CRM." },
+    {
+      title: "Agente de Atendimento RAG 24/7",
+      desc: "Implementação de chatbot que resolve dúvidas técnicas complexas consultando a documentação oficial da empresa em tempo real.",
+    },
+    {
+      title: "Automação de Extração de Dados (OCR + IA)",
+      desc: "Leitura inteligente de documentos não estruturados, transformando imagens e PDFs em dados prontos para o ERP.",
+    },
   ],
   glossario: [
-    { termo: "LLM (Large Language Model)", definicao: "Modelo de linguagem treinado em escala massiva, capaz de entender e gerar texto natural (GPT, Claude, Gemini, Llama)." },
-    { termo: "RAG (Retrieval-Augmented Generation)", definicao: "Técnica que busca trechos relevantes da sua base de dados antes de gerar a resposta, reduzindo alucinação." },
-    { termo: "Embeddings", definicao: "Representação numérica (vetor) de um texto, usada para busca semântica — encontra significado, não só palavra exata." },
-    { termo: "Vector database / pgvector", definicao: "Banco que armazena e busca embeddings com performance. pgvector é a extensão para PostgreSQL." },
-    { termo: "Function calling / tool use", definicao: "Capacidade do LLM de invocar funções externas (APIs, banco, cálculos) para executar ações, não só responder." },
-    { termo: "Prompt engineering", definicao: "Arte e ciência de escrever instruções que guiam o modelo a produzir o resultado desejado com consistência." },
-    { termo: "Guardrails", definicao: "Camadas de validação (input e output) que impedem o modelo de responder fora do escopo, vazar dado ou cometer erro grave." },
-    { termo: "Fine-tuning", definicao: "Treinamento adicional do modelo com dados próprios para especializá-lo em um domínio. Geralmente RAG resolve antes." },
-    { termo: "Token", definicao: "Unidade de processamento do LLM (≈ 0.75 palavra em inglês, menos em PT-BR). Custo e limite são medidos em tokens." },
+    {
+      termo: "LLM (Large Language Model)",
+      definicao:
+        "Modelos de inteligência artificial treinados em vastas quantidades de texto para compreender e gerar linguagem humana.",
+    },
+    {
+      termo: "Embeddings",
+      definicao:
+        "Representação numérica do significado de palavras ou frases, permitindo que a IA realize buscas por contexto e não apenas por termos exatos.",
+    },
   ],
   problemas: [
-    { dor: "Time gasta horas respondendo as mesmas perguntas", solucao: "Construímos um agente RAG treinado na sua base que responde com precisão e cita a fonte." },
-    { dor: "Atendimento ao cliente trava em horário de pico", solucao: "Chatbot com IA generativa que resolve 60–80% dos tickets antes do humano." },
-    { dor: "Triagem manual de documentos, propostas, currículos", solucao: "Pipelines de extração estruturada com validação humana opcional no loop." },
-    { dor: "Medo do custo da OpenAI explodir", solucao: "Arquitetura com cache, rate limit por usuário, fallback para modelos open-source e relatório de gasto." },
+    {
+      dor: "Sobrecarga de tarefas manuais e repetitivas",
+      solucao:
+        "Implementamos fluxos de trabalho inteligentes que executam o 'trabalho braçal' digital, reduzindo erros e cansaço da equipe.",
+    },
+    {
+      dor: "Lentidão na resposta a clientes e parceiros",
+      solucao:
+        "Agentes de IA que respondem instantaneamente, garantindo que o lead seja atendido no momento de maior interesse.",
+    },
+    {
+      dor: "Dificuldade em analisar grandes volumes de dados",
+      solucao:
+        "Sistemas de IA que processam e resumem informações complexas, entregando insights acionáveis para a diretoria em segundos.",
+    },
+    {
+      dor: "Inconsistência na comunicação da marca",
+      solucao:
+        "Modelos de IA treinados com o tom de voz e diretrizes da sua empresa, garantindo uniformidade em todos os canais.",
+    },
   ],
   entregaveis: [
-    { title: "Agente RAG sobre seus dados", desc: "Indexação vetorial, retrieval contextual e citação de fontes.", icon: FileSearch },
-    { title: "Chatbot multicanal", desc: "Web, WhatsApp Business API e widget no site, mesma base de conhecimento.", icon: MessageSquare },
-    { title: "Agentes que executam ações", desc: "Function calling: criar tickets, agendar, consultar APIs internas.", icon: Bot },
-    { title: "Pipelines de extração", desc: "Documentos viram dados estruturados auditáveis.", icon: Brain },
-    { title: "Workflows automatizados", desc: "Eventos disparam encadeamentos de IA + lógica de negócio.", icon: Zap },
-    { title: "Versionamento de prompts", desc: "Mudou o prompt? Roda regression tests antes de subir.", icon: GitBranch },
+    {
+      title: "Chatbots e Agentes Conversacionais",
+      desc: "Interfaces inteligentes para Web, WhatsApp e Slack integradas aos seus sistemas internos.",
+      icon: MessageSquare,
+    },
+    {
+      title: "Pipelines RAG (Base de Conhecimento)",
+      desc: "Arquitetura de busca vetorial para que a IA aprenda e responda sobre os seus dados específicos.",
+      icon: FileSearch,
+    },
+    {
+      title: "Integração via Function Calling",
+      desc: "Capacidade da IA de executar comandos em APIs externas para realizar ações reais de negócio.",
+      icon: Bot,
+    },
+    {
+      title: "Extração e Classificação de Documentos",
+      desc: "Uso de IA para ler, entender e organizar arquivos, contratos e notas fiscais automaticamente.",
+      icon: Brain,
+    },
+    {
+      title: "Workflows de IA Automatizados",
+      desc: "Encadeamento de múltiplas tarefas de IA para resolver processos de ponta a ponta.",
+      icon: Zap,
+    },
+    {
+      title: "Infraestrutura de Monitoramento (LLMOps)",
+      desc: "Painéis para acompanhar a precisão das respostas, custos de API e performance dos modelos.",
+      icon: GitBranch,
+    },
   ],
   stack: [
-    { title: "OpenAI / Anthropic / Gemini", desc: "Modelo certo para cada tarefa, com fallback automático." },
-    { title: "Embeddings + pgvector", desc: "RAG performático e barato no PostgreSQL." },
-    { title: "LangGraph / orquestração", desc: "Agentes com memória, roteamento e tool use." },
-    { title: "Observability LLM", desc: "Latência, custo por requisição e qualidade rastreados." },
+    { title: "OpenAI / Anthropic / Gemini", desc: "Acesso aos modelos mais avançados do mundo via API segura." },
+    { title: "LangChain / LangGraph", desc: "Frameworks líderes para orquestração de agentes e fluxos de IA." },
+    { title: "Pinecone / pgvector", desc: "Bancos de dados vetoriais para busca semântica de alta performance." },
+    { title: "Python / Node.js", desc: "Linguagens robustas para backend de inteligência artificial." },
   ],
   processo: [
-    { n: "01", title: "Descoberta de uso", desc: "Identificamos onde IA gera ROI real, não cosmético." },
-    { n: "02", title: "POC validado", desc: "Em 2 semanas você testa com dados reais e mede impacto." },
-    { n: "03", title: "Produção", desc: "Hardening, guardrails, logs e integração com seus sistemas." },
-    { n: "04", title: "Iteração", desc: "Acompanhamento de qualidade e custo, ajustes contínuos." },
+    {
+      n: "01",
+      title: "Mapeamento de Oportunidades",
+      desc: "Identificamos os processos onde a IA trará o maior retorno sobre investimento (ROI) imediato.",
+    },
+    {
+      n: "02",
+      title: "Desenvolvimento de POC",
+      desc: "Criamos uma versão funcional em ambiente controlado para validar a precisão e utilidade da solução.",
+    },
+    {
+      n: "03",
+      title: "Engenharia de Prompt e RAG",
+      desc: "Refinamos as instruções e a base de conhecimento para garantir respostas perfeitas e seguras.",
+    },
+    {
+      n: "04",
+      title: "Integração e Escalonamento",
+      desc: "Conectamos a IA aos seus sistemas de produção e monitoramos os resultados em escala real.",
+    },
   ],
   faq: [
-    { q: "Meus dados ficam expostos para a OpenAI?", a: "Não. Usamos APIs com retenção zero ou modelos hospedados na sua infra quando o caso exige." },
-    { q: "Quanto custa rodar o agente por mês?", a: "Variável por uso, mas projetamos custo unitário antes de subir. Tipicamente entre R$ 0,01 e R$ 0,10 por interação." },
-    { q: "E se a IA responder errado?", a: "Construímos guardrails, validação por regras e fallback para humano. Tudo logado e auditável." },
-    { q: "Vocês fazem fine-tuning de modelos?", a: "Sim quando faz sentido. Na maioria dos casos RAG + bom prompt resolve por uma fração do custo." },
-    { q: "Funciona em português?", a: "Sim. Modelos atuais (GPT-4o, Claude, Gemini) entregam qualidade nativa em PT-BR." },
+    {
+      q: "A Inteligência Artificial vai substituir meus funcionários?",
+      a: "O objetivo da automação com IA é aumentar a capacidade humana, não substituí-la. Ela remove as tarefas burocráticas e repetitivas, permitindo que seus talentos foquem em atividades que exigem criatividade, empatia e julgamento crítico.",
+    },
+    {
+      q: "Meus dados de empresa serão usados para treinar o ChatGPT?",
+      a: "Não. Na Vtech Soluções, utilizamos APIs empresariais que garantem por contrato que os dados enviados não sejam utilizados para treinamento de modelos globais. Sua privacidade é nossa prioridade técnica.",
+    },
+    {
+      q: "Como medir o retorno financeiro (ROI) de um projeto de IA?",
+      a: "O ROI é medido pela redução de horas gastas em tarefas manuais, aumento na velocidade de resposta ao cliente, redução de erros operacionais e escalabilidade do atendimento sem a necessidade de novas contratações imediatas.",
+    },
+    {
+      q: "A IA pode fornecer informações erradas (alucinações)?",
+      a: "Utilizamos a técnica de RAG (Retrieval-Augmented Generation) e guardrails rígidos para minimizar drasticamente as alucinações. A IA é instruída a responder apenas com base nos fatos fornecidos pela sua base de dados.",
+    },
+    {
+      q: "Quanto custa manter um sistema de IA rodando?",
+      a: "O custo geralmente é baseado no consumo (tokens). Projetamos o custo operacional durante a fase de diagnóstico para garantir que a solução seja financeiramente viável e sustentável para sua empresa.",
+    },
+    {
+      q: "É difícil integrar IA com sistemas legados (antigos)?",
+      a: "Nossa equipe é especialista em criar 'pontes' tecnológicas. Se o seu sistema atual possui uma API ou banco de dados acessível, podemos integrá-lo à inteligência artificial de forma transparente.",
+    },
   ],
   relacionados: [
-    { slug: "sistemas-web", title: "Sistemas web sob medida", href: "/servicos/sistemas-web", desc: "Onde o agente vive: dentro do seu painel ou portal." },
-    { slug: "integracoes", title: "Integrações", href: "/servicos/integracoes", desc: "Conecte o agente ao ERP, CRM e WhatsApp Business." },
-    { slug: "consultoria-tech", title: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Estratégia de IA antes de gastar em modelos." },
+    {
+      slug: "sistemas-web",
+      title: "Sistemas Web Personalizados",
+      href: "/servicos/sistemas-web",
+      desc: "Onde sua IA pode ganhar uma interface completa de gestão e controle.",
+    },
+    {
+      slug: "integracoes",
+      title: "Integrações de Sistemas",
+      href: "/servicos/integracoes",
+      desc: "Conecte sua IA ao WhatsApp, CRM, ERP e outras ferramentas de mercado.",
+    },
+  ],
+  ctaFinalTitle: "Pronto para liderar seu mercado com inteligência artificial aplicada",
+};tle: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Estratégia de IA antes de gastar em modelos." },
   ],
   ctaFinalTitle: "Pronto para colocar IA pra trabalhar de verdade",
 };
