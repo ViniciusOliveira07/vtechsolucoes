@@ -88,6 +88,33 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         </div>
       </section>
 
+      {/* O que é (definição didática para SEO + featured snippet) */}
+      {data.oQueE && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-10 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Entenda o serviço</p>
+              <h2 className="text-display-md font-display">
+                {data.oQueE.title}<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <div className="space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {data.oQueE.paragrafos.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+            {data.oQueE.sinonimos && data.oQueE.sinonimos.length > 0 && (
+              <div className="mt-10 rounded-2xl border border-border-strong bg-background/40 p-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-primary/80">Também conhecido como</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {data.oQueE.sinonimos.join(" · ")}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Problema → Solução */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
