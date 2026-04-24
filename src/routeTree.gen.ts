@@ -10,17 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosECondicoesRouteImport } from './routes/termos-e-condicoes'
-import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as ServicosRouteImport } from './routes/servicos/route'
 import { Route as PoliticaDeSegurancaRouteImport } from './routes/politica-de-seguranca'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos.sites-institucionais'
-import { Route as ServicosSistemasWebRouteImport } from './routes/servicos.sistemas-web'
-import { Route as ServicosIntegracoesRouteImport } from './routes/servicos.integracoes'
-import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos.consultoria-tech'
-import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos.automacoes-com-ia'
+import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
+import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos/sites-institucionais'
+import { Route as ServicosSistemasWebRouteImport } from './routes/servicos/sistemas-web'
+import { Route as ServicosIntegracoesRouteImport } from './routes/servicos/integracoes'
+import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos/consultoria-tech'
+import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos/automacoes-com-ia'
 
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
   id: '/termos-e-condicoes',
@@ -57,6 +58,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicosRoute,
+} as any)
 const ServicosSitesInstitucionaisRoute =
   ServicosSitesInstitucionaisRouteImport.update({
     id: '/sites-institucionais',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
   '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/servicos/': typeof ServicosIndexRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
@@ -104,7 +111,7 @@ export interface FileRoutesByTo {
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRouteWithChildren
+  '/servicos': typeof ServicosIndexRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -121,6 +128,7 @@ export interface FileRoutesById {
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
   '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/servicos/': typeof ServicosIndexRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
@@ -137,6 +145,7 @@ export interface FileRouteTypes {
     | '/politica-de-seguranca'
     | '/servicos'
     | '/termos-e-condicoes'
+    | '/servicos/'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/politica-de-seguranca'
     | '/servicos'
     | '/termos-e-condicoes'
+    | '/servicos/'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
@@ -233,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof ServicosRouteImport
+    }
     '/servicos/sites-institucionais': {
       id: '/servicos/sites-institucionais'
       path: '/sites-institucionais'
@@ -272,6 +289,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface ServicosRouteChildren {
+  ServicosIndexRoute: typeof ServicosIndexRoute
   ServicosAutomacoesComIaRoute: typeof ServicosAutomacoesComIaRoute
   ServicosConsultoriaTechRoute: typeof ServicosConsultoriaTechRoute
   ServicosIntegracoesRoute: typeof ServicosIntegracoesRoute
@@ -280,6 +298,7 @@ interface ServicosRouteChildren {
 }
 
 const ServicosRouteChildren: ServicosRouteChildren = {
+  ServicosIndexRoute: ServicosIndexRoute,
   ServicosAutomacoesComIaRoute: ServicosAutomacoesComIaRoute,
   ServicosConsultoriaTechRoute: ServicosConsultoriaTechRoute,
   ServicosIntegracoesRoute: ServicosIntegracoesRoute,
@@ -300,15 +319,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRouteWithChildren,
   TermosECondicoesRoute: TermosECondicoesRoute,
 }
+
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
