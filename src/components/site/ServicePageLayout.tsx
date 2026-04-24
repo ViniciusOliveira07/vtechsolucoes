@@ -18,10 +18,18 @@ export type ServicePageData = {
   h1: string;
   subheadline: string;
   trust: string[];
+  /** Bloco "O que é" — texto didático com a keyword principal + sinônimos. Otimizado para featured snippet. */
+  oQueE?: { title: string; paragrafos: string[]; sinonimos?: string[] };
   problemas: { dor: string; solucao: string }[];
   entregaveis: { title: string; desc: string; icon?: ComponentType<{ className?: string }> }[];
+  /** "Para quem é" — define ICP, ajuda Google a entender intenção comercial. */
+  paraQuem?: { perfil: string; descricao: string }[];
   stack: { title: string; desc: string }[];
   processo: { n: string; title: string; desc: string }[];
+  /** Casos de uso reais — long-tail keywords + intent comercial. */
+  casosDeUso?: { title: string; desc: string }[];
+  /** Glossário de termos técnicos — captura buscas informativas. */
+  glossario?: { termo: string; definicao: string }[];
   faq: FAQItem[];
   relacionados: RelatedService[];
   ctaFinalTitle: string;
