@@ -130,7 +130,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-[11px] text-muted-foreground sm:mt-16 sm:pt-8 sm:text-xs md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} Vtech Soluções. Todos os direitos reservados.</p>
-          <p>Empresa de tecnologia B2B · CNPJ sob consulta</p>
+          <p>Empresa de tecnologia B2B · CNPJ 66.428.598/0001-22</p>
         </div>
       </div>
     </footer>

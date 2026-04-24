@@ -59,6 +59,7 @@ export const Route = createRootRoute({
           url: "https://vtechsolucoes.com.br",
           description:
             "Empresa de tecnologia B2B. Sites institucionais, sistemas web sob medida, automações com IA, integrações e consultoria técnica.",
+          vatID: "66.428.598/0001-22",
           areaServed: { "@type": "Country", name: "Brasil" },
           contactPoint: {
             "@type": "ContactPoint",
