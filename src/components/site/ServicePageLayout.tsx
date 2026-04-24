@@ -277,6 +277,28 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         </div>
       </section>
 
+      {/* Glossário (termos técnicos — captura buscas informativas) */}
+      {data.glossario && data.glossario.length > 0 && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Glossário</p>
+              <h2 className="text-display-md font-display">
+                Termos que você vai ouvir nesse universo<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <dl className="divide-y divide-border-strong rounded-2xl border border-border-strong bg-background/40">
+              {data.glossario.map((g, i) => (
+                <div key={i} className="grid grid-cols-1 gap-2 p-6 md:grid-cols-[220px_1fr] md:gap-8">
+                  <dt className="text-base font-display font-semibold text-foreground">{g.termo}</dt>
+                  <dd className="text-sm leading-relaxed text-muted-foreground sm:text-base">{g.definicao}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
