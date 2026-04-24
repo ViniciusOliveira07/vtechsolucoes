@@ -199,6 +199,33 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         </div>
       </section>
 
+      {/* Casos de uso (long-tail keywords + intent comercial) */}
+      {data.casosDeUso && data.casosDeUso.length > 0 && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Casos de uso</p>
+              <h2 className="text-display-md font-display">
+                Aplicações reais que entregamos<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {data.casosDeUso.map((c, i) => (
+                <div
+                  key={i}
+                  className="glass rounded-3xl border border-border-strong p-6 sm:p-8 transition-all duration-500 hover:border-primary/40"
+                >
+                  <h3 className="mb-3 text-lg font-display font-semibold tracking-tight text-foreground sm:text-xl">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Stack & diferenciais */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
