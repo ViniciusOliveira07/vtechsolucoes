@@ -18,10 +18,18 @@ export type ServicePageData = {
   h1: string;
   subheadline: string;
   trust: string[];
+  /** Bloco "O que é" — texto didático com a keyword principal + sinônimos. Otimizado para featured snippet. */
+  oQueE?: { title: string; paragrafos: string[]; sinonimos?: string[] };
   problemas: { dor: string; solucao: string }[];
   entregaveis: { title: string; desc: string; icon?: ComponentType<{ className?: string }> }[];
+  /** "Para quem é" — define ICP, ajuda Google a entender intenção comercial. */
+  paraQuem?: { perfil: string; descricao: string }[];
   stack: { title: string; desc: string }[];
   processo: { n: string; title: string; desc: string }[];
+  /** Casos de uso reais — long-tail keywords + intent comercial. */
+  casosDeUso?: { title: string; desc: string }[];
+  /** Glossário de termos técnicos — captura buscas informativas. */
+  glossario?: { termo: string; definicao: string }[];
   faq: FAQItem[];
   relacionados: RelatedService[];
   ctaFinalTitle: string;
@@ -80,6 +88,33 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         </div>
       </section>
 
+      {/* O que é (definição didática para SEO + featured snippet) */}
+      {data.oQueE && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-10 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Entenda o serviço</p>
+              <h2 className="text-display-md font-display">
+                {data.oQueE.title}<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <div className="space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {data.oQueE.paragrafos.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+            {data.oQueE.sinonimos && data.oQueE.sinonimos.length > 0 && (
+              <div className="mt-10 rounded-2xl border border-border-strong bg-background/40 p-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-primary/80">Também conhecido como</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {data.oQueE.sinonimos.join(" · ")}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Problema → Solução */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
@@ -105,6 +140,31 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           </div>
         </div>
       </section>
+
+      {/* Para quem é (ICP — intent comercial) */}
+      {data.paraQuem && data.paraQuem.length > 0 && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Para quem é</p>
+              <h2 className="text-display-md font-display">
+                Empresas que tiram mais valor desse serviço<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {data.paraQuem.map((p, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-border-strong bg-background/40 p-6 transition-colors duration-500 hover:border-primary/40"
+                >
+                  <h3 className="text-base font-display font-semibold tracking-tight text-foreground">{p.perfil}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.descricao}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Entregáveis */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
@@ -138,6 +198,33 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           </div>
         </div>
       </section>
+
+      {/* Casos de uso (long-tail keywords + intent comercial) */}
+      {data.casosDeUso && data.casosDeUso.length > 0 && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Casos de uso</p>
+              <h2 className="text-display-md font-display">
+                Aplicações reais que entregamos<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {data.casosDeUso.map((c, i) => (
+                <div
+                  key={i}
+                  className="glass rounded-3xl border border-border-strong p-6 sm:p-8 transition-all duration-500 hover:border-primary/40"
+                >
+                  <h3 className="mb-3 text-lg font-display font-semibold tracking-tight text-foreground sm:text-xl">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Stack & diferenciais */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
@@ -189,6 +276,28 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           </div>
         </div>
       </section>
+
+      {/* Glossário (termos técnicos — captura buscas informativas) */}
+      {data.glossario && data.glossario.length > 0 && (
+        <section className="relative bg-background py-16 md:py-20 lg:py-24">
+          <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Glossário</p>
+              <h2 className="text-display-md font-display">
+                Termos que você vai ouvir nesse universo<span className="text-primary">.</span>
+              </h2>
+            </div>
+            <dl className="divide-y divide-border-strong rounded-2xl border border-border-strong bg-background/40">
+              {data.glossario.map((g, i) => (
+                <div key={i} className="grid grid-cols-1 gap-2 p-6 md:grid-cols-[220px_1fr] md:gap-8">
+                  <dt className="text-base font-display font-semibold text-foreground">{g.termo}</dt>
+                  <dd className="text-sm leading-relaxed text-muted-foreground sm:text-base">{g.definicao}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       <section className="relative bg-background py-16 md:py-20 lg:py-24">
