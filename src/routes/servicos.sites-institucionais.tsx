@@ -23,6 +23,52 @@ const data: ServicePageData = {
   subheadline:
     "Para empresas B2B que precisam de presença digital à altura do ticket que cobram. SEO técnico, performance e copy persuasiva — não só design bonito.",
   trust: ["Entrega em 30 dias", "SEO técnico nativo", "Sem mensalidade refém"],
+  oQueE: {
+    title: "O que é um site institucional B2B de alto padrão",
+    paragrafos: [
+      "Um site institucional é o endereço digital oficial da sua empresa — a página corporativa que apresenta marca, posicionamento, soluções, cases e canais de contato para clientes, parceiros, investidores e candidatos. No B2B, ele é frequentemente o primeiro ponto de contato antes de uma reunião comercial e por isso precisa transmitir maturidade, autoridade e clareza de proposta de valor em segundos.",
+      "Diferente de um site de e-commerce ou de um SaaS, o site institucional não vende um produto direto: ele vende confiança e qualifica oportunidade. As páginas típicas incluem Home, Sobre, Serviços ou Soluções, Cases, Conteúdo (blog), Carreiras e Contato. A estrutura precisa equilibrar storytelling, prova social, SEO técnico (sitemap, schema, meta tags) e performance (Core Web Vitals em verde) para ranquear bem no Google e converter visitantes em leads qualificados.",
+      "Construir um site institucional moderno em 2025 envolve stack atual (React, SSR, edge), design system próprio, identidade visual coesa e medição via GA4. É o tipo de projeto que costuma ser entregue por agências digitais, web designers, desenvolvedores freelancers ou estúdios de produto — com qualidade, prazos e preços muito diferentes entre si.",
+    ],
+    sinonimos: [
+      "site corporativo",
+      "site empresarial",
+      "página institucional",
+      "website B2B",
+      "site para empresa",
+      "criação de site profissional",
+      "desenvolvimento de site corporativo",
+      "site para indústria",
+      "site para escritório de advocacia",
+      "site para consultoria",
+    ],
+  },
+  paraQuem: [
+    { perfil: "Indústrias e fabricantes B2B", descricao: "Empresas com ciclo de venda longo que precisam educar o comprador antes da reunião comercial." },
+    { perfil: "Escritórios de advocacia e consultorias", descricao: "Negócios baseados em autoridade e reputação, onde o site é prova de credibilidade." },
+    { perfil: "SaaS e tech companies", descricao: "Empresas de tecnologia que precisam de presença premium para parcerias enterprise e investidores." },
+    { perfil: "Holdings, gestoras e family offices", descricao: "Marcas que comunicam discrição, solidez e governança — design e copy precisam refletir isso." },
+    { perfil: "Empresas em rebranding ou fusão", descricao: "Quem está renovando posicionamento e precisa de presença digital nova alinhada à marca atualizada." },
+    { perfil: "Startups em rodada de captação", descricao: "Site é vitrine para investidores, parceiros e talentos. Precisa transmitir maturidade desde o domínio.com." },
+  ],
+  casosDeUso: [
+    { title: "Site para indústria com catálogo técnico", desc: "Multi-idioma, área de downloads de fichas técnicas, integração com RD Station/HubSpot e SEO para termos técnicos do segmento." },
+    { title: "Site de escritório de advocacia", desc: "Áreas de atuação, equipe, publicações e blog jurídico com schema Article, dentro das normas da OAB." },
+    { title: "Landing page para captação de leads", desc: "Página de campanha enxuta, com formulário, prova social, FAQ e tracking de conversão GA4 + Meta Ads." },
+    { title: "Site institucional para holding", desc: "Apresentação do grupo, empresas controladas, governança e sustentabilidade — visual sóbrio e premium." },
+    { title: "Hotsite para lançamento de produto", desc: "Página de produto com hero cinematográfico, vídeo, especificações, formulário de pré-venda e contagem regressiva." },
+    { title: "Migração de WordPress para stack moderna", desc: "Saída de CMS instável para arquitetura headless rápida, mantendo URLs e ranking SEO existente." },
+  ],
+  glossario: [
+    { termo: "Core Web Vitals", definicao: "Métricas de performance do Google (LCP, INP, CLS) que impactam diretamente o ranking de busca e a experiência do usuário." },
+    { termo: "SEO on-page", definicao: "Otimizações dentro da página: títulos, descrições, headings, alt text, links internos e palavras-chave bem distribuídas." },
+    { termo: "Schema.org / JSON-LD", definicao: "Marcação estruturada que ajuda o Google a entender o conteúdo (organização, FAQ, breadcrumb) e gerar rich snippets." },
+    { termo: "SSR (Server-Side Rendering)", definicao: "Renderização da página no servidor antes de enviar ao navegador. Crucial para indexação rápida e performance percebida." },
+    { termo: "Sitemap.xml", definicao: "Arquivo que lista todas as URLs do site para os buscadores rastrearem com eficiência." },
+    { termo: "Open Graph", definicao: "Meta tags que controlam como o site aparece quando compartilhado no LinkedIn, WhatsApp, Slack e redes sociais." },
+    { termo: "Design system", definicao: "Conjunto reutilizável de tokens (cores, tipografia, espaçamentos) e componentes que garantem consistência visual." },
+    { termo: "Headless CMS", definicao: "CMS que entrega só conteúdo via API (Sanity, Contentful, Strapi), separado da camada de apresentação." },
+  ],
   problemas: [
     {
       dor: "Site bonito que não traz lead nenhum",
