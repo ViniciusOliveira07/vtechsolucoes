@@ -118,7 +118,7 @@ export function Footer() {
                   href="https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Vtech%20Solu%C3%A7%C3%B5es%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground hover:text-primary"
+                  className="text-foreground hover:text-primary whitespace-nowrap"
                 >
                   WhatsApp · +55 11 5444-1926
                 </a>
@@ -128,9 +128,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-[11px] text-muted-foreground sm:mt-16 sm:pt-8 sm:text-xs md:flex-row md:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 pb-20 text-[11px] text-muted-foreground sm:mt-16 sm:pt-8 sm:pb-0 sm:text-xs md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} Vtech Soluções. Todos os direitos reservados.</p>
-          <p>Empresa de tecnologia B2B · CNPJ 66.428.598/0001-22</p>
+          <p className="pr-4 sm:pr-20 md:pr-24 lg:pr-28">Empresa de tecnologia B2B · CNPJ 66.428.598/0001-22</p>
         </div>
       </div>
     </footer>
