@@ -14,7 +14,9 @@ const SLUG = "consultoria-tech";
 const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
 const TITLE = "Consultoria de Tecnologia para Empresas | Vtech";
 const DESCRIPTION =
-  "Consultoria sênior em arquitetura, escolha de stack e roadmap técnico. Decisões certas antes de gastar R$100k em código.";const data: ServicePageData = {
+  "Consultoria sênior em arquitetura, escolha de stack e roadmap técnico. Decisões certas antes de gastar R$100k em código.";
+
+const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Consultoria tech",
   h1: "Consultoria de Tecnologia B2B: Estratégia, Arquitetura e Inovação para o seu Negócio.",
@@ -206,9 +208,12 @@ const DESCRIPTION =
       href: "/servicos/automacoes-com-ia",
       desc: "Estratégia e implementação de inteligência artificial para otimizar sua operação corporativa.",
     },
-  ],
-  ctaFinalTitle: "Pronto para profissionalizar sua estratégia tecnológica com especialistas",
-}; slug: "automacoes-com-ia", title: "Automações com IA", href: "/servicos/automacoes-com-ia", desc: "Estratégia de IA empresarial com ROI mensurável." },
+    {
+      slug: "automacoes-com-ia",
+      title: "Automações com IA",
+      href: "/servicos/automacoes-com-ia",
+      desc: "Estratégia de IA empresarial com ROI mensurável.",
+    },
   ],
   ctaFinalTitle: "Pronto para tomar a próxima decisão técnica com clareza",
 };

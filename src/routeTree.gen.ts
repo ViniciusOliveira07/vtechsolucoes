@@ -10,11 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosECondicoesRouteImport } from './routes/termos-e-condicoes'
-import { Route as ServicosRouteImport } from './routes/servicos/route'
 import { Route as PoliticaDeSegurancaRouteImport } from './routes/politica-de-seguranca'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ServicosRouteRouteImport } from './routes/servicos/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
 import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos/sites-institucionais'
@@ -26,11 +26,6 @@ import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos/a
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
   id: '/termos-e-condicoes',
   path: '/termos-e-condicoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicosRoute = ServicosRouteImport.update({
-  id: '/servicos',
-  path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliticaDeSegurancaRoute = PoliticaDeSegurancaRouteImport.update({
@@ -53,6 +48,11 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosRouteRoute = ServicosRouteRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,49 +61,49 @@ const IndexRoute = IndexRouteImport.update({
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ServicosRoute,
+  getParentRoute: () => ServicosRouteRoute,
 } as any)
 const ServicosSitesInstitucionaisRoute =
   ServicosSitesInstitucionaisRouteImport.update({
     id: '/sites-institucionais',
     path: '/sites-institucionais',
-    getParentRoute: () => ServicosRoute,
+    getParentRoute: () => ServicosRouteRoute,
   } as any)
 const ServicosSistemasWebRoute = ServicosSistemasWebRouteImport.update({
   id: '/sistemas-web',
   path: '/sistemas-web',
-  getParentRoute: () => ServicosRoute,
+  getParentRoute: () => ServicosRouteRoute,
 } as any)
 const ServicosIntegracoesRoute = ServicosIntegracoesRouteImport.update({
   id: '/integracoes',
   path: '/integracoes',
-  getParentRoute: () => ServicosRoute,
+  getParentRoute: () => ServicosRouteRoute,
 } as any)
 const ServicosConsultoriaTechRoute = ServicosConsultoriaTechRouteImport.update({
   id: '/consultoria-tech',
   path: '/consultoria-tech',
-  getParentRoute: () => ServicosRoute,
+  getParentRoute: () => ServicosRouteRoute,
 } as any)
 const ServicosAutomacoesComIaRoute = ServicosAutomacoesComIaRouteImport.update({
   id: '/automacoes-com-ia',
   path: '/automacoes-com-ia',
-  getParentRoute: () => ServicosRoute,
+  getParentRoute: () => ServicosRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/servicos': typeof ServicosRouteRouteWithChildren
   '/contato': typeof ContatoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
-  '/servicos/': typeof ServicosIndexRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,46 +111,46 @@ export interface FileRoutesByTo {
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosIndexRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/servicos': typeof ServicosRouteRouteWithChildren
   '/contato': typeof ContatoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
-  '/servicos': typeof ServicosRouteWithChildren
   '/termos-e-condicoes': typeof TermosECondicoesRoute
-  '/servicos/': typeof ServicosIndexRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/servicos'
     | '/contato'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
-    | '/servicos'
     | '/termos-e-condicoes'
-    | '/servicos/'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -158,37 +158,37 @@ export interface FileRouteTypes {
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
-    | '/servicos'
     | '/termos-e-condicoes'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/servicos'
   id:
     | '__root__'
     | '/'
+    | '/servicos'
     | '/contato'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
-    | '/servicos'
     | '/termos-e-condicoes'
-    | '/servicos/'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ServicosRouteRoute: typeof ServicosRouteRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PoliticaDeSegurancaRoute: typeof PoliticaDeSegurancaRoute
-  ServicosRoute: typeof ServicosRouteWithChildren
   TermosECondicoesRoute: typeof TermosECondicoesRoute
 }
 
@@ -199,13 +199,6 @@ declare module '@tanstack/react-router' {
       path: '/termos-e-condicoes'
       fullPath: '/termos-e-condicoes'
       preLoaderRoute: typeof TermosECondicoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/servicos': {
-      id: '/servicos'
-      path: '/servicos'
-      fullPath: '/servicos'
-      preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/politica-de-seguranca': {
@@ -236,6 +229,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -248,78 +248,86 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/servicos/'
       preLoaderRoute: typeof ServicosIndexRouteImport
-      parentRoute: typeof ServicosRouteImport
+      parentRoute: typeof ServicosRouteRoute
     }
     '/servicos/sites-institucionais': {
       id: '/servicos/sites-institucionais'
       path: '/sites-institucionais'
       fullPath: '/servicos/sites-institucionais'
       preLoaderRoute: typeof ServicosSitesInstitucionaisRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof ServicosRouteRoute
     }
     '/servicos/sistemas-web': {
       id: '/servicos/sistemas-web'
       path: '/sistemas-web'
       fullPath: '/servicos/sistemas-web'
       preLoaderRoute: typeof ServicosSistemasWebRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof ServicosRouteRoute
     }
     '/servicos/integracoes': {
       id: '/servicos/integracoes'
       path: '/integracoes'
       fullPath: '/servicos/integracoes'
       preLoaderRoute: typeof ServicosIntegracoesRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof ServicosRouteRoute
     }
     '/servicos/consultoria-tech': {
       id: '/servicos/consultoria-tech'
       path: '/consultoria-tech'
       fullPath: '/servicos/consultoria-tech'
       preLoaderRoute: typeof ServicosConsultoriaTechRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof ServicosRouteRoute
     }
     '/servicos/automacoes-com-ia': {
       id: '/servicos/automacoes-com-ia'
       path: '/automacoes-com-ia'
       fullPath: '/servicos/automacoes-com-ia'
       preLoaderRoute: typeof ServicosAutomacoesComIaRouteImport
-      parentRoute: typeof ServicosRoute
+      parentRoute: typeof ServicosRouteRoute
     }
   }
 }
 
-interface ServicosRouteChildren {
-  ServicosIndexRoute: typeof ServicosIndexRoute
+interface ServicosRouteRouteChildren {
   ServicosAutomacoesComIaRoute: typeof ServicosAutomacoesComIaRoute
   ServicosConsultoriaTechRoute: typeof ServicosConsultoriaTechRoute
   ServicosIntegracoesRoute: typeof ServicosIntegracoesRoute
   ServicosSistemasWebRoute: typeof ServicosSistemasWebRoute
   ServicosSitesInstitucionaisRoute: typeof ServicosSitesInstitucionaisRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
-const ServicosRouteChildren: ServicosRouteChildren = {
-  ServicosIndexRoute: ServicosIndexRoute,
+const ServicosRouteRouteChildren: ServicosRouteRouteChildren = {
   ServicosAutomacoesComIaRoute: ServicosAutomacoesComIaRoute,
   ServicosConsultoriaTechRoute: ServicosConsultoriaTechRoute,
   ServicosIntegracoesRoute: ServicosIntegracoesRoute,
   ServicosSistemasWebRoute: ServicosSistemasWebRoute,
   ServicosSitesInstitucionaisRoute: ServicosSitesInstitucionaisRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
 }
 
-const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
-  ServicosRouteChildren,
+const ServicosRouteRouteWithChildren = ServicosRouteRoute._addFileChildren(
+  ServicosRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ServicosRouteRoute: ServicosRouteRouteWithChildren,
   ContatoRoute: ContatoRoute,
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PoliticaDeSegurancaRoute: PoliticaDeSegurancaRoute,
-  ServicosRoute: ServicosRouteWithChildren,
   TermosECondicoesRoute: TermosECondicoesRoute,
 }
-
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

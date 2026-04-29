@@ -14,7 +14,9 @@ const SLUG = "automacoes-com-ia";
 const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
 const TITLE = "Automação com IA para Empresas | Agentes e RAG | Vtech";
 const DESCRIPTION =
-  "Automatize processos com agentes de IA, RAG e integração com seus dados. Reduza custo operacional em semanas, não meses."const data: ServicePageData = {
+  "Automatize processos com agentes de IA, RAG e integração com seus dados. Reduza custo operacional em semanas, não meses.";
+
+const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Automações com IA",
   h1: "Automação com Inteligência Artificial para Empresas: Inovação e Eficiência B2B.",
@@ -206,9 +208,12 @@ const DESCRIPTION =
       href: "/servicos/integracoes",
       desc: "Conecte sua IA ao WhatsApp, CRM, ERP e outras ferramentas de mercado.",
     },
-  ],
-  ctaFinalTitle: "Pronto para liderar seu mercado com inteligência artificial aplicada",
-};tle: "Consultoria tech", href: "/servicos/consultoria-tech", desc: "Estratégia de IA antes de gastar em modelos." },
+    {
+      slug: "consultoria-tech",
+      title: "Consultoria Tech",
+      href: "/servicos/consultoria-tech",
+      desc: "Estratégia de IA antes de gastar em modelos.",
+    },
   ],
   ctaFinalTitle: "Pronto para colocar IA pra trabalhar de verdade",
 };
