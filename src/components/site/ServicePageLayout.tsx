@@ -53,10 +53,10 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           </nav>
 
           <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">{data.eyebrow}</p>
-          <h1 className="text-display-xl font-display max-w-5xl leading-[0.95]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-display font-medium tracking-tight max-w-4xl text-balance leading-[1.1] text-foreground">
             {data.h1}
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <p className="mt-6 max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
             {data.subheadline}
           </p>
 
@@ -94,7 +94,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
             <div className="mb-10 max-w-3xl">
               <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Entenda o serviço</p>
-              <h2 className="text-display-md font-display">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
                 {data.oQueE.title}<span className="text-primary">.</span>
               </h2>
             </div>
@@ -120,7 +120,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12 max-w-3xl">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">O problema</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Onde a maioria trava — e como destravamos<span className="text-primary">.</span>
             </h2>
           </div>
@@ -147,7 +147,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
             <div className="mb-12 max-w-3xl">
               <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Para quem é</p>
-              <h2 className="text-display-md font-display">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
                 Empresas que tiram mais valor desse serviço<span className="text-primary">.</span>
               </h2>
             </div>
@@ -171,7 +171,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12 max-w-3xl">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">O que entregamos</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Escopo concreto, não promessa<span className="text-primary">.</span>
             </h2>
           </div>
@@ -205,7 +205,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
             <div className="mb-12 max-w-3xl">
               <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Casos de uso</p>
-              <h2 className="text-display-md font-display">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
                 Aplicações reais que entregamos<span className="text-primary">.</span>
               </h2>
             </div>
@@ -231,7 +231,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12 max-w-3xl">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Stack & diferenciais</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Decisões técnicas que envelhecem bem<span className="text-primary">.</span>
             </h2>
           </div>
@@ -254,7 +254,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12 max-w-3xl">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Processo dedicado</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Quatro etapas. Sem ruído<span className="text-primary">.</span>
             </h2>
           </div>
@@ -283,7 +283,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
             <div className="mb-12 max-w-3xl">
               <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Glossário</p>
-              <h2 className="text-display-md font-display">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
                 Termos que você vai ouvir nesse universo<span className="text-primary">.</span>
               </h2>
             </div>
@@ -304,7 +304,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Perguntas frequentes</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Dúvidas comuns, respostas diretas<span className="text-primary">.</span>
             </h2>
           </div>
@@ -317,7 +317,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="mb-12 max-w-3xl">
             <p className="text-eyebrow mb-6 text-primary tracking-[0.3em] uppercase">Serviços relacionados</p>
-            <h2 className="text-display-md font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-display font-semibold tracking-tight text-foreground text-balance">
               Combine para um resultado completo<span className="text-primary">.</span>
             </h2>
           </div>
@@ -348,7 +348,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <div className="absolute inset-0 grid-bg opacity-40" />
         <div className="absolute inset-0 bg-aurora" />
         <div className="relative z-10 mx-auto max-w-[1100px] px-5 text-center sm:px-8 lg:px-12 xl:px-16">
-          <h2 className="text-display-lg font-display">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold tracking-tight text-foreground text-balance">
             {data.ctaFinalTitle}<span className="text-primary">?</span>
           </h2>
           <div className="mt-12">
