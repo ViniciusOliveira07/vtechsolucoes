@@ -1,6 +1,6 @@
 import { Events } from "@/lib/analytics";
 
-const WHATSAPP_NUMBER = "551154441926";
+const WHATSAPP_NUMBER = "5511963141069";
 const WHATSAPP_MESSAGE = "Olá! Vim pelo site da Vtech Soluções e gostaria de conversar sobre um projeto.";
 
 export function WhatsAppButton() {
