@@ -63,7 +63,7 @@ export const Route = createRootRoute({
           areaServed: { "@type": "Country", name: "Brasil" },
           contactPoint: {
             "@type": "ContactPoint",
-            telephone: "+55-11-5444-1926",
+            telephone: "+55-11-96314-1069",
             contactType: "sales",
             availableLanguage: ["Portuguese"],
           },
