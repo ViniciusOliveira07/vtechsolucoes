@@ -92,8 +92,8 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="w-full space-y-5 sm:space-y-6">
-      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+    <form onSubmit={handleSubmit} noValidate className="w-full space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Nome"
           name="name"
@@ -142,14 +142,14 @@ export function ContactForm() {
         helper={`${values.message.length}/1000`}
       />
 
-      <div className="pt-2">
+      <div className="pt-3">
         <button
           type="submit"
           disabled={loading || sent}
           className={cn(
-            "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-all duration-300 sm:w-auto sm:px-7 sm:py-4",
-            "hover:scale-[1.02] hover:shadow-[0_12px_32px_-8px_rgba(255,255,255,0.3)]",
-            "disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100",
+            "group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-semibold text-white transition-all duration-300 sm:w-auto sm:px-8 sm:py-4",
+            "shadow-[0_0_24px_-6px_oklch(0.62_0.21_258_/_0.7)] hover:shadow-[0_0_32px_-4px_oklch(0.7_0.22_255_/_0.9)] hover:scale-[1.02]",
+            "disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-none",
           )}
         >
           {sent ? (
@@ -159,7 +159,7 @@ export function ContactForm() {
             </>
           ) : loading ? (
             <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-background/30 border-t-background" />
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
               Enviando…
             </>
           ) : (
@@ -211,52 +211,39 @@ function Field({
   helper,
 }: FieldProps) {
   const [focused, setFocused] = useState(false);
-  const isFloating = focused || value.length > 0;
   const hasError = Boolean(error);
 
-  const baseClass = cn(
-    "peer w-full bg-transparent border-0 border-b px-0 pt-6 pb-3 text-base text-foreground outline-none transition-colors duration-300 sm:pt-7",
+  const inputClass = cn(
+    "w-full rounded-xl border bg-white/[0.03] px-4 py-3 text-[14px] text-foreground outline-none placeholder-white/20 transition-all duration-200",
     hasError
-      ? "border-destructive focus:border-destructive"
-      : "border-border-strong focus:border-primary",
+      ? "border-destructive/60 focus:border-destructive"
+      : focused
+        ? "border-primary/50 bg-white/[0.05]"
+        : "border-white/[0.08] hover:border-white/[0.14]",
   );
 
   return (
-    <div className="relative">
-      <label
-        htmlFor={name}
-        className={cn(
-          "pointer-events-none absolute left-0 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-          isFloating
-            ? "top-0.5 text-xs sm:top-1"
-            : "top-6 text-[15px] sm:top-7 sm:text-base",
-          hasError
-            ? "text-destructive"
-            : isFloating && focused
-              ? "text-primary"
-              : "text-muted-foreground",
-        )}
-      >
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={name} className="text-[12px] font-medium tracking-wide text-white/40">
         {label}
-        {required && <span className={hasError ? "text-destructive" : "text-primary"}>*</span>}
+        {required && <span className={cn("ml-0.5", hasError ? "text-destructive" : "text-primary/70")}>*</span>}
       </label>
+
       {textarea ? (
         <textarea
           id={name}
           name={name}
           required={required}
-          rows={4}
+          rows={5}
           value={value}
           maxLength={maxLength}
+          placeholder="Descreva brevemente o que você precisa…"
           onFocus={() => setFocused(true)}
-          onBlur={() => {
-            setFocused(false);
-            onBlur();
-          }}
+          onBlur={() => { setFocused(false); onBlur(); }}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={hasError}
           aria-describedby={error ? `${name}-error` : helper ? `${name}-helper` : undefined}
-          className={cn(baseClass, "resize-none")}
+          className={cn(inputClass, "resize-none leading-relaxed")}
         />
       ) : (
         <input
@@ -269,39 +256,25 @@ function Field({
           inputMode={inputMode}
           maxLength={maxLength}
           onFocus={() => setFocused(true)}
-          onBlur={() => {
-            setFocused(false);
-            onBlur();
-          }}
+          onBlur={() => { setFocused(false); onBlur(); }}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={hasError}
           aria-describedby={error ? `${name}-error` : undefined}
-          className={baseClass}
+          className={inputClass}
         />
       )}
 
-      {/* underline glow on focus */}
-      <div
-        className={cn(
-          "pointer-events-none absolute bottom-0 left-0 h-px bg-primary transition-all duration-500",
-          focused && !hasError ? "w-full opacity-100" : "w-0 opacity-0",
-        )}
-      />
-
-      <div className="mt-2 flex min-h-[18px] items-center justify-between gap-3 text-xs">
+      <div className="flex min-h-[16px] items-center justify-between gap-3 text-[11px]">
         {hasError ? (
-          <span
-            id={`${name}-error`}
-            className="flex items-center gap-1.5 text-destructive animate-fade-in"
-          >
-            <AlertCircle className="h-3 w-3" />
+          <span id={`${name}-error`} className="flex items-center gap-1 text-destructive">
+            <AlertCircle className="h-3 w-3 shrink-0" />
             {error}
           </span>
         ) : (
           <span />
         )}
         {helper && !hasError && (
-          <span id={`${name}-helper`} className="text-muted-foreground">
+          <span id={`${name}-helper`} className="text-white/25">
             {helper}
           </span>
         )}
