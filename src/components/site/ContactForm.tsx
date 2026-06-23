@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaMU8WPd92kfTe07_fRZeA08rUhSdOM_l2oGfk078p_JXPhX4bPTmWumA/exec";
 
 // Número do WhatsApp no formato internacional (sem + ou espaços)
-const WA_NUMBER = "5511544441926";
+const WA_NUMBER = "551154441926";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const phoneRegex = /^[\d\s()+\-]{8,20}$/;
