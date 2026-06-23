@@ -13,7 +13,6 @@ const NAV = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState<string | null>(null);
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -47,7 +46,7 @@ export function Header() {
           {/* sutil top highlight line */}
           <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-          <div className="flex h-[72px] items-center justify-between pl-5 pr-3 md:h-[84px] md:pl-8 md:pr-4">
+          <div className="flex h-[64px] items-center justify-between pl-5 pr-3 md:h-[72px] md:pl-8 md:pr-4">
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-9 w-9">
                 <div className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-transform duration-500 group-hover:rotate-45" />
@@ -59,37 +58,21 @@ export function Header() {
               </span>
             </Link>
 
-            <nav
-              className="relative hidden items-center gap-1 md:flex"
-              onMouseLeave={() => setHovered(null)}
-            >
+            <nav className="hidden items-center gap-8 md:flex">
               {NAV.map((item) => {
                 const isActive = currentPath === item.to;
-                const isHighlighted = hovered ? hovered === item.to : isActive;
                 return (
                   <Link
                     key={item.to}
                     to={item.to}
-                    onMouseEnter={() => setHovered(item.to)}
                     className={cn(
-                      "relative rounded-full px-6 py-3 text-[14.5px] font-medium transition-colors duration-300",
+                      "text-[14px] font-medium transition-colors duration-300",
                       isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground",
+                        ? "text-foreground"
+                        : "text-white/60 hover:text-foreground",
                     )}
                   >
-                    {isHighlighted && (
-                      <motion.span
-                        layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 32,
-                        }}
-                      />
-                    )}
-                    <span className="relative z-10">{item.label}</span>
+                    {item.label}
                   </Link>
                 );
               })}
@@ -98,10 +81,9 @@ export function Header() {
             <div className="hidden md:block">
               <Link
                 to="/contato"
-                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-[14.5px] font-medium text-background transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(255,255,255,0.25)]"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-transparent px-6 py-2.5 text-[14px] font-medium text-foreground transition-all duration-300 hover:bg-white/10 hover:border-white/30"
               >
                 Iniciar projeto
-                <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </Link>
             </div>
 
@@ -164,7 +146,7 @@ export function Header() {
                 <Link
                   to="/contato"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center rounded-full bg-foreground px-5 py-3 text-[14px] font-medium text-background"
+                  className="inline-flex w-full items-center justify-center rounded-full border border-white/20 bg-transparent px-5 py-3 text-[14px] font-medium text-foreground transition-all hover:bg-white/10"
                 >
                   Iniciar projeto
                 </Link>
