@@ -3,6 +3,14 @@ import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 
+// ─── Configuração ────────────────────────────────────────────────────────────
+// Cole aqui a URL do seu Google Apps Script após publicá-lo como Web App
+const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL as string | undefined;
+
+// Número do WhatsApp no formato internacional (sem + ou espaços)
+const WA_NUMBER = "5511544441926";
+// ─────────────────────────────────────────────────────────────────────────────
+
 const phoneRegex = /^[\d\s()+\-]{8,20}$/;
 
 const contactSchema = z.object({
@@ -49,12 +57,23 @@ function formatPhone(raw: string) {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 }
 
+function buildWhatsAppUrl(values: FormState) {
+  const text =
+    `Olá! Vim pelo site da Vtech Soluções e gostaria de iniciar um projeto.\n\n` +
+    `*Nome:* ${values.name}\n` +
+    `*Telefone:* ${values.phone}\n` +
+    `*Email:* ${values.email}\n\n` +
+    `*Sobre o projeto:*\n${values.message}`;
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
 export function ContactForm() {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormState, boolean>>>({});
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const setField = (name: keyof FormState, value: string) => {
     const v = name === "phone" ? formatPhone(value) : value;
@@ -71,8 +90,10 @@ export function ContactForm() {
     setErrors((e) => ({ ...e, [name]: result.success ? undefined : result.error.issues[0].message }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
+
     const result = contactSchema.safeParse(values);
     if (!result.success) {
       const fieldErrors: Errors = {};
@@ -84,11 +105,35 @@ export function ContactForm() {
       setTouched({ name: true, phone: true, email: true, message: true });
       return;
     }
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-    }, 800);
+
+    // 1. Salva no Google Sheets (silencioso — não bloqueia o fluxo)
+    if (APPS_SCRIPT_URL) {
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          // mode no-cors é necessário para Apps Script; a resposta não é lida
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            name: values.name,
+            phone: values.phone,
+            email: values.email,
+            message: values.message,
+          }),
+        });
+      } catch {
+        // Falha silenciosa — o lead ainda chegará pelo WhatsApp
+      }
+    }
+
+    // 2. Abre WhatsApp com a mensagem pré-preenchida
+    window.open(buildWhatsAppUrl(values), "_blank", "noopener,noreferrer");
+
+    setLoading(false);
+    setSent(true);
   };
 
   return (
@@ -142,6 +187,13 @@ export function ContactForm() {
         helper={`${values.message.length}/1000`}
       />
 
+      {submitError && (
+        <p className="flex items-center gap-1.5 text-[13px] text-destructive">
+          <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+          {submitError}
+        </p>
+      )}
+
       <div className="pt-3">
         <button
           type="submit"
@@ -155,7 +207,7 @@ export function ContactForm() {
           {sent ? (
             <>
               <Check className="h-4 w-4" />
-              Mensagem enviada
+              Mensagem enviada!
             </>
           ) : loading ? (
             <>
@@ -171,7 +223,7 @@ export function ContactForm() {
         </button>
         {sent && (
           <p className="mt-4 text-sm text-muted-foreground">
-            Recebemos sua mensagem. Retornaremos em até 24 horas úteis.
+            Seu WhatsApp foi aberto com a mensagem pronta. Basta enviar!
           </p>
         )}
       </div>
