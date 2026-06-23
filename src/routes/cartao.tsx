@@ -26,7 +26,7 @@ function generateVCard(): string {
     "VERSION:3.0",
     "FN:Vtech Soluções",
     "ORG:Vtech Soluções",
-    "TEL;TYPE=CELL:+55 11 96314-1069",
+    "TEL;TYPE=CELL:+55 11 5444-1926",
     "URL:https://vtechsolucoes.com.br",
     "ADR;TYPE=WORK:;;São Paulo;SP;;Brasil",
     "NOTE:Empresa de tecnologia B2B. Sites, sistemas web, automações com IA, integrações e consultoria tech.",
@@ -48,7 +48,7 @@ function downloadVCard() {
 
 function CartaoPage() {
   const whatsappHref =
-    "https://wa.me/5511963141069?text=Ol%C3%A1%21%20Vim%20pelo%20cart%C3%A3o%20de%20visita%20virtual%20da%20Vtech%20Solu%C3%A7%C3%B5es.";
+    "https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20cart%C3%A3o%20de%20visita%20virtual%20da%20Vtech%20Solu%C3%A7%C3%B5es.";
 
   return (
     <div className="flex min-h-[calc(100vh-80px)] items-center justify-center px-5 py-14 sm:px-8">
@@ -94,7 +94,7 @@ function CartaoPage() {
               <InfoRow
                 icon={MessageCircle}
                 label="WhatsApp"
-                value="+55 11 96314-1069"
+                value="+55 11 5444-1926"
                 href={whatsappHref}
               />
               <InfoRow icon={MapPin} label="Localização" value="São Paulo · Brasil" />
