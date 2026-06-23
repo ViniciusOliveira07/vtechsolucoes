@@ -13,7 +13,11 @@ const NAV = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+<<<<<<< HEAD
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+=======
+  const [hovered, setHovered] = useState<string | null>(null);
+>>>>>>> d877239 (fix: remove service card icons from Services section)
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -49,8 +53,12 @@ export function Header() {
         >
           <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
+<<<<<<< HEAD
           <div className="flex h-[64px] items-center justify-between pl-5 pr-3 md:h-[72px] md:pl-8 md:pr-4">
             {/* Logo */}
+=======
+          <div className="flex h-[72px] items-center justify-between pl-5 pr-3 md:h-[84px] md:pl-8 md:pr-4">
+>>>>>>> d877239 (fix: remove service card icons from Services section)
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-9 w-9">
                 <div className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-transform duration-500 group-hover:rotate-45" />
@@ -62,6 +70,7 @@ export function Header() {
               </span>
             </Link>
 
+<<<<<<< HEAD
             {/* Desktop nav */}
             <nav
               className="hidden items-center gap-1 md:flex"
@@ -69,10 +78,20 @@ export function Header() {
             >
               {NAV.map((item) => {
                 const isActive = currentPath === item.to || (item.to === "/servicos" && currentPath.startsWith("/servicos"));
+=======
+            <nav
+              className="relative hidden items-center gap-1 md:flex"
+              onMouseLeave={() => setHovered(null)}
+            >
+              {NAV.map((item) => {
+                const isActive = currentPath === item.to;
+                const isHighlighted = hovered ? hovered === item.to : isActive;
+>>>>>>> d877239 (fix: remove service card icons from Services section)
                 return (
                   <Link
                     key={item.to}
                     to={item.to}
+<<<<<<< HEAD
                     className="relative px-4 py-2 text-[14px] font-medium transition-colors duration-200"
                     onMouseEnter={() => setHoveredNav(item.to)}
                   >
@@ -90,6 +109,28 @@ export function Header() {
                     <span className={cn("relative z-10", isActive ? "text-foreground" : "text-white/60")}>
                       {item.label}
                     </span>
+=======
+                    onMouseEnter={() => setHovered(item.to)}
+                    className={cn(
+                      "relative rounded-full px-6 py-3 text-[14.5px] font-medium transition-colors duration-300",
+                      isActive
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {isHighlighted && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 32,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+>>>>>>> d877239 (fix: remove service card icons from Services section)
                   </Link>
                 );
               })}
@@ -97,6 +138,7 @@ export function Header() {
 
             {/* CTA */}
             <div className="hidden md:block">
+<<<<<<< HEAD
               <motion.div
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
@@ -111,6 +153,15 @@ export function Header() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </motion.div>
+=======
+              <Link
+                to="/contato"
+                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-[14.5px] font-medium text-background transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(255,255,255,0.25)]"
+              >
+                Iniciar projeto
+                <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+              </Link>
+>>>>>>> d877239 (fix: remove service card icons from Services section)
             </div>
 
             {/* Mobile toggle */}
@@ -175,6 +226,7 @@ export function Header() {
                   </Link>
                 </motion.div>
               ))}
+<<<<<<< HEAD
             </nav>
 
             <motion.div
@@ -188,6 +240,18 @@ export function Header() {
                   whileTap={{ scale: 0.97 }}
                   className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-[15px] font-semibold text-white shadow-[0_0_30px_-6px_oklch(0.62_0.21_258_/_0.8)]"
                   style={{ display: "flex" }}
+=======
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: NAV.length * 0.06, duration: 0.5 }}
+                className="pt-6"
+              >
+                <Link
+                  to="/contato"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center rounded-full bg-foreground px-5 py-3 text-[14px] font-medium text-background"
+>>>>>>> d877239 (fix: remove service card icons from Services section)
                 >
                   Iniciar projeto
                   <ArrowRight className="h-4 w-4" />
