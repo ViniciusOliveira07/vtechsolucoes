@@ -4,8 +4,7 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 
 // ─── Configuração ────────────────────────────────────────────────────────────
-// Cole aqui a URL do seu Google Apps Script após publicá-lo como Web App
-const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL as string | undefined;
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaMU8WPd92kfTe07_fRZeA08rUhSdOM_l2oGfk078p_JXPhX4bPTmWumA/exec";
 
 // Número do WhatsApp no formato internacional (sem + ou espaços)
 const WA_NUMBER = "5511544441926";
