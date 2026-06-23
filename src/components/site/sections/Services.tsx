@@ -48,14 +48,15 @@ export function Services() {
   return (
     <section className="relative z-10 w-full bg-background py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:max-w-[1600px]">
-        <div className="mx-auto mb-14 flex flex-col items-center text-center">
+
+        <div className="mx-auto mb-16 flex flex-col items-center text-center">
           <p className="text-eyebrow mb-6 tracking-[0.3em] text-primary uppercase">02 — Serviços</p>
           <h2 className="font-display text-display-md">
             Acelerando sua operação<span className="text-primary">.</span>
           </h2>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-12">
+        <div className="w-full border-t border-white/[0.07]">
           {SERVICES.map((s) => {
             const Icon = s.icon;
             return (
@@ -63,36 +64,35 @@ export function Services() {
                 key={s.n}
                 to={s.href}
                 aria-label={`Saber mais sobre ${s.title}`}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-surface p-8 transition-all duration-300 hover:border-white/[0.15] sm:p-10 ${s.colSpan}`}
+                className="group flex items-start gap-5 border-b border-white/[0.07] py-7 transition-colors duration-200 hover:bg-white/[0.025] sm:gap-7 sm:py-9"
               >
-                {/* Accent line top — acende azul no hover */}
-                <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/[0.12] to-transparent transition-all duration-500 group-hover:via-primary/60" />
+                {/* Número */}
+                <span className="w-8 shrink-0 pt-0.5 font-mono text-[11px] tracking-[0.2em] text-white/20">
+                  {s.n}
+                </span>
 
-                {/* Número + ícone */}
-                <div className="mb-8 flex items-center justify-between">
-                  <span className="font-mono text-[11px] tracking-[0.2em] text-white/25">{s.n}</span>
-                  <Icon className="h-[18px] w-[18px] text-white/30 transition-colors duration-300 group-hover:text-primary/70" />
+                {/* Ícone */}
+                <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-surface transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary/[0.07] sm:flex">
+                  <Icon className="h-[17px] w-[17px] text-white/30 transition-colors duration-300 group-hover:text-primary/80" />
                 </div>
 
-                {/* Título */}
-                <h3 className="mb-3 text-[20px] font-semibold leading-snug tracking-tight text-foreground sm:text-[22px]">
-                  {s.title}
-                </h3>
-
-                {/* Descrição */}
-                <p className="text-[14px] leading-relaxed text-white/45 sm:text-[15px]">
-                  {s.desc}
-                </p>
-
-                {/* Saiba mais — só aparece no hover */}
-                <div className="mt-8 flex translate-y-1 items-center gap-1 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <span className="text-[12px] font-medium text-primary">Saiba mais</span>
-                  <ArrowUpRight className="h-3 w-3 text-primary" />
+                {/* Título + Descrição */}
+                <div className="flex min-w-0 flex-1 flex-col gap-2 md:flex-row md:items-center md:gap-10 lg:gap-16">
+                  <h3 className="shrink-0 text-[19px] font-semibold tracking-tight text-foreground md:w-[220px] lg:w-[260px] lg:text-[21px]">
+                    {s.title}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed text-white/45 md:text-[15px]">
+                    {s.desc}
+                  </p>
                 </div>
+
+                {/* Seta */}
+                <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 translate-y-0.5 text-white/20 opacity-0 transition-all duration-200 group-hover:text-primary group-hover:opacity-100" />
               </Link>
             );
           })}
         </div>
+
       </div>
     </section>
   );
