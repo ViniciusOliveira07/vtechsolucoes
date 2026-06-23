@@ -8,6 +8,12 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaM
 
 // Número do WhatsApp no formato internacional (sem + ou espaços)
 const WA_NUMBER = "551154441926";
+
+// ─── Integração EVO (preencher quando disponível) ────────────────────────────
+const EVO_URL      = "";          // Ex: "https://evo.suaempresa.com"
+const EVO_INSTANCE = "";          // Ex: "vtech"
+const EVO_API_KEY  = "";          // Token de autenticação da instância
+const EVO_GROUP_JID = "";         // Ex: "120363XXXXXXXX@g.us"
 // ─────────────────────────────────────────────────────────────────────────────
 
 const phoneRegex = /^[\d\s()+\-]{8,20}$/;
@@ -128,7 +134,29 @@ export function ContactForm() {
       }
     }
 
-    // 2. Abre WhatsApp com a mensagem pré-preenchida
+    // 2. Notifica grupo via EVO (silencioso — preencher constantes acima para ativar)
+    if (EVO_URL && EVO_INSTANCE && EVO_API_KEY && EVO_GROUP_JID) {
+      const evoText =
+        `🆕 Novo Lead — Forms Vtech Soluções\n\n` +
+        `*Nome:* ${values.name}\n` +
+        `*Telefone:* ${values.phone}\n` +
+        `*Email:* ${values.email}\n\n` +
+        `*Sobre o projeto:*\n${values.message}`;
+      try {
+        await fetch(`${EVO_URL}/message/sendText/${EVO_INSTANCE}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": EVO_API_KEY,
+          },
+          body: JSON.stringify({ number: EVO_GROUP_JID, text: evoText }),
+        });
+      } catch {
+        // Falha silenciosa
+      }
+    }
+
+    // 3. Abre WhatsApp com a mensagem pré-preenchida
     window.open(buildWhatsAppUrl(values), "_blank", "noopener,noreferrer");
 
     setLoading(false);
