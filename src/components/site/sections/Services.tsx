@@ -46,7 +46,7 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section className="relative z-10 w-full overflow-visible bg-background py-16 md:py-20 lg:py-24">
+    <section className="relative z-10 w-full bg-background py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:max-w-[1600px]">
         <div className="mx-auto mb-14 flex flex-col items-center text-center">
           <p className="text-eyebrow mb-6 tracking-[0.3em] text-primary uppercase">02 — Serviços</p>
@@ -55,7 +55,7 @@ export function Services() {
           </h2>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-2.5 md:grid-cols-12">
+        <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-12">
           {SERVICES.map((s) => {
             const Icon = s.icon;
             return (
@@ -63,31 +63,31 @@ export function Services() {
                 key={s.n}
                 to={s.href}
                 aria-label={`Saber mais sobre ${s.title}`}
-                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 transition-colors duration-300 hover:border-white/[0.12] hover:bg-white/[0.04] sm:p-10 ${s.colSpan}`}
+                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-surface p-8 transition-all duration-300 hover:border-white/[0.15] sm:p-10 ${s.colSpan}`}
               >
-                {/* Top: number + icon */}
-                <div className="mb-14 flex items-start justify-between">
-                  <span className="font-mono text-[11px] tracking-[0.25em] text-white/20">
-                    {s.n}
-                  </span>
-                  <Icon className="h-[18px] w-[18px] text-white/20 transition-colors duration-300 group-hover:text-primary/60" />
+                {/* Accent line top — acende azul no hover */}
+                <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/[0.12] to-transparent transition-all duration-500 group-hover:via-primary/60" />
+
+                {/* Número + ícone */}
+                <div className="mb-8 flex items-center justify-between">
+                  <span className="font-mono text-[11px] tracking-[0.2em] text-white/25">{s.n}</span>
+                  <Icon className="h-[18px] w-[18px] text-white/30 transition-colors duration-300 group-hover:text-primary/70" />
                 </div>
 
-                {/* Bottom: content */}
-                <div>
-                  <h3 className="mb-3 text-[20px] font-semibold leading-snug tracking-tight text-foreground sm:text-[22px]">
-                    {s.title}
-                  </h3>
-                  <p className="text-[14px] leading-relaxed text-white/40 sm:text-[15px]">
-                    {s.desc}
-                  </p>
+                {/* Título */}
+                <h3 className="mb-3 text-[20px] font-semibold leading-snug tracking-tight text-foreground sm:text-[22px]">
+                  {s.title}
+                </h3>
 
-                  <div className="mt-7 flex items-center gap-1.5">
-                    <span className="text-[12px] font-medium tracking-wide text-white/20 transition-colors duration-300 group-hover:text-primary/70">
-                      Saiba mais
-                    </span>
-                    <ArrowUpRight className="h-3 w-3 text-white/20 transition-colors duration-300 group-hover:text-primary/70" />
-                  </div>
+                {/* Descrição */}
+                <p className="text-[14px] leading-relaxed text-white/45 sm:text-[15px]">
+                  {s.desc}
+                </p>
+
+                {/* Saiba mais — só aparece no hover */}
+                <div className="mt-8 flex translate-y-1 items-center gap-1 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <span className="text-[12px] font-medium text-primary">Saiba mais</span>
+                  <ArrowUpRight className="h-3 w-3 text-primary" />
                 </div>
               </Link>
             );
