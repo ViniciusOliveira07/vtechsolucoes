@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev --host",
     "build": "vite build",
+    "postbuild": "node -e \"const fs = require('fs'); fs.mkdirSync('dist/server', { recursive: true }); if (fs.existsSync('.output/server/wrangler.json')) fs.copyFileSync('.output/server/wrangler.json', 'dist/server/wrangler.json');\"",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
