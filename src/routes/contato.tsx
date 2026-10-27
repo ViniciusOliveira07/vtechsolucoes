@@ -1,29 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/site";
 import { Contact } from "@/components/site/sections/Contact";
+import { SpecSheet } from "@/components/site/sections/SpecSheet";
 
 export const Route = createFileRoute("/contato")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Iniciar projeto com a Vtech Soluções. Atendimento exclusivamente B2B, resposta em até 24 horas úteis.",
-      },
-      { property: "og:title", content: "Contato — Vtech Soluções" },
-      {
-        property: "og:description",
-        content: "Vamos conversar sobre seu próximo projeto. B2B only.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Contato | Vtech Soluções",
+      description:
+        "Conte o desafio da sua operação. Devolvemos um diagnóstico e uma proposta com escopo, prazo e investimento em até 24 horas úteis. Atendimento B2B.",
+      path: "/contato",
+    }),
   component: ContatoPage,
 });
 
 function ContatoPage() {
   return (
-    <div className="pt-24">
-      <Contact />
-    </div>
+    <>
+      <Contact headingAs="h1" />
+      <SpecSheet />
+    </>
   );
 }

@@ -10,23 +10,40 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosECondicoesRouteImport } from './routes/termos-e-condicoes'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PoliticaDeSegurancaRouteImport } from './routes/politica-de-seguranca'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
+import { Route as MetodoRouteImport } from './routes/metodo'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CartaoRouteImport } from './routes/cartao'
 import { Route as ServicosRouteRouteImport } from './routes/servicos/route'
+import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos/sites-institucionais'
 import { Route as ServicosSistemasWebRouteImport } from './routes/servicos/sistemas-web'
 import { Route as ServicosIntegracoesRouteImport } from './routes/servicos/integracoes'
 import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos/consultoria-tech'
 import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos/automacoes-com-ia'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as BlogCategoriaCategoriaRouteImport } from './routes/blog/categoria.$categoria'
 
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
   id: '/termos-e-condicoes',
   path: '/termos-e-condicoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliticaDeSegurancaRoute = PoliticaDeSegurancaRouteImport.update({
@@ -44,6 +61,11 @@ const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
   path: '/politica-de-cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MetodoRoute = MetodoRouteImport.update({
+  id: '/metodo',
+  path: '/metodo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -59,6 +81,11 @@ const ServicosRouteRoute = ServicosRouteRouteImport.update({
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRouteRoute = BlogRouteRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -68,6 +95,11 @@ const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ServicosRouteRoute,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRouteRoute,
 } as any)
 const ServicosSitesInstitucionaisRoute =
   ServicosSitesInstitucionaisRouteImport.update({
@@ -95,113 +127,167 @@ const ServicosAutomacoesComIaRoute = ServicosAutomacoesComIaRouteImport.update({
   path: '/automacoes-com-ia',
   getParentRoute: () => ServicosRouteRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+const BlogCategoriaCategoriaRoute = BlogCategoriaCategoriaRouteImport.update({
+  id: '/categoria/$categoria',
+  path: '/categoria/$categoria',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
   '/servicos': typeof ServicosRouteRouteWithChildren
   '/cartao': typeof CartaoRoute
   '/contato': typeof ContatoRoute
+  '/metodo': typeof MetodoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/blog/': typeof BlogIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cartao': typeof CartaoRoute
   '/contato': typeof ContatoRoute
+  '/metodo': typeof MetodoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/blog': typeof BlogIndexRoute
   '/servicos': typeof ServicosIndexRoute
+  '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
   '/servicos': typeof ServicosRouteRouteWithChildren
   '/cartao': typeof CartaoRoute
   '/contato': typeof ContatoRoute
+  '/metodo': typeof MetodoRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/politica-de-seguranca': typeof PoliticaDeSegurancaRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/blog/': typeof BlogIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/servicos'
     | '/cartao'
     | '/contato'
+    | '/metodo'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
+    | '/sitemap.xml'
+    | '/sobre'
     | '/termos-e-condicoes'
+    | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/blog/'
     | '/servicos/'
+    | '/blog/categoria/$categoria'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cartao'
     | '/contato'
+    | '/metodo'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
+    | '/sitemap.xml'
+    | '/sobre'
     | '/termos-e-condicoes'
+    | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/blog'
     | '/servicos'
+    | '/blog/categoria/$categoria'
   id:
     | '__root__'
     | '/'
+    | '/blog'
     | '/servicos'
     | '/cartao'
     | '/contato'
+    | '/metodo'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/politica-de-seguranca'
+    | '/sitemap.xml'
+    | '/sobre'
     | '/termos-e-condicoes'
+    | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/blog/'
     | '/servicos/'
+    | '/blog/categoria/$categoria'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRouteRoute: typeof BlogRouteRouteWithChildren
   ServicosRouteRoute: typeof ServicosRouteRouteWithChildren
   CartaoRoute: typeof CartaoRoute
   ContatoRoute: typeof ContatoRoute
+  MetodoRoute: typeof MetodoRoute
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   PoliticaDeSegurancaRoute: typeof PoliticaDeSegurancaRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SobreRoute: typeof SobreRoute
   TermosECondicoesRoute: typeof TermosECondicoesRoute
 }
 
@@ -212,6 +298,20 @@ declare module '@tanstack/react-router' {
       path: '/termos-e-condicoes'
       fullPath: '/termos-e-condicoes'
       preLoaderRoute: typeof TermosECondicoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/politica-de-seguranca': {
@@ -235,6 +335,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliticaDeCookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/metodo': {
+      id: '/metodo'
+      path: '/metodo'
+      fullPath: '/metodo'
+      preLoaderRoute: typeof MetodoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
@@ -256,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -269,6 +383,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/servicos/'
       preLoaderRoute: typeof ServicosIndexRouteImport
       parentRoute: typeof ServicosRouteRoute
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRouteRoute
     }
     '/servicos/sites-institucionais': {
       id: '/servicos/sites-institucionais'
@@ -305,8 +426,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosAutomacoesComIaRouteImport
       parentRoute: typeof ServicosRouteRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
+    '/blog/categoria/$categoria': {
+      id: '/blog/categoria/$categoria'
+      path: '/categoria/$categoria'
+      fullPath: '/blog/categoria/$categoria'
+      preLoaderRoute: typeof BlogCategoriaCategoriaRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
   }
 }
+
+interface BlogRouteRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  BlogCategoriaCategoriaRoute: typeof BlogCategoriaCategoriaRoute
+}
+
+const BlogRouteRouteChildren: BlogRouteRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  BlogCategoriaCategoriaRoute: BlogCategoriaCategoriaRoute,
+}
+
+const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
+  BlogRouteRouteChildren,
+)
 
 interface ServicosRouteRouteChildren {
   ServicosAutomacoesComIaRoute: typeof ServicosAutomacoesComIaRoute
@@ -332,12 +483,16 @@ const ServicosRouteRouteWithChildren = ServicosRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRouteRoute: BlogRouteRouteWithChildren,
   ServicosRouteRoute: ServicosRouteRouteWithChildren,
   CartaoRoute: CartaoRoute,
   ContatoRoute: ContatoRoute,
+  MetodoRoute: MetodoRoute,
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   PoliticaDeSegurancaRoute: PoliticaDeSegurancaRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SobreRoute: SobreRoute,
   TermosECondicoesRoute: TermosECondicoesRoute,
 }
 export const routeTree = rootRouteImport

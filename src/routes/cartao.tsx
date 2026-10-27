@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MessageCircle, MapPin, Building2, ArrowUpRight, Download, ExternalLink } from "lucide-react";
+import { LogoMark } from "@/components/site/Logo";
 
 export const Route = createFileRoute("/cartao")({
   head: () => ({
@@ -27,7 +28,7 @@ function generateVCard(): string {
     "FN:Vtech Soluções",
     "ORG:Vtech Soluções",
     "TEL;TYPE=CELL:+55 11 5444-1926",
-    "URL:https://vtechsolucoes.com.br",
+    "URL:https://vtechsolucoes.ia.br",
     "ADR;TYPE=WORK:;;São Paulo;SP;;Brasil",
     "NOTE:Empresa de tecnologia B2B. Sites, sistemas web, automações com IA, integrações e consultoria tech.",
     "END:VCARD",
@@ -59,7 +60,7 @@ function CartaoPage() {
           className="pointer-events-none absolute -top-24 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
           style={{
             background:
-              "radial-gradient(closest-side, oklch(0.62 0.21 258 / 0.7), transparent)",
+              "radial-gradient(closest-side, #7fd4ff55, transparent)",
           }}
         />
 
@@ -71,14 +72,10 @@ function CartaoPage() {
 
             {/* logo */}
             <div className="flex flex-col items-center text-center">
-              <div className="flex items-center gap-2.5">
-                <div className="relative h-8 w-8">
-                  <div className="absolute inset-0 rounded-md bg-primary" />
-                  <div className="absolute inset-[6px] rounded-sm bg-background" />
-                  <div className="absolute inset-[10px] rounded-[2px] bg-primary" />
-                </div>
-                <span className="text-base font-semibold tracking-tight">
-                  Vtech Soluções
+              <div className="flex items-center gap-2.5 font-mono text-base font-medium tracking-tight">
+                <LogoMark className="h-7 w-7" />
+                <span>
+                  vtech<span className="text-faint">/soluções</span>
                 </span>
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -132,7 +129,7 @@ function CartaoPage() {
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
-                vtechsolucoes.com.br
+                vtechsolucoes.ia.br
               </Link>
             </div>
           </div>

@@ -9,9 +9,10 @@ import {
   type ServicePageData,
 } from "@/components/site/ServicePageLayout";
 import { Events } from "@/lib/analytics";
+import { SITE_URL, seo } from "@/lib/site";
 
 const SLUG = "sites-institucionais";
-const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
+const URL = `${SITE_URL}/servicos/${SLUG}`;
 const TITLE = "Sites Institucionais B2B sob medida | Vtech Soluções";
 const DESCRIPTION =
   "Site institucional premium com SEO técnico, performance Core Web Vitals e identidade estúdio. Entrega em 30 dias. Solicite proposta.";
@@ -19,7 +20,7 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Sites institucionais",
-  h1: "Sites Institucionais B2B: Transformação Digital e Autoridade para sua Empresa.",
+  h1: "Sites institucionais B2B que geram oportunidades.",
   subheadline:
     "Desenvolvemos sites institucionais premium focados em conversão, performance Core Web Vitals e autoridade de marca. A solução ideal para empresas B2B que buscam expansão digital e credibilidade no mercado corporativo.",
   trust: ["Entrega em até 30 dias", "Otimização SEO de alta performance", "Código proprietário e seguro"],
@@ -30,17 +31,7 @@ const data: ServicePageData = {
       "O desenvolvimento de um site institucional moderno exige a integração de design de ponta com tecnologia de última geração. Na Vtech Soluções, utilizamos stacks como React 19 e SSR (Server-Side Rendering) para garantir que sua empresa não apenas tenha um visual impressionante, mas também carregue instantaneamente em qualquer dispositivo. A arquitetura de informação é pensada para guiar o usuário em uma jornada de confiança, desde o primeiro impacto no Hero até a conversão final em nossos formulários otimizados.",
       "Além da estética, focamos intensamente no SEO técnico (Search Engine Optimization). Isso significa que cada página é construída para ser facilmente indexada pelo Google, utilizando marcações de dados estruturados (Schema.org), sitemaps dinâmicos e otimização de metadados. Um site institucional de alto padrão deve ser uma ferramenta ativa de geração de demanda, servindo como o pilar de autoridade que sustenta sua reputação no mercado brasileiro e global.",
       "Através da transformação digital, ajudamos empresas a saírem de sistemas obsoletos e limitados, como WordPress mal configurado, para ecossistemas digitais ágeis, seguros e escaláveis. Nosso foco é garantir que sua infraestrutura web suporte o crescimento do seu negócio, oferecendo flexibilidade para atualizações constantes sem comprometer a estabilidade ou a velocidade do sistema.",
-    ],
-    sinonimos: [
-      "site corporativo de alto padrão",
-      "desenvolvimento de site empresarial",
-      "criação de website B2B",
-      "página institucional para empresas",
-      "soluções web corporativas",
-      "estúdio de criação de sites premium",
-      "consultoria em presença digital B2B",
-      "plataforma institucional escalável",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -213,17 +204,7 @@ const data: ServicePageData = {
 
 export const Route = createFileRoute("/servicos/sites-institucionais")({
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: URL },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: URL }],
+    ...seo({ title: TITLE, description: DESCRIPTION, path: `/servicos/${SLUG}` }),
     scripts: [
       {
         type: "application/ld+json",

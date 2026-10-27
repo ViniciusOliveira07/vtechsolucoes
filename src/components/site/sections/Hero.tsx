@@ -1,61 +1,52 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-import { useSpotlight } from "@/hooks/use-spotlight";
-import { MagneticButton } from "@/components/site/MagneticButton";
-import { motion } from "framer-motion";
+import { Events } from "@/lib/analytics";
+import { FlowConsole } from "@/components/site/FlowConsole";
+
+const FACTS = ["Proposta fechada em até 24h úteis", "POC de IA em 15 dias", "Exclusivo B2B"];
 
 export function Hero() {
-  const ref = useSpotlight<HTMLElement>();
-
   return (
-    <section
-      ref={ref}
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
-    >
-      {/* Background layers */}
-      <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-background to-transparent pointer-events-none z-0" />
-
-      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-5 text-center sm:px-8 lg:px-12 xl:px-16">
-        <h1 className="text-display-xl font-display text-foreground text-balance">
-          Sites e sistemas
-          <br />
-          <span className="text-shimmer">construídos com IA.</span>
-        </h1>
-
-        <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:mt-8 sm:text-lg md:text-xl text-balance">
-          Entregamos 3× mais rápido que agências tradicionais — com tecnologia de ponta
-          embarcada no produto final.
-        </p>
-
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:mt-12 sm:flex-row">
-          <Link to="/contato">
-            <MagneticButton variant="primary">
-              Iniciar projeto
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </MagneticButton>
-          </Link>
+    <section className="relative overflow-hidden border-b border-border pb-[clamp(40px,6vw,80px)] pt-[clamp(48px,7vw,96px)]">
+      <div
+        aria-hidden
+        className="grid-lines pointer-events-none absolute inset-0 opacity-35 [mask-image:radial-gradient(ellipse_70%_60%_at_70%_40%,#000_20%,transparent_75%)]"
+      />
+      <div className="shell relative grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <div className="min-w-0">
+          <p className="kicker">
+            <span className="text-signal">●</span> Software sob medida · Integrações · IA aplicada
+          </p>
+          <h1 className="mt-5 text-[clamp(40px,5.4vw,76px)] font-medium leading-none tracking-[-0.04em]">
+            Sua operação, <em className="not-italic text-signal">conectada</em> e trabalhando sozinha.
+          </h1>
+          <p className="mt-6 max-w-[52ch] text-[clamp(16px,1.4vw,18px)] text-muted-foreground">
+            Construímos sistemas, integrações e agentes de IA que ligam os seus canais, ERP e CRM, e executam o trabalho
+            repetitivo enquanto sua equipe decide.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/contato"
+              onClick={() => Events.ctaClick("Iniciar diagnóstico", "hero")}
+              className="btn max-sm:flex-1 max-sm:basis-full"
+            >
+              Iniciar diagnóstico →
+            </Link>
+            <Link to="/servicos" className="btn btn-line max-sm:flex-1 max-sm:basis-full">
+              Ver o que construímos
+            </Link>
+          </div>
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-faint">
+            {FACTS.map((f) => (
+              <li key={f}>
+                <span aria-hidden className="text-signal">
+                  ▸{" "}
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <div className="w-[18px] h-[30px] rounded-full border border-muted-foreground/30 flex justify-center p-1">
-          <motion.div
-            animate={{
-              y: [0, 10, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="w-1 h-1 rounded-full bg-muted-foreground/60"
-          />
-        </div>
-        <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
-          Role para descobrir
-        </div>
+        <FlowConsole />
       </div>
     </section>
   );

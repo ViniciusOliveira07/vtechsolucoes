@@ -1,32 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/site";
 import { Hero } from "@/components/site/sections/Hero";
-import { Positioning } from "@/components/site/sections/Positioning";
-import { Services } from "@/components/site/sections/Services";
-import { Process } from "@/components/site/sections/Process";
-import { Numbers } from "@/components/site/sections/Numbers";
-import { FinalCTA } from "@/components/site/sections/FinalCTA";
+import { Layers } from "@/components/site/sections/Layers";
+import { ServicesExplorer } from "@/components/site/sections/ServicesExplorer";
+import { SpecSheet } from "@/components/site/sections/SpecSheet";
+import { Credentials } from "@/components/site/sections/Credentials";
+import { CtaBand } from "@/components/site/sections/CtaBand";
+import { BlogPreview } from "@/components/site/sections/BlogPreview";
 import { Contact } from "@/components/site/sections/Contact";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Empresa de tecnologia B2B. Entregamos sites e sistemas com IA embarcada — 3× mais rápido que agências tradicionais. Projeto fechado, sem mensalidade.",
-      },
-      {
-        property: "og:title",
-        content: "Vtech Soluções — Sites e sistemas inteligentes com IA",
-      },
-      {
-        property: "og:description",
-        content:
-          "Boutique de tecnologia B2B com IA no processo e no produto. Mais rápido, mais moderno, mais acessível.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Vtech Soluções | Sistemas, integrações e IA para operações B2B",
+      description:
+        "Construímos sistemas, integrações e agentes de IA que conectam canais, ERP e CRM. Escopo fechado, proposta em até 24 horas úteis e código entregue a você.",
+      path: "/",
+    }),
   component: HomePage,
 });
 
@@ -34,11 +24,12 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Positioning />
-      <Services />
-      <Process />
-      <Numbers />
-      <FinalCTA />
+      <Layers />
+      <ServicesExplorer />
+      <SpecSheet />
+      <Credentials />
+      <CtaBand />
+      <BlogPreview />
       <Contact />
     </>
   );

@@ -9,9 +9,10 @@ import {
   type ServicePageData,
 } from "@/components/site/ServicePageLayout";
 import { Events } from "@/lib/analytics";
+import { SITE_URL, seo } from "@/lib/site";
 
 const SLUG = "consultoria-tech";
-const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
+const URL = `${SITE_URL}/servicos/${SLUG}`;
 const TITLE = "Consultoria de Tecnologia para Empresas | Vtech";
 const DESCRIPTION =
   "Consultoria sênior em arquitetura, escolha de stack e roadmap técnico. Decisões certas antes de gastar R$100k em código.";
@@ -19,7 +20,7 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Consultoria tech",
-  h1: "Consultoria de Tecnologia B2B: Estratégia, Arquitetura e Inovação para o seu Negócio.",
+  h1: "Consultoria de tecnologia para decidir stack, arquitetura e fornecedores.",
   subheadline:
     "Apoio técnico especializado para decisões críticas de tecnologia. Oferecemos consultoria sênior em arquitetura de software, escolha de stack, roadmap tecnológico e CTO as a Service para empresas em crescimento.",
   trust: ["Consultores com vivência sênior", "Metodologia orientada a resultados", "Entregas baseadas em evidências"],
@@ -30,18 +31,7 @@ const data: ServicePageData = {
       "Muitas vezes, as empresas encontram-se em um dilema: investir em uma nova tecnologia, modernizar um sistema legado ou contratar uma equipe interna de engenharia. Nossa consultoria remove a incerteza desse processo. Atuamos em frentes que vão desde o 'CTO as a Service' (provendo liderança técnica fracionada para empresas que ainda não possuem um CTO full-time) até a realização de Due Diligence Técnica para fundos de investimento e processos de fusão e aquisição (M&A).",
       "Um pilar fundamental da nossa consultoria é o Assessment de Arquitetura. Analisamos profundamente o código, os bancos de dados e a infraestrutura de nuvem existentes para identificar gargalos de performance, dívidas técnicas acumuladas e riscos de segurança. Com base nesse diagnóstico, construímos um Roadmap Tecnológico claro e prioritário, que serve como o guia para os próximos 12 a 24 meses de desenvolvimento da empresa, garantindo que o investimento em tech seja aplicado onde gera mais valor real.",
       "Além da parte técnica, focamos na Transformação Digital holística. Isso inclui a otimização de processos de engenharia, implementação de métricas de produtividade (como as métricas DORA) e mentoria para líderes técnicos. Nosso objetivo é garantir que a tecnologia não seja apenas um centro de custo, mas um motor de inovação que permita à empresa adaptar-se rapidamente às mudanças do mercado e superar a concorrência através da excelência digital.",
-    ],
-    sinonimos: [
-      "consultoria de TI empresarial",
-      "CTO as a Service para startups",
-      "consultoria em arquitetura de software",
-      "estratégia de transformação digital B2B",
-      "due diligence técnica para M&A",
-      "mentoria técnica para líderes",
-      "advisory de tecnologia e inovação",
-      "roadmap tecnológico corporativo",
-      "auditoria de sistemas e código",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -220,17 +210,7 @@ const data: ServicePageData = {
 
 export const Route = createFileRoute("/servicos/consultoria-tech")({
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: URL },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: URL }],
+    ...seo({ title: TITLE, description: DESCRIPTION, path: `/servicos/${SLUG}` }),
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(buildServiceSchema({ name: "Consultoria de Tecnologia", description: DESCRIPTION, url: URL, serviceType: "Technology Consulting" })) },
       { type: "application/ld+json", children: JSON.stringify(buildFAQSchema(data.faq)) },

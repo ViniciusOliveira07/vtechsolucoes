@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vtechsolucoes.com.br/sitemap.xml
-
+Sitemap: https://vtechsolucoes.ia.br/sitemap.xml

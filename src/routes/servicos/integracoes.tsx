@@ -9,9 +9,10 @@ import {
   type ServicePageData,
 } from "@/components/site/ServicePageLayout";
 import { Events } from "@/lib/analytics";
+import { SITE_URL, seo } from "@/lib/site";
 
 const SLUG = "integracoes";
-const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
+const URL = `${SITE_URL}/servicos/${SLUG}`;
 const TITLE = "Integrações de Sistemas, ERPs e APIs | Vtech Soluções";
 const DESCRIPTION =
   "Integramos ERP, CRM, gateways de pagamento e APIs internas. Fim do retrabalho manual entre sistemas. Diagnóstico em 7 dias.";
@@ -19,7 +20,7 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Integrações",
-  h1: "Integração de Sistemas e APIs: Conectividade e Eficiência Operacional para sua Empresa.",
+  h1: "Integração de sistemas: ERP, CRM e pagamentos sem retrabalho.",
   subheadline:
     "Elimine o retrabalho manual e a inconsistência de dados integrando seus ERPs, CRMs e gateways. Soluções robustas de middleware que garantem fluxos de informação contínuos e seguros.",
   trust: ["Diagnóstico técnico em 7 dias", "Idempotência e segurança de dados", "Suporte a grandes volumes de requisição"],
@@ -30,18 +31,7 @@ const data: ServicePageData = {
       "Através da utilização de APIs (Application Programming Interfaces), webhooks e barramentos de serviços, criamos ecossistemas onde um evento em um sistema (como uma venda no e-commerce) dispara automaticamente ações em outros sistemas (como a emissão de nota fiscal no ERP e a atualização de estoque no WMS). Isso não apenas acelera a operação, mas elimina drasticamente o erro humano, garantindo que a base de dados da sua empresa seja única, íntegra e confiável para tomadas de decisão estratégica.",
       "Na Vtech Soluções, desenvolvemos integrações de alta confiabilidade utilizando técnicas de idempotência (garantindo que uma transação nunca seja processada em duplicidade) e filas de mensagens com retry automático. Isso significa que, mesmo se um sistema de terceiro ficar temporariamente fora do ar, nossa arquitetura de integração retém a informação e a processa assim que a conexão for restabelecida, evitando perda de pedidos ou falhas financeiras críticas.",
       "A integração moderna também envolve a segurança rigorosa dos dados em trânsito. Utilizamos protocolos de autenticação avançados e criptografia de ponta a ponta, garantindo que informações sensíveis de clientes e da própria empresa estejam protegidas contra acessos não autorizados. Integrar sistemas é, em última análise, investir na escalabilidade do negócio, permitindo que a operação cresça em volume sem a necessidade de aumentar proporcionalmente a equipe administrativa.",
-    ],
-    sinonimos: [
-      "consultoria em integração de sistemas",
-      "desenvolvimento de middleware personalizado",
-      "conectividade de APIs B2B",
-      "integração de ERP e CRM",
-      "automação de fluxos de dados",
-      "sincronização de bancos de dados",
-      "integração com gateways de pagamento",
-      "middleware para transformação digital",
-      "orquestração de serviços web",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -214,17 +204,7 @@ const data: ServicePageData = {
 
 export const Route = createFileRoute("/servicos/integracoes")({
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: URL },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: URL }],
+    ...seo({ title: TITLE, description: DESCRIPTION, path: `/servicos/${SLUG}` }),
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(buildServiceSchema({ name: "Integração de Sistemas", description: DESCRIPTION, url: URL, serviceType: "Systems Integration" })) },
       { type: "application/ld+json", children: JSON.stringify(buildFAQSchema(data.faq)) },

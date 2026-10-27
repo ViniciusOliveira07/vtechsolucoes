@@ -9,9 +9,10 @@ import {
   type ServicePageData,
 } from "@/components/site/ServicePageLayout";
 import { Events } from "@/lib/analytics";
+import { SITE_URL, seo } from "@/lib/site";
 
 const SLUG = "sistemas-web";
-const URL = `https://vtechsolucoes.com.br/servicos/${SLUG}`;
+const URL = `${SITE_URL}/servicos/${SLUG}`;
 const TITLE = "Desenvolvimento de Sistemas Web sob Medida | Vtech";
 const DESCRIPTION =
   "Sistemas web sob medida para operações B2B: ERPs internos, painéis, portais. Stack moderna, deploy contínuo, sem mensalidade refém.";
@@ -19,7 +20,7 @@ const DESCRIPTION =
 const data: ServicePageData = {
   slug: SLUG,
   eyebrow: "Sistemas web",
-  h1: "Desenvolvimento de Sistemas Web sob Medida: Eficiência, Escalabilidade e ROI para sua Operação.",
+  h1: "Sistemas web sob medida para a operação que hoje vive em planilhas.",
   subheadline:
     "Soluções de software personalizadas que eliminam gargalos operacionais e automatizam processos complexos. Sistemas web robustos com foco em produtividade corporativa e integração total.",
   trust: ["MVP entregue em tempo recorde", "Código 100% proprietário", "Segurança de dados nível enterprise"],
@@ -30,18 +31,7 @@ const data: ServicePageData = {
       "No mercado corporativo atual, a agilidade operacional é um diferencial competitivo crítico. Desenvolvemos sistemas web utilizando stacks modernas que permitem acessibilidade total via navegador, sem necessidade de instalações locais complexas. Isso facilita o trabalho híbrido e a gestão centralizada de dados, permitindo que gestores tenham visibilidade em tempo real sobre KPIs, finanças, logística ou qualquer outro pilar crítico do negócio através de dashboards intuitivos e seguros.",
       "A construção de um sistema web personalizado pela Vtech Soluções envolve uma análise profunda de arquitetura de software e experiência do usuário (UX). Utilizamos tecnologias como React e bancos de dados escaláveis para garantir que o sistema cresça junto com sua empresa (escalabilidade horizontal). Além disso, priorizamos a segurança da informação através de protocolos de autenticação robustos, criptografia de ponta a ponta e controle de acesso granular (RBAC), protegendo o ativo mais valioso da sua corporação: os dados.",
       "Investir em um sistema próprio significa livrar-se de mensalidades abusivas por usuário e limitações técnicas de plataformas genéricas. O código-fonte é um ativo da sua empresa, garantindo independência tecnológica e liberdade para evoluir a solução conforme as demandas do mercado mudam. É o passo definitivo para a transformação digital completa de organizações que buscam liderança em seus setores através da inovação tecnológica.",
-    ],
-    sinonimos: [
-      "software sob medida B2B",
-      "desenvolvimento de aplicações web personalizadas",
-      "sistema de gestão customizado",
-      "plataforma web corporativa",
-      "ERP personalizado para empresas",
-      "soluções de software enterprise",
-      "desenvolvimento ágil de sistemas",
-      "arquitetura de sistemas web",
-      "aplicativos web de alta performance",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -214,17 +204,7 @@ const data: ServicePageData = {
 
 export const Route = createFileRoute("/servicos/sistemas-web")({
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: URL },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: URL }],
+    ...seo({ title: TITLE, description: DESCRIPTION, path: `/servicos/${SLUG}` }),
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(buildServiceSchema({ name: "Desenvolvimento de Sistemas Web", description: DESCRIPTION, url: URL, serviceType: "Custom Software Development" })) },
       { type: "application/ld+json", children: JSON.stringify(buildFAQSchema(data.faq)) },

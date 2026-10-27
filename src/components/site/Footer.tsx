@@ -1,138 +1,86 @@
 import { Link } from "@tanstack/react-router";
+import { COMPANY, SERVICES, whatsappUrl } from "@/lib/site";
+import { Events } from "@/lib/analytics";
+import { Logo } from "@/components/site/Logo";
+
+const EMPRESA = [
+  { to: "/metodo", label: "Método" },
+  { to: "/blog", label: "Blog" },
+  { to: "/sobre", label: "Sobre" },
+  { to: "/contato", label: "Contato" },
+] as const;
+
+const LEGAL = [
+  { to: "/politica-de-privacidade", label: "Privacidade" },
+  { to: "/politica-de-cookies", label: "Cookies" },
+  { to: "/termos-e-condicoes", label: "Termos" },
+  { to: "/politica-de-seguranca", label: "Segurança" },
+] as const;
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-[1440px] 2xl:max-w-[1600px] px-5 py-14 sm:px-8 md:py-16 lg:px-12 xl:px-16">
-        <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-12">
-          <div className="sm:col-span-2 md:col-span-3">
-            <div className="flex items-center gap-2.5">
-              <div className="relative h-7 w-7">
-                <div className="absolute inset-0 rounded-md bg-primary" />
-                <div className="absolute inset-[5px] rounded-sm bg-background" />
-                <div className="absolute inset-[9px] rounded-[2px] bg-primary" />
-              </div>
-              <span className="text-[15px] font-semibold tracking-tight">Vtech Soluções</span>
-            </div>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Empresa de tecnologia B2B. Sites e sistemas inteligentes com IA — entregues no
-              prazo, sem mensalidade.
-            </p>
+    <footer className="text-sm text-muted-foreground">
+      <div className="shell pb-28 pt-14 sm:pb-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Logo className="text-foreground" />
+            <p className="mt-3 max-w-[34ch]">Sistemas, integrações e IA aplicada para operações B2B.</p>
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => Events.whatsappClick("footer")}
+              className="mt-2 inline-flex min-h-11 items-center font-mono text-xs text-foreground hover:text-signal"
+            >
+              whatsapp: {COMPANY.phoneDisplay}
+            </a>
           </div>
-
-          <div className="md:col-span-2">
-            <p className="text-eyebrow">Navegação</p>
-            <ul className="mt-5 space-y-3 text-sm">
-              <li>
-                <Link to="/" className="text-muted-foreground hover:text-foreground">
-                  Início
+          <FooterCol title="Serviços">
+            {SERVICES.map((s) => (
+              <li key={s.slug}>
+                <Link to={`/servicos/${s.slug}`} className="hover:text-signal">
+                  {s.title}
                 </Link>
               </li>
-              <li>
-                <Link to="/servicos" className="text-muted-foreground hover:text-foreground">
-                  Serviços
+            ))}
+          </FooterCol>
+          <FooterCol title="Empresa">
+            {EMPRESA.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="hover:text-signal">
+                  {l.label}
                 </Link>
               </li>
-              <li>
-                <Link to="/contato" className="text-muted-foreground hover:text-foreground">
-                  Contato
+            ))}
+          </FooterCol>
+          <FooterCol title="Legal">
+            {LEGAL.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} className="hover:text-signal">
+                  {l.label}
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-3">
-            <p className="text-eyebrow">Serviços</p>
-            <ul className="mt-5 space-y-3 text-sm">
-              <li>
-                <Link to="/servicos/sites-institucionais" className="text-muted-foreground hover:text-foreground">
-                  Sites institucionais
-                </Link>
-              </li>
-              <li>
-                <Link to="/servicos/sistemas-web" className="text-muted-foreground hover:text-foreground">
-                  Sistemas web
-                </Link>
-              </li>
-              <li>
-                <Link to="/servicos/automacoes-com-ia" className="text-muted-foreground hover:text-foreground">
-                  Automações com IA
-                </Link>
-              </li>
-              <li>
-                <Link to="/servicos/integracoes" className="text-muted-foreground hover:text-foreground">
-                  Integrações
-                </Link>
-              </li>
-              <li>
-                <Link to="/servicos/consultoria-tech" className="text-muted-foreground hover:text-foreground">
-                  Consultoria tech
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="text-eyebrow">Legal</p>
-            <ul className="mt-5 space-y-3 text-sm">
-              <li>
-                <Link
-                  to="/politica-de-privacidade"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Política de Privacidade
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/politica-de-cookies"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Política de Cookies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/termos-e-condicoes"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Termos e Condições
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/politica-de-seguranca"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Política de Segurança
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="text-eyebrow">Contato</p>
-            <ul className="mt-5 space-y-3 text-sm">
-              <li>
-                <a
-                  href="https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Vtech%20Solu%C3%A7%C3%B5es%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground hover:text-primary whitespace-nowrap"
-                >
-                  WhatsApp · +55 11 5444-1926
-                </a>
-              </li>
-              <li className="text-muted-foreground">São Paulo · Brasil</li>
-            </ul>
-          </div>
+            ))}
+          </FooterCol>
         </div>
-
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 pb-20 text-[11px] text-muted-foreground sm:mt-16 sm:pt-8 sm:pb-0 sm:text-xs md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Vtech Soluções. Todos os direitos reservados.</p>
-          <p className="pr-4 sm:pr-20 md:pr-24 lg:pr-28">Empresa de tecnologia B2B · CNPJ 66.428.598/0001-22</p>
+        <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-border pt-5 font-mono text-[11px] text-faint">
+          <span>
+            © {new Date().getFullYear()} {COMPANY.legalName} · CNPJ {COMPANY.cnpj}
+          </span>
+          <span>
+            {COMPANY.city}, {COMPANY.state}
+          </span>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="kicker mb-3.5">{title}</h2>
+      <ul className="grid gap-2">{children}</ul>
+    </div>
   );
 }

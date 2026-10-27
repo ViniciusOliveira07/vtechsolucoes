@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import { Events } from "@/lib/analytics";
 
 // ─── Configuração ────────────────────────────────────────────────────────────
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaMU8WPd92kfTe07_fRZeA08rUhSdOM_l2oGfk078p_JXPhX4bPTmWumA/exec";
@@ -112,6 +113,7 @@ export function ContactForm() {
     }
 
     setLoading(true);
+    Events.generateLead();
 
     // 1. Salva no Google Sheets (silencioso — não bloqueia o fluxo)
     if (APPS_SCRIPT_URL) {
@@ -225,11 +227,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={loading || sent}
-          className={cn(
-            "group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-semibold text-white transition-all duration-300 sm:w-auto sm:px-8 sm:py-4",
-            "shadow-[0_0_24px_-6px_oklch(0.62_0.21_258_/_0.7)] hover:shadow-[0_0_32px_-4px_oklch(0.7_0.22_255_/_0.9)] hover:scale-[1.02]",
-            "disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-none",
-          )}
+          className="btn group w-full sm:w-auto sm:px-7"
         >
           {sent ? (
             <>
@@ -238,7 +236,7 @@ export function ContactForm() {
             </>
           ) : loading ? (
             <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
               Enviando…
             </>
           ) : (
@@ -293,19 +291,19 @@ function Field({
   const hasError = Boolean(error);
 
   const inputClass = cn(
-    "w-full rounded-xl border bg-white/[0.03] px-4 py-3 text-[14px] text-foreground outline-none placeholder-white/20 transition-all duration-200",
+    "w-full rounded-lg border bg-background px-4 py-3 text-[15px] text-foreground outline-none placeholder:text-faint transition-colors duration-200",
     hasError
-      ? "border-destructive/60 focus:border-destructive"
+      ? "border-destructive/70 focus:border-destructive"
       : focused
-        ? "border-primary/50 bg-white/[0.05]"
-        : "border-white/[0.08] hover:border-white/[0.14]",
+        ? "border-signal"
+        : "border-border-strong hover:border-faint",
   );
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-[12px] font-medium tracking-wide text-white/40">
+      <label htmlFor={name} className="font-mono text-[12px] text-muted-foreground">
         {label}
-        {required && <span className={cn("ml-0.5", hasError ? "text-destructive" : "text-primary/70")}>*</span>}
+        {required && <span aria-hidden className={cn("ml-0.5", hasError ? "text-destructive" : "text-signal")}>*</span>}
       </label>
 
       {textarea ? (
@@ -353,7 +351,7 @@ function Field({
           <span />
         )}
         {helper && !hasError && (
-          <span id={`${name}-helper`} className="text-white/25">
+          <span id={`${name}-helper`} className="font-mono text-faint">
             {helper}
           </span>
         )}
