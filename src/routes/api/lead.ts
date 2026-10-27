@@ -8,6 +8,8 @@ import { leadFields } from "@/lib/leads";
 //   EVO_INSTANCE   nome da instância
 //   EVO_API_KEY    apikey da instância
 //   EVO_GROUP_JID  ex.: 120363XXXXXXXXXXXX@g.us
+//   EVO_HEADER_NAME / EVO_HEADER_VALUE  (opcionais) header extra exigido por proxy na frente da Evolution,
+//                                       o mesmo configurado na plataforma de prospecção
 
 const bodySchema = z.object({
   ...leadFields,
@@ -45,7 +47,7 @@ export const Route = createFileRoute("/api/lead")({
         const lead = parsed.data;
         if (lead.website) return json({ ok: true });
 
-        const { EVO_URL, EVO_INSTANCE, EVO_API_KEY, EVO_GROUP_JID } = process.env;
+        const { EVO_URL, EVO_INSTANCE, EVO_API_KEY, EVO_GROUP_JID, EVO_HEADER_NAME, EVO_HEADER_VALUE } = process.env;
         if (!EVO_URL || !EVO_INSTANCE || !EVO_API_KEY || !EVO_GROUP_JID) {
           return json({ ok: false, error: "evo_nao_configurada" }, 503);
         }
@@ -59,10 +61,15 @@ export const Route = createFileRoute("/api/lead")({
           `${lead.message}` +
           (lead.page ? `\n\n*Página:* ${lead.page}` : "");
 
+        const headers: Record<string, string> = { "Content-Type": "application/json", apikey: EVO_API_KEY };
+        if (EVO_HEADER_NAME && EVO_HEADER_VALUE && /^[A-Za-z0-9-]+$/.test(EVO_HEADER_NAME)) {
+          headers[EVO_HEADER_NAME] = EVO_HEADER_VALUE;
+        }
+
         try {
           const r = await fetch(`${EVO_URL.replace(/\/+$/, "")}/message/sendText/${encodeURIComponent(EVO_INSTANCE)}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json", apikey: EVO_API_KEY },
+            headers,
             body: JSON.stringify({ number: EVO_GROUP_JID, text }),
             signal: AbortSignal.timeout(10_000),
           });
