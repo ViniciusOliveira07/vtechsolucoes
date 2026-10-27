@@ -199,7 +199,7 @@ function DownloadPostDialog({
             <button type="submit" className="btn mt-1 w-full" disabled={status === "loading"}>
               {status === "loading" ? "Gerando PDF…" : "Baixar PDF"}
             </button>
-            <p className="font-mono text-[0.6875rem] leading-relaxed text-faint">
+            <p className="font-mono text-[max(11px,0.6875rem)] leading-relaxed text-faint">
               Usamos seus dados só para falar com você sobre este assunto. Veja a{" "}
               <a href="/politica-de-privacidade" className="underline underline-offset-2 hover:text-foreground">
                 política de privacidade

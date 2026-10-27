@@ -24,7 +24,7 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Layers />
+      <Layers withFlow />
       <ServicesExplorer />
       <SpecSheet />
       <Credentials />

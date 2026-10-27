@@ -146,7 +146,7 @@ function InfoRow({ icon: Icon, label, value, href }: InfoRowProps) {
         <Icon className="h-4 w-4 text-muted-foreground" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-[max(11px,0.6875rem)] font-medium uppercase tracking-[0.18em] text-muted-foreground">
           {label}
         </p>
         <p className="mt-0.5 truncate text-base font-medium tracking-tight text-foreground">

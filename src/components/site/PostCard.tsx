@@ -74,18 +74,19 @@ export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLev
       params={{ slug: post.slug }}
       className="group flex flex-col overflow-hidden rounded-[0.875rem] border border-border bg-surface transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong"
     >
-      <div aria-hidden className="relative aspect-video max-w-full border-b border-border bg-surface-elevated">
-        <svg viewBox="0 0 160 90" className="absolute inset-0 h-full w-full">
+      {/* altura da arte pela altura da tela, para o card caber junto com o título da seção */}
+      <div aria-hidden className="relative h-[clamp(4.5rem,14vh,12rem)] max-w-full border-b border-border bg-surface-elevated">
+        <svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 h-full w-full">
           {ART[post.category.slug]}
         </svg>
       </div>
-      <div className="flex flex-1 flex-col gap-2.5 px-[1.375rem] pb-6 pt-5">
+      <div className="flex flex-1 flex-col gap-2 px-[1.375rem] pb-[clamp(1rem,3vh,1.5rem)] pt-[clamp(0.875rem,2.6vh,1.25rem)]">
         <span className="kicker text-signal">{post.category.name}</span>
         <H className="text-[1.1875rem] leading-[1.3] tracking-[-0.015em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
           {post.title}
         </H>
-        <p className="line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
-        <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[0.6875rem] text-faint">
+        <p className="hide-short line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
+        <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span>
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> · {post.readingMinutes} min
           </span>

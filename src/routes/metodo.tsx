@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { breadcrumbSchema, jsonLd, seo } from "@/lib/site";
 import { SectionHead } from "@/components/site/SectionHead";
+import { RailHint } from "@/components/site/RailHint";
 import { SpecSheet } from "@/components/site/sections/SpecSheet";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 
@@ -52,22 +53,26 @@ function MetodoPage() {
     <>
       <section className="section">
         <div className="shell">
-          <SectionHead as="h1" title="Do diagnóstico ao sistema em produção, em quatro etapas.">
+          <SectionHead as="h1" title="Do diagnóstico ao sistema em produção, em quatro etapas." detailClassName="hide-short">
             Cada etapa termina com algo concreto nas suas mãos. Você sabe o que vai receber, quando e por quanto antes de
             aprovar.
           </SectionHead>
-          <ol className="grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-4">
+          <ol tabIndex={0} aria-label="Etapas" className="rail rail-boxed grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="flex flex-col border-b border-r border-border px-6 py-7">
+              <li
+                key={s.title}
+                className="flex flex-col border-b border-r border-border px-6 py-[clamp(1rem,3.4vh,1.75rem)]"
+              >
                 <span className="kicker text-signal">Etapa {i + 1}</span>
-                <h2 className="mt-3 text-[1.5rem] tracking-[-0.025em]">{s.title}</h2>
+                <h2 className="mt-2 text-[clamp(1.25rem,3vh,1.5rem)] tracking-[-0.025em]">{s.title}</h2>
                 <p className="mt-2 text-[0.9375rem] text-muted-foreground">{s.desc}</p>
-                <p className="mt-auto pt-6 font-mono text-xs text-faint">
+                <p className="mt-auto pt-[clamp(0.75rem,2.6vh,1.5rem)] font-mono text-xs text-faint">
                   <span className="text-signal">→</span> {s.out}
                 </p>
               </li>
             ))}
           </ol>
+          <RailHint />
         </div>
       </section>
       <SpecSheet />

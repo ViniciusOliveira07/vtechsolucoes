@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/site/SectionHead";
+import { RailHint } from "@/components/site/RailHint";
 
 export const SPECS = [
   { k: "Escopo", v: "Fechado", d: "Definido por escrito antes do início. Mudanças entram como aditivo." },
@@ -13,18 +14,25 @@ export function SpecSheet({ id = "ficha" }: { id?: string }) {
   return (
     <section id={id} className="section">
       <div className="shell">
-        <SectionHead title="Ficha técnica da contratação">O que você pode exigir de nós em qualquer projeto.</SectionHead>
-        <dl className="grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3">
+        <SectionHead title="Ficha técnica da contratação" detailClassName="hide-phone">
+          O que você pode exigir de nós em qualquer projeto.
+        </SectionHead>
+        <dl
+          tabIndex={0}
+          aria-label="Condições de contratação"
+          className="rail rail-boxed grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-3"
+        >
           {SPECS.map((s) => (
-            <div key={s.k} className="border-b border-r border-border px-6 py-7">
+            <div key={s.k} className="border-b border-r border-border px-6 py-[clamp(1rem,3.4vh,1.75rem)]">
               <dt className="kicker">{s.k}</dt>
               <dd className="m-0">
-                <p className="mt-2.5 text-[clamp(1.375rem,2.2vw,1.875rem)] tracking-[-0.03em]">{s.v}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
+                <p className="mt-2 text-[clamp(1.375rem,min(2.2vw,4vh),1.875rem)] tracking-[-0.03em]">{s.v}</p>
+                <p className="mt-1.5 text-sm text-muted-foreground">{s.d}</p>
               </dd>
             </div>
           ))}
         </dl>
+        <RailHint />
       </div>
     </section>
   );

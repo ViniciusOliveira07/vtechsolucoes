@@ -16,7 +16,7 @@ interface LegalPageProps {
 
 export function LegalPage({ eyebrow, title, intro, updatedAt, sections }: LegalPageProps) {
   return (
-    <section className="section">
+    <section className="section-flow">
       <div className="shell grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
         <header className="min-w-0 lg:sticky lg:top-24 lg:self-start">
           <p className="kicker">{eyebrow}</p>

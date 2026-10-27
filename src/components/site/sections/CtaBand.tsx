@@ -19,9 +19,11 @@ export function CtaBand({
         aria-hidden
         className="pointer-events-none absolute -right-[10%] -top-[40%] h-[180%] w-[60%] bg-[radial-gradient(closest-side,#7fd4ff1a,transparent)]"
       />
-      <div className="shell relative grid items-end gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
+      <div className="shell relative grid items-end gap-[clamp(1.25rem,4vh,2.5rem)] lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
         <div className="min-w-0">
-          <h2 className="text-[clamp(2.125rem,4.6vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">{title}</h2>
+          <h2 className="text-[clamp(1.875rem,min(4.6vw+0.5rem,7vh),4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
+            {title}
+          </h2>
           <p className="mt-4 max-w-[50ch] text-muted-foreground">{text}</p>
         </div>
         <div className="grid justify-items-start gap-3">

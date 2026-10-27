@@ -20,11 +20,12 @@ const LEGAL = [
 export function Footer() {
   return (
     <footer className="text-sm text-muted-foreground">
-      <div className="shell pb-28 pt-14 sm:pb-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
-          <div className="sm:col-span-2 lg:col-span-1">
+      <div className="shell pb-20 pt-[clamp(2rem,6vh,3.5rem)] sm:pb-8">
+        {/* três colunas de links lado a lado já no celular, para o rodapé caber numa tela */}
+        <div className="grid grid-cols-3 gap-x-4 gap-y-6 lg:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))] lg:gap-8">
+          <div className="col-span-3 lg:col-span-1">
             <Logo className="text-foreground" />
-            <p className="mt-3 max-w-[34ch]">Sistemas, integrações e IA aplicada para operações B2B.</p>
+            <p className="hide-short mt-3 max-w-[34ch]">Sistemas, integrações e IA aplicada para operações B2B.</p>
             <a
               href={whatsappUrl()}
               target="_blank"
@@ -63,7 +64,7 @@ export function Footer() {
             ))}
           </FooterCol>
         </div>
-        <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-border pt-5 font-mono text-[0.6875rem] text-faint">
+        <div className="mt-[clamp(1.5rem,5vh,3rem)] flex flex-wrap justify-between gap-3 border-t border-border pt-5 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span>
             © {new Date().getFullYear()} {COMPANY.legalName} · CNPJ {COMPANY.cnpj}
           </span>
@@ -78,9 +79,9 @@ export function Footer() {
 
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div>
-      <h2 className="kicker mb-3.5">{title}</h2>
-      <ul className="grid gap-2">{children}</ul>
+    <div className="min-w-0">
+      <h2 className="kicker mb-3">{title}</h2>
+      <ul className="grid gap-1.5 text-[0.8125rem] sm:text-sm">{children}</ul>
     </div>
   );
 }

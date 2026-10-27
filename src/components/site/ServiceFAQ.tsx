@@ -24,11 +24,11 @@ export function ServiceFAQ({ items, serviceSlug }: ServiceFAQProps) {
         >
           <AccordionTrigger
             onClick={() => Events.faqOpen(item.q, serviceSlug)}
-            className="py-6 text-left text-base font-display font-semibold tracking-tight text-foreground hover:no-underline sm:text-lg"
+            className="py-[clamp(0.55rem,2vh,1.5rem)] text-left text-[0.9375rem] font-medium tracking-tight text-foreground hover:no-underline sm:text-lg"
           >
             {item.q}
           </AccordionTrigger>
-          <AccordionContent className="pb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <AccordionContent className="pb-[clamp(0.75rem,2.4vh,1.5rem)] text-sm leading-relaxed text-muted-foreground sm:text-base">
             {item.a}
           </AccordionContent>
         </AccordionItem>

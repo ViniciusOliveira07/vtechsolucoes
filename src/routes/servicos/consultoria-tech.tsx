@@ -31,7 +31,7 @@ const data: ServicePageData = {
       "Muitas vezes, as empresas encontram-se em um dilema: investir em uma nova tecnologia, modernizar um sistema legado ou contratar uma equipe interna de engenharia. Nossa consultoria remove a incerteza desse processo. Atuamos em frentes que vão desde o 'CTO as a Service' (provendo liderança técnica fracionada para empresas que ainda não possuem um CTO full-time) até a realização de Due Diligence Técnica para fundos de investimento e processos de fusão e aquisição (M&A).",
       "Um pilar fundamental da nossa consultoria é o Assessment de Arquitetura. Analisamos profundamente o código, os bancos de dados e a infraestrutura de nuvem existentes para identificar gargalos de performance, dívidas técnicas acumuladas e riscos de segurança. Com base nesse diagnóstico, construímos um Roadmap Tecnológico claro e prioritário, que serve como o guia para os próximos 12 a 24 meses de desenvolvimento da empresa, garantindo que o investimento em tech seja aplicado onde gera mais valor real.",
       "Além da parte técnica, focamos na Transformação Digital holística. Isso inclui a otimização de processos de engenharia, implementação de métricas de produtividade (como as métricas DORA) e mentoria para líderes técnicos. Nosso objetivo é garantir que a tecnologia não seja apenas um centro de custo, mas um motor de inovação que permita à empresa adaptar-se rapidamente às mudanças do mercado e superar a concorrência através da excelência digital.",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -199,10 +199,10 @@ const data: ServicePageData = {
       desc: "Estratégia e implementação de inteligência artificial para otimizar sua operação corporativa.",
     },
     {
-      slug: "automacoes-com-ia",
-      title: "Automações com IA",
-      href: "/servicos/automacoes-com-ia",
-      desc: "Estratégia de IA empresarial com ROI mensurável.",
+      slug: "integracoes",
+      title: "Integração de Sistemas",
+      href: "/servicos/integracoes",
+      desc: "Conecte ERP, CRM e pagamentos que a consultoria apontou como gargalo.",
     },
   ],
   ctaFinalTitle: "Pronto para tomar a próxima decisão técnica com clareza",

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 // Diagrama ilustrativo: canais de entrada → agente → sistemas de destino.
 // O HTML do servidor já sai completo (nós, fios e log); a animação dos pacotes só roda no cliente.
@@ -40,7 +41,8 @@ const fmt = (s: number) =>
 
 const INITIAL: Line[] = ROUTES.map((r, i) => ({ t: fmt(START + i * 7), event: r.event, result: r.result }));
 
-export function FlowConsole() {
+/** `compact`: só o diagrama (sem o log de eventos), para caber em telas de celular. */
+export function FlowConsole({ compact = false }: { compact?: boolean }) {
   const [lines, setLines] = useState<Line[]>(INITIAL);
   const [pulse, setPulse] = useState(false);
   const pktLayer = useRef<SVGGElement>(null);
@@ -109,7 +111,7 @@ export function FlowConsole() {
   return (
     <figure className="flow m-0 min-w-0">
       <div className="overflow-hidden rounded-[0.875rem] border border-border-strong bg-gradient-to-b from-surface to-background shadow-[0_2.5rem_5rem_-2.5rem_#000]">
-        <div className="flex items-center justify-between border-b border-border px-3.5 py-2.5 font-mono text-[0.6875rem] text-faint">
+        <div className="flex items-center justify-between border-b border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span aria-hidden className="flex gap-1.5">
             <i className="h-2 w-2 rounded-full bg-border-strong" />
             <i className="h-2 w-2 rounded-full bg-border-strong" />
@@ -165,7 +167,13 @@ export function FlowConsole() {
           </g>
           <g ref={pktLayer} />
         </svg>
-        <div aria-hidden className="flow-log overflow-hidden border-t border-border px-3.5 py-2.5 font-mono text-[0.6875rem] leading-[1.75] text-muted-foreground">
+        <div
+          aria-hidden
+          className={cn(
+            "flow-log overflow-hidden border-t border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] leading-[1.75] text-muted-foreground",
+            compact && "hidden",
+          )}
+        >
           {lines.map((l, i) => (
             <div key={`${l.t}-${i}`} className="overflow-hidden text-ellipsis whitespace-nowrap">
               <span className="text-faint">{l.t}</span> <span className="text-signal">{l.event}</span> → agente →{" "}
@@ -174,7 +182,7 @@ export function FlowConsole() {
           ))}
         </div>
       </div>
-      <figcaption className="mt-2.5 font-mono text-[0.6875rem] text-faint">
+      <figcaption className="mt-2 font-mono text-[max(11px,0.6875rem)] text-faint">
         Simulação ilustrativa de um fluxo típico. Não representa um cliente.
       </figcaption>
     </figure>

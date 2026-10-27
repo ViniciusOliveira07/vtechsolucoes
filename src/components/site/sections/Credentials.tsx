@@ -1,5 +1,6 @@
 import { COMPANY } from "@/lib/site";
 import { SectionHead } from "@/components/site/SectionHead";
+import { RailHint } from "@/components/site/RailHint";
 
 export const STACK = ["OpenAI", "Anthropic", "Gemini", "LangChain", "LangGraph", "pgvector", "Pinecone", "Python", "Node.js"];
 
@@ -13,11 +14,11 @@ export function Credentials({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
   return (
     <section id="credenciais" className="section">
       <div className="shell">
-        <SectionHead as={headingAs} title="Credenciais">
+        <SectionHead as={headingAs} title="Credenciais" detailClassName="hide-short">
           Dados verificáveis da empresa e das tecnologias com que trabalhamos.
         </SectionHead>
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="panel min-w-0 p-7">
+        <div tabIndex={0} aria-label="Credenciais" className="rail grid gap-6 md:grid-cols-2">
+          <div className="panel min-w-0 p-[clamp(1.25rem,4vh,1.75rem)]">
             <h3 className="mb-4 text-xl">Empresa</h3>
             <dl className="grid font-mono text-[0.8125rem]">
               {rows.map(([k, v]) => (
@@ -28,7 +29,7 @@ export function Credentials({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
               ))}
             </dl>
           </div>
-          <div className="panel min-w-0 p-7">
+          <div className="panel min-w-0 p-[clamp(1.25rem,4vh,1.75rem)]">
             <h3 className="mb-4 text-xl">Stack</h3>
             <ul className="flex flex-wrap gap-1.5">
               {STACK.map((t) => (
@@ -39,6 +40,7 @@ export function Credentials({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
             </ul>
           </div>
         </div>
+        <RailHint />
       </div>
     </section>
   );

@@ -91,9 +91,10 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="w-full space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="w-full space-y-[clamp(0.5rem,1.6vh,1rem)]">
       <Honeypot />
-      <div className="grid gap-4 sm:grid-cols-2">
+      {/* nome e telefone lado a lado até no celular, para o formulário caber numa tela */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <Field
           label="Nome"
           name="name"
@@ -149,7 +150,7 @@ export function ContactForm() {
         </p>
       )}
 
-      <div className="pt-3">
+      <div className="pt-1">
         <button
           type="submit"
           disabled={loading || sent}
@@ -229,7 +230,7 @@ export function Field({
   const hasError = Boolean(error);
 
   const inputClass = cn(
-    "w-full rounded-lg border bg-background px-4 py-3 text-[0.9375rem] text-foreground outline-none placeholder:text-faint transition-colors duration-200",
+    "min-h-11 w-full rounded-lg border bg-background px-3.5 py-[clamp(0.5rem,1.4vh,0.75rem)] text-[0.9375rem] text-foreground outline-none placeholder:text-faint transition-colors duration-200",
     hasError
       ? "border-destructive/70 focus:border-destructive"
       : focused
@@ -238,7 +239,7 @@ export function Field({
   );
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex min-w-0 flex-col gap-1">
       <label htmlFor={name} className="font-mono text-[0.75rem] text-muted-foreground">
         {label}
         {required && <span aria-hidden className={cn("ml-0.5", hasError ? "text-destructive" : "text-signal")}>*</span>}
@@ -258,7 +259,7 @@ export function Field({
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={hasError}
           aria-describedby={error ? `${name}-error` : helper ? `${name}-helper` : undefined}
-          className={cn(inputClass, "resize-none leading-relaxed")}
+          className={cn(inputClass, "h-[clamp(4.5rem,13vh,9rem)] resize-none leading-relaxed")}
         />
       ) : (
         <input
@@ -279,21 +280,24 @@ export function Field({
         />
       )}
 
-      <div className="flex min-h-[1rem] items-center justify-between gap-3 text-[0.6875rem]">
-        {hasError ? (
-          <span id={`${name}-error`} className="flex items-center gap-1 text-destructive">
-            <AlertCircle className="h-3 w-3 shrink-0" />
-            {error}
-          </span>
-        ) : (
-          <span />
-        )}
-        {helper && !hasError && (
-          <span id={`${name}-helper`} className="font-mono text-faint">
-            {helper}
-          </span>
-        )}
-      </div>
+      {/* linha de erro/contador só ocupa espaço quando tem algo a mostrar */}
+      {(hasError || helper) && (
+        <div className="flex items-center justify-between gap-3 text-[max(11px,0.6875rem)]">
+          {hasError ? (
+            <span id={`${name}-error`} className="flex items-center gap-1 text-destructive">
+              <AlertCircle className="h-3 w-3 shrink-0" />
+              {error}
+            </span>
+          ) : (
+            <span />
+          )}
+          {helper && !hasError && (
+            <span id={`${name}-helper`} className="font-mono text-faint">
+              {helper}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 }

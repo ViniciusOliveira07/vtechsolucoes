@@ -89,7 +89,14 @@
   html {
     background-color: var(--color-background);
     color-scheme: dark;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: var(--header-h);
+    /* rolar encaixa seção a seção, sem prender quem rola devagar */
+    scroll-snap-type: y proximity;
+  }
+
+  :root {
+    --header-h: 4rem;
+    --screen-h: calc(100svh - var(--header-h));
   }
 
   /*
@@ -101,6 +108,17 @@
   @media (min-width: 1600px) {
     html {
       font-size: max(16px, min(1vw, 1.75vh));
+    }
+  }
+  /* Celulares estreitos (≤379px e ≤339px): a mesma composição, um pouco menor, para cada seção caber na tela */
+  @media (max-width: 379px) {
+    html {
+      font-size: 15px;
+    }
+  }
+  @media (max-width: 339px) {
+    html {
+      font-size: 14.5px;
     }
   }
 
@@ -146,7 +164,8 @@
   .shell {
     margin-inline: auto;
     width: 100%;
-    max-width: 80rem;
+    /* acompanha a largura em qualquer monitor (inclusive ultrawide), nunca menos que 80rem */
+    max-width: max(80rem, 88vw);
     padding-left: max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-left, 0px));
     padding-right: max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-right, 0px));
   }
@@ -154,7 +173,7 @@
   /* Rótulo técnico em mono */
   .kicker {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: max(11px, 0.6875rem);
     line-height: 1.4;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -162,9 +181,81 @@
     color: var(--faint);
   }
 
-  .section {
-    padding-block: clamp(4rem, 8vw, 7rem);
+  /*
+   * Sistema de telas: cada seção ocupa exatamente uma tela útil (altura da janela menos o
+   * cabeçalho), com o conteúdo centralizado e espaçamentos pela altura. O conteúdo de cada
+   * seção é desenhado para caber nessa altura em qualquer formato (ver .rail e .hide-short).
+   */
+  .section,
+  .hero {
+    min-height: var(--screen-h);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border-bottom: 1px solid var(--border);
+    scroll-snap-align: start;
+  }
+  .section {
+    padding-block: clamp(1.25rem, 5.5vh, 5rem);
+  }
+  .section > .shell,
+  .hero > .shell {
+    width: 100%;
+  }
+  /* Páginas de leitura (artigo, textos legais): fluxo contínuo, sem altura de tela */
+  .section-flow {
+    padding-block: clamp(2.5rem, 7vw, 6rem);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /*
+   * Faixa deslizante: no celular, listas de itens viram uma faixa horizontal com encaixe
+   * (o próximo item aparece pela metade); do tablet em diante voltam ao grid normal.
+   */
+  @media (max-width: 47.99rem) {
+    .rail {
+      display: flex !important;
+      gap: 0.75rem;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      border-width: 0 !important;
+      margin-inline: calc(-1 * max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-left, 0px)));
+      padding-inline: max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-left, 0px));
+      scroll-padding-inline: max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-left, 0px));
+    }
+    .rail::-webkit-scrollbar {
+      display: none;
+    }
+    .rail > * {
+      flex: 0 0 84%;
+      scroll-snap-align: start;
+    }
+    .rail-boxed > * {
+      border: 1px solid var(--border) !important;
+      border-radius: 0.875rem;
+      background: var(--surface);
+    }
+    .rail-hint {
+      display: block !important;
+    }
+    .hide-phone {
+      display: none !important;
+    }
+  }
+  .rail-hint {
+    display: none;
+  }
+
+  /* Telas baixas de celular/tablet (ex.: 320×568, 360×640): só o essencial */
+  @media (max-width: 63.99rem) and (max-height: 44rem) {
+    .hide-short {
+      display: none !important;
+    }
+    .section {
+      padding-block: 0.75rem;
+    }
   }
 
   /*
@@ -174,11 +265,25 @@
    * para o CTA e o diagrama caberem sem rolar.
    */
   .hero {
-    padding-top: clamp(2rem, 7vw, 6rem);
-    padding-bottom: clamp(2.5rem, 6vw, 5rem);
+    padding-block: clamp(1.25rem, 5vh, 5rem);
+  }
+  /* celular: o diagrama não cabe junto do título na mesma tela */
+  @media (max-width: 47.99rem) {
+    .hero .flow {
+      display: none;
+    }
+  }
+  /* tablet em pé: diagrama limitado pela altura para a dobra fechar numa tela */
+  @media (min-width: 48rem) and (max-width: 63.99rem) {
+    .hero .flow-svg {
+      max-height: 22vh;
+    }
+    .hero .flow figcaption {
+      display: none;
+    }
   }
   .hero-title {
-    font-size: clamp(2.5rem, 7.2vw, 4.25rem);
+    font-size: clamp(2rem, min(7.2vw + 0.6rem, 6.5vh), 4.25rem);
   }
   .hero-title-svc {
     font-size: clamp(1.875rem, 6.4vw, 4rem);
@@ -247,7 +352,7 @@
   }
 
   .h-section {
-    font-size: clamp(1.875rem, 3.6vw, 3.125rem);
+    font-size: clamp(1.5rem, min(3.6vw + 0.5rem, 5.2vh), 3.125rem);
     font-weight: 500;
     letter-spacing: -0.035em;
     line-height: 1.05;
@@ -318,8 +423,17 @@
 
   /* Camadas em perspectiva (seção Proposta) */
   .plane-stack {
+    /* unidade que encolhe em telas baixas: a pilha nunca passa de ~46% da altura */
+    --u: min(1rem, 1.95vh);
     perspective: 68.75rem;
     position: relative;
+    width: 100%;
+    max-width: calc(var(--u) * 32.5);
+    height: calc(var(--u) * 23.75);
+    --plane-h: calc(var(--u) * 9.375);
+    --t0: calc(var(--u) * 12.5);
+    --t1: calc(var(--u) * 6.875);
+    --t2: calc(var(--u) * 1.25);
   }
   .plane {
     position: absolute;

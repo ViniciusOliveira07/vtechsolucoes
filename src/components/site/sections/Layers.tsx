@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { SectionHead } from "@/components/site/SectionHead";
+import { FlowConsole } from "@/components/site/FlowConsole";
 
 const LAYERS = [
   {
@@ -23,21 +24,24 @@ const LAYERS = [
 // Posição vertical de cada plano: a camada 0 fica embaixo.
 const TOPS = ["top-[var(--t0)]", "top-[var(--t1)]", "top-[var(--t2)]"];
 
-export function Layers() {
+export function Layers({ withFlow = false }: { withFlow?: boolean }) {
   const [active, setActive] = useState(2);
 
   return (
     <section id="proposta" className="section">
       <div className="shell">
-        <SectionHead title="Três camadas. Um responsável pela arquitetura inteira.">
+        <SectionHead title="Três camadas. Um responsável pela arquitetura inteira." detailClassName="hide-phone">
           A maioria das empresas contrata cada parte de um fornecedor diferente e herda as falhas entre elas. Nós
           desenhamos as três juntas.
         </SectionHead>
-        <div className="grid items-center gap-14 lg:grid-cols-2">
-          <div
-            aria-hidden
-            className="plane-stack h-[16.875rem] max-w-[32.5rem] [--plane-h:6.875rem] [--t0:9.375rem] [--t1:5.3125rem] [--t2:1.25rem] sm:h-[23.75rem] sm:[--plane-h:9.375rem] sm:[--t0:12.5rem] sm:[--t1:6.875rem] sm:[--t2:1.25rem]"
-          >
+        <div className="grid items-center gap-[clamp(1rem,4vh,3.5rem)] md:grid-cols-2">
+          {/* Celular: no lugar das camadas decorativas, o diagrama do fluxo (que não coube na primeira tela) */}
+          {withFlow && (
+            <div className="hide-short md:hidden">
+              <FlowConsole compact />
+            </div>
+          )}
+          <div aria-hidden className="plane-stack hidden md:block">
             {LAYERS.map((l, i) => (
               <div key={l.label} className={cn("plane", TOPS[i])} data-l={i} data-on={active === i}>
                 <span>{l.label}</span>
@@ -53,14 +57,27 @@ export function Layers() {
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className="grid w-full gap-1.5 border-t border-border py-[1.375rem] text-left last:border-b sm:grid-cols-[7.5rem_1fr] sm:gap-5"
+                className="grid w-full gap-1 border-t border-border py-[clamp(0.6rem,2vh,1.375rem)] text-left last:border-b lg:grid-cols-[7.5rem_1fr] lg:gap-5"
               >
-                <span className="kicker pt-1">Camada {i + 1}</span>
+                <span className="kicker pt-1 max-md:hidden">Camada {i + 1}</span>
                 <span>
-                  <span className={cn("block text-[1.375rem] tracking-[-0.02em]", active === i && "text-signal")}>
+                  <span
+                    className={cn(
+                      "block text-[clamp(1.125rem,2.6vh,1.375rem)] tracking-[-0.02em]",
+                      active === i && "text-signal",
+                    )}
+                  >
                     {l.title}
                   </span>
-                  <span className="mt-1.5 block text-[0.9375rem] text-muted-foreground">{l.desc}</span>
+                  {/* celular: só a camada escolhida mostra a descrição */}
+                  <span
+                    className={cn(
+                      "mt-1 block text-[0.9375rem] text-muted-foreground",
+                      active !== i && "max-md:hidden",
+                    )}
+                  >
+                    {l.desc}
+                  </span>
                 </span>
               </button>
             ))}

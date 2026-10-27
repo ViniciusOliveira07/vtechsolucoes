@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { CATEGORIES, POSTS, slugify, type Category, type Post } from "@/lib/blog";
 import { PostCard } from "@/components/site/PostCard";
+import { RailHint } from "@/components/site/RailHint";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 
 /** Índice do blog: usado em /blog e em /blog/categoria/:categoria. */
@@ -22,7 +23,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
     <>
       <section className="section">
         <div className="shell">
-          <nav aria-label="Trilha de navegação" className="mb-8 font-mono text-xs text-faint">
+          <nav aria-label="Trilha de navegação" className="hide-short mb-[clamp(0.75rem,3vh,2rem)] font-mono text-xs text-faint">
             <Link to="/" className="hover:text-foreground">
               início
             </Link>{" "}
@@ -38,16 +39,16 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
               <span className="text-foreground">blog</span>
             )}
           </nav>
-          <div className="mb-12 grid gap-6 md:grid-cols-2 md:items-end md:gap-8">
+          <div className="mb-[clamp(1rem,4vh,3rem)] grid gap-[clamp(0.75rem,2.5vh,1.5rem)] md:grid-cols-2 md:items-end md:gap-8">
             <h1 className="h-section min-w-0">{category ? category.name : "Notas técnicas"}</h1>
-            <p className="min-w-0 max-w-[48ch] text-muted-foreground md:justify-self-end">
+            <p className="hide-phone min-w-0 max-w-[48ch] text-muted-foreground md:justify-self-end">
               {category
                 ? category.description
                 : "Guias práticos sobre IA aplicada, integrações, sistemas e arquitetura, escritos para quem decide tecnologia na empresa."}
             </p>
           </div>
 
-          <div className="mb-10 flex flex-col gap-4 border-y border-border py-4 md:flex-row md:items-center md:justify-between">
+          <div className="mb-[clamp(1rem,3.4vh,2.5rem)] flex flex-col gap-2 border-y border-border py-2 md:flex-row md:items-center md:justify-between md:gap-4 md:py-3">
             <nav aria-label="Categorias" className="-mx-1 flex gap-1 overflow-x-auto [scrollbar-width:none]">
               <CategoryLink to="/blog" active={!category} label="Todas" />
               {CATEGORIES.map((c) => (
@@ -73,11 +74,14 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((p) => (
-                <PostCard key={p.slug} post={p} headingLevel="h2" />
-              ))}
-            </div>
+            <>
+              <div tabIndex={0} aria-label="Artigos" className="rail grid gap-5 md:grid-cols-3">
+                {filtered.map((p) => (
+                  <PostCard key={p.slug} post={p} headingLevel="h2" />
+                ))}
+              </div>
+              <RailHint />
+            </>
           ) : (
             <div className="rounded-[0.875rem] border border-dashed border-border-strong px-7 py-10 font-mono text-[0.8125rem] text-muted-foreground">
               {posts.length === 0
@@ -85,7 +89,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
                 : `Nenhum artigo encontrado para "${query}". Tente outro termo ou veja todas as categorias.`}
             </div>
           )}
-          <p className="mt-6 font-mono text-xs text-faint" aria-live="polite">
+          <p className="hide-short mt-[clamp(0.5rem,2vh,1.5rem)] font-mono text-xs text-faint" aria-live="polite">
             {filtered.length} de {POSTS.length} {POSTS.length === 1 ? "artigo" : "artigos"}
           </p>
         </div>

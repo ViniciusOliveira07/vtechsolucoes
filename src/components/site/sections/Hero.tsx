@@ -13,7 +13,7 @@ export function Hero() {
       />
       <div className="shell relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14">
         <div className="min-w-0">
-          <p className="kicker">
+          <p className="kicker hide-short">
             <span className="text-signal">●</span> Software sob medida · Integrações · IA aplicada
           </p>
           <h1 className="hero-title mt-5 font-medium leading-none tracking-[-0.04em]">
@@ -35,7 +35,7 @@ export function Hero() {
               Ver o que construímos
             </Link>
           </div>
-          <ul className="hero-facts flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
+          <ul className="hero-facts hide-short flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
             {FACTS.map((f) => (
               <li key={f}>
                 <span aria-hidden className="text-signal">

@@ -6,6 +6,7 @@ import { absoluteUrl, breadcrumbSchema, jsonLd, seo, SITE_NAME, SITE_URL } from 
 import { Events } from "@/lib/analytics";
 import { trackView } from "@/lib/views";
 import { PostCard, ViewCount } from "@/components/site/PostCard";
+import { RailHint } from "@/components/site/RailHint";
 import { DownloadPostButton } from "@/components/site/DownloadPostDialog";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 
@@ -67,7 +68,7 @@ function PostPage() {
 
   return (
     <>
-      <article className="section">
+      <article className="section-flow">
         <div className="shell">
           <nav aria-label="Trilha de navegação" className="mb-8 font-mono text-xs text-faint">
             <Link to="/" className="hover:text-foreground">
@@ -171,12 +172,13 @@ function PostPage() {
       {related.length > 0 && (
         <section className="section">
           <div className="shell">
-            <h2 className="h-section mb-10">Leia também</h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <h2 className="h-section mb-[clamp(1.25rem,5vh,2.5rem)]">Leia também</h2>
+            <div tabIndex={0} aria-label="Artigos relacionados" className="rail grid gap-5 md:grid-cols-3">
               {related.map((p) => (
                 <PostCard key={p.slug} post={p} />
               ))}
             </div>
+            <RailHint />
           </div>
         </section>
       )}

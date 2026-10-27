@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { breadcrumbSchema, jsonLd, seo } from "@/lib/site";
 import { SectionHead } from "@/components/site/SectionHead";
+import { RailHint } from "@/components/site/RailHint";
 import { Credentials } from "@/components/site/sections/Credentials";
 import { Layers } from "@/components/site/sections/Layers";
 import { CtaBand } from "@/components/site/sections/CtaBand";
@@ -45,19 +46,24 @@ function SobrePage() {
     <>
       <section className="section">
         <div className="shell">
-          <SectionHead as="h1" title="Engenharia de software e IA aplicada para operações B2B.">
+          <SectionHead as="h1" title="Engenharia de software e IA aplicada para operações B2B." detailClassName="hide-short">
             A Vtech Soluções é uma empresa de tecnologia de São Paulo. Uma única equipe responde pela interface, pela
             integração e pela inteligência de cada projeto.
           </SectionHead>
-          <div className="grid gap-px overflow-hidden rounded-[0.875rem] border border-border bg-border md:grid-cols-3">
+          <div
+            tabIndex={0}
+            aria-label="Princípios"
+            className="rail rail-boxed grid gap-px overflow-hidden rounded-[0.875rem] border border-border bg-border md:grid-cols-3"
+          >
             {PRINCIPLES.map((p) => (
-              <article key={p.title} className="bg-background p-7">
-                <h2 className="text-[1.375rem] tracking-[-0.02em]">{p.title}</h2>
-                <p className="mt-2.5 text-[0.9375rem] text-muted-foreground">{p.desc}</p>
+              <article key={p.title} className="bg-background p-[clamp(1.25rem,3.6vh,1.75rem)]">
+                <h2 className="text-[clamp(1.1875rem,2.8vh,1.375rem)] tracking-[-0.02em]">{p.title}</h2>
+                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{p.desc}</p>
               </article>
             ))}
           </div>
-          <p className="mt-8 text-muted-foreground">
+          <RailHint />
+          <p className="mt-[clamp(1rem,3vh,2rem)] text-muted-foreground">
             Veja como funciona cada etapa em{" "}
             <Link to="/metodo" className="text-signal underline underline-offset-4">
               nosso método
