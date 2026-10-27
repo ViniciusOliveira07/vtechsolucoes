@@ -67,7 +67,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="buscar artigos…"
-                className="min-h-11 w-full rounded-lg border border-border-strong bg-background px-3.5 font-mono text-[13px] text-foreground outline-none placeholder:text-faint focus:border-signal"
+                className="min-h-11 w-full rounded-lg border border-border-strong bg-background px-3.5 font-mono text-[0.8125rem] text-foreground outline-none placeholder:text-faint focus:border-signal"
               />
             </label>
           </div>
@@ -79,7 +79,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
               ))}
             </div>
           ) : (
-            <div className="rounded-[14px] border border-dashed border-border-strong px-7 py-10 font-mono text-[13px] text-muted-foreground">
+            <div className="rounded-[0.875rem] border border-dashed border-border-strong px-7 py-10 font-mono text-[0.8125rem] text-muted-foreground">
               {posts.length === 0
                 ? "Nenhum artigo publicado nesta categoria ainda."
                 : `Nenhum artigo encontrado para "${query}". Tente outro termo ou veja todas as categorias.`}

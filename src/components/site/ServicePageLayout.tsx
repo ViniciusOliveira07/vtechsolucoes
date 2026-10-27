@@ -38,7 +38,7 @@ export type ServicePageData = {
 
 function Head({ kicker, title }: { kicker: string; title: string }) {
   return (
-    <div className="mb-12 max-w-[760px]">
+    <div className="mb-12 max-w-[47.5rem]">
       <p className="kicker">{kicker}</p>
       <h2 className="h-section mt-4">{title}</h2>
     </div>
@@ -50,13 +50,13 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border pb-[clamp(48px,6vw,88px)] pt-[clamp(40px,6vw,80px)]">
+      <section className="hero relative overflow-hidden border-b border-border">
         <div
           aria-hidden
           className="grid-lines pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_80%_30%,#000_20%,transparent_75%)]"
         />
         <div className="shell relative">
-          <nav aria-label="Trilha de navegação" className="mb-8 font-mono text-xs text-faint">
+          <nav aria-label="Trilha de navegação" className="hero-crumbs font-mono text-xs text-faint">
             <Link to="/" className="hover:text-foreground">
               início
             </Link>{" "}
@@ -66,16 +66,22 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             </Link>{" "}
             / <span className="text-foreground">{data.slug}</span>
           </nav>
-          <div className={withFlow ? "grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]" : undefined}>
+          <div
+            className={
+              withFlow ? "grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14" : undefined
+            }
+          >
             <div className="min-w-0">
               <p className="kicker">
                 <span className="text-signal">●</span> {data.eyebrow}
               </p>
-              <h1 className="mt-5 max-w-[20ch] text-[clamp(36px,4.8vw,64px)] font-medium leading-[1.03] tracking-[-0.04em]">
+              <h1 className="hero-title-svc mt-5 max-w-[20ch] font-medium leading-[1.03] tracking-[-0.04em]">
                 {data.h1}
               </h1>
-              <p className="mt-6 max-w-[60ch] text-[clamp(16px,1.4vw,18px)] text-muted-foreground">{data.subheadline}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <p className="hero-sub max-w-[60ch] text-[clamp(1rem,1.4vw,1.125rem)] text-muted-foreground">
+                {data.subheadline}
+              </p>
+              <div className="hero-ctas flex flex-wrap gap-3">
                 <Link
                   to="/contato"
                   onClick={() => Events.ctaClick("Solicitar proposta", "hero", data.slug)}
@@ -91,7 +97,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                   Ver o processo
                 </a>
               </div>
-              <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-faint">
+              <ul className="hero-facts flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
                 {data.trust.map((t) => (
                   <li key={t}>
                     <span aria-hidden className="text-signal">
@@ -115,7 +121,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
               <p className="kicker">Entenda o serviço</p>
               <h2 className="h-section mt-4">{data.oQueE.title}</h2>
             </div>
-            <div className="grid min-w-0 max-w-[68ch] gap-5 text-[17px] leading-[1.75] text-muted-foreground">
+            <div className="grid min-w-0 max-w-[68ch] gap-5 text-[1.0625rem] leading-[1.75] text-muted-foreground">
               {data.oQueE.paragrafos.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -131,8 +137,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <div className="grid border-t border-border">
             {data.problemas.map((p, i) => (
               <div key={i} className="grid gap-3 border-b border-border py-6 md:grid-cols-2 md:gap-10">
-                <p className="text-[19px] tracking-[-0.015em]">{p.dor}</p>
-                <p className="text-[15px] text-muted-foreground">
+                <p className="text-[1.1875rem] tracking-[-0.015em]">{p.dor}</p>
+                <p className="text-[0.9375rem] text-muted-foreground">
                   <span aria-hidden className="mr-2 font-mono text-signal">
                     →
                   </span>
@@ -152,8 +158,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             <div className="grid border-l border-t border-border md:grid-cols-2">
               {data.paraQuem.map((p, i) => (
                 <div key={i} className="border-b border-r border-border p-6 md:p-7">
-                  <h3 className="text-[19px] tracking-[-0.015em]">{p.perfil}</h3>
-                  <p className="mt-2 text-[15px] text-muted-foreground">{p.descricao}</p>
+                  <h3 className="text-[1.1875rem] tracking-[-0.015em]">{p.perfil}</h3>
+                  <p className="mt-2 text-[0.9375rem] text-muted-foreground">{p.descricao}</p>
                 </div>
               ))}
             </div>
@@ -165,14 +171,14 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       <section className="section">
         <div className="shell">
           <Head kicker="O que entregamos" title="Escopo concreto, não promessa" />
-          <ul className="grid overflow-hidden rounded-[14px] border border-border bg-surface md:grid-cols-2">
+          <ul className="grid overflow-hidden rounded-[0.875rem] border border-border bg-surface md:grid-cols-2">
             {data.entregaveis.map((e, i) => (
-              <li key={i} className="grid grid-cols-[24px_1fr] gap-2 border-b border-border p-6 md:odd:border-r">
+              <li key={i} className="grid grid-cols-[1.5rem_1fr] gap-2 border-b border-border p-6 md:odd:border-r">
                 <span aria-hidden className="font-mono text-signal">
                   →
                 </span>
                 <span>
-                  <span className="block text-[17px]">{e.title}</span>
+                  <span className="block text-[1.0625rem]">{e.title}</span>
                   <span className="mt-1.5 block text-sm text-muted-foreground">{e.desc}</span>
                 </span>
               </li>
@@ -189,8 +195,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             <div className="grid gap-5 md:grid-cols-2">
               {data.casosDeUso.map((c, i) => (
                 <div key={i} className="panel p-7">
-                  <h3 className="text-[20px] tracking-[-0.015em]">{c.title}</h3>
-                  <p className="mt-2.5 text-[15px] text-muted-foreground">{c.desc}</p>
+                  <h3 className="text-[1.25rem] tracking-[-0.015em]">{c.title}</h3>
+                  <p className="mt-2.5 text-[0.9375rem] text-muted-foreground">{c.desc}</p>
                 </div>
               ))}
             </div>
@@ -205,7 +211,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           <dl className="grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
             {data.stack.map((s, i) => (
               <div key={i} className="border-b border-r border-border p-6">
-                <dt className="font-mono text-[13px] text-signal">{s.title}</dt>
+                <dt className="font-mono text-[0.8125rem] text-signal">{s.title}</dt>
                 <dd className="m-0 mt-2 text-sm text-muted-foreground">{s.desc}</dd>
               </div>
             ))}
@@ -221,7 +227,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             {data.processo.map((p, i) => (
               <li key={p.n} className="border-b border-r border-border px-6 py-7">
                 <span className="kicker text-signal">Etapa {i + 1}</span>
-                <h3 className="mt-3 text-[20px] tracking-[-0.02em]">{p.title}</h3>
+                <h3 className="mt-3 text-[1.25rem] tracking-[-0.02em]">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
               </li>
             ))}
@@ -236,9 +242,9 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             <Head kicker="Glossário" title="Termos que você vai ouvir nesse universo" />
             <dl className="grid border-t border-border">
               {data.glossario.map((g, i) => (
-                <div key={i} className="grid gap-2 border-b border-border py-5 md:grid-cols-[260px_1fr] md:gap-8">
-                  <dt className="font-mono text-[14px] text-foreground">{g.termo}</dt>
-                  <dd className="m-0 max-w-[68ch] text-[15px] text-muted-foreground">{g.definicao}</dd>
+                <div key={i} className="grid gap-2 border-b border-border py-5 md:grid-cols-[16.25rem_1fr] md:gap-8">
+                  <dt className="font-mono text-[0.875rem] text-foreground">{g.termo}</dt>
+                  <dd className="m-0 max-w-[68ch] text-[0.9375rem] text-muted-foreground">{g.definicao}</dd>
                 </div>
               ))}
             </dl>
@@ -271,9 +277,9 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                 onClick={() => Events.relatedServiceClick(data.slug, r.slug)}
                 className="group panel flex flex-col p-7 transition-colors hover:border-border-strong"
               >
-                <h3 className="text-[20px] tracking-[-0.015em] group-hover:text-signal">{r.title}</h3>
-                <p className="mt-2.5 text-[15px] text-muted-foreground">{r.desc}</p>
-                <span className="mt-auto pt-6 font-mono text-[13px] text-signal">ver serviço →</span>
+                <h3 className="text-[1.25rem] tracking-[-0.015em] group-hover:text-signal">{r.title}</h3>
+                <p className="mt-2.5 text-[0.9375rem] text-muted-foreground">{r.desc}</p>
+                <span className="mt-auto pt-6 font-mono text-[0.8125rem] text-signal">ver serviço →</span>
               </Link>
             ))}
           </div>

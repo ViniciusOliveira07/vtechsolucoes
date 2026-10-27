@@ -72,20 +72,20 @@ export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLev
     <Link
       to="/blog/$slug"
       params={{ slug: post.slug }}
-      className="group flex flex-col overflow-hidden rounded-[14px] border border-border bg-surface transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong"
+      className="group flex flex-col overflow-hidden rounded-[0.875rem] border border-border bg-surface transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong"
     >
       <div aria-hidden className="relative aspect-video max-w-full border-b border-border bg-surface-elevated">
         <svg viewBox="0 0 160 90" className="absolute inset-0 h-full w-full">
           {ART[post.category.slug]}
         </svg>
       </div>
-      <div className="flex flex-1 flex-col gap-2.5 px-[22px] pb-6 pt-5">
+      <div className="flex flex-1 flex-col gap-2.5 px-[1.375rem] pb-6 pt-5">
         <span className="kicker text-signal">{post.category.name}</span>
-        <H className="text-[19px] leading-[1.3] tracking-[-0.015em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
+        <H className="text-[1.1875rem] leading-[1.3] tracking-[-0.015em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
           {post.title}
         </H>
         <p className="line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
-        <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[11px] text-faint">
+        <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[0.6875rem] text-faint">
           <span>
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> · {post.readingMinutes} min
           </span>

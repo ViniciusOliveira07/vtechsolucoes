@@ -23,7 +23,7 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
         <SectionHead as={headingAs} title="O que construímos">
           Cinco frentes, contratadas separadamente ou combinadas no mesmo projeto.
         </SectionHead>
-        <div className="grid overflow-hidden rounded-[14px] border border-border bg-surface md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="grid overflow-hidden rounded-[0.875rem] border border-border bg-surface md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div
             role="tablist"
             aria-label="Serviços"
@@ -43,19 +43,19 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
                 aria-controls="painel-servico"
                 tabIndex={active === i ? 0 : -1}
                 onClick={() => setActive(i)}
-                className="flex min-h-11 shrink-0 items-center justify-between gap-3 whitespace-nowrap border-r border-border px-4 py-3.5 text-[15px] text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground aria-selected:bg-surface-elevated aria-selected:text-foreground aria-selected:shadow-[inset_0_-2px_0_var(--signal)] md:border-b md:border-r-0 md:px-6 md:py-[22px] md:text-[17px] md:last:border-b-0 md:aria-selected:shadow-[inset_2px_0_0_var(--signal)]"
+                className="flex min-h-11 shrink-0 items-center justify-between gap-3 whitespace-nowrap border-r border-border px-4 py-3.5 text-[0.9375rem] text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground aria-selected:bg-surface-elevated aria-selected:text-foreground aria-selected:shadow-[inset_0_-0.125rem_0_var(--signal)] md:border-b md:border-r-0 md:px-6 md:py-[1.375rem] md:text-[1.0625rem] md:last:border-b-0 md:aria-selected:shadow-[inset_0.125rem_0_0_var(--signal)]"
               >
                 <span>{svc.title}</span>
-                <span className="kicker hidden text-[10px] md:inline">{svc.kicker}</span>
+                <span className="kicker hidden lg:inline">{svc.kicker}</span>
               </button>
             ))}
           </div>
           <div role="tabpanel" id="painel-servico" aria-labelledby={`tab-${s.slug}`} className="min-w-0 p-6 md:p-8">
-            <h3 className="text-[28px] tracking-[-0.03em]">{s.title}</h3>
+            <h3 className="text-[1.75rem] tracking-[-0.03em]">{s.title}</h3>
             <p className="mt-3 max-w-[52ch] text-muted-foreground">{s.forWho}</p>
             <ul className="mt-7">
               {s.deliverables.map((d) => (
-                <li key={d} className="grid grid-cols-[24px_1fr] gap-2 border-t border-dashed border-border-strong py-3 text-[15px]">
+                <li key={d} className="grid grid-cols-[1.5rem_1fr] gap-2 border-t border-dashed border-border-strong py-3 text-[0.9375rem]">
                   <span aria-hidden className="font-mono text-signal">
                     →
                   </span>
@@ -72,7 +72,7 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
             </div>
             <Link
               to={`/servicos/${s.slug}`}
-              className="mt-6 inline-flex min-h-11 items-center font-mono text-[13px] font-medium text-signal hover:underline"
+              className="mt-6 inline-flex min-h-11 items-center font-mono text-[0.8125rem] font-medium text-signal hover:underline"
             >
               ver página do serviço →
             </Link>

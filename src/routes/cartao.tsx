@@ -45,12 +45,12 @@ function CartaoPage() {
     "https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20cart%C3%A3o%20de%20visita%20virtual%20da%20Vtech%20Solu%C3%A7%C3%B5es.";
 
   return (
-    <div className="flex min-h-[calc(100vh-80px)] items-center justify-center px-5 py-14 sm:px-8">
+    <div className="flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-5 py-14 sm:px-8">
       <div className="relative w-full max-w-md">
         {/* ambient glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+          className="pointer-events-none absolute -top-24 left-1/2 h-[18.75rem] w-[min(31.25rem,100%)] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
           style={{
             background:
               "radial-gradient(closest-side, #7fd4ff55, transparent)",
@@ -58,7 +58,7 @@ function CartaoPage() {
         />
 
         {/* card */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-px shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-px shadow-[0_1.875rem_5rem_-1.25rem_rgba(0,0,0,0.6)]">
           <div className="rounded-3xl bg-background/60 px-8 py-10 backdrop-blur-xl sm:px-10 sm:py-12">
             {/* top edge highlight */}
             <div className="pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
@@ -100,7 +100,7 @@ function CartaoPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-6px_rgba(37,211,102,0.5)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_32px_-6px_rgba(37,211,102,0.65)]"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-[0_0.5rem_1.5rem_-0.375rem_rgba(37,211,102,0.5)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0.75rem_2rem_-0.375rem_rgba(37,211,102,0.65)]"
               >
                 <MessageCircle className="h-4 w-4" />
                 Conversar no WhatsApp
@@ -146,7 +146,7 @@ function InfoRow({ icon: Icon, label, value, href }: InfoRowProps) {
         <Icon className="h-4 w-4 text-muted-foreground" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
           {label}
         </p>
         <p className="mt-0.5 truncate text-base font-medium tracking-tight text-foreground">

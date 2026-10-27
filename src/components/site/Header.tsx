@@ -42,14 +42,14 @@ export function Header() {
           ))}
         </nav>
 
-        <span className="ml-auto hidden items-center gap-2 font-mono text-xs text-muted-foreground lg:inline-flex">
-          <i aria-hidden className="h-1.5 w-1.5 rounded-full bg-ok shadow-[0_0_0_3px_#8fe3b022]" />
+        <span className="ml-auto hidden items-center gap-2 whitespace-nowrap font-mono text-xs text-muted-foreground xl:inline-flex">
+          <i aria-hidden className="h-1.5 w-1.5 rounded-full bg-ok shadow-[0_0_0_0.1875rem_#8fe3b022]" />
           Recebendo novos projetos
         </span>
         <Link
           to="/contato"
           onClick={() => Events.ctaClick("Iniciar diagnóstico", "header")}
-          className="btn hidden lg:inline-flex"
+          className="btn hidden lg:ml-auto lg:inline-flex xl:ml-0"
         >
           Iniciar diagnóstico
         </Link>
@@ -72,7 +72,7 @@ export function Header() {
               key={item.to}
               to={item.to}
               aria-current={isActive(item.to) ? "page" : undefined}
-              className="flex min-h-[52px] items-center justify-between border-b border-border text-lg"
+              className="flex min-h-[3.25rem] items-center justify-between border-b border-border text-lg"
             >
               {item.label}
               <span aria-hidden className="font-mono text-faint">

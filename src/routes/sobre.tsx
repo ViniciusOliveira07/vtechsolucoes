@@ -49,11 +49,11 @@ function SobrePage() {
             A Vtech Soluções é uma empresa de tecnologia de São Paulo. Uma única equipe responde pela interface, pela
             integração e pela inteligência de cada projeto.
           </SectionHead>
-          <div className="grid gap-px overflow-hidden rounded-[14px] border border-border bg-border md:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-[0.875rem] border border-border bg-border md:grid-cols-3">
             {PRINCIPLES.map((p) => (
               <article key={p.title} className="bg-background p-7">
-                <h2 className="text-[22px] tracking-[-0.02em]">{p.title}</h2>
-                <p className="mt-2.5 text-[15px] text-muted-foreground">{p.desc}</p>
+                <h2 className="text-[1.375rem] tracking-[-0.02em]">{p.title}</h2>
+                <p className="mt-2.5 text-[0.9375rem] text-muted-foreground">{p.desc}</p>
               </article>
             ))}
           </div>

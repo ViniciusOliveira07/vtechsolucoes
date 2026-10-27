@@ -63,7 +63,7 @@ export function Footer() {
             ))}
           </FooterCol>
         </div>
-        <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-border pt-5 font-mono text-[11px] text-faint">
+        <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-border pt-5 font-mono text-[0.6875rem] text-faint">
           <span>
             © {new Date().getFullYear()} {COMPANY.legalName} · CNPJ {COMPANY.cnpj}
           </span>

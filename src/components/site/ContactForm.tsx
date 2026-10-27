@@ -143,7 +143,7 @@ export function ContactForm() {
       />
 
       {submitError && (
-        <p className="flex items-center gap-1.5 text-[13px] text-destructive">
+        <p className="flex items-center gap-1.5 text-[0.8125rem] text-destructive">
           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
           {submitError}
         </p>
@@ -185,7 +185,7 @@ export function ContactForm() {
 /** Campo-armadilha para robôs: fora da tela, fora da ordem de tabulação e escondido de leitores de tela. */
 export function Honeypot() {
   return (
-    <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+    <div aria-hidden className="absolute -left-[624.9375rem] h-px w-px overflow-hidden">
       <label>
         Site
         <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" defaultValue="" />
@@ -229,7 +229,7 @@ export function Field({
   const hasError = Boolean(error);
 
   const inputClass = cn(
-    "w-full rounded-lg border bg-background px-4 py-3 text-[15px] text-foreground outline-none placeholder:text-faint transition-colors duration-200",
+    "w-full rounded-lg border bg-background px-4 py-3 text-[0.9375rem] text-foreground outline-none placeholder:text-faint transition-colors duration-200",
     hasError
       ? "border-destructive/70 focus:border-destructive"
       : focused
@@ -239,7 +239,7 @@ export function Field({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="font-mono text-[12px] text-muted-foreground">
+      <label htmlFor={name} className="font-mono text-[0.75rem] text-muted-foreground">
         {label}
         {required && <span aria-hidden className={cn("ml-0.5", hasError ? "text-destructive" : "text-signal")}>*</span>}
       </label>
@@ -279,7 +279,7 @@ export function Field({
         />
       )}
 
-      <div className="flex min-h-[16px] items-center justify-between gap-3 text-[11px]">
+      <div className="flex min-h-[1rem] items-center justify-between gap-3 text-[0.6875rem]">
         {hasError ? (
           <span id={`${name}-error`} className="flex items-center gap-1 text-destructive">
             <AlertCircle className="h-3 w-3 shrink-0" />

@@ -116,14 +116,14 @@ function DownloadPostDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[calc(100dvh-32px)] w-[calc(100%-32px)] max-w-[460px] gap-0 overflow-y-auto rounded-[14px] border-border-strong bg-surface p-6 sm:p-8 [&>button]:right-3 [&>button]:top-3 [&>button]:inline-flex [&>button]:h-11 [&>button]:w-11 [&>button]:items-center [&>button]:justify-center">
+      <DialogContent className="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[28.75rem] gap-0 overflow-y-auto rounded-[0.875rem] border-border-strong bg-surface p-6 sm:p-8 [&>button]:right-3 [&>button]:top-3 [&>button]:inline-flex [&>button]:h-11 [&>button]:w-11 [&>button]:items-center [&>button]:justify-center">
         {status === "done" ? (
           <div className="grid gap-4 py-2">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ok/40 text-ok">
               <Check className="h-5 w-5" />
             </span>
-            <DialogTitle className="text-[22px] font-medium tracking-[-0.02em]">Download iniciado</DialogTitle>
-            <DialogDescription className="text-[15px] text-muted-foreground">
+            <DialogTitle className="text-[1.375rem] font-medium tracking-[-0.02em]">Download iniciado</DialogTitle>
+            <DialogDescription className="text-[0.9375rem] text-muted-foreground">
               O PDF de "{post.title}" está sendo salvo no seu dispositivo. Se o download não começou, use o botão abaixo.
             </DialogDescription>
             <div className="mt-2 flex flex-wrap gap-3">
@@ -140,10 +140,10 @@ function DownloadPostDialog({
             <Honeypot />
             <div className="pr-8">
               <p className="kicker text-signal">Material em PDF</p>
-              <DialogTitle className="mt-3 text-[22px] font-medium leading-tight tracking-[-0.02em]">
+              <DialogTitle className="mt-3 text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">
                 Baixe este artigo
               </DialogTitle>
-              <DialogDescription className="mt-2 text-[15px] text-muted-foreground">
+              <DialogDescription className="mt-2 text-[0.9375rem] text-muted-foreground">
                 Informe seus dados para receber "{post.title}" em PDF.
               </DialogDescription>
             </div>
@@ -191,7 +191,7 @@ function DownloadPostDialog({
               inputMode="tel"
             />
             {status === "error" && (
-              <p role="alert" className="flex items-center gap-1.5 text-[13px] text-destructive">
+              <p role="alert" className="flex items-center gap-1.5 text-[0.8125rem] text-destructive">
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                 Não foi possível gerar o PDF. Verifique sua conexão e tente de novo.
               </p>
@@ -199,7 +199,7 @@ function DownloadPostDialog({
             <button type="submit" className="btn mt-1 w-full" disabled={status === "loading"}>
               {status === "loading" ? "Gerando PDF…" : "Baixar PDF"}
             </button>
-            <p className="font-mono text-[11px] leading-relaxed text-faint">
+            <p className="font-mono text-[0.6875rem] leading-relaxed text-faint">
               Usamos seus dados só para falar com você sobre este assunto. Veja a{" "}
               <a href="/politica-de-privacidade" className="underline underline-offset-2 hover:text-foreground">
                 política de privacidade

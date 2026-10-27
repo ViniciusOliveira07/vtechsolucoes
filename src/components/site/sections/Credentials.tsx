@@ -19,7 +19,7 @@ export function Credentials({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="panel min-w-0 p-7">
             <h3 className="mb-4 text-xl">Empresa</h3>
-            <dl className="grid font-mono text-[13px]">
+            <dl className="grid font-mono text-[0.8125rem]">
               {rows.map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-3 border-t border-border py-2.5">
                   <dt className="text-faint">{k}</dt>

@@ -21,7 +21,7 @@ export function CtaBand({
       />
       <div className="shell relative grid items-end gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
         <div className="min-w-0">
-          <h2 className="text-[clamp(34px,4.6vw,64px)] font-medium leading-[1.02] tracking-[-0.04em]">{title}</h2>
+          <h2 className="text-[clamp(2.125rem,4.6vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">{title}</h2>
           <p className="mt-4 max-w-[50ch] text-muted-foreground">{text}</p>
         </div>
         <div className="grid justify-items-start gap-3">
@@ -33,7 +33,7 @@ export function CtaBand({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => Events.whatsappClick(location)}
-            className="inline-flex min-h-11 items-center font-mono text-[13px] text-muted-foreground hover:text-signal"
+            className="inline-flex min-h-11 items-center font-mono text-[0.8125rem] text-muted-foreground hover:text-signal"
           >
             whatsapp: {COMPANY.phoneDisplay}
           </a>

@@ -87,7 +87,7 @@ function PostPage() {
             </Link>
           </nav>
 
-          <header className="max-w-[860px]">
+          <header className="max-w-[53.75rem]">
             <Link
               to="/blog/categoria/$categoria"
               params={{ categoria: post.category.slug }}
@@ -95,7 +95,7 @@ function PostPage() {
             >
               {post.category.name}
             </Link>
-            <h1 className="mt-4 text-[clamp(34px,4.4vw,58px)] font-medium leading-[1.05] tracking-[-0.035em]">
+            <h1 className="mt-4 text-[clamp(2.125rem,4.4vw,3.625rem)] font-medium leading-[1.05] tracking-[-0.035em]">
               {post.title}
             </h1>
             <p className="mt-5 max-w-[62ch] text-lg text-muted-foreground">{post.description}</p>
@@ -117,13 +117,13 @@ function PostPage() {
             </div>
           </header>
 
-          <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_17.5rem]">
             <div className="min-w-0 max-w-[70ch]">
               <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug) }} />
               <aside className="panel mt-14 p-7" aria-label="Serviço relacionado">
                 <p className="kicker">Serviço relacionado</p>
-                <p className="mt-3 text-[22px] tracking-[-0.02em]">{service.title}</p>
-                <p className="mt-2 text-[15px] text-muted-foreground">{service.forWho}</p>
+                <p className="mt-3 text-[1.375rem] tracking-[-0.02em]">{service.title}</p>
+                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{service.forWho}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     to="/contato"
@@ -136,7 +136,7 @@ function PostPage() {
                 </div>
                 <Link
                   to={`/servicos/${service.slug}`}
-                  className="mt-3 inline-flex min-h-11 items-center font-mono text-[13px] text-signal hover:underline"
+                  className="mt-3 inline-flex min-h-11 items-center font-mono text-[0.8125rem] text-signal hover:underline"
                 >
                   conhecer o serviço de {service.title.toLowerCase()} →
                 </Link>

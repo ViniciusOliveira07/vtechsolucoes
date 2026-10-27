@@ -60,8 +60,8 @@ function MetodoPage() {
             {STEPS.map((s, i) => (
               <li key={s.title} className="flex flex-col border-b border-r border-border px-6 py-7">
                 <span className="kicker text-signal">Etapa {i + 1}</span>
-                <h2 className="mt-3 text-[24px] tracking-[-0.025em]">{s.title}</h2>
-                <p className="mt-2 text-[15px] text-muted-foreground">{s.desc}</p>
+                <h2 className="mt-3 text-[1.5rem] tracking-[-0.025em]">{s.title}</h2>
+                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{s.desc}</p>
                 <p className="mt-auto pt-6 font-mono text-xs text-faint">
                   <span className="text-signal">→</span> {s.out}
                 </p>

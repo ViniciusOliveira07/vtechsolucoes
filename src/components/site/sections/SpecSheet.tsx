@@ -19,7 +19,7 @@ export function SpecSheet({ id = "ficha" }: { id?: string }) {
             <div key={s.k} className="border-b border-r border-border px-6 py-7">
               <dt className="kicker">{s.k}</dt>
               <dd className="m-0">
-                <p className="mt-2.5 text-[clamp(22px,2.2vw,30px)] tracking-[-0.03em]">{s.v}</p>
+                <p className="mt-2.5 text-[clamp(1.375rem,2.2vw,1.875rem)] tracking-[-0.03em]">{s.v}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
               </dd>
             </div>

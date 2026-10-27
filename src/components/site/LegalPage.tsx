@@ -28,11 +28,11 @@ export function LegalPage({ eyebrow, title, intro, updatedAt, sections }: LegalP
         <div className="min-w-0 max-w-[70ch]">
           {sections.map((section, i) => (
             <article key={section.title} className="border-t border-border py-8 first:border-t-0 first:pt-0">
-              <h2 className="flex items-baseline gap-4 text-[22px] tracking-[-0.02em]">
+              <h2 className="flex items-baseline gap-4 text-[1.375rem] tracking-[-0.02em]">
                 <span className="font-mono text-xs text-signal tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 {section.title}
               </h2>
-              <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-muted-foreground sm:pl-9 [&_a]:text-signal [&_a]:underline [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
+              <div className="mt-4 space-y-4 text-[0.9375rem] leading-relaxed text-muted-foreground sm:pl-9 [&_a]:text-signal [&_a]:underline [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
                 {section.body}
               </div>
             </article>

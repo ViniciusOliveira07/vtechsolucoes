@@ -16,7 +16,7 @@ export function BlogPreview() {
             <PostCard key={p.slug} post={p} />
           ))}
         </div>
-        <Link to="/blog" className="mt-6 inline-flex min-h-11 items-center font-mono text-[13px] text-signal hover:underline">
+        <Link to="/blog" className="mt-6 inline-flex min-h-11 items-center font-mono text-[0.8125rem] text-signal hover:underline">
           ver todas as publicações →
         </Link>
       </div>

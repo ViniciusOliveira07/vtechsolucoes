@@ -36,7 +36,7 @@ export function Layers() {
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <div
             aria-hidden
-            className="plane-stack h-[270px] max-w-[520px] [--plane-h:110px] [--t0:150px] [--t1:85px] [--t2:20px] sm:h-[380px] sm:[--plane-h:150px] sm:[--t0:200px] sm:[--t1:110px] sm:[--t2:20px]"
+            className="plane-stack h-[16.875rem] max-w-[32.5rem] [--plane-h:6.875rem] [--t0:9.375rem] [--t1:5.3125rem] [--t2:1.25rem] sm:h-[23.75rem] sm:[--plane-h:9.375rem] sm:[--t0:12.5rem] sm:[--t1:6.875rem] sm:[--t2:1.25rem]"
           >
             {LAYERS.map((l, i) => (
               <div key={l.label} className={cn("plane", TOPS[i])} data-l={i} data-on={active === i}>
@@ -53,14 +53,14 @@ export function Layers() {
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className="grid w-full gap-1.5 border-t border-border py-[22px] text-left last:border-b sm:grid-cols-[120px_1fr] sm:gap-5"
+                className="grid w-full gap-1.5 border-t border-border py-[1.375rem] text-left last:border-b sm:grid-cols-[7.5rem_1fr] sm:gap-5"
               >
                 <span className="kicker pt-1">Camada {i + 1}</span>
                 <span>
-                  <span className={cn("block text-[22px] tracking-[-0.02em]", active === i && "text-signal")}>
+                  <span className={cn("block text-[1.375rem] tracking-[-0.02em]", active === i && "text-signal")}>
                     {l.title}
                   </span>
-                  <span className="mt-1.5 block text-[15px] text-muted-foreground">{l.desc}</span>
+                  <span className="mt-1.5 block text-[0.9375rem] text-muted-foreground">{l.desc}</span>
                 </span>
               </button>
             ))}
