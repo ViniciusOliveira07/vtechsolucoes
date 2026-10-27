@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { COMPANY, whatsappUrl } from "@/lib/site";
 
 interface LegalSection {
   title: string;
@@ -38,9 +39,14 @@ export function LegalPage({ eyebrow, title, intro, updatedAt, sections }: LegalP
           ))}
 
           <div className="panel mt-6 p-6 text-sm text-muted-foreground">
-            Dúvidas sobre este documento? Escreva para{" "}
-            <a href="mailto:contato@vtechsolucoes.com" className="text-signal underline underline-offset-4">
-              contato@vtechsolucoes.com
+            Dúvidas sobre este documento? Fale com a gente pelo WhatsApp{" "}
+            <a
+              href={whatsappUrl("Olá! Tenho uma dúvida sobre os documentos legais do site.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-signal underline underline-offset-4"
+            >
+              {COMPANY.phoneDisplay}
             </a>
             .
           </div>

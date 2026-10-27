@@ -1,5 +1,26 @@
 import { Link } from "@tanstack/react-router";
 import { formatDate, type Post } from "@/lib/blog";
+import { formatViews, useViewCounts } from "@/lib/views";
+
+/** Número de acessos do artigo. Não renderiza nada enquanto carrega ou se o contador estiver desligado. */
+export function ViewCount({ slug, className }: { slug: string; className?: string }) {
+  const counts = useViewCounts();
+  if (!counts) return null;
+  const n = counts[slug] ?? 0;
+  return (
+    <span
+      className={className ?? "inline-flex shrink-0 items-center gap-1.5"}
+      aria-label={`${n} ${n === 1 ? "acesso" : "acessos"}`}
+      title={`${n.toLocaleString("pt-BR")} ${n === 1 ? "acesso" : "acessos"}`}
+    >
+      <svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.4">
+        <path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8Z" />
+        <circle cx="8" cy="8" r="2" />
+      </svg>
+      {formatViews(n)}
+    </span>
+  );
+}
 
 // Arte de capa gerada por categoria: um diagrama simples, sem foto de banco de imagens.
 const ART: Record<string, React.ReactNode> = {
@@ -65,8 +86,11 @@ export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLev
           {post.title}
         </H>
         <p className="line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
-        <span className="mt-auto pt-2 font-mono text-[11px] text-faint">
-          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> · {post.readingMinutes} min
+        <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[11px] text-faint">
+          <span>
+            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> · {post.readingMinutes} min
+          </span>
+          <ViewCount slug={post.slug} />
         </span>
       </div>
     </Link>

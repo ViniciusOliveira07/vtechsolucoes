@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { formatDate, getPost, relatedPosts, serviceFor } from "@/lib/blog";
 import { renderPost } from "@/lib/blog-render";
 import { absoluteUrl, breadcrumbSchema, jsonLd, seo, SITE_NAME, SITE_URL } from "@/lib/site";
 import { Events } from "@/lib/analytics";
-import { PostCard } from "@/components/site/PostCard";
+import { trackView } from "@/lib/views";
+import { PostCard, ViewCount } from "@/components/site/PostCard";
+import { DownloadPostButton } from "@/components/site/DownloadPostDialog";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -60,6 +63,8 @@ function PostPage() {
   const service = serviceFor(post.category);
   const related = relatedPosts(post);
 
+  useEffect(() => trackView(post.slug), [post.slug]);
+
   return (
     <>
       <article className="section">
@@ -105,7 +110,11 @@ function PostPage() {
                 </span>
               )}
               <span>{post.readingMinutes} min de leitura</span>
+              <ViewCount slug={post.slug} />
             </p>
+            <div className="mt-7">
+              <DownloadPostButton post={post} />
+            </div>
           </header>
 
           <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px]">
@@ -123,10 +132,14 @@ function PostPage() {
                   >
                     Iniciar diagnóstico →
                   </Link>
-                  <Link to={`/servicos/${service.slug}`} className="btn btn-line">
-                    Conhecer o serviço
-                  </Link>
+                  <DownloadPostButton post={post} />
                 </div>
+                <Link
+                  to={`/servicos/${service.slug}`}
+                  className="mt-3 inline-flex min-h-11 items-center font-mono text-[13px] text-signal hover:underline"
+                >
+                  conhecer o serviço de {service.title.toLowerCase()} →
+                </Link>
               </aside>
             </div>
 

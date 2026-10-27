@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
+import { COMPANY, whatsappUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/politica-de-seguranca")({
   head: () => ({
@@ -101,12 +102,13 @@ function SecurityPage() {
           body: (
             <p>
               Identificou uma vulnerabilidade em nossos sistemas? Comunique de
-              forma responsável pelo email{" "}
+              forma responsável pelo WhatsApp{" "}
               <a
-                href="mailto:contato@vtechsolucoes.com"
-                className="text-foreground hover:text-primary"
+                href={whatsappUrl("Olá! Quero reportar uma possível vulnerabilidade de segurança.")}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                contato@vtechsolucoes.com
+                {COMPANY.phoneDisplay}
               </a>
               . Nos comprometemos a responder em até 48 horas úteis.
             </p>

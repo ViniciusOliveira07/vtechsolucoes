@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
+import { COMPANY, whatsappUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/politica-de-privacidade")({
   head: () => ({
@@ -111,12 +112,13 @@ function PrivacyPage() {
           body: (
             <p>
               Para exercer seus direitos ou tirar dúvidas sobre o tratamento de
-              dados, entre em contato pelo email{" "}
+              dados, entre em contato pelo WhatsApp{" "}
               <a
-                href="mailto:contato@vtechsolucoes.com"
-                className="text-foreground hover:text-primary"
+                href={whatsappUrl("Olá! Gostaria de falar sobre o tratamento dos meus dados pessoais.")}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                contato@vtechsolucoes.com
+                {COMPANY.phoneDisplay}
               </a>
               .
             </p>

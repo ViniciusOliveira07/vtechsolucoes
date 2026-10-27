@@ -3,39 +3,11 @@ import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { Events } from "@/lib/analytics";
-
-// ─── Configuração ────────────────────────────────────────────────────────────
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaMU8WPd92kfTe07_fRZeA08rUhSdOM_l2oGfk078p_JXPhX4bPTmWumA/exec";
-
-// Número do WhatsApp no formato internacional (sem + ou espaços)
-const WA_NUMBER = "551154441926";
-
-// ─── Integração EVO (preencher quando disponível) ────────────────────────────
-const EVO_URL      = "";          // Ex: "https://evo.suaempresa.com"
-const EVO_INSTANCE = "";          // Ex: "vtech"
-const EVO_API_KEY  = "";          // Token de autenticação da instância
-const EVO_GROUP_JID = "";         // Ex: "120363XXXXXXXX@g.us"
-// ─────────────────────────────────────────────────────────────────────────────
-
-const phoneRegex = /^[\d\s()+\-]{8,20}$/;
+import { COMPANY } from "@/lib/site";
+import { formatPhone, leadFields, saveLead, sendLead } from "@/lib/leads";
 
 const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Informe seu nome completo")
-    .max(100, "Nome muito longo"),
-  phone: z
-    .string()
-    .trim()
-    .min(8, "Telefone inválido")
-    .max(20, "Telefone muito longo")
-    .regex(phoneRegex, "Use apenas números, espaços, +, ( ) e -"),
-  email: z
-    .string()
-    .trim()
-    .email("Email inválido")
-    .max(255, "Email muito longo"),
+  ...leadFields,
   message: z
     .string()
     .trim()
@@ -54,15 +26,6 @@ type Errors = Partial<Record<keyof FormState, string>>;
 
 const initialState: FormState = { name: "", phone: "", email: "", message: "" };
 
-function formatPhone(raw: string) {
-  const digits = raw.replace(/\D/g, "").slice(0, 11);
-  if (digits.length <= 2) return digits;
-  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-  if (digits.length <= 10)
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-}
-
 function buildWhatsAppUrl(values: FormState) {
   const text =
     `Olá! Vim pelo site da Vtech Soluções e gostaria de iniciar um projeto.\n\n` +
@@ -70,7 +33,7 @@ function buildWhatsAppUrl(values: FormState) {
     `*Telefone:* ${values.phone}\n` +
     `*Email:* ${values.email}\n\n` +
     `*Sobre o projeto:*\n${values.message}`;
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${COMPANY.whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
 export function ContactForm() {
@@ -115,48 +78,9 @@ export function ContactForm() {
     setLoading(true);
     Events.generateLead();
 
-    // 1. Salva no Google Sheets (silencioso — não bloqueia o fluxo)
-    if (APPS_SCRIPT_URL) {
-      try {
-        await fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          // mode no-cors é necessário para Apps Script; a resposta não é lida
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            timestamp: new Date().toISOString(),
-            name: values.name,
-            phone: values.phone,
-            email: values.email,
-            message: values.message,
-          }),
-        });
-      } catch {
-        // Falha silenciosa — o lead ainda chegará pelo WhatsApp
-      }
-    }
-
-    // 2. Notifica grupo via EVO (silencioso — preencher constantes acima para ativar)
-    if (EVO_URL && EVO_INSTANCE && EVO_API_KEY && EVO_GROUP_JID) {
-      const evoText =
-        `🆕 Novo Lead — Forms Vtech Soluções\n\n` +
-        `*Nome:* ${values.name}\n` +
-        `*Telefone:* ${values.phone}\n` +
-        `*Email:* ${values.email}\n\n` +
-        `*Sobre o projeto:*\n${values.message}`;
-      try {
-        await fetch(`${EVO_URL}/message/sendText/${EVO_INSTANCE}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": EVO_API_KEY,
-          },
-          body: JSON.stringify({ number: EVO_GROUP_JID, text: evoText }),
-        });
-      } catch {
-        // Falha silenciosa
-      }
-    }
+    // 1–2. Planilha + aviso no grupo (silenciosos: o lead ainda chega pelo WhatsApp)
+    await sendLead(values);
+    saveLead(values);
 
     // 3. Abre WhatsApp com a mensagem pré-preenchida
     window.open(buildWhatsAppUrl(values), "_blank", "noopener,noreferrer");
@@ -272,7 +196,7 @@ interface FieldProps {
   helper?: string;
 }
 
-function Field({
+export function Field({
   label,
   name,
   type = "text",
