@@ -1,23 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/site";
 import { MessageCircle, MapPin, Building2, ArrowUpRight, Download, ExternalLink } from "lucide-react";
 import { LogoMark } from "@/components/site/Logo";
 
 export const Route = createFileRoute("/cartao")({
-  head: () => ({
-    meta: [
-      { title: "Cartão de Visita — Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Cartão de visita virtual da Vtech Soluções. Tecnologia B2B: sites, sistemas, automações com IA e consultoria.",
-      },
-      { property: "og:title", content: "Vtech Soluções — Cartão de Visita" },
-      {
-        property: "og:description",
-        content: "Empresa de tecnologia B2B. Entre em contato via WhatsApp.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Cartão de visita | Vtech Soluções",
+      description:
+        "Cartão de visita virtual da Vtech Soluções. Sistemas, integrações e IA para empresas B2B. Fale pelo WhatsApp.",
+      path: "/cartao",
+    }),
   component: CartaoPage,
 });
 

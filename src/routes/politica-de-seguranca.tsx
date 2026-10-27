@@ -1,23 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
-import { COMPANY, whatsappUrl } from "@/lib/site";
+import { COMPANY, whatsappUrl, seo } from "@/lib/site";
 
 export const Route = createFileRoute("/politica-de-seguranca")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Práticas de segurança da informação adotadas pela Vtech Soluções para proteger dados de clientes.",
-      },
-      { property: "og:title", content: "Política de Segurança — Vtech Soluções" },
-      {
-        property: "og:description",
-        content: "Controles técnicos, organizacionais e resposta a incidentes.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Política de Segurança | Vtech Soluções",
+      description:
+        "Práticas de segurança da informação da Vtech Soluções: controles técnicos, organizacionais e resposta a incidentes.",
+      path: "/politica-de-seguranca",
+    }),
   component: SecurityPage,
 });
 

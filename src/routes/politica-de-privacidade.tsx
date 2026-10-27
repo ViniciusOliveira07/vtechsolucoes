@@ -1,27 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
-import { COMPANY, whatsappUrl } from "@/lib/site";
+import { COMPANY, whatsappUrl, seo } from "@/lib/site";
 
 export const Route = createFileRoute("/politica-de-privacidade")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Como a Vtech Soluções coleta, utiliza e protege dados pessoais conforme a LGPD.",
-      },
-      {
-        property: "og:title",
-        content: "Política de Privacidade — Vtech Soluções",
-      },
-      {
-        property: "og:description",
-        content:
-          "Tratamento de dados pessoais com base na LGPD: coleta, finalidade, direitos do titular.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Política de Privacidade | Vtech Soluções",
+      description:
+        "Como a Vtech Soluções coleta, utiliza e protege dados pessoais conforme a LGPD: finalidades, bases legais e direitos do titular.",
+      path: "/politica-de-privacidade",
+    }),
   component: PrivacyPage,
 });
 

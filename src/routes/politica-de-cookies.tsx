@@ -1,22 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/site";
 import { LegalPage } from "@/components/site/LegalPage";
 
 export const Route = createFileRoute("/politica-de-cookies")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Como a Vtech Soluções utiliza cookies e tecnologias semelhantes em seu site institucional.",
-      },
-      { property: "og:title", content: "Política de Cookies — Vtech Soluções" },
-      {
-        property: "og:description",
-        content: "Tipos de cookies, finalidades e como gerenciar preferências.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Política de Cookies | Vtech Soluções",
+      description:
+        "Como a Vtech Soluções utiliza cookies e tecnologias semelhantes no site, para que servem e como gerenciar suas preferências.",
+      path: "/politica-de-cookies",
+    }),
   component: CookiesPage,
 });
 

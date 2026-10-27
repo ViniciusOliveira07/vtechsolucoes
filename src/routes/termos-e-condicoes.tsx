@@ -1,22 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/site";
 import { LegalPage } from "@/components/site/LegalPage";
 
 export const Route = createFileRoute("/termos-e-condicoes")({
-  head: () => ({
-    meta: [
-      { title: "Vtech Soluções" },
-      {
-        name: "description",
-        content:
-          "Termos de uso do site e condições gerais de prestação de serviços da Vtech Soluções.",
-      },
-      { property: "og:title", content: "Termos e Condições — Vtech Soluções" },
-      {
-        property: "og:description",
-        content: "Regras de uso do site institucional e condições contratuais B2B.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Termos e Condições | Vtech Soluções",
+      description:
+        "Termos de uso do site e condições gerais de prestação de serviços B2B da Vtech Soluções.",
+      path: "/termos-e-condicoes",
+    }),
   component: TermsPage,
 });
 
