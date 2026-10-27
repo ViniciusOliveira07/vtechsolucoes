@@ -1,78 +1,85 @@
 import { useEffect, useState } from "react";
 
-// Contador de acessos dos artigos, gravado numa planilha Google via Apps Script
-// (código em scripts/apps-script/visualizacoes-blog.gs).
-// Enquanto VIEWS_URL estiver vazio, o site simplesmente não mostra os números.
-export const VIEWS_URL = "";
+// Contador de acessos dos artigos no Abacus (abacus.jasoncameron.dev): serviço público e gratuito,
+// sem conta. GET /get/<namespace>/<slug> lê e /hit/<namespace>/<slug> soma 1.
+// Se o serviço não responder, o site esconde o número em vez de mostrar 0.
+const API = "https://abacus.jasoncameron.dev";
+const NAMESPACE = "vtechsolucoes-ia-br-blog";
 
-type Counts = Record<string, number>;
-
-const CACHE_KEY = "vt-views";
 const CACHE_MS = 5 * 60 * 1000;
-let inflight: Promise<Counts | null> | null = null;
+const cacheKey = (slug: string) => `vt-views:${slug}`;
+const inflight = new Map<string, Promise<number | null>>();
 
-function readCache(): Counts | null {
+function readCache(slug: string): number | null {
   try {
-    const raw = sessionStorage.getItem(CACHE_KEY);
+    const raw = sessionStorage.getItem(cacheKey(slug));
     if (!raw) return null;
-    const { at, counts } = JSON.parse(raw) as { at: number; counts: Counts };
-    return Date.now() - at < CACHE_MS ? counts : null;
+    const { at, n } = JSON.parse(raw) as { at: number; n: number };
+    return Date.now() - at < CACHE_MS ? n : null;
   } catch {
     return null;
   }
 }
 
-function writeCache(counts: Counts) {
+function writeCache(slug: string, n: number) {
   try {
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), counts }));
+    sessionStorage.setItem(cacheKey(slug), JSON.stringify({ at: Date.now(), n }));
   } catch {
     // sem armazenamento: busca de novo na próxima página
   }
+  window.dispatchEvent(new CustomEvent("vt-views", { detail: slug }));
 }
 
-/** null quando a planilha não responde: nesse caso o site esconde o número em vez de mostrar 0. */
-function fetchCounts(): Promise<Counts | null> {
-  const cached = readCache();
-  if (cached) return Promise.resolve(cached);
-  inflight ??= fetch(VIEWS_URL)
-    .then((r) => {
-      if (!r.ok) throw new Error(String(r.status));
-      return r.json() as Promise<Counts>;
-    })
-    .then((counts) => {
-      writeCache(counts);
-      return counts;
-    })
-    .catch(() => null)
-    .finally(() => {
-      inflight = null;
+async function request(path: string): Promise<number | null> {
+  try {
+    const r = await fetch(`${API}${path}`);
+    if (r.status === 404) return 0; // artigo ainda sem nenhum acesso
+    if (!r.ok) return null;
+    const { value } = (await r.json()) as { value?: number };
+    return typeof value === "number" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function fetchCount(slug: string): Promise<number | null> {
+  const cached = readCache(slug);
+  if (cached !== null) return Promise.resolve(cached);
+  let p = inflight.get(slug);
+  if (!p) {
+    p = request(`/get/${NAMESPACE}/${slug}`).then((n) => {
+      if (n !== null) writeCache(slug, n);
+      inflight.delete(slug);
+      return n;
     });
-  return inflight;
+    inflight.set(slug, p);
+  }
+  return p;
 }
 
-/** Contagens de todos os artigos; null enquanto carrega ou se o contador não estiver ativo. */
-export function useViewCounts() {
-  const [counts, setCounts] = useState<Counts | null>(null);
+/** Acessos do artigo; null enquanto carrega ou se o serviço não responder. */
+export function useViewCount(slug: string) {
+  const [n, setN] = useState<number | null>(null);
   useEffect(() => {
-    if (!VIEWS_URL) return;
     let alive = true;
-    fetchCounts().then((c) => alive && setCounts(c));
-    const onLocal = () => {
-      const c = readCache();
-      if (c && alive) setCounts(c);
+    fetchCount(slug).then((v) => alive && setN(v));
+    const onUpdate = (e: Event) => {
+      if ((e as CustomEvent<string>).detail !== slug) return;
+      const v = readCache(slug);
+      if (v !== null && alive) setN(v);
     };
-    window.addEventListener("vt-views", onLocal);
+    window.addEventListener("vt-views", onUpdate);
     return () => {
       alive = false;
-      window.removeEventListener("vt-views", onLocal);
+      window.removeEventListener("vt-views", onUpdate);
     };
-  }, []);
-  return counts;
+  }, [slug]);
+  return n;
 }
 
 /** Registra um acesso ao artigo, no máximo uma vez por sessão do navegador. */
 export function trackView(slug: string) {
-  if (!VIEWS_URL || typeof window === "undefined") return;
+  if (typeof window === "undefined") return;
   const key = `vt-viewed:${slug}`;
   try {
     if (sessionStorage.getItem(key)) return;
@@ -80,17 +87,8 @@ export function trackView(slug: string) {
   } catch {
     // sem sessionStorage: conta mesmo assim
   }
-  fetch(VIEWS_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify({ slug }),
-  }).catch(() => {});
-  // Atualiza o número na tela sem esperar a planilha.
-  fetchCounts().then((c) => {
-    if (!c) return;
-    writeCache({ ...c, [slug]: (c[slug] ?? 0) + 1 });
-    window.dispatchEvent(new Event("vt-views"));
+  request(`/hit/${NAMESPACE}/${slug}`).then((n) => {
+    if (n !== null) writeCache(slug, n);
   });
 }
 

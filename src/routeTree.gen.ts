@@ -29,6 +29,7 @@ import { Route as ServicosIntegracoesRouteImport } from './routes/servicos/integ
 import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos/consultoria-tech'
 import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos/automacoes-com-ia'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as ApiLeadRouteImport } from './routes/api/lead'
 import { Route as BlogCategoriaCategoriaRouteImport } from './routes/blog/categoria.$categoria'
 
 const TermosECondicoesRoute = TermosECondicoesRouteImport.update({
@@ -132,6 +133,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRouteRoute,
 } as any)
+const ApiLeadRoute = ApiLeadRouteImport.update({
+  id: '/api/lead',
+  path: '/api/lead',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogCategoriaCategoriaRoute = BlogCategoriaCategoriaRouteImport.update({
   id: '/categoria/$categoria',
   path: '/categoria/$categoria',
@@ -151,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/api/lead': typeof ApiLeadRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/api/lead': typeof ApiLeadRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -196,6 +204,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
+  '/api/lead': typeof ApiLeadRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -221,6 +230,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/termos-e-condicoes'
+    | '/api/lead'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/termos-e-condicoes'
+    | '/api/lead'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/termos-e-condicoes'
+    | '/api/lead'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   TermosECondicoesRoute: typeof TermosECondicoesRoute
+  ApiLeadRoute: typeof ApiLeadRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -433,6 +446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRouteRoute
     }
+    '/api/lead': {
+      id: '/api/lead'
+      path: '/api/lead'
+      fullPath: '/api/lead'
+      preLoaderRoute: typeof ApiLeadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/categoria/$categoria': {
       id: '/blog/categoria/$categoria'
       path: '/categoria/$categoria'
@@ -494,6 +514,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   TermosECondicoesRoute: TermosECondicoesRoute,
+  ApiLeadRoute: ApiLeadRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

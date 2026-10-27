@@ -2,9 +2,9 @@ import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { AlertCircle, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { Field } from "@/components/site/ContactForm";
+import { Field, Honeypot } from "@/components/site/ContactForm";
 import { Events } from "@/lib/analytics";
-import { formatPhone, leadFields, loadSavedLead, saveLead, sendLead } from "@/lib/leads";
+import { formatPhone, HONEYPOT_NAME, leadFields, loadSavedLead, saveLead, sendLead } from "@/lib/leads";
 import { absoluteUrl } from "@/lib/site";
 import type { Post } from "@/lib/blog";
 
@@ -84,13 +84,15 @@ function DownloadPostDialog({
       setTouched({ name: true, phone: true, email: true });
       return;
     }
+    const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
     setStatus("loading");
     Events.generateLead(`download:${post.slug}`);
     saveLead(values);
-    // O lead entra na planilha antes do arquivo, mas uma falha de rede não impede o download.
+    // O lead é enviado junto com a geração do arquivo; uma falha de rede não impede o download.
     const leadSent = sendLead(
       { ...values, message: `[Download de material] ${post.title} — ${absoluteUrl(`/blog/${post.slug}`)}` },
-      "Download de material do blog",
+      "download",
+      honeypot,
     );
     try {
       const { downloadPostPdf } = await import("@/lib/post-pdf");
@@ -134,7 +136,8 @@ function DownloadPostDialog({
             </div>
           </div>
         ) : (
-          <form onSubmit={onSubmit} noValidate className="grid gap-4">
+          <form onSubmit={onSubmit} noValidate className="relative grid gap-4">
+            <Honeypot />
             <div className="pr-8">
               <p className="kicker text-signal">Material em PDF</p>
               <DialogTitle className="mt-3 text-[22px] font-medium leading-tight tracking-[-0.02em]">

@@ -1,12 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { formatDate, type Post } from "@/lib/blog";
-import { formatViews, useViewCounts } from "@/lib/views";
+import { formatViews, useViewCount } from "@/lib/views";
 
-/** Número de acessos do artigo. Não renderiza nada enquanto carrega ou se o contador estiver desligado. */
+/** Número de acessos do artigo. Não renderiza nada enquanto carrega ou se o serviço não responder. */
 export function ViewCount({ slug, className }: { slug: string; className?: string }) {
-  const counts = useViewCounts();
-  if (!counts) return null;
-  const n = counts[slug] ?? 0;
+  const n = useViewCount(slug);
+  if (n === null) return null;
   return (
     <span
       className={className ?? "inline-flex shrink-0 items-center gap-1.5"}

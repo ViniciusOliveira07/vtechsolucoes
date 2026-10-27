@@ -4,7 +4,7 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { Events } from "@/lib/analytics";
 import { COMPANY } from "@/lib/site";
-import { formatPhone, leadFields, saveLead, sendLead } from "@/lib/leads";
+import { formatPhone, HONEYPOT_NAME, leadFields, saveLead, sendLead } from "@/lib/leads";
 
 const contactSchema = z.object({
   ...leadFields,
@@ -78,8 +78,9 @@ export function ContactForm() {
     setLoading(true);
     Events.generateLead();
 
-    // 1–2. Planilha + aviso no grupo (silenciosos: o lead ainda chega pelo WhatsApp)
-    await sendLead(values);
+    // 1–2. Aviso no grupo + planilha (silenciosos: o lead ainda chega pelo WhatsApp)
+    const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
+    await sendLead(values, "contato", honeypot);
     saveLead(values);
 
     // 3. Abre WhatsApp com a mensagem pré-preenchida
@@ -91,6 +92,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="w-full space-y-4">
+      <Honeypot />
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Nome"
@@ -177,6 +179,18 @@ export function ContactForm() {
         )}
       </div>
     </form>
+  );
+}
+
+/** Campo-armadilha para robôs: fora da tela, fora da ordem de tabulação e escondido de leitores de tela. */
+export function Honeypot() {
+  return (
+    <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+      <label>
+        Site
+        <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" defaultValue="" />
+      </label>
+    </div>
   );
 }
 

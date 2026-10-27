@@ -30,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Segredos locais (EVO etc.) — nunca versionar
+.env
+.env.*
+!.env.example
+.dev.vars
