@@ -1,0 +1,33 @@
+MARCA VTECH SOLUÇÕES
+====================
+
+Nome: vtech soluções (minúsculas, com espaço)
+Fonte do nome: Geist Mono Medium (nos SVG o texto já está convertido em desenho,
+não precisa ter a fonte instalada)
+
+Cores
+  Fundo da marca ......... #0a0d11
+  Branco ................. #e8eef3
+  Azul de sinal .......... #7fd4ff  (ponto do "V." e "soluções" em fundo escuro)
+  Azul para fundo claro .. #1a8fd8 -> #2f6bff
+
+LOGO (ícone + nome)
+  logo-fundo-escuro.svg / .png ... para usar sobre fundo escuro (fundo transparente)
+  logo-fundo-claro.svg / .png .... para usar sobre fundo branco ou claro (fundo transparente)
+  logo-com-fundo.svg / .png ...... já com o fundo escuro da marca (redes, apresentações)
+
+ÍCONE (só o "V.")
+  icone-fundo-escuro.svg / -512.png ... ícone claro, fundo transparente
+  icone-fundo-claro.svg / -512.png .... ícone escuro, fundo transparente
+
+FAVICON (ícone com o quadrado arredondado, igual ao do site)
+  favicon.svg ........................ versão vetorial (a que o site usa)
+  favicon-16/32/48.png ............... abas do navegador
+  favicon-180.png / apple-touch-icon.png ... atalho no iPhone
+  favicon-192/512.png ................ Android, perfil de WhatsApp e redes
+
+OUTROS
+  og-default.png ... imagem que aparece ao compartilhar o link do site
+
+Use SVG sempre que possível (fica nítido em qualquer tamanho). PNG para onde
+SVG não é aceito (WhatsApp, Instagram, assinatura de e-mail).

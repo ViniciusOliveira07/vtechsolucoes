@@ -11,11 +11,11 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-/** Nome contínuo "vtechsoluções": o branco do "vtech" se mescla no azul da marca ao longo da palavra. */
+/** Nome "vtech soluções": o branco do "vtech" se mescla no azul da marca ao longo da palavra. */
 export function LogoWord({ className }: { className?: string }) {
   return (
     <span className={cn("logo-word", className)}>
-      vtech<span className="logo-word-tail">soluções</span>
+      vtech <span className="logo-word-tail">soluções</span>
     </span>
   );
 }
