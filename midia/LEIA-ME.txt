@@ -27,7 +27,8 @@ FAVICON (ícone com o quadrado arredondado, igual ao do site)
   favicon-192/512.png ................ Android, perfil de WhatsApp e redes
 
 OUTROS
-  og-default.png ... imagem que aparece ao compartilhar o link do site
+  og-vtech.png ..... imagem que aparece ao compartilhar o link do site (conteúdo
+                    centralizado: o WhatsApp recorta as laterais na miniatura)
 
 Use SVG sempre que possível (fica nítido em qualquer tamanho). PNG para onde
 SVG não é aceito (WhatsApp, Instagram, assinatura de e-mail).

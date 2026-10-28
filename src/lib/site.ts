@@ -5,7 +5,7 @@ export const SITE_URL = "https://vtechsolucoes.ia.br";
 export const SITE_NAME = "Vtech Soluções";
 export const SITE_DESCRIPTION =
   "Sistemas, integrações e agentes de IA para operações B2B. Escopo fechado, proposta em até 24 horas úteis e código entregue a você.";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.png`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-vtech.png`;
 
 export const COMPANY = {
   legalName: "Vtech Soluções Ltda.",
