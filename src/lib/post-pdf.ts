@@ -110,8 +110,11 @@ export function buildPostPdf(post: Post) {
   doc.rect(0, 0, PAGE.w, 36, "F");
   doc.setFont("courier", "bold");
   doc.setFontSize(11);
+  // PDF não tem degradê em texto: "vtech" no branco e "soluções" no azul da marca, sem separador
   doc.setTextColor("#e8eef3");
-  doc.text("vtech/soluções", M.x, 23);
+  doc.text("vtech", M.x, 23);
+  doc.setTextColor("#7fd4ff");
+  doc.text("soluções", M.x + doc.getTextWidth("vtech"), 23);
   doc.setFont("courier", "normal");
   doc.setTextColor("#7fd4ff");
   doc.text(post.category.name.toUpperCase(), PAGE.w - M.x, 23, { align: "right" });

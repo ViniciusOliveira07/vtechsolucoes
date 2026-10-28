@@ -11,6 +11,15 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
+/** Nome contínuo "vtechsoluções": o branco do "vtech" se mescla no azul da marca ao longo da palavra. */
+export function LogoWord({ className }: { className?: string }) {
+  return (
+    <span className={cn("logo-word", className)}>
+      vtech<span className="logo-word-tail">soluções</span>
+    </span>
+  );
+}
+
 export function Logo({ className, onClick }: { className?: string; onClick?: () => void }) {
   return (
     <Link
@@ -20,9 +29,7 @@ export function Logo({ className, onClick }: { className?: string; onClick?: () 
       className={cn("inline-flex min-h-11 items-center gap-2.5 font-mono text-[1rem] font-medium tracking-tight", className)}
     >
       <LogoMark />
-      <span>
-        vtech<span className="text-faint">/soluções</span>
-      </span>
+      <LogoWord />
     </Link>
   );
 }

@@ -23,7 +23,7 @@ const data: ServicePageData = {
   h1: "Automação com IA: agentes que trabalham dentro da sua operação.",
   subheadline:
     "Implementamos agentes inteligentes e pipelines de IA generativa (RAG) que automatizam processos complexos, reduzem custos operacionais e potencializam a tomada de decisão corporativa.",
-  trust: ["Prova de Conceito (POC) em 15 dias", "Privacidade e segurança de dados", "Integração total via API"],
+  trust: ["Privacidade e segurança de dados", "Integração total via API"],
   oQueE: {
     title: "O que é automação com IA generativa empresarial",
     paragrafos: [
@@ -31,7 +31,7 @@ const data: ServicePageData = {
       "Um dos pilares das nossas soluções é o RAG (Retrieval-Augmented Generation), um pipeline que conecta a inteligência da IA à base de conhecimento específica da sua empresa. Isso significa que criamos sistemas que respondem perguntas, geram relatórios e analisam dados utilizando exclusivamente os manuais, contratos, históricos de atendimento e documentos internos da sua organização. O resultado é uma IA personalizada que não alucina e fornece informações precisas com citação direta de fontes, garantindo compliance e segurança.",
       "Além de responder dúvidas, desenvolvemos Agentes de IA capazes de agir. Através da técnica de 'function calling', nossos agentes podem interagir com seu ERP, CRM ou banco de dados para realizar tarefas como agendar reuniões, emitir segunda via de boletos, qualificar leads em tempo real ou processar pedidos de compra sem intervenção humana. É a transformação digital aplicada para liberar seu capital humano de tarefas repetitivas e burocráticas, permitindo que sua equipe foque em inovação e estratégia.",
       "A implementação de IA empresarial na Vtech Soluções segue rigorosos padrões de segurança de dados. Garantimos que suas informações confidenciais não sejam utilizadas para treinamento de modelos públicos, mantendo o isolamento total do seu ecossistema digital. Com o monitoramento contínuo de performance e custos (LLMOps), sua empresa tem controle total sobre o investimento e o retorno gerado pelas automações inteligentes.",
-    ],
+    ],
   },
   paraQuem: [
     {
@@ -145,8 +145,8 @@ const data: ServicePageData = {
     },
     {
       n: "02",
-      title: "Desenvolvimento de POC",
-      desc: "Criamos uma versão funcional em ambiente controlado para validar a precisão e utilidade da solução.",
+      title: "Desenvolvimento",
+      desc: "Construímos a solução integrada aos seus sistemas e medimos a precisão com casos reais antes de liberar para a operação.",
     },
     {
       n: "03",

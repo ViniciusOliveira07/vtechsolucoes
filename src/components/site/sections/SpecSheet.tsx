@@ -4,7 +4,7 @@ import { RailHint } from "@/components/site/RailHint";
 export const SPECS = [
   { k: "Escopo", v: "Fechado", d: "Definido por escrito antes do início. Mudanças entram como aditivo." },
   { k: "Proposta", v: "≤ 24h úteis", d: "Depois da conversa de diagnóstico, sem custo." },
-  { k: "Prova de conceito", v: "15 dias", d: "Para projetos de IA, validamos precisão antes de escalar." },
+  { k: "Atendimento", v: "Exclusivo B2B", d: "Atendemos apenas empresas, do diagnóstico à entrega." },
   { k: "Seus dados", v: "Fora do treino", d: "Usamos APIs empresariais que não treinam modelos com o seu conteúdo." },
   { k: "Entrega", v: "Código + docs", d: "Deploy, documentação técnica e handoff para sua equipe." },
   { k: "Mensalidade", v: "Opcional", d: "Você paga pelo projeto. Sustentação só se fizer sentido para você." },

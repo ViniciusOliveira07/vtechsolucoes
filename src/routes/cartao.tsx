@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "@/lib/site";
 import { MessageCircle, MapPin, Building2, ArrowUpRight, Download, ExternalLink } from "lucide-react";
-import { LogoMark } from "@/components/site/Logo";
+import { LogoMark, LogoWord } from "@/components/site/Logo";
 
 export const Route = createFileRoute("/cartao")({
   head: () =>
@@ -67,9 +67,7 @@ function CartaoPage() {
             <div className="flex flex-col items-center text-center">
               <div className="flex items-center gap-2.5 font-mono text-base font-medium tracking-tight">
                 <LogoMark className="h-7 w-7" />
-                <span>
-                  vtech<span className="text-faint">/soluções</span>
-                </span>
+                <LogoWord />
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
                 Empresa de tecnologia B2B

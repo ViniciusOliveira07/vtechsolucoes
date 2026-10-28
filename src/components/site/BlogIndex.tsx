@@ -39,7 +39,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
               <span className="text-foreground">blog</span>
             )}
           </nav>
-          <div className="mb-[clamp(1rem,4vh,3rem)] grid gap-[clamp(0.75rem,2.5vh,1.5rem)] md:grid-cols-2 md:items-end md:gap-8">
+          <div className="mb-[clamp(1rem,3vh,3rem)] grid gap-[clamp(0.75rem,2.5vh,1.5rem)] md:grid-cols-2 md:items-end md:gap-8">
             <h1 className="h-section min-w-0">{category ? category.name : "Notas técnicas"}</h1>
             <p className="hide-phone min-w-0 max-w-[48ch] text-muted-foreground md:justify-self-end">
               {category
@@ -48,7 +48,7 @@ export function BlogIndex({ posts, category }: { posts: Post[]; category?: Categ
             </p>
           </div>
 
-          <div className="mb-[clamp(1rem,3.4vh,2.5rem)] flex flex-col gap-2 border-y border-border py-2 md:flex-row md:items-center md:justify-between md:gap-4 md:py-3">
+          <div className="mb-[clamp(0.875rem,2.6vh,2.5rem)] flex flex-col gap-2 border-y border-border py-2 md:flex-row md:items-center md:justify-between md:gap-4 md:py-3">
             <nav aria-label="Categorias" className="-mx-1 flex gap-1 overflow-x-auto [scrollbar-width:none]">
               <CategoryLink to="/blog" active={!category} label="Todas" />
               {CATEGORIES.map((c) => (

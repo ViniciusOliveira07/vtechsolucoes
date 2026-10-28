@@ -75,7 +75,7 @@ export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLev
       className="group flex flex-col overflow-hidden rounded-[0.875rem] border border-border bg-surface transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong"
     >
       {/* altura da arte pela altura da tela, para o card caber junto com o título da seção */}
-      <div aria-hidden className="relative h-[clamp(4.5rem,14vh,12rem)] max-w-full border-b border-border bg-surface-elevated">
+      <div aria-hidden className="relative h-[clamp(4.5rem,12vh,12rem)] max-w-full border-b border-border bg-surface-elevated">
         <svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 h-full w-full">
           {ART[post.category.slug]}
         </svg>

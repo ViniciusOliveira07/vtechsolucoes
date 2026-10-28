@@ -170,12 +170,16 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
         <div
           aria-hidden
           className={cn(
-            "flow-log overflow-hidden border-t border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] leading-[1.75] text-muted-foreground",
+            "flow-log flex flex-col border-t border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] text-muted-foreground",
             compact && "hidden",
           )}
         >
-          {lines.map((l, i) => (
-            <div key={`${l.t}-${i}`} className="overflow-hidden text-ellipsis whitespace-nowrap">
+          {/* só as 4 últimas; a mais antiga delas aparece apenas em telas altas */}
+          {lines.slice(-4).map((l, i, arr) => (
+            <div
+              key={`${l.t}-${l.event}`}
+              className={cn("overflow-hidden text-ellipsis whitespace-nowrap", arr.length === 4 && i === 0 && "flow-log-extra")}
+            >
               <span className="text-faint">{l.t}</span> <span className="text-signal">{l.event}</span> → agente →{" "}
               <span className="text-ok">{l.result}</span>
             </div>

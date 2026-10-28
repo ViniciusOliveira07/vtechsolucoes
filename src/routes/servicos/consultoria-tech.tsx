@@ -166,7 +166,7 @@ const data: ServicePageData = {
     },
     {
       q: "A consultoria apenas dá conselhos ou também coloca a mão no código?",
-      a: "Nosso foco principal na consultoria é estratégico e arquitetural. No entanto, realizamos provas de conceito (PoCs) e revisões de código (code reviews) profundas. Caso a empresa precise de execução completa, podemos transitar para o nosso modelo de desenvolvimento de sistemas.",
+      a: "Nosso foco principal na consultoria é estratégico e arquitetural. No entanto, fazemos revisões de código (code reviews) profundas. Caso a empresa precise de execução completa, podemos transitar para o nosso modelo de desenvolvimento de sistemas.",
     },
     {
       q: "Como a consultoria pode ajudar na redução de custos de TI?",
