@@ -86,6 +86,41 @@
     border-color: var(--color-border);
   }
 
+  /*
+   * O preflight do Tailwind 4 deixa <button> com cursor padrão (seta). Tudo que é
+   * clicável mostra a mão; desabilitado mostra "proibido". Labels de campo de texto
+   * ficam com a seta (o cursor de texto aparece no próprio campo).
+   */
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="menuitemradio"],
+  [role="menuitemcheckbox"],
+  [role="option"],
+  [role="switch"],
+  [role="checkbox"],
+  [role="radio"],
+  summary,
+  select,
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="file"],
+  input[type="range"],
+  input[type="color"],
+  label:has(> input[type="checkbox"]),
+  label:has(> input[type="radio"]),
+  label:has(> input[type="file"]) {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
   html {
     background-color: var(--color-background);
     color-scheme: dark;
