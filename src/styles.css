@@ -125,8 +125,15 @@
     background-color: var(--color-background);
     color-scheme: dark;
     scroll-padding-top: var(--header-h);
-    /* rolar encaixa seção a seção, sem prender quem rola devagar */
-    scroll-snap-type: y proximity;
+  }
+  /*
+   * Encaixe seção a seção só com mouse/touchpad em tela de notebook pra cima.
+   * No toque (celular e tablet) o encaixe briga com a inércia do dedo e puxa a página.
+   */
+  @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+    html {
+      scroll-snap-type: y proximity;
+    }
   }
 
   :root {
