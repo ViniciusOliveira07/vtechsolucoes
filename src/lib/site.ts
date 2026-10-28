@@ -43,7 +43,8 @@ export function seo({ title, description, path, image, type = "website", publish
   const url = absoluteUrl(path);
   const img = image ? absoluteUrl(image) : DEFAULT_OG_IMAGE;
   const meta: Record<string, string>[] = [
-    { title },
+    // guia do navegador mostra só a marca; o título descritivo vai no preview de link (og/twitter)
+    { title: SITE_NAME },
     { name: "description", content: description },
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
