@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { AlertCircle, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { Field, Honeypot } from "@/components/site/ContactForm";
+import { CONSENT_ERROR, Field, Honeypot, PrivacyConsent } from "@/components/site/ContactForm";
 import { Events } from "@/lib/analytics";
 import { formatPhone, HONEYPOT_NAME, leadFields, loadSavedLead, saveLead, sendLead } from "@/lib/leads";
 import { absoluteUrl } from "@/lib/site";
@@ -49,6 +49,8 @@ function DownloadPostDialog({
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [consentAt, setConsentAt] = useState<string | null>(null);
+  const [consentError, setConsentError] = useState<string>();
 
   // Pré-preenche com os dados de quem já preencheu algum formulário neste navegador.
   useEffect(() => {
@@ -58,6 +60,9 @@ function DownloadPostDialog({
     setErrors({});
     setTouched({});
     setStatus("idle");
+    // o aceite é pedido a cada envio, mesmo com os dados pré-preenchidos
+    setConsentAt(null);
+    setConsentError(undefined);
   }, [open]);
 
   const validate = (name: keyof Values, v: string) => {
@@ -74,6 +79,7 @@ function DownloadPostDialog({
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const r = schema.safeParse(values);
+    if (!consentAt) setConsentError(CONSENT_ERROR);
     if (!r.success) {
       const fe: Errors = {};
       for (const issue of r.error.issues) {
@@ -84,6 +90,7 @@ function DownloadPostDialog({
       setTouched({ name: true, phone: true, email: true });
       return;
     }
+    if (!consentAt) return;
     const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
     setStatus("loading");
     Events.generateLead(`download:${post.slug}`);
@@ -93,6 +100,7 @@ function DownloadPostDialog({
       { ...values, message: `[Download de material] ${post.title} — ${absoluteUrl(`/blog/${post.slug}`)}` },
       "download",
       honeypot,
+      consentAt,
     );
     try {
       const { downloadPostPdf } = await import("@/lib/post-pdf");
@@ -190,6 +198,15 @@ function DownloadPostDialog({
               autoComplete="tel"
               inputMode="tel"
             />
+            <PrivacyConsent
+              id="dl-privacidade"
+              checked={Boolean(consentAt)}
+              error={consentError}
+              onChange={(v) => {
+                setConsentAt(v ? new Date().toISOString() : null);
+                if (v) setConsentError(undefined);
+              }}
+            />
             {status === "error" && (
               <p role="alert" className="flex items-center gap-1.5 text-[0.8125rem] text-destructive">
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" />
@@ -199,13 +216,6 @@ function DownloadPostDialog({
             <button type="submit" className="btn mt-1 w-full" disabled={status === "loading"}>
               {status === "loading" ? "Gerando PDF…" : "Baixar PDF"}
             </button>
-            <p className="font-mono text-[max(11px,0.6875rem)] leading-relaxed text-faint">
-              Usamos seus dados só para falar com você sobre este assunto. Veja a{" "}
-              <a href="/politica-de-privacidade" className="underline underline-offset-2 hover:text-foreground">
-                política de privacidade
-              </a>
-              .
-            </p>
           </form>
         )}
       </DialogContent>

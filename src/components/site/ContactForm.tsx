@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Events } from "@/lib/analytics";
 import { COMPANY } from "@/lib/site";
 import { formatPhone, HONEYPOT_NAME, leadFields, saveLead, sendLead } from "@/lib/leads";
@@ -43,6 +44,8 @@ export function ContactForm() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [consentAt, setConsentAt] = useState<string | null>(null);
+  const [consentError, setConsentError] = useState<string>();
 
   const setField = (name: keyof FormState, value: string) => {
     const v = name === "phone" ? formatPhone(value) : value;
@@ -64,6 +67,7 @@ export function ContactForm() {
     setSubmitError(null);
 
     const result = contactSchema.safeParse(values);
+    if (!consentAt) setConsentError(CONSENT_ERROR);
     if (!result.success) {
       const fieldErrors: Errors = {};
       for (const issue of result.error.issues) {
@@ -74,13 +78,14 @@ export function ContactForm() {
       setTouched({ name: true, phone: true, email: true, message: true });
       return;
     }
+    if (!consentAt) return;
 
     setLoading(true);
     Events.generateLead();
 
     // 1–2. Aviso no grupo + planilha (silenciosos: o lead ainda chega pelo WhatsApp)
     const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
-    await sendLead(values, "contato", honeypot);
+    await sendLead(values, "contato", honeypot, consentAt);
     saveLead(values);
 
     // 3. Abre WhatsApp com a mensagem pré-preenchida
@@ -143,6 +148,16 @@ export function ContactForm() {
         helper={`${values.message.length}/1000`}
       />
 
+      <PrivacyConsent
+        id="contato-privacidade"
+        checked={Boolean(consentAt)}
+        error={consentError}
+        onChange={(v) => {
+          setConsentAt(v ? new Date().toISOString() : null);
+          if (v) setConsentError(undefined);
+        }}
+      />
+
       {submitError && (
         <p className="flex items-center gap-1.5 text-[0.8125rem] text-destructive">
           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
@@ -180,6 +195,62 @@ export function ContactForm() {
         )}
       </div>
     </form>
+  );
+}
+
+export const CONSENT_ERROR = "Para enviar, aceite a política de privacidade.";
+
+/**
+ * Aceite obrigatório da política de privacidade em todo formulário que coleta contato.
+ * A caixa é o checkbox do Radix (sem o controle nativo do navegador); o texto inteiro
+ * também marca/desmarca, e o link abre a política em outra aba sem perder o que foi digitado.
+ */
+export function PrivacyConsent({
+  id,
+  checked,
+  error,
+  onChange,
+}: {
+  id: string;
+  checked: boolean;
+  error?: string;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <div className="grid gap-1">
+      <div className="flex items-start gap-2.5">
+        <Checkbox
+          id={id}
+          checked={checked}
+          onCheckedChange={(v) => onChange(v === true)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={cn(
+            "mt-0.5 h-[1.125rem] w-[1.125rem] rounded-[0.3rem] border-border-strong bg-background data-[state=checked]:border-signal data-[state=checked]:bg-signal data-[state=checked]:text-background [&_svg]:h-3 [&_svg]:w-3",
+            error && "border-destructive/70",
+          )}
+        />
+        <label htmlFor={id} className="cursor-pointer text-[0.8125rem] leading-snug text-muted-foreground">
+          Li e aceito a{" "}
+          <a
+            href="/politica-de-privacidade"
+            target="_blank"
+            rel="noopener"
+            onClick={(e) => e.stopPropagation()}
+            className="text-foreground underline underline-offset-2 hover:text-signal"
+          >
+            política de privacidade
+          </a>{" "}
+          e autorizo o contato da Vtech Soluções.
+        </label>
+      </div>
+      {error && (
+        <span id={`${id}-error`} role="alert" className="flex items-center gap-1 pl-7 text-[max(11px,0.6875rem)] text-destructive">
+          <AlertCircle className="h-3 w-3 shrink-0" />
+          {error}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -282,7 +353,12 @@ export function Field({
 
       {/* linha de erro/contador só ocupa espaço quando tem algo a mostrar */}
       {(hasError || helper) && (
-        <div className="flex items-center justify-between gap-3 text-[max(11px,0.6875rem)]">
+        <div
+          className={cn(
+            "flex items-center justify-between gap-3 text-[max(11px,0.6875rem)]",
+            !hasError && "hide-short", // o contador some em telas muito baixas; erro sempre aparece
+          )}
+        >
           {hasError ? (
             <span id={`${name}-error`} className="flex items-center gap-1 text-destructive">
               <AlertCircle className="h-3 w-3 shrink-0" />

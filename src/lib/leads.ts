@@ -37,14 +37,16 @@ export type LeadSource = "contato" | "download";
  * Envia o lead para o grupo (via /api/lead) e para a planilha. Nunca lança erro:
  * uma falha de rede não pode travar o formulário nem o download.
  * `website` é o campo-armadilha para robôs (deve vir vazio).
+ * `consentAt` é o momento (ISO) em que a pessoa marcou o aceite da política de privacidade;
+ * vai junto para o grupo e a planilha como registro do consentimento (LGPD).
  */
-export async function sendLead(lead: Lead, source: LeadSource, website = "") {
+export async function sendLead(lead: Lead, source: LeadSource, website: string, consentAt: string) {
   const page = typeof window !== "undefined" ? window.location.href : undefined;
 
   const toGroup = fetch("/api/lead", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...lead, source, page, website }),
+    body: JSON.stringify({ ...lead, source, page, website, consent: true, consentAt }),
   }).catch(() => undefined);
 
   const toSheet = APPS_SCRIPT_URL
@@ -53,7 +55,7 @@ export async function sendLead(lead: Lead, source: LeadSource, website = "") {
         // mode no-cors é necessário para Apps Script; a resposta não é lida
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ timestamp: new Date().toISOString(), ...lead }),
+        body: JSON.stringify({ timestamp: new Date().toISOString(), ...lead, consentimento_privacidade: consentAt }),
       }).catch(() => undefined)
     : Promise.resolve();
 

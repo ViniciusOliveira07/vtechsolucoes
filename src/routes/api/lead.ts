@@ -18,7 +18,13 @@ const bodySchema = z.object({
   page: z.string().max(300).optional(),
   // Campo invisível para humanos: se vier preenchido, é robô.
   website: z.string().max(200).optional(),
+  // Aceite da política de privacidade: obrigatório, sem ele o lead é recusado.
+  consent: z.literal(true),
+  consentAt: z.string().datetime(),
 });
+
+const dataHoraSP = (iso: string) =>
+  new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" });
 
 const TITLES = {
   contato: "Forms Vtech Soluções",
@@ -43,7 +49,10 @@ export const Route = createFileRoute("/api/lead")({
         } catch {
           return json({ ok: false, error: "corpo_invalido" }, 400);
         }
-        if (!parsed.success) return json({ ok: false, error: "dados_invalidos" }, 400);
+        if (!parsed.success) {
+          const semAceite = parsed.error.issues.some((i) => i.path[0] === "consent" || i.path[0] === "consentAt");
+          return json({ ok: false, error: semAceite ? "sem_aceite_privacidade" : "dados_invalidos" }, 400);
+        }
         const lead = parsed.data;
         if (lead.website) return json({ ok: true });
 
@@ -59,7 +68,8 @@ export const Route = createFileRoute("/api/lead")({
           `*Email:* ${lead.email}\n\n` +
           (lead.source === "contato" ? `*Sobre o projeto:*\n` : `*Material:*\n`) +
           `${lead.message}` +
-          (lead.page ? `\n\n*Página:* ${lead.page}` : "");
+          (lead.page ? `\n\n*Página:* ${lead.page}` : "") +
+          `\n*Privacidade:* aceitou a política em ${dataHoraSP(lead.consentAt)}`;
 
         const headers: Record<string, string> = { "Content-Type": "application/json", apikey: EVO_API_KEY };
         if (EVO_HEADER_NAME && EVO_HEADER_VALUE && /^[A-Za-z0-9-]+$/.test(EVO_HEADER_NAME)) {
