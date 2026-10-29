@@ -67,7 +67,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = (p: string) => localizedUrl(p, locale);
     return {
       ...seo({
-        title: `${post.title} | ${SITE_NAME}`,
+        title: `${post.title} | Vtech`,
         description: post.description,
         path,
         locale,

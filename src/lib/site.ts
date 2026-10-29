@@ -73,8 +73,8 @@ export function seo({ title, description, path, locale: given, image, type = "we
   const url = localizedUrl(path, locale);
   const img = image ? absoluteUrl(image) : OG_IMAGE[locale];
   const meta: Record<string, string>[] = [
-    // guia do navegador mostra só a marca; o título descritivo vai no preview de link (og/twitter)
-    { title: SITE_NAME },
+    // título descritivo na guia e no Google: é o principal sinal de SEO da página
+    { title },
     { name: "description", content: description },
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
