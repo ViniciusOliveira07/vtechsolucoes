@@ -3,11 +3,14 @@ import { formatDate, getCategory, type Post } from "@/lib/blog";
 import { useLocale } from "@/lib/i18n";
 import { formatViews, useViewCount, viewsLabel } from "@/lib/views";
 
-/** Número de acessos do artigo. Não renderiza nada enquanto carrega ou se o serviço não responder. */
+/**
+ * Número de acessos do artigo. Não renderiza nada enquanto carrega, se o serviço não responder
+ * ou se o artigo ainda não tem acesso (o olho só aparece a partir de 1).
+ */
 export function ViewCount({ slug, className }: { slug: string; className?: string }) {
   const n = useViewCount(slug);
   const locale = useLocale();
-  if (n === null) return null;
+  if (n === null || n < 1) return null;
   return (
     <span
       className={className ?? "inline-flex shrink-0 items-center gap-1.5"}
