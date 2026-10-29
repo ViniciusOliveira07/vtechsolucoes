@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { formatDate, getCategory, getPost, relatedPosts, serviceFor, slugify, type Post } from "@/lib/blog";
+import { formatDate, getCategory, getPost, loadPostBody, relatedPosts, serviceFor, slugify, type Post } from "@/lib/blog";
 import { renderPost } from "@/lib/blog-render";
 import { LOCALE_META, pick, useLocale, useT, type Locale } from "@/lib/i18n";
 import { breadcrumbSchema, jsonLd, localizedUrl, seo, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -64,10 +64,11 @@ function categoryIn(post: Post, locale: Locale) {
 }
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params, context }) => {
+  // o texto do artigo vem de um arquivo próprio (não fica no JavaScript inicial do site)
+  loader: async ({ params, context }) => {
     const post = getPost(params.slug, context.locale);
     if (!post) throw notFound();
-    return { slug: post.slug };
+    return { slug: post.slug, body: await loadPostBody(post.slug, post.locale) };
   },
   head: ({ loaderData, match }) => {
     const locale = match.context.locale;
@@ -117,7 +118,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function PostPage() {
-  const { slug } = Route.useLoaderData();
+  const { slug, body } = Route.useLoaderData();
   const locale = useLocale();
   const t = useT(TEXT);
   const post = getPost(slug, locale)!;
@@ -182,7 +183,7 @@ function PostPage() {
 
           <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_17.5rem]">
             <div className="min-w-0 max-w-[70ch]">
-              <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug, locale) }} />
+              <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug, post.locale, body) }} />
               <aside className="panel mt-14 p-7" aria-label={t.relatedService}>
                 <p className="kicker">{t.relatedService}</p>
                 <p className="mt-3 text-[1.375rem] tracking-[-0.02em]">{service.title}</p>

@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf";
 import { Lexer, type Token, type Tokens } from "marked";
-import { formatDate, getCategory, postBody, type Post } from "@/lib/blog";
+import { formatDate, getCategory, loadPostBody, type Post } from "@/lib/blog";
 import { pick } from "@/lib/i18n";
 import { COMPANY, localizedUrl } from "@/lib/site";
 
@@ -77,7 +77,7 @@ function segments(tokens: Token[] | undefined, bold = false): Seg[] {
   });
 }
 
-export function buildPostPdf(post: Post) {
+export function buildPostPdf(post: Post, body: string) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const locale = post.locale;
   const t = pick(TEXT, locale);
@@ -166,7 +166,7 @@ export function buildPostPdf(post: Post) {
   y += 26;
 
   // ── Corpo ──
-  const tokens = new Lexer().lex(postBody(post.slug, locale));
+  const tokens = new Lexer().lex(body);
   for (const t of tokens) {
     switch (t.type) {
       case "heading": {
@@ -286,6 +286,8 @@ export function buildPostPdf(post: Post) {
   return doc;
 }
 
-export function downloadPostPdf(post: Post) {
-  buildPostPdf(post).save(`vtech-${post.slug}.pdf`);
+/** Baixa o texto do artigo (arquivo separado) e gera o PDF. */
+export async function downloadPostPdf(post: Post) {
+  const body = await loadPostBody(post.slug, post.locale);
+  buildPostPdf(post, body).save(`vtech-${post.slug}.pdf`);
 }

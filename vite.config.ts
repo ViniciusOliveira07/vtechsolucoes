@@ -4,10 +4,13 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import react from "@vitejs/plugin-react";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { nitro } from "nitro/vite";
+import { blogIndex } from "./vite-blog-index";
 
 // Build do site: TanStack Start (SSR) + Tailwind v4, empacotado pelo Nitro como Worker da Cloudflare.
 export default defineConfig(({ command }) => ({
   plugins: [
+    // índice leve dos artigos do blog (o texto completo é baixado só na página do artigo)
+    blogIndex(),
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({

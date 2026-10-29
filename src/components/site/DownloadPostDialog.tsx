@@ -168,7 +168,7 @@ function DownloadPostDialog({
     );
     try {
       const { downloadPostPdf } = await import("@/lib/post-pdf");
-      downloadPostPdf(post);
+      await downloadPostPdf(post);
       await leadSent;
       setStatus("done");
     } catch {
@@ -179,7 +179,7 @@ function DownloadPostDialog({
   const retry = async () => {
     try {
       const { downloadPostPdf } = await import("@/lib/post-pdf");
-      downloadPostPdf(post);
+      await downloadPostPdf(post);
       setStatus("done");
     } catch {
       setStatus("error");

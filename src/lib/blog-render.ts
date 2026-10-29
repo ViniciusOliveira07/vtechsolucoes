@@ -1,5 +1,5 @@
 import { Marked, type Tokens } from "marked";
-import { postBody, slugify } from "@/lib/blog";
+import { slugify } from "@/lib/blog";
 import type { Locale } from "@/lib/i18n";
 
 // Renderização do markdown fica num módulo separado: só a rota do artigo o importa,
@@ -7,7 +7,8 @@ import type { Locale } from "@/lib/i18n";
 
 const cache = new Map<string, string>();
 
-export function renderPost(slug: string, locale: Locale) {
+/** `body` é o markdown do artigo, carregado pelo loader da rota (loadPostBody). */
+export function renderPost(slug: string, locale: Locale, body: string) {
   const cacheKey = `${locale}:${slug}`;
   const hit = cache.get(cacheKey);
   if (hit) return hit;
@@ -33,7 +34,7 @@ export function renderPost(slug: string, locale: Locale) {
       },
     },
   });
-  const html = marked.parse(postBody(slug, locale), { async: false }) as string;
+  const html = marked.parse(body, { async: false }) as string;
   cache.set(cacheKey, html);
   return html;
 }

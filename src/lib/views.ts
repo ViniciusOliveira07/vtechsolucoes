@@ -65,7 +65,9 @@ export function useViewCount(slug: string) {
   const [n, setN] = useState<number | null>(null);
   useEffect(() => {
     let alive = true;
-    fetchCount(slug).then((v) => alive && setN(v));
+    // o contador não é essencial: busca só depois que a página terminou de carregar
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1500));
+    idle(() => alive && fetchCount(slug).then((v) => alive && setN(v)), { timeout: 4000 });
     const onUpdate = (e: Event) => {
       if ((e as CustomEvent<string>).detail !== slug) return;
       const v = readCache(slug);

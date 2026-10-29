@@ -1,7 +1,9 @@
 import { getService, type ServiceSlug } from "@/lib/site";
+import INDEX from "virtual:blog-index";
 import { DEFAULT_LOCALE, LOCALES, pick, type L, type Locale } from "@/lib/i18n";
 
 // Artigos ficam em src/content/blog/<slug>.md (português), com metadados no topo (frontmatter).
+// O frontmatter e o sumário são lidos no build (vite-blog-index.ts); o texto, sob demanda (loadPostBody).
 // As traduções usam o mesmo nome de arquivo em src/content/blog/en/ e src/content/blog/es/.
 // O endereço do artigo é o mesmo nos três idiomas; sem tradução, o idioma cai para o português.
 // Para publicar um artigo novo basta criar o arquivo: rotas, sitemap e relacionados se atualizam sozinhos.
@@ -88,65 +90,31 @@ export function slugify(text: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-/** Frontmatter simples: `chave: valor`, strings entre aspas e listas `[a, b]`. */
-function parseFrontmatter(raw: string) {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
-  if (!match) throw new Error("Artigo sem frontmatter");
-  const data: Record<string, string | string[]> = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const m = /^(\w+):\s*(.*)$/.exec(line.trim());
-    if (!m) continue;
-    const value = m[2].trim();
-    data[m[1]] = value.startsWith("[")
-      ? value
-          .slice(1, -1)
-          .split(",")
-          .map((v) => v.trim().replace(/^["']|["']$/g, ""))
-          .filter(Boolean)
-      : value.replace(/^["']|["']$/g, "");
-  }
-  return { data, body: match[2] };
-}
-
-/** Títulos H2/H3 para o sumário. Os ids batem com os gerados em blog-render.ts. */
-function extractHeadings(body: string): Heading[] {
-  const used = new Set<string>();
-  const out: Heading[] = [];
-  let inCode = false;
-  for (const line of body.split(/\r?\n/)) {
-    if (line.startsWith("```")) inCode = !inCode;
-    const m = !inCode && /^(#{1,6})\s+(.+?)\s*#*$/.exec(line);
-    if (!m) continue;
-    const text = m[2].replace(/[*_`]/g, "");
-    let id = slugify(text);
-    while (used.has(id)) id += "-2";
-    used.add(id);
-    const depth = m[1].length;
-    if (depth === 2 || depth === 3) out.push({ id, text, level: depth });
-  }
-  return out;
-}
-
-const bodies = new Map<string, string>();
 const key = (slug: string, locale: Locale) => `${locale}:${slug}`;
 
-export function postBody(slug: string, locale: Locale) {
-  return bodies.get(key(slug, locale)) ?? bodies.get(key(slug, DEFAULT_LOCALE)) ?? "";
+// Texto completo de cada artigo: um arquivo por artigo, baixado só quando alguém abre o artigo
+// ou baixa o PDF. Os metadados (lista, home, sitemap) vêm de "virtual:blog-index", gerado no build.
+const bodyFiles = import.meta.glob("../content/blog/**/*.md", { query: "?raw", import: "default" }) as Record<
+  string,
+  () => Promise<string>
+>;
+
+function bodyPath(slug: string, locale: Locale) {
+  return `../content/blog/${locale === DEFAULT_LOCALE ? "" : `${locale}/`}${slug}.md`;
 }
 
-const files = import.meta.glob("../content/blog/**/*.md", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-}) as Record<string, string>;
+/** Corpo em markdown do artigo (sem o frontmatter), no idioma pedido ou em português se não houver tradução. */
+export async function loadPostBody(slug: string, locale: Locale) {
+  const load = bodyFiles[bodyPath(slug, locale)] ?? bodyFiles[bodyPath(slug, DEFAULT_LOCALE)];
+  if (!load) return "";
+  const raw = await load();
+  return raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
+}
 
-function parsePost(path: string, raw: string, locale: Locale): Post {
-  const slug = path.split("/").pop()!.replace(/\.md$/, "");
-  const { data, body } = parseFrontmatter(raw);
+function parsePost(entry: (typeof INDEX)[number]): Post {
+  const { slug, locale, data } = entry;
   const category = getCategories(locale).find((c) => c.slug === data.category);
   if (!category) throw new Error(`Categoria desconhecida em ${slug}: ${String(data.category)}`);
-  bodies.set(key(slug, locale), body);
-  const words = body.split(/\s+/).filter(Boolean).length;
   const publishedAt = String(data.publishedAt);
   return {
     slug,
@@ -158,8 +126,8 @@ function parsePost(path: string, raw: string, locale: Locale): Post {
     author: String(data.author ?? pick(DEFAULT_AUTHOR, locale)),
     publishedAt,
     updatedAt: String(data.updatedAt ?? publishedAt),
-    readingMinutes: Math.max(1, Math.round(words / 200)),
-    headings: extractHeadings(body),
+    readingMinutes: Math.max(1, Math.round(entry.words / 200)),
+    headings: entry.headings,
   };
 }
 
@@ -170,11 +138,7 @@ const byNewest = (a: Post, b: Post) =>
 
 function load(): L<Post[]> {
   const out = { pt: [], en: [], es: [] } as L<Post[]>;
-  for (const [path, raw] of Object.entries(files)) {
-    const folder = path.split("/").slice(-2, -1)[0];
-    const locale: Locale = folder === "en" || folder === "es" ? folder : "pt";
-    out[locale].push(parsePost(path, raw, locale));
-  }
+  for (const entry of INDEX) out[entry.locale].push(parsePost(entry));
   // Artigo ainda sem tradução aparece em português nos outros idiomas, para o blog não ficar com buracos.
   for (const locale of LOCALES) {
     if (locale === DEFAULT_LOCALE) continue;

@@ -124,34 +124,56 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
   const pktLayer = useRef<SVGGElement>(null);
   const paths = useRef<Partial<Record<WireId, SVGPathElement | null>>>({});
 
+  const figRef = useRef<HTMLElement>(null);
+
+  // A animação só começa quando o console aparece na tela e o navegador está ocioso, e pausa fora
+  // dela: no celular ela competia com o carregamento da página (1,4 s de CPU no PageSpeed).
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const fig = figRef.current;
+    if (!fig) return;
     let alive = true;
+    let visible = false;
+    let started = false;
     let clock = START + ROUTES.length * 7;
     let i = 0;
     const timers: number[] = [];
+    // pontos de cada fio calculados uma única vez: medir o SVG a cada quadro forçava reflow
+    const samples: Partial<Record<WireId, { x: number; y: number }[]>> = {};
+    const pointsOf = (id: WireId) => {
+      if (samples[id]) return samples[id];
+      const p = paths.current[id];
+      if (!p) return undefined;
+      const len = p.getTotalLength();
+      const pts = Array.from({ length: 49 }, (_, k) => {
+        const pt = p.getPointAtLength((len * k) / 48);
+        return { x: pt.x, y: pt.y };
+      });
+      samples[id] = pts;
+      return pts;
+    };
 
     const travel = (id: WireId, dur: number, done: () => void) => {
-      const p = paths.current[id];
+      const pts = pointsOf(id);
       const layer = pktLayer.current;
-      if (!p || !layer) return;
-      const len = p.getTotalLength();
+      if (!pts || !layer) return;
       const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      const p0 = p.getPointAtLength(0);
       c.setAttribute("r", "3.2");
       c.setAttribute("fill", "var(--signal)");
-      c.setAttribute("cx", String(p0.x));
-      c.setAttribute("cy", String(p0.y));
+      c.setAttribute("cx", String(pts[0].x));
+      c.setAttribute("cy", String(pts[0].y));
       layer.appendChild(c);
       let start: number | null = null;
       const frame = (ts: number) => {
         if (!alive) return c.remove();
         start ??= ts;
         const k = Math.min(1, (ts - start) / dur);
-        const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
-        const pt = p.getPointAtLength(e * len);
-        c.setAttribute("cx", String(pt.x));
-        c.setAttribute("cy", String(pt.y));
+        const e = (k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2) * (pts.length - 1);
+        const a = pts[Math.floor(e)];
+        const b = pts[Math.min(pts.length - 1, Math.floor(e) + 1)];
+        const f = e - Math.floor(e);
+        c.setAttribute("cx", String(a.x + (b.x - a.x) * f));
+        c.setAttribute("cy", String(a.y + (b.y - a.y) * f));
         if (k < 1) requestAnimationFrame(frame);
         else {
           c.remove();
@@ -162,7 +184,8 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
     };
 
     const loop = () => {
-      if (!alive || document.hidden) {
+      if (!alive) return;
+      if (!visible || document.hidden) {
         timers.push(window.setTimeout(loop, 1500));
         return;
       }
@@ -178,15 +201,29 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
       });
       timers.push(window.setTimeout(loop, 1500));
     };
-    loop();
+
+    const begin = () => {
+      if (started || !alive) return;
+      started = true;
+      loop();
+    };
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (!visible || started) return;
+      // espera o navegador terminar o carregamento antes de animar
+      const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
+      idle(begin, { timeout: 2500 });
+    });
+    io.observe(fig);
     return () => {
       alive = false;
+      io.disconnect();
       timers.forEach(clearTimeout);
     };
   }, []);
 
   return (
-    <figure className="flow m-0 min-w-0">
+    <figure ref={figRef} className="flow m-0 min-w-0">
       <div className="overflow-hidden rounded-[0.875rem] border border-border-strong bg-gradient-to-b from-surface to-background shadow-[0_2.5rem_5rem_-2.5rem_#000]">
         <div className="flex items-center justify-between border-b border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span aria-hidden className="flex gap-1.5">

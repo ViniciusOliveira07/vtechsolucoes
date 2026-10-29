@@ -46,6 +46,14 @@ export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
     locale: resolveLocale((location.search as Record<string, unknown>).lang),
   }),
+  // CSS e fonte anunciados no cabeçalho HTTP: o navegador começa a baixá-los antes de ler o HTML,
+  // e com o "Early Hints" da Cloudflare ligado, antes até de a página ser gerada.
+  headers: () => ({
+    Link: [
+      `<${appCss}>; rel=preload; as=style`,
+      `<${geistLatin}>; rel=preload; as=font; type="font/woff2"; crossorigin`,
+    ].join(", "),
+  }),
   head: ({ match }) => {
     const { locale } = match.context;
     return {

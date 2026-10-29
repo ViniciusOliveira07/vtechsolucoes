@@ -1,5 +1,9 @@
 @import "tailwindcss" source(none);
+/* Varre o site, mas não os ~45 componentes prontos de src/components/ui que não usamos:
+   eles geravam classes mortas e inflavam o CSS que bloqueia a primeira exibição no celular.
+   Ao passar a usar um componente de ui/, tire o nome dele desta lista. */
 @source "../src";
+@source not "./components/ui/{alert-dialog,alert,aspect-ratio,avatar,badge,breadcrumb,button,calendar,card,carousel,chart,collapsible,command,context-menu,drawer,dropdown-menu,form,hover-card,input-otp,input,label,menubar,navigation-menu,pagination,popover,progress,radio-group,resizable,scroll-area,select,separator,sheet,sidebar,skeleton,slider,sonner,switch,table,tabs,textarea,toggle-group,toggle,tooltip}.tsx";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
