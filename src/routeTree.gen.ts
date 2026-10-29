@@ -29,6 +29,7 @@ import { Route as ServicosIntegracoesRouteImport } from './routes/servicos/integ
 import { Route as ServicosConsultoriaTechRouteImport } from './routes/servicos/consultoria-tech'
 import { Route as ServicosAutomacoesComIaRouteImport } from './routes/servicos/automacoes-com-ia'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as ApiViewsRouteImport } from './routes/api/views'
 import { Route as ApiLeadRouteImport } from './routes/api/lead'
 import { Route as BlogCategoriaCategoriaRouteImport } from './routes/blog/categoria.$categoria'
 
@@ -133,6 +134,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRouteRoute,
 } as any)
+const ApiViewsRoute = ApiViewsRouteImport.update({
+  id: '/api/views',
+  path: '/api/views',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiLeadRoute = ApiLeadRouteImport.update({
   id: '/api/lead',
   path: '/api/lead',
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/views': typeof ApiViewsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/views': typeof ApiViewsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/sobre': typeof SobreRoute
   '/termos-e-condicoes': typeof TermosECondicoesRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/views': typeof ApiViewsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/servicos/automacoes-com-ia': typeof ServicosAutomacoesComIaRoute
   '/servicos/consultoria-tech': typeof ServicosConsultoriaTechRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos-e-condicoes'
     | '/api/lead'
+    | '/api/views'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos-e-condicoes'
     | '/api/lead'
+    | '/api/views'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos-e-condicoes'
     | '/api/lead'
+    | '/api/views'
     | '/blog/$slug'
     | '/servicos/automacoes-com-ia'
     | '/servicos/consultoria-tech'
@@ -302,6 +314,7 @@ export interface RootRouteChildren {
   SobreRoute: typeof SobreRoute
   TermosECondicoesRoute: typeof TermosECondicoesRoute
   ApiLeadRoute: typeof ApiLeadRoute
+  ApiViewsRoute: typeof ApiViewsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -446,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRouteRoute
     }
+    '/api/views': {
+      id: '/api/views'
+      path: '/api/views'
+      fullPath: '/api/views'
+      preLoaderRoute: typeof ApiViewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/lead': {
       id: '/api/lead'
       path: '/api/lead'
@@ -515,6 +535,7 @@ const rootRouteChildren: RootRouteChildren = {
   SobreRoute: SobreRoute,
   TermosECondicoesRoute: TermosECondicoesRoute,
   ApiLeadRoute: ApiLeadRoute,
+  ApiViewsRoute: ApiViewsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

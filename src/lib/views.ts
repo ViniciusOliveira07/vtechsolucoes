@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { LOCALE_META, type L, type Locale } from "@/lib/i18n";
 
-// Contador de acessos dos artigos no Abacus (abacus.jasoncameron.dev): serviço público e gratuito,
-// sem conta. GET /get/<namespace>/<slug> lê e /hit/<namespace>/<slug> soma 1.
+// Contador de acessos dos artigos. O navegador fala só com /api/views (src/routes/api/views.ts),
+// que repassa ao Abacus, serviço público e gratuito: GET lê e POST soma 1.
 // Se o serviço não responder, o site esconde o número em vez de mostrar 0.
-const API = "https://abacus.jasoncameron.dev";
-const NAMESPACE = "vtech-ia-br-artigos";
 // Só o domínio de produção soma acessos: dev local, previews e testes leem, mas não contam.
 const COUNTS_HOST = "vtechsolucoes.ia.br";
 
@@ -33,10 +31,9 @@ function writeCache(slug: string, n: number) {
   window.dispatchEvent(new CustomEvent("vt-views", { detail: slug }));
 }
 
-async function request(path: string): Promise<number | null> {
+async function request(slug: string, method: "GET" | "POST" = "GET"): Promise<number | null> {
   try {
-    const r = await fetch(`${API}${path}`);
-    if (r.status === 404) return 0; // artigo ainda sem nenhum acesso
+    const r = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`, { method });
     if (!r.ok) return null;
     const { value } = (await r.json()) as { value?: number };
     return typeof value === "number" ? value : null;
@@ -50,7 +47,7 @@ function fetchCount(slug: string): Promise<number | null> {
   if (cached !== null) return Promise.resolve(cached);
   let p = inflight.get(slug);
   if (!p) {
-    p = request(`/get/${NAMESPACE}/${slug}`).then((n) => {
+    p = request(slug).then((n) => {
       if (n !== null) writeCache(slug, n);
       inflight.delete(slug);
       return n;
@@ -92,7 +89,7 @@ export function trackView(slug: string) {
   } catch {
     // sem sessionStorage: conta mesmo assim
   }
-  request(`/hit/${NAMESPACE}/${slug}`).then((n) => {
+  request(slug, "POST").then((n) => {
     if (n !== null) writeCache(slug, n);
   });
 }
