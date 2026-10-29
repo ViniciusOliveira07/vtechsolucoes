@@ -6,16 +6,19 @@ import { BlogIndex } from "@/components/site/BlogIndex";
 
 const HEAD = {
   pt: {
+    title: "Blog: IA, sistemas, integrações e sites para empresas | Vtech",
     description:
       "Guias práticos sobre automação com IA, integrações de ERP e CRM, sistemas sob medida e SEO técnico para empresas B2B.",
     home: "Início",
   },
   en: {
+    title: "Blog: AI, software, integrations and websites for businesses | Vtech",
     description:
       "Practical guides on AI automation, ERP and CRM integrations, custom software and technical SEO for B2B companies.",
     home: "Home",
   },
   es: {
+    title: "Blog: IA, sistemas, integraciones y sitios web para empresas | Vtech",
     description:
       "Guías prácticas sobre automatización con IA, integraciones de ERP y CRM, sistemas a medida y SEO técnico para empresas B2B.",
     home: "Inicio",
@@ -27,7 +30,7 @@ export const Route = createFileRoute("/blog/")({
     const locale = match.context.locale;
     const t = pick(HEAD, locale);
     return {
-      ...seo({ title: `Blog | ${SITE_NAME}`, description: t.description, path: "/blog", locale }),
+      ...seo({ title: t.title, description: t.description, path: "/blog", locale }),
       scripts: [
         jsonLd({
           "@context": "https://schema.org",

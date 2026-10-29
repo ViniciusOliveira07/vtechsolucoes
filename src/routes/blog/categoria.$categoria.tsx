@@ -1,10 +1,11 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { getCategory, postsInCategory } from "@/lib/blog";
 import { pick, useLocale } from "@/lib/i18n";
-import { breadcrumbSchema, jsonLd, localizedUrl, seo, SITE_NAME } from "@/lib/site";
+import { breadcrumbSchema, jsonLd, localizedUrl, seo } from "@/lib/site";
 import { BlogIndex } from "@/components/site/BlogIndex";
 
 const HOME = { pt: "Início", en: "Home", es: "Inicio" };
+const GUIDES = { pt: "artigos e guias", en: "articles and guides", es: "artículos y guías" };
 
 export const Route = createFileRoute("/blog/categoria/$categoria")({
   loader: ({ params, context }) => {
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/blog/categoria/$categoria")({
     if (!category) return {};
     const path = `/blog/categoria/${category.slug}`;
     return {
-      ...seo({ title: `${category.name} | Blog ${SITE_NAME}`, description: category.description, path, locale }),
+      ...seo({ title: `${category.name}: ${pick(GUIDES, locale)} | Blog Vtech`, description: category.description, path, locale }),
       scripts: [
         jsonLd(
           breadcrumbSchema([
