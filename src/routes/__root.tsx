@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import geistLatin from "../assets/fonts/geist-latin.woff2?url";
+import geistMonoLatin from "../assets/fonts/geist-mono-latin.woff2?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
@@ -56,15 +58,12 @@ export const Route = createRootRoute({
         { name: "theme-color", content: "#0a0d11" },
       ],
       links: [
+        // fontes do próprio site (ver @font-face em styles.css), pedidas junto com o CSS
+        { rel: "preload", href: geistLatin, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+        { rel: "preload", href: geistMonoLatin, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
         { rel: "stylesheet", href: appCss },
         { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
         { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap",
-        },
         { rel: "dns-prefetch", href: "https://wa.me" },
       ],
       scripts: [jsonLd(organizationSchema(locale))],

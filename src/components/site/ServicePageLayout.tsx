@@ -7,8 +7,8 @@ import { ReadMore } from "@/components/site/ReadMore";
 import { RailHint } from "@/components/site/RailHint";
 import { cn } from "@/lib/utils";
 import { Events } from "@/lib/analytics";
-import { localizedUrl, SITE_NAME, SITE_URL } from "@/lib/site";
-import { pick, useT, type L, type Locale } from "@/lib/i18n";
+import { buildFAQSchema } from "@/lib/service-schema";
+import { useT, type L } from "@/lib/i18n";
 
 // Textos fixos do layout (o conteúdo de cada serviço vem da rota, já no idioma certo)
 const TEXT = {
@@ -128,14 +128,6 @@ const CRUMB: Record<string, Omit<L<string>, "pt">> = {
   "consultoria-tech": { en: "tech-consulting", es: "consultoria-tech" },
 };
 
-const BREADCRUMB = {
-  pt: { home: "Início", services: "Serviços" },
-  en: { home: "Home", services: "Services" },
-  es: { home: "Inicio", services: "Servicios" },
-};
-
-const COUNTRY = { pt: "Brasil", en: "Brazil", es: "Brasil" };
-
 export type RelatedService = {
   slug: string;
   title: string;
@@ -184,6 +176,9 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
   const withFlow = data.slug === "automacoes-com-ia";
   return (
     <>
+      {/* FAQ para buscadores: renderizado na página, não no head(), para o conteúdo do serviço
+          não entrar no JavaScript inicial do site */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFAQSchema(data.faq)).replace(/</g, "\\u003c") }} />
       {/* Hero */}
       <section className="hero relative overflow-hidden border-b border-border">
         <div
@@ -449,55 +444,4 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       <CtaBand title={`${data.ctaFinalTitle}?`} location="service_footer" slug={data.slug} />
     </>
   );
-}
-
-/**
- * Helpers de schema JSON-LD usados no head() de cada rota de serviço.
- */
-export function buildServiceSchema(opts: {
-  name: string;
-  description: string;
-  url: string;
-  serviceType: string;
-  locale: Locale;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: opts.name,
-    description: opts.description,
-    url: opts.url,
-    serviceType: opts.serviceType,
-    areaServed: { "@type": "Country", name: COUNTRY[opts.locale] },
-    provider: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-  };
-}
-
-export function buildFAQSchema(items: FAQItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((it) => ({
-      "@type": "Question",
-      name: it.q,
-      acceptedAnswer: { "@type": "Answer", text: it.a },
-    })),
-  };
-}
-
-export function buildBreadcrumbSchema(eyebrow: string, slug: string, locale: Locale) {
-  const t = pick(BREADCRUMB, locale);
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: t.home, item: localizedUrl("/", locale) },
-      { "@type": "ListItem", position: 2, name: t.services, item: localizedUrl("/servicos", locale) },
-      { "@type": "ListItem", position: 3, name: eyebrow, item: localizedUrl(`/servicos/${slug}`, locale) },
-    ],
-  };
 }

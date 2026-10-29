@@ -1,13 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Compass, Map, GitBranch, Users, ShieldCheck, TrendingUp } from "lucide-react";
-import {
-  ServicePageLayout,
-  buildServiceSchema,
-  buildFAQSchema,
-  buildBreadcrumbSchema,
-  type ServicePageData,
-} from "@/components/site/ServicePageLayout";
+import { ServicePageLayout, type ServicePageData } from "@/components/site/ServicePageLayout";
+import { buildBreadcrumbSchema, buildServiceSchema } from "@/lib/service-schema";
 import { Events } from "@/lib/analytics";
 import { getService, jsonLd, localizedUrl, seo } from "@/lib/site";
 import { pick, useT, type L } from "@/lib/i18n";
@@ -619,7 +614,6 @@ export const Route = createFileRoute("/servicos/consultoria-tech")({
   head: ({ match }) => {
     const locale = match.context.locale;
     const h = pick(HEAD, locale);
-    const data = pick(DATA, locale);
     return {
       ...seo({ title: h.title, description: h.description, path: PATH, locale }),
       scripts: [
@@ -632,7 +626,6 @@ export const Route = createFileRoute("/servicos/consultoria-tech")({
             locale,
           }),
         ),
-        jsonLd(buildFAQSchema(data.faq)),
         jsonLd(buildBreadcrumbSchema(h.crumb, SLUG, locale)),
       ],
     };
