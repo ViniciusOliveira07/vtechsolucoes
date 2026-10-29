@@ -1,5 +1,5 @@
-// GA4 (Google Analytics). O script do Google só é baixado depois que a página terminou de
-// carregar e o navegador ficou ocioso, para não pesar no desempenho (PageSpeed). Eventos disparados
+// GA4 (Google Analytics). O script do Google só é baixado depois da primeira interação ou 5 s
+// após a página carregar, para não pesar no desempenho (PageSpeed). Eventos disparados
 // antes disso ficam na fila do dataLayer e são enviados quando o script chega.
 // Só o domínio de produção envia dados: dev local, previews e testes não contam.
 export const GA_MEASUREMENT_ID = "G-CGQYE5Q14F";
@@ -35,8 +35,19 @@ export function initAnalytics() {
     s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     document.head.appendChild(s);
   };
-  const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 2000));
-  const afterLoad = () => idle(load, { timeout: 5000 });
+  // Baixa na primeira interação (rolar, tocar, clicar, teclar) ou 5 s depois de a página carregar,
+  // o que vier antes. Carregado logo após o load, o gtag.js ainda caía na medição do PageSpeed
+  // como "tarefas longas" (TBT de até 310 ms no celular).
+  let done = false;
+  const events = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
+  const once = () => {
+    if (done) return;
+    done = true;
+    events.forEach((e) => window.removeEventListener(e, once));
+    load();
+  };
+  events.forEach((e) => window.addEventListener(e, once, { once: true, passive: true }));
+  const afterLoad = () => window.setTimeout(once, 5000);
   if (document.readyState === "complete") afterLoad();
   else window.addEventListener("load", afterLoad, { once: true });
 }
