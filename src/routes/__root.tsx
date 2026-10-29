@@ -114,7 +114,7 @@ function RootComponent() {
 
   // GA4: uma visualização por página aberta (o site troca de página sem recarregar)
   useEffect(() => {
-    trackPageView(LOCALE_META[locale].html);
+    trackPageView(href, LOCALE_META[locale].html);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [href]);
 

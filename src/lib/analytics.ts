@@ -41,12 +41,18 @@ export function initAnalytics() {
   else window.addEventListener("load", afterLoad, { once: true });
 }
 
-/** Visualização de página, com o idioma em que a pessoa está navegando. */
-export function trackPageView(language: string) {
-  if (!enabled() || typeof window.gtag !== "function") return;
+let lastPath = "";
+
+/**
+ * Visualização de página, com o idioma em que a pessoa está navegando. `path` vem do roteador
+ * (na abertura ele "muda" mais de uma vez para o mesmo endereço; repetições são ignoradas).
+ */
+export function trackPageView(path: string, language: string) {
+  if (!enabled() || typeof window.gtag !== "function" || path === lastPath) return;
+  lastPath = path;
   window.gtag("event", "page_view", {
-    page_location: window.location.href,
-    page_path: window.location.pathname + window.location.search,
+    page_location: window.location.origin + path,
+    page_path: path,
     page_title: document.title,
     language,
   });
