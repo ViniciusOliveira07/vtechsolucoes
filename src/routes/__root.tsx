@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import geistLatin from "../assets/fonts/geist-latin.woff2?url";
@@ -8,7 +8,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { SITE_DESCRIPTION, SITE_NAME, jsonLd, organizationSchema } from "@/lib/site";
-import { LOCALE_META, LocaleContext, isLocale, saveLocaleCookie, useT } from "@/lib/i18n";
+import { LOCALE_META, LocaleContext, isLocale, saveLocaleCookie, useLocale, useT } from "@/lib/i18n";
+import { initAnalytics, trackPageView } from "@/lib/analytics";
 import { resolveLocale } from "@/lib/resolve-locale";
 
 const NOT_FOUND = {
@@ -101,11 +102,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const t = useT(SKIP);
 
+  const locale = useLocale();
+  const { href } = useLocation();
+
   // Quem chega por um link com ?lang= continua nesse idioma ao navegar pelo site.
   useEffect(() => {
     const lang = new URLSearchParams(window.location.search).get("lang");
     if (isLocale(lang)) saveLocaleCookie(lang);
+    initAnalytics();
   }, []);
+
+  // GA4: uma visualização por página aberta (o site troca de página sem recarregar)
+  useEffect(() => {
+    trackPageView(LOCALE_META[locale].html);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [href]);
 
   return (
     <div className="relative bg-background text-foreground">

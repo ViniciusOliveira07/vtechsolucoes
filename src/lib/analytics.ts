@@ -1,6 +1,9 @@
-// GA4 analytics helper. Insira o ID de medição abaixo (formato G-XXXXXXXXXX)
-// para ativar o rastreamento. O helper é seguro de chamar mesmo sem ID.
-export const GA_MEASUREMENT_ID = ""; // TODO: substituir por "G-XXXXXXXXXX"
+// GA4 (Google Analytics). O script do Google só é baixado depois que a página terminou de
+// carregar e o navegador ficou ocioso, para não pesar no desempenho (PageSpeed). Eventos disparados
+// antes disso ficam na fila do dataLayer e são enviados quando o script chega.
+// Só o domínio de produção envia dados: dev local, previews e testes não contam.
+export const GA_MEASUREMENT_ID = "G-CGQYE5Q14F";
+const PROD_HOST = "vtechsolucoes.ia.br";
 
 declare global {
   interface Window {
@@ -11,8 +14,46 @@ declare global {
 
 type EventParams = Record<string, string | number | boolean | undefined>;
 
+const enabled = () => typeof window !== "undefined" && !!GA_MEASUREMENT_ID && window.location.hostname === PROD_HOST;
+
+/** Cria a fila do gtag já na abertura (para nenhum evento se perder) e baixa o script quando ocioso. */
+export function initAnalytics() {
+  if (!enabled() || window.gtag) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    // o gtag.js espera o objeto `arguments`, não um array
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  };
+  window.gtag("js", new Date());
+  // page_view é enviado manualmente a cada troca de página (o site navega sem recarregar)
+  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
+
+  const load = () => {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(s);
+  };
+  const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 2000));
+  const afterLoad = () => idle(load, { timeout: 5000 });
+  if (document.readyState === "complete") afterLoad();
+  else window.addEventListener("load", afterLoad, { once: true });
+}
+
+/** Visualização de página, com o idioma em que a pessoa está navegando. */
+export function trackPageView(language: string) {
+  if (!enabled() || typeof window.gtag !== "function") return;
+  window.gtag("event", "page_view", {
+    page_location: window.location.href,
+    page_path: window.location.pathname + window.location.search,
+    page_title: document.title,
+    language,
+  });
+}
+
 /**
- * Dispara um evento GA4. No-op se não houver ID configurado ou se rodando no servidor.
+ * Dispara um evento GA4. No-op fora do domínio de produção ou rodando no servidor.
  */
 export function track(eventName: string, params: EventParams = {}): void {
   if (typeof window === "undefined") return;
@@ -21,8 +62,7 @@ export function track(eventName: string, params: EventParams = {}): void {
     // eslint-disable-next-line no-console
     console.debug("[analytics]", eventName, params);
   }
-  if (!GA_MEASUREMENT_ID) return;
-  if (typeof window.gtag !== "function") return;
+  if (!enabled() || typeof window.gtag !== "function") return;
   window.gtag("event", eventName, params);
 }
 
