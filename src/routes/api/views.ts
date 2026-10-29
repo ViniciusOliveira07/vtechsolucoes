@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { POSTS } from "@/lib/blog";
+import { ALL_POSTS } from "@/lib/blog";
 
 // Ponte para o contador de acessos dos artigos (Abacus). O navegador fala só com o próprio site:
 // sem requisição a terceiros na página e sem os 404 que o Abacus devolve para artigo ainda sem
@@ -11,7 +11,7 @@ const NAMESPACE = "vtech-ia-br-artigos";
 // Só o domínio de produção soma acessos: dev local, previews e testes leem, mas não contam.
 const COUNTS_HOST = "vtechsolucoes.ia.br";
 
-const SLUGS = new Set(POSTS.map((p) => p.slug));
+const SLUGS = new Set(ALL_POSTS.map((p) => p.slug));
 
 function json(data: unknown, status = 200, cache = "no-store") {
   return new Response(JSON.stringify(data), {

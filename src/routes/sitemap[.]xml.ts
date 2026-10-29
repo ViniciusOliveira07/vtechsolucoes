@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CATEGORIES, POSTS } from "@/lib/blog";
+import { CATEGORIES, getPosts } from "@/lib/blog";
 import { localizedUrl, SERVICES } from "@/lib/site";
 import { DEFAULT_LOCALE, LOCALE_META, LOCALES } from "@/lib/i18n";
 
@@ -9,6 +9,8 @@ const PAGES_UPDATED = "2026-10-27";
 type Entry = { path: string; lastmod: string; changefreq: string; priority: string };
 
 function entries(): Entry[] {
+  // só os já publicados: artigo agendado entra no sitemap no dia em que é liberado
+  const POSTS = getPosts(DEFAULT_LOCALE);
   const latestPost = POSTS[0]?.updatedAt ?? PAGES_UPDATED;
   return [
     { path: "/", lastmod: PAGES_UPDATED, changefreq: "weekly", priority: "1.0" },

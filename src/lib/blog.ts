@@ -315,15 +315,22 @@ function load(): L<Post[]> {
 
 const POSTS_BY_LOCALE = load();
 
-/** Artigos em português (ordem do mais novo), para sitemap e usos que só precisam dos slugs. */
-export const POSTS = POSTS_BY_LOCALE.pt;
+// Agendamento: artigo com publishedAt no futuro já pode estar no código, mas só aparece (lista,
+// sitemap, relacionados e o próprio endereço) a partir desse dia, no horário de São Paulo.
+// O site é renderizado a cada acesso, então a liberação acontece sozinha, sem novo deploy.
+const today = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
+const isLive = (p: Post) => p.publishedAt <= today();
 
+/** Todos os artigos em português, inclusive os agendados (só para validar slugs, nunca para listar). */
+export const ALL_POSTS = POSTS_BY_LOCALE.pt;
+
+/** Artigos já publicados, do mais novo para o mais antigo. */
 export function getPosts(locale: Locale) {
-  return POSTS_BY_LOCALE[locale];
+  return POSTS_BY_LOCALE[locale].filter(isLive);
 }
 
 export function getPost(slug: string, locale: Locale) {
-  return POSTS_BY_LOCALE[locale].find((p) => p.slug === slug);
+  return getPosts(locale).find((p) => p.slug === slug);
 }
 
 export function getCategory(slug: string, locale: Locale) {
@@ -331,12 +338,12 @@ export function getCategory(slug: string, locale: Locale) {
 }
 
 export function postsInCategory(slug: string, locale: Locale) {
-  return POSTS_BY_LOCALE[locale].filter((p) => p.category.slug === slug);
+  return getPosts(locale).filter((p) => p.category.slug === slug);
 }
 
 /** Mesma categoria primeiro, depois tags em comum, depois os mais recentes. */
 export function relatedPosts(post: Post, limit = 3) {
-  return POSTS_BY_LOCALE[post.locale]
+  return getPosts(post.locale)
     .filter((p) => p.slug !== post.slug)
     .map((p) => ({
       p,
