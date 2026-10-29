@@ -5,11 +5,6 @@ import type { L, Locale } from "@/lib/i18n";
 // O aviso no grupo do WhatsApp (EVO) é feito pelo servidor em /api/lead, para que a apikey
 // da instância nunca vá para o navegador.
 
-// Planilha Google: mantida em paralelo só até a EVO estar ativa em produção.
-// Quando o primeiro lead chegar no grupo, remover esta constante e o bloco que a usa.
-export const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwQAapbmB2I1EaMU8WPd92kfTe07_fRZeA08rUhSdOM_l2oGfk078p_JXPhX4bPTmWumA/exec";
-
 const phoneRegex = /^[\d\s()+\-]{8,20}$/;
 
 const FIELD_ERRORS: L<{ name: string; nameLong: string; phone: string; phoneLong: string; phoneChars: string; email: string; emailLong: string }> = {
@@ -67,33 +62,21 @@ export type Lead = { name: string; phone: string; email: string; message: string
 export type LeadSource = "contato" | "download";
 
 /**
- * Envia o lead para o grupo (via /api/lead) e para a planilha. Nunca lança erro:
+ * Envia o lead para o grupo do WhatsApp (via /api/lead). Nunca lança erro:
  * uma falha de rede não pode travar o formulário nem o download.
  * `website` é o campo-armadilha para robôs (deve vir vazio).
  * `consentAt` é o momento (ISO) em que a pessoa marcou o aceite da política de privacidade;
- * vai junto para o grupo e a planilha como registro do consentimento (LGPD).
+ * vai junto para o grupo como registro do consentimento (LGPD).
  * `locale` é o idioma em que a pessoa navegava, para a equipe responder no mesmo idioma.
  */
 export async function sendLead(lead: Lead, source: LeadSource, website: string, consentAt: string, locale: Locale = "pt") {
   const page = typeof window !== "undefined" ? window.location.href : undefined;
 
-  const toGroup = fetch("/api/lead", {
+  await fetch("/api/lead", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...lead, source, page, website, consent: true, consentAt, locale }),
   }).catch(() => undefined);
-
-  const toSheet = APPS_SCRIPT_URL
-    ? fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        // mode no-cors é necessário para Apps Script; a resposta não é lida
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ timestamp: new Date().toISOString(), ...lead, consentimento_privacidade: consentAt }),
-      }).catch(() => undefined)
-    : Promise.resolve();
-
-  await Promise.all([toGroup, toSheet]);
 }
 
 // Lembra os dados de quem já preencheu, para não pedir de novo no próximo download.

@@ -156,7 +156,7 @@ export function ContactForm() {
     setLoading(true);
     Events.generateLead();
 
-    // 1–2. Aviso no grupo + planilha (silenciosos: o lead ainda chega pelo WhatsApp)
+    // 1–2. Aviso no grupo do WhatsApp (silencioso: a conversa ainda abre no WhatsApp da pessoa)
     const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
     await sendLead(values, "contato", honeypot, consentAt, locale);
     saveLead(values);
