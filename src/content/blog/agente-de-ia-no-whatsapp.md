@@ -47,17 +47,17 @@ As tarefas mais comuns em empresas B2B e de serviços são estas:
 
 O que o agente **não** deve fazer sem regra clara: conceder descontos, prometer prazos que dependem de outra área, alterar cadastro sensível ou tomar decisões que hoje exigem aprovação de alguém.
 
-## API oficial do WhatsApp ou conexão não oficial
+## API oficial do WhatsApp ou conexão via WhatsApp Web: como escolher
 
-Esta é a decisão técnica mais importante, e muitas vezes ninguém explica ao cliente.
+Existem dois caminhos para ligar um agente ao WhatsApp, e os dois são usados por empresas no dia a dia. A escolha certa depende do volume, do orçamento e de como a empresa usa o número.
 
-**API oficial (WhatsApp Business Platform).** É a forma oferecida pela Meta para empresas integrarem sistemas ao WhatsApp, diretamente pela Cloud API ou por um provedor parceiro. O número é verificado, as mensagens que a empresa inicia usam modelos (templates) aprovados, e existe um caminho formal para escalar volume. A documentação fica no [site de desenvolvedores da Meta](https://developers.facebook.com/docs/whatsapp).
+**API oficial (WhatsApp Business Platform).** É a forma oferecida pela Meta para empresas integrarem sistemas ao WhatsApp, diretamente pela Cloud API ou por um provedor parceiro. O número é verificado, as mensagens que a empresa inicia usam modelos (templates) aprovados e existe um caminho formal para escalar volume. Em troca, há etapas de aprovação e cobrança por mensagem conforme a tabela da Meta. A documentação fica no [site de desenvolvedores da Meta](https://developers.facebook.com/docs/whatsapp).
 
-**Conexões não oficiais.** São ferramentas que simulam o WhatsApp Web ou o aplicativo para automatizar um número comum. São rápidas de montar e não exigem aprovação, mas violam os termos de uso do WhatsApp. O risco concreto é o **banimento do número**: a Meta pode bloquear a conta, e junto vão os contatos e o histórico de atendimento que estavam nela. Também não há garantia de funcionamento quando o aplicativo muda.
+**Conexão via WhatsApp Web.** Ferramentas que conectam o agente a um número comum do WhatsApp, da mesma forma que o WhatsApp Web. São rápidas de colocar no ar, não exigem aprovação de modelos e não têm custo por mensagem da Meta. Como não são homologadas pela Meta, pedem alguns cuidados: o número pode sofrer restrições se for usado para disparos em massa ou contatos que não pediram mensagem, e a conexão pode precisar de ajustes quando o aplicativo é atualizado.
 
-Para testes internos ou provas de conceito, uma conexão não oficial pode servir. Para o número principal de atendimento de uma empresa, a API oficial é o caminho com menos risco.
+Na prática, a conexão via WhatsApp Web funciona bem para atender quem chama a empresa, com volume moderado e boas práticas de uso. A API oficial faz mais sentido para volumes altos, para campanhas ativas e para empresas que precisam de selo de verificação e de garantias formais. Muitas empresas começam pelo primeiro caminho e migram quando o volume cresce.
 
-Dois pontos das regras da Meta que afetam o projeto:
+Duas regras da Meta que valem para a API oficial e afetam o projeto:
 
 - **Janela de atendimento de 24 horas.** Quando o cliente manda mensagem, a empresa pode responder livremente por 24 horas. Fora dessa janela, só é possível iniciar contato com um modelo aprovado.
 - **Finalidade do agente.** As políticas da plataforma admitem agentes de IA voltados ao atendimento e às vendas da própria empresa. Assistentes de IA de uso geral, sem relação com o negócio, não são o uso previsto. Vale conferir as políticas vigentes antes de definir o escopo.
@@ -91,7 +91,7 @@ Um agente que responde errado em nome da sua empresa é pior do que nenhum agent
 1. **Leia as conversas atuais.** Exporte algumas centenas de conversas e agrupe por assunto. Isso mostra o que se repete, o que é simples e o que exige uma pessoa.
 2. **Escolha o escopo inicial.** Comece por dois ou três assuntos de alto volume e baixo risco, como dúvidas frequentes e status de pedido.
 3. **Organize a base de conhecimento.** Políticas, tabelas e respostas aprovadas, em um lugar que a equipe consiga atualizar.
-4. **Defina a conexão.** API oficial, direta ou por provedor, com o número verificado e os modelos de mensagem aprovados.
+4. **Defina a conexão.** Conexão via WhatsApp Web para começar rápido com o número atual, ou API oficial, direta ou por provedor, com o número verificado e os modelos de mensagem aprovados.
 5. **Integre os sistemas necessários.** ERP, CRM e agenda, com acesso somente ao que o agente precisa.
 6. **Escreva as regras e os gatilhos de passagem.** O que o agente faz, o que nunca faz e quando chama uma pessoa.
 7. **Teste com conversas reais.** Use perguntas tiradas do histórico, incluindo as difíceis e as mal escritas.
@@ -117,7 +117,7 @@ Na maioria das empresas, não. Ele assume as conversas repetitivas e a primeira 
 
 ### Posso usar o mesmo número de WhatsApp que já uso hoje?
 
-Em geral, sim. É possível migrar um número existente para a API oficial, mas ele deixa de funcionar no aplicativo comum enquanto estiver na API, salvo nas modalidades em que a Meta permite o uso combinado. Planeje a migração com cuidado para não perder o histórico de que a equipe precisa.
+Sim. Com a conexão via WhatsApp Web, o agente usa o número atual e a equipe continua vendo as conversas no aparelho. Na API oficial também é possível migrar um número existente para a API oficial, mas ele deixa de funcionar no aplicativo comum enquanto estiver na API, salvo nas modalidades em que a Meta permite o uso combinado. Planeje a migração com cuidado para não perder o histórico de que a equipe precisa.
 
 ### O agente entende áudio?
 

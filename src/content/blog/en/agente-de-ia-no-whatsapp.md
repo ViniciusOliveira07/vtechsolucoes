@@ -47,17 +47,17 @@ The most common tasks in B2B and service companies are these:
 
 What the agent **should not** do without a clear rule: grant discounts, promise deadlines that depend on another team, change sensitive account data or make decisions that require someone's approval today.
 
-## Official WhatsApp API or an unofficial connection
+## Official WhatsApp API or a WhatsApp Web connection: how to choose
 
-This is the most important technical decision, and often nobody explains it to the client.
+There are two ways to connect an agent to WhatsApp, and companies use both every day. The right choice depends on volume, budget and how the company uses the number.
 
-**Official API (WhatsApp Business Platform).** It's the way Meta offers for companies to connect systems to WhatsApp, directly through the Cloud API or through a partner provider. The number is verified, messages the company initiates use approved templates, and there's a formal path to scale volume. The documentation is on [Meta's developer site](https://developers.facebook.com/docs/whatsapp).
+**Official API (WhatsApp Business Platform).** It's the way Meta offers for companies to connect systems to WhatsApp, directly through the Cloud API or through a partner provider. The number is verified, messages the company initiates use approved templates, and there's a formal path to scale volume. In exchange, there are approval steps and per-message charges according to Meta's pricing. The documentation is on [Meta's developer site](https://developers.facebook.com/docs/whatsapp).
 
-**Unofficial connections.** These are tools that emulate WhatsApp Web or the app to automate a regular number. They're quick to set up and need no approval, but they violate WhatsApp's terms of service. The concrete risk is a **banned number**: Meta can block the account, and the contacts and service history in it go with it. There's also no guarantee they keep working when the app changes.
+**WhatsApp Web connection.** Tools that connect the agent to a regular WhatsApp number, the same way WhatsApp Web does. They're quick to launch, need no template approval and carry no Meta per-message charges. Since they aren't certified by Meta, they call for some care: the number can be restricted if it's used for mass messaging or to contact people who didn't ask for it, and the connection may need adjustments when the app is updated.
 
-For internal tests or proofs of concept, an unofficial connection may do. For a company's main customer service number, the official API is the lower-risk path.
+In practice, a WhatsApp Web connection works well for answering people who contact the company, at moderate volume and with good usage practices. The official API makes more sense for high volumes, outbound campaigns and companies that need a verified badge and formal guarantees. Many companies start with the first path and migrate as volume grows.
 
-Two points in Meta's rules that affect the project:
+Two of Meta's rules that apply to the official API and affect the project:
 
 - **24-hour customer service window.** When the customer sends a message, the company can reply freely for 24 hours. Outside that window, it can only start a conversation with an approved template.
 - **The agent's purpose.** Platform policies allow AI agents focused on the company's own customer service and sales. General-purpose AI assistants unrelated to the business are not the intended use. Check the current policies before defining the scope.
@@ -91,7 +91,7 @@ An agent that answers wrongly on behalf of your company is worse than no agent a
 1. **Read your current conversations.** Export a few hundred conversations and group them by topic. This shows what repeats, what's simple and what needs a person.
 2. **Pick the initial scope.** Start with two or three high-volume, low-risk topics, like FAQs and order status.
 3. **Organize the knowledge base.** Policies, price lists and approved answers, in a place the team can update.
-4. **Choose the connection.** Official API, direct or through a provider, with a verified number and approved message templates.
+4. **Choose the connection.** A WhatsApp Web connection to start fast with your current number, or the official API, direct or through a provider, with a verified number and approved message templates.
 5. **Integrate the systems you need.** ERP, CRM and calendar, with access only to what the agent needs.
 6. **Write the rules and handoff triggers.** What the agent does, what it never does and when it calls a person.
 7. **Test with real conversations.** Use questions taken from your history, including the hard ones and the badly written ones.
@@ -117,7 +117,7 @@ In most companies, no. It takes over repetitive conversations and first-line tri
 
 ### Can I use the WhatsApp number I already have?
 
-Usually, yes. You can migrate an existing number to the official API, but it stops working in the regular app while it's on the API, except in the setups where Meta allows combined use. Plan the migration carefully so you don't lose the history your team needs.
+Yes. With a WhatsApp Web connection, the agent uses your current number and the team can still see conversations on the phone. With the official API you can also migrate an existing number to the official API, but it stops working in the regular app while it's on the API, except in the setups where Meta allows combined use. Plan the migration carefully so you don't lose the history your team needs.
 
 ### Does the agent understand voice messages?
 
