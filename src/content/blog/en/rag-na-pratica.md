@@ -6,6 +6,12 @@ tags: [rag, llm, base-de-conhecimento]
 author: "Vtech team"
 publishedAt: 2026-10-27
 updatedAt: 2026-10-27
+offerTitle: "Free assessment: does your case need RAG?"
+offerText: "Tell us which documents and questions the agent has to cover. We tell you whether RAG is the way to go or a simpler approach is enough, with estimated architecture and cost."
+offerItems: [RAG or a simpler alternative for your case, Estimated architecture and monthly cost, Proposal with scope and timeline within 24 business hours]
+offerAsk: "Which documents does the agent need to look up?"
+offerPlaceholder: "E.g. 400 contracts and manuals in PDF, used by support and legal…"
+offerCta: "Get my free assessment"
 ---
 
 RAG has become shorthand for "AI that knows the company's documents." The idea is sound and it works, but it is not the answer to every problem. Before investing in a RAG architecture, it pays to understand what it does and when a simpler alternative delivers the same result.
@@ -50,3 +56,5 @@ Many good projects combine all three: fixed instructions for the rules, tools to
 Build a set of real questions, asked by the people who will use the system, with the expected answer and the source document for each one. Measure two things separately: whether retrieval brought back the right passage, and whether the final answer is correct and faithful to it. Run this set every time you change documents, chunking, or the model. It is the most reliable way to keep an improvement in one place from making something else worse without anyone noticing.
 
 RAG is an excellent tool when the problem is about documents. Diagnosing first whether that really is the problem avoids building a complex architecture where a well-written instruction or a database query would do the job.
+
+Not sure whether your case calls for RAG? [Request the free assessment below](#oferta) and we will reply with estimated architecture and cost.

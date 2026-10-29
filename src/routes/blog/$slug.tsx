@@ -4,15 +4,12 @@ import { formatDate, getCategory, getPost, loadPostBody, relatedPosts, serviceFo
 import { renderPost } from "@/lib/blog-render";
 import { LOCALE_META, pick, useLocale, useT, type Locale } from "@/lib/i18n";
 import { breadcrumbSchema, jsonLd, localizedUrl, seo, SITE_NAME, SITE_URL } from "@/lib/site";
-import { Events } from "@/lib/analytics";
 import { trackView } from "@/lib/views";
 import { PostCard, ViewCount } from "@/components/site/PostCard";
 import { RailHint } from "@/components/site/RailHint";
 import { DownloadPostButton } from "@/components/site/DownloadPostDialog";
 import { CtaBand } from "@/components/site/sections/CtaBand";
-
-// só a inicial: siglas como IA/AI continuam em maiúsculas
-const lowerFirst = (s: string) => (/^.[a-zà-ÿ]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s);
+import { PostOffer } from "@/components/site/PostOffer";
 
 const TEXT = {
   pt: {
@@ -21,9 +18,6 @@ const TEXT = {
     published: "publicado",
     updated: "atualizado",
     reading: "min de leitura",
-    relatedService: "Serviço relacionado",
-    cta: "Iniciar diagnóstico →",
-    serviceLink: (name: string) => `conhecer o serviço de ${lowerFirst(name)} →`,
     toc: "Neste artigo",
     readAlso: "Leia também",
     relatedArticles: "Artigos relacionados",
@@ -34,9 +28,6 @@ const TEXT = {
     published: "published",
     updated: "updated",
     reading: "min read",
-    relatedService: "Related service",
-    cta: "Start diagnosis →",
-    serviceLink: (name: string) => `explore our ${lowerFirst(name)} service →`,
     toc: "In this article",
     readAlso: "Keep reading",
     relatedArticles: "Related articles",
@@ -47,9 +38,6 @@ const TEXT = {
     published: "publicado",
     updated: "actualizado",
     reading: "min de lectura",
-    relatedService: "Servicio relacionado",
-    cta: "Iniciar diagnóstico →",
-    serviceLink: (name: string) => `conocer el servicio de ${lowerFirst(name)} →`,
     toc: "En este artículo",
     readAlso: "Lea también",
     relatedArticles: "Artículos relacionados",
@@ -184,27 +172,6 @@ function PostPage() {
           <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_17.5rem]">
             <div className="min-w-0 max-w-[70ch]">
               <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug, post.locale, body) }} />
-              <aside className="panel mt-14 p-7" aria-label={t.relatedService}>
-                <p className="kicker">{t.relatedService}</p>
-                <p className="mt-3 text-[1.375rem] tracking-[-0.02em]">{service.title}</p>
-                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{service.forWho}</p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Link
-                    to="/contato"
-                    onClick={() => Events.ctaClick("Iniciar diagnóstico", "blog_post", post.slug)}
-                    className="btn"
-                  >
-                    {t.cta}
-                  </Link>
-                  <DownloadPostButton post={post} />
-                </div>
-                <Link
-                  to={`/servicos/${service.slug}`}
-                  className="mt-3 inline-flex min-h-11 items-center font-mono text-[0.8125rem] text-signal hover:underline"
-                >
-                  {t.serviceLink(service.title)}
-                </Link>
-              </aside>
             </div>
 
             {post.headings.length > 2 && (
@@ -229,6 +196,8 @@ function PostPage() {
               </aside>
             )}
           </div>
+
+          <PostOffer post={post} service={service} />
         </div>
       </article>
 

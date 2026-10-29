@@ -6,6 +6,12 @@ tags: [custos, llm, agentes]
 author: "Vtech team"
 publishedAt: 2026-10-27
 updatedAt: 2026-10-27
+offerTitle: "Free cost estimate for your AI agent"
+offerText: "Tell us what the agent will do and the expected volume. We send back what it would cost per month in production, with the model and architecture that fit your case."
+offerItems: [Estimated cost per conversation and per month, Model and architecture suited to your volume, Proposal with scope and timeline within 24 business hours]
+offerAsk: "What would the agent do, and how many conversations per month?"
+offerPlaceholder: "E.g. answer customer questions on WhatsApp, about 3,000 conversations a month…"
+offerCta: "Get my free estimate"
 ---
 
 The most common question after an AI agent demo is "how much will this cost per month?" The honest answer is that it depends, but it depends on only a few variables, and all of them can be estimated before the project starts. This article shows how to run the numbers.
@@ -64,3 +70,5 @@ A cheap agent that gets things wrong is expensive in rework and unhappy customer
 - How will quality be measured before and after each change?
 
 With these answers, cost stops being a surprise and becomes a predictable line in the budget. In every AI automation project, we build this projection during the diagnosis phase, before a single line of code is written.
+
+Want to know what your agent would cost in production before investing? [Request the free estimate below](#oferta).

@@ -14,7 +14,7 @@ import { leadFields } from "@/lib/leads";
 const bodySchema = z.object({
   ...leadFields,
   message: z.string().trim().max(1500),
-  source: z.enum(["contato", "download"]),
+  source: z.enum(["contato", "download", "blog"]),
   page: z.string().max(300).optional(),
   // Campo invisível para humanos: se vier preenchido, é robô.
   website: z.string().max(200).optional(),
@@ -33,6 +33,13 @@ const IDIOMAS = { en: "inglês 🇺🇸", es: "espanhol 🇪🇸" } as const;
 const TITLES = {
   contato: "Forms Vtech Soluções",
   download: "Download de material do blog",
+  blog: "Oferta do blog",
+} as const;
+
+const MESSAGE_LABELS = {
+  contato: "Sobre o projeto",
+  download: "Material",
+  blog: "Pedido",
 } as const;
 
 function json(data: unknown, status = 200) {
@@ -70,7 +77,7 @@ export const Route = createFileRoute("/api/lead")({
           `*Nome:* ${lead.name}\n` +
           `*Telefone:* ${lead.phone}\n` +
           `*Email:* ${lead.email}\n\n` +
-          (lead.source === "contato" ? `*Sobre o projeto:*\n` : `*Material:*\n`) +
+          `*${MESSAGE_LABELS[lead.source]}:*\n` +
           `${lead.message}` +
           (lead.page ? `\n\n*Página:* ${lead.page}` : "") +
           (lead.locale && lead.locale !== "pt" ? `\n*Idioma:* ${IDIOMAS[lead.locale]}` : "") +

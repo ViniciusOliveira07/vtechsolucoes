@@ -55,3 +55,5 @@ Em geral, a ordem de preferência é API e webhooks, depois arquivos, depois lei
 ## Por onde começar
 
 Comece pelo fluxo que mais consome tempo manual da equipe, e não pelo mais complexo. Mapeie de onde o dado sai, para onde vai, com que frequência e o que acontece quando ele está errado. Com esse mapa, a escolha da forma de integração costuma ficar evidente, e o projeto pode ser entregue em etapas, cada uma com retorno próprio.
+
+Quer saber qual caminho faz sentido para os seus sistemas? [Peça o mapa de integração gratuito logo abaixo](#oferta).

@@ -6,6 +6,12 @@ tags: [rag, llm, base-de-conhecimento]
 author: "Equipo Vtech"
 publishedAt: 2026-10-27
 updatedAt: 2026-10-27
+offerTitle: "Diagnóstico gratuito: ¿su caso necesita RAG?"
+offerText: "Cuéntenos qué documentos y preguntas debe cubrir el agente. Le respondemos si RAG es el camino o si una solución más simple alcanza, con arquitectura y costo estimados."
+offerItems: [RAG o una alternativa más simple para su caso, Arquitectura y costo mensual estimados, Propuesta con alcance y plazo en hasta 24 horas hábiles]
+offerAsk: "¿Qué documentos necesita consultar el agente?"
+offerPlaceholder: "Ej.: 400 contratos y manuales en PDF, consultados por soporte y legal…"
+offerCta: "Quiero el diagnóstico gratuito"
 ---
 
 RAG se volvió sinónimo de "IA que conoce los documentos de la empresa". La idea es buena y funciona, pero no es la respuesta para todo problema. Antes de invertir en una arquitectura RAG, conviene entender qué hace y en qué casos una alternativa más simple entrega el mismo resultado.
@@ -50,3 +56,5 @@ Muchos buenos proyectos combinan las tres cosas: instrucciones fijas para las re
 Arme un conjunto de preguntas reales, hechas por quienes van a usar el sistema, con la respuesta esperada y el documento de origen de cada una. Mida dos cosas por separado: si la búsqueda trajo el fragmento correcto y si la respuesta final es correcta y fiel a él. Ejecute ese conjunto con cada cambio de documento, de división en fragmentos o de modelo. Es la forma más confiable de evitar que una mejora en un punto empeore otro sin que nadie lo note.
 
 RAG es una herramienta excelente cuando el problema es documental. Diagnosticar primero si el problema es realmente ese evita construir una arquitectura compleja donde una instrucción bien escrita o una consulta a la base de datos lo resolvería.
+
+¿Le quedó la duda de si su caso pide RAG? [Pida el diagnóstico gratuito aquí abajo](#oferta) y le respondemos con arquitectura y costo estimados.

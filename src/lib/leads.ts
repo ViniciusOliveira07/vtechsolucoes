@@ -59,7 +59,7 @@ export function formatPhone(raw: string) {
 }
 
 export type Lead = { name: string; phone: string; email: string; message: string };
-export type LeadSource = "contato" | "download";
+export type LeadSource = "contato" | "download" | "blog";
 
 /**
  * Envia o lead para o grupo do WhatsApp (via /api/lead). Nunca lança erro:

@@ -6,6 +6,12 @@ tags: [custos, llm, agentes]
 author: "Equipo Vtech"
 publishedAt: 2026-10-27
 updatedAt: 2026-10-27
+offerTitle: "Estimación gratuita del costo de su agente de IA"
+offerText: "Cuéntenos qué hará el agente y el volumen esperado. Le devolvemos cuánto costaría al mes en producción, con el modelo y la arquitectura que tienen sentido para su caso."
+offerItems: [Costo estimado por conversación y por mes, Modelo y arquitectura indicados para su volumen, Propuesta con alcance y plazo en hasta 24 horas hábiles]
+offerAsk: "¿Qué haría el agente y cuántas conversaciones por mes?"
+offerPlaceholder: "Ej.: responder consultas de clientes en WhatsApp, unas 3 mil conversaciones por mes…"
+offerCta: "Quiero la estimación gratuita"
 ---
 
 La pregunta más común después de una demostración de un agente de IA es "¿cuánto va a costar esto al mes?". La respuesta honesta es que depende, pero depende de pocas variables, y todas pueden estimarse antes de que el proyecto empiece. Este texto muestra cómo hacer esa cuenta.
@@ -64,3 +70,5 @@ Un agente barato que se equivoca sale caro en retrabajo y en clientes insatisfec
 - ¿Cómo se medirá la calidad antes y después de cada cambio?
 
 Con estas respuestas, el costo deja de ser una sorpresa y se convierte en una línea predecible del presupuesto. En todo proyecto de automatización con IA, hacemos esta proyección ya en la fase de diagnóstico, antes de cualquier línea de código.
+
+¿Quiere saber cuánto costaría su agente en producción antes de invertir? [Pida la estimación gratuita aquí abajo](#oferta).

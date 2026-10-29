@@ -55,3 +55,5 @@ In general, the order of preference is API and webhooks, then files, then databa
 ## Where to start
 
 Start with the flow that eats up the most manual time for your team, not the most complex one. Map where the data comes from, where it goes, how often, and what happens when it is wrong. With that map, the right integration method usually becomes obvious, and the project can be delivered in stages, each with its own return.
+
+Want to know which path makes sense for your systems? [Request the free integration map below](#oferta).

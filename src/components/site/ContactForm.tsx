@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Events } from "@/lib/analytics";
 import { COMPANY } from "@/lib/site";
-import { formatPhone, HONEYPOT_NAME, leadFieldsFor, saveLead, sendLead } from "@/lib/leads";
+import { formatPhone, HONEYPOT_NAME, leadFieldsFor, saveLead, sendLead, type LeadSource } from "@/lib/leads";
 import { LOCALES, useLocale, useT, type L, type Locale } from "@/lib/i18n";
 
 const MESSAGE_ERRORS: L<{ short: string; long: string }> = {
@@ -96,10 +96,11 @@ type Errors = Partial<Record<keyof FormState, string>>;
 
 const initialState: FormState = { name: "", phone: "", email: "", message: "" };
 
-function buildWhatsAppUrl(values: FormState, locale: Locale) {
+function buildWhatsAppUrl(values: FormState, locale: Locale, context?: string) {
   const w = WHATSAPP_TEXT[locale];
   const text =
     `${w.intro}\n\n` +
+    (context ? `${context}\n\n` : "") +
     `*${w.name}:* ${values.name}\n` +
     `*${w.phone}:* ${values.phone}\n` +
     `*${w.email}:* ${values.email}\n\n` +
@@ -107,7 +108,26 @@ function buildWhatsAppUrl(values: FormState, locale: Locale) {
   return `https://wa.me/${COMPANY.whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
-export function ContactForm() {
+/**
+ * Formulário de contato. Usado na página de contato e na oferta do fim de cada artigo do blog.
+ * `context` (ex.: oferta e artigo de origem) vai junto no aviso do grupo e na mensagem do WhatsApp,
+ * para a equipe saber o que a pessoa pediu sem ter de perguntar. Os textos já vêm no idioma da página.
+ */
+export function ContactForm({
+  source = "contato",
+  context,
+  messageLabel,
+  messagePlaceholder,
+  submitLabel,
+  consentId = "contato-privacidade",
+}: {
+  source?: LeadSource;
+  context?: string;
+  messageLabel?: string;
+  messagePlaceholder?: string;
+  submitLabel?: string;
+  consentId?: string;
+} = {}) {
   const locale = useLocale();
   const t = useT(TEXT);
   const contactSchema = CONTACT_SCHEMAS[locale];
@@ -158,11 +178,12 @@ export function ContactForm() {
 
     // 1–2. Aviso no grupo do WhatsApp (silencioso: a conversa ainda abre no WhatsApp da pessoa)
     const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
-    await sendLead(values, "contato", honeypot, consentAt, locale);
+    const message = context ? `${context}\n\n${values.message}` : values.message;
+    await sendLead({ ...values, message }, source, honeypot, consentAt, locale);
     saveLead(values);
 
     // 3. Abre WhatsApp com a mensagem pré-preenchida
-    window.open(buildWhatsAppUrl(values, locale), "_blank", "noopener,noreferrer");
+    window.open(buildWhatsAppUrl(values, locale, context), "_blank", "noopener,noreferrer");
 
     setLoading(false);
     setSent(true);
@@ -209,7 +230,7 @@ export function ContactForm() {
         inputMode="email"
       />
       <Field
-        label={t.message}
+        label={messageLabel ?? t.message}
         name="message"
         textarea
         required
@@ -219,10 +240,11 @@ export function ContactForm() {
         onBlur={() => handleBlur("message")}
         maxLength={1000}
         helper={`${values.message.length}/1000`}
+        placeholder={messagePlaceholder}
       />
 
       <PrivacyConsent
-        id="contato-privacidade"
+        id={consentId}
         checked={Boolean(consentAt)}
         error={consentError}
         onChange={(v) => {
@@ -256,7 +278,7 @@ export function ContactForm() {
             </>
           ) : (
             <>
-              {t.submit}
+              {submitLabel ?? t.submit}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </>
           )}
