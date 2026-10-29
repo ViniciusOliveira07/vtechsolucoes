@@ -1,22 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { formatDate, type Post } from "@/lib/blog";
-import { formatViews, useViewCount } from "@/lib/views";
+import { formatDate, getCategory, type Post } from "@/lib/blog";
+import { useLocale } from "@/lib/i18n";
+import { formatViews, useViewCount, viewsLabel } from "@/lib/views";
 
 /** Número de acessos do artigo. Não renderiza nada enquanto carrega ou se o serviço não responder. */
 export function ViewCount({ slug, className }: { slug: string; className?: string }) {
   const n = useViewCount(slug);
+  const locale = useLocale();
   if (n === null) return null;
   return (
     <span
       className={className ?? "inline-flex shrink-0 items-center gap-1.5"}
-      aria-label={`${n} ${n === 1 ? "acesso" : "acessos"}`}
-      title={`${n.toLocaleString("pt-BR")} ${n === 1 ? "acesso" : "acessos"}`}
+      aria-label={viewsLabel(n, locale)}
+      title={viewsLabel(n, locale)}
     >
       <svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.4">
         <path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8Z" />
         <circle cx="8" cy="8" r="2" />
       </svg>
-      {formatViews(n)}
+      {formatViews(n, locale)}
     </span>
   );
 }
@@ -68,6 +70,9 @@ const ART: Record<string, React.ReactNode> = {
 
 export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLevel?: "h2" | "h3" }) {
   const H = headingLevel;
+  const locale = useLocale();
+  // artigo sem tradução chega em português; a categoria segue o idioma da página
+  const categoryName = getCategory(post.category.slug, locale)?.name ?? post.category.name;
   return (
     <Link
       to="/blog/$slug"
@@ -81,14 +86,14 @@ export function PostCard({ post, headingLevel = "h3" }: { post: Post; headingLev
         </svg>
       </div>
       <div className="flex flex-1 flex-col gap-2 px-[1.375rem] pb-[clamp(1rem,3vh,1.5rem)] pt-[clamp(0.875rem,2.6vh,1.25rem)]">
-        <span className="kicker text-signal">{post.category.name}</span>
+        <span className="kicker text-signal">{categoryName}</span>
         <H className="text-[1.1875rem] leading-[1.3] tracking-[-0.015em] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
           {post.title}
         </H>
         <p className="hide-short line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
         <span className="mt-auto flex items-center justify-between gap-3 pt-2 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span>
-            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> · {post.readingMinutes} min
+            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time> · {post.readingMinutes} min
           </span>
           <ViewCount slug={post.slug} />
         </span>

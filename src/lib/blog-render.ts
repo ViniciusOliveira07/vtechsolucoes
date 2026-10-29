@@ -1,13 +1,15 @@
 import { Marked, type Tokens } from "marked";
 import { postBody, slugify } from "@/lib/blog";
+import type { Locale } from "@/lib/i18n";
 
 // Renderização do markdown fica num módulo separado: só a rota do artigo o importa,
 // então o parser não entra no JavaScript da home nem do índice do blog.
 
 const cache = new Map<string, string>();
 
-export function renderPost(slug: string) {
-  const hit = cache.get(slug);
+export function renderPost(slug: string, locale: Locale) {
+  const cacheKey = `${locale}:${slug}`;
+  const hit = cache.get(cacheKey);
   if (hit) return hit;
   const used = new Set<string>();
   const marked = new Marked({
@@ -31,7 +33,7 @@ export function renderPost(slug: string) {
       },
     },
   });
-  const html = marked.parse(postBody(slug), { async: false }) as string;
-  cache.set(slug, html);
+  const html = marked.parse(postBody(slug, locale), { async: false }) as string;
+  cache.set(cacheKey, html);
   return html;
 }

@@ -1,12 +1,36 @@
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { SERVICES } from "@/lib/site";
+import { useServices } from "@/lib/site";
+import { useT } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { SectionHead } from "@/components/site/SectionHead";
+
+const TEXT = {
+  pt: {
+    title: "O que construímos",
+    detail: "Cinco frentes, contratadas separadamente ou combinadas no mesmo projeto.",
+    tabs: "Serviços",
+    more: "ver página do serviço →",
+  },
+  en: {
+    title: "What we build",
+    detail: "Five practice areas, hired separately or combined in the same project.",
+    tabs: "Services",
+    more: "see the service page →",
+  },
+  es: {
+    title: "Lo que construimos",
+    detail: "Cinco frentes, contratados por separado o combinados en el mismo proyecto.",
+    tabs: "Servicios",
+    more: "ver la página del servicio →",
+  },
+};
 
 export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const t = useT(TEXT);
+  const SERVICES = useServices();
   const s = SERVICES[active];
 
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -21,13 +45,13 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
   return (
     <section id="servicos" className="section">
       <div className="shell">
-        <SectionHead as={headingAs} title="O que construímos" detailClassName="hide-phone">
-          Cinco frentes, contratadas separadamente ou combinadas no mesmo projeto.
+        <SectionHead as={headingAs} title={t.title} detailClassName="hide-phone">
+          {t.detail}
         </SectionHead>
         <div className="grid overflow-hidden rounded-[0.875rem] border border-border bg-surface md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div
             role="tablist"
-            aria-label="Serviços"
+            aria-label={t.tabs}
             aria-orientation="vertical"
             onKeyDown={onKey}
             className="flex overflow-x-auto border-b border-border [scrollbar-width:none] md:grid md:overflow-visible md:border-b-0 md:border-r"
@@ -77,9 +101,9 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
             </ul>
             <div className="mt-[clamp(0.75rem,2.5vh,1.5rem)] flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
               <div className="hide-phone hide-short flex flex-wrap gap-1.5">
-                {s.stack.map((t) => (
-                  <span key={t} className="chip">
-                    {t}
+                {s.stack.map((tech) => (
+                  <span key={tech} className="chip">
+                    {tech}
                   </span>
                 ))}
               </div>
@@ -87,7 +111,7 @@ export function ServicesExplorer({ headingAs = "h2" }: { headingAs?: "h1" | "h2"
                 to={`/servicos/${s.slug}`}
                 className="inline-flex min-h-11 items-center font-mono text-[0.8125rem] font-medium text-signal hover:underline"
               >
-                ver página do serviço →
+                {t.more}
               </Link>
             </div>
           </div>

@@ -1,13 +1,18 @@
 import { Events } from "@/lib/analytics";
-import { whatsappUrl } from "@/lib/site";
+import { WHATSAPP_GREETING, whatsappUrl } from "@/lib/site";
+import { useT } from "@/lib/i18n";
+
+const TEXT = { pt: "Conversar no WhatsApp", en: "Chat on WhatsApp", es: "Conversar por WhatsApp" };
 
 export function WhatsAppButton() {
+  const label = useT(TEXT);
+  const greeting = useT(WHATSAPP_GREETING);
   return (
     <a
-      href={whatsappUrl()}
+      href={whatsappUrl(greeting)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Conversar no WhatsApp"
+      aria-label={label}
       onClick={() => Events.whatsappClick(typeof window !== "undefined" ? window.location.pathname : "")}
       className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 inline-flex h-14 w-14 items-center justify-center rounded-full border border-[#25D366]/40 bg-[#0f1f17] text-[#25D366] shadow-[0_0.75rem_1.875rem_-0.625rem_#000] transition-colors hover:bg-[#25D366] hover:text-[#0a0d11]"
     >

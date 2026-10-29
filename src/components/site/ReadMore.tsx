@@ -1,5 +1,12 @@
 import { useId, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { useT } from "@/lib/i18n";
+
+const TEXT = {
+  pt: { more: "Ler explicação completa", less: "Recolher ↑" },
+  en: { more: "Read the full explanation", less: "Collapse ↑" },
+  es: { more: "Leer la explicación completa", less: "Contraer ↑" },
+};
 
 /**
  * Texto longo recolhido para a seção caber numa tela. O conteúdo inteiro fica no HTML
@@ -8,12 +15,13 @@ import { cn } from "@/lib/utils";
 export function ReadMore({
   children,
   className,
-  label = "Ler explicação completa",
+  label,
 }: {
   children: ReactNode;
   className?: string;
   label?: string;
 }) {
+  const t = useT(TEXT);
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
@@ -35,7 +43,7 @@ export function ReadMore({
         onClick={() => setOpen((v) => !v)}
         className="mt-3 inline-flex min-h-11 items-center font-mono text-[0.8125rem] text-signal hover:underline"
       >
-        {open ? "Recolher ↑" : `${label} ↓`}
+        {open ? t.less : `${label ?? t.more} ↓`}
       </button>
     </div>
   );

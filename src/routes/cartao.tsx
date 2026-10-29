@@ -1,20 +1,80 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "@/lib/site";
+import { pick, useT, type L } from "@/lib/i18n";
 import { MessageCircle, MapPin, Building2, ArrowUpRight, Download, ExternalLink } from "lucide-react";
 import { LogoMark, LogoWord } from "@/components/site/Logo";
 
+const HEAD = {
+  pt: {
+    title: "Cartão de visita | Vtech Soluções",
+    description:
+      "Cartão de visita virtual da Vtech Soluções. Sistemas, integrações e IA para empresas B2B. Fale pelo WhatsApp.",
+  },
+  en: {
+    title: "Business card | Vtech Soluções",
+    description:
+      "Vtech Soluções digital business card. Systems, integrations and AI for B2B companies. Reach us on WhatsApp.",
+  },
+  es: {
+    title: "Tarjeta de presentación | Vtech Soluções",
+    description:
+      "Tarjeta de presentación virtual de Vtech Soluções. Sistemas, integraciones e IA para empresas B2B. Escríbanos por WhatsApp.",
+  },
+};
+
+const TEXT = {
+  pt: {
+    tagline: "Empresa de tecnologia B2B",
+    location: "Localização",
+    country: "São Paulo · Brasil",
+    whatsapp: "Conversar no WhatsApp",
+    save: "Salvar contato",
+    greeting: "Olá! Vim pelo cartão de visita virtual da Vtech Soluções.",
+  },
+  en: {
+    tagline: "B2B technology company",
+    location: "Location",
+    country: "São Paulo · Brazil",
+    whatsapp: "Chat on WhatsApp",
+    save: "Save contact",
+    greeting: "Hi! I found you through the Vtech Soluções digital business card.",
+  },
+  es: {
+    tagline: "Empresa de tecnología B2B",
+    location: "Ubicación",
+    country: "São Paulo · Brasil",
+    whatsapp: "Conversar por WhatsApp",
+    save: "Guardar contacto",
+    greeting: "¡Hola! Llegué por la tarjeta de presentación virtual de Vtech Soluções.",
+  },
+};
+
+// Texto do vCard (país e nota), no idioma de quem baixa
+const VCARD: L<{ country: string; note: string }> = {
+  pt: {
+    country: "Brasil",
+    note: "Empresa de tecnologia B2B. Sites, sistemas web, automações com IA, integrações e consultoria tech.",
+  },
+  en: {
+    country: "Brazil",
+    note: "B2B technology company. Websites, web systems, AI automations, integrations and tech consulting.",
+  },
+  es: {
+    country: "Brasil",
+    note: "Empresa de tecnología B2B. Sitios web, sistemas web, automatizaciones con IA, integraciones y consultoría tech.",
+  },
+};
+
 export const Route = createFileRoute("/cartao")({
-  head: () =>
-    seo({
-      title: "Cartão de visita | Vtech Soluções",
-      description:
-        "Cartão de visita virtual da Vtech Soluções. Sistemas, integrações e IA para empresas B2B. Fale pelo WhatsApp.",
-      path: "/cartao",
-    }),
+  head: ({ match }) => {
+    const locale = match.context.locale;
+    const t = pick(HEAD, locale);
+    return seo({ title: t.title, description: t.description, path: "/cartao", locale });
+  },
   component: CartaoPage,
 });
 
-function generateVCard(): string {
+function generateVCard(v: { country: string; note: string }): string {
   return [
     "BEGIN:VCARD",
     "VERSION:3.0",
@@ -22,14 +82,14 @@ function generateVCard(): string {
     "ORG:Vtech Soluções",
     "TEL;TYPE=CELL:+55 11 5444-1926",
     "URL:https://vtechsolucoes.ia.br",
-    "ADR;TYPE=WORK:;;São Paulo;SP;;Brasil",
-    "NOTE:Empresa de tecnologia B2B. Sites, sistemas web, automações com IA, integrações e consultoria tech.",
+    `ADR;TYPE=WORK:;;São Paulo;SP;;${v.country}`,
+    `NOTE:${v.note}`,
     "END:VCARD",
   ].join("\r\n");
 }
 
-function downloadVCard() {
-  const blob = new Blob([generateVCard()], { type: "text/vcard" });
+function downloadVCard(v: { country: string; note: string }) {
+  const blob = new Blob([generateVCard(v)], { type: "text/vcard" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -41,8 +101,9 @@ function downloadVCard() {
 }
 
 function CartaoPage() {
-  const whatsappHref =
-    "https://wa.me/551154441926?text=Ol%C3%A1%21%20Vim%20pelo%20cart%C3%A3o%20de%20visita%20virtual%20da%20Vtech%20Solu%C3%A7%C3%B5es.";
+  const t = useT(TEXT);
+  const vcard = useT(VCARD);
+  const whatsappHref = `https://wa.me/551154441926?text=${encodeURIComponent(t.greeting)}`;
 
   return (
     <div className="flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-5 py-14 sm:px-8">
@@ -70,7 +131,7 @@ function CartaoPage() {
                 <LogoWord />
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Empresa de tecnologia B2B
+                {t.tagline}
               </p>
             </div>
 
@@ -85,7 +146,7 @@ function CartaoPage() {
                 value="+55 11 5444-1926"
                 href={whatsappHref}
               />
-              <InfoRow icon={MapPin} label="Localização" value="São Paulo · Brasil" />
+              <InfoRow icon={MapPin} label={t.location} value={t.country} />
               <InfoRow icon={Building2} label="CNPJ" value="66.428.598/0001-22" />
             </div>
 
@@ -101,15 +162,15 @@ function CartaoPage() {
                 className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-[0_0.5rem_1.5rem_-0.375rem_rgba(37,211,102,0.5)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0.75rem_2rem_-0.375rem_rgba(37,211,102,0.65)]"
               >
                 <MessageCircle className="h-4 w-4" />
-                Conversar no WhatsApp
+                {t.whatsapp}
               </a>
 
               <button
-                onClick={downloadVCard}
+                onClick={() => downloadVCard(vcard)}
                 className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground backdrop-blur transition-all duration-300 hover:bg-white/[0.06] hover:border-white/20"
               >
                 <Download className="h-4 w-4" />
-                Salvar contato
+                {t.save}
               </button>
             </div>
 

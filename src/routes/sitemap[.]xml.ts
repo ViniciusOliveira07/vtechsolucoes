@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CATEGORIES, POSTS } from "@/lib/blog";
-import { absoluteUrl, SERVICES } from "@/lib/site";
+import { localizedUrl, SERVICES } from "@/lib/site";
+import { DEFAULT_LOCALE, LOCALE_META, LOCALES } from "@/lib/i18n";
 
 // Data da última revisão das páginas institucionais. Atualize ao mudar o conteúdo delas.
 const PAGES_UPDATED = "2026-10-27";
@@ -35,16 +36,31 @@ function entries(): Entry[] {
   ];
 }
 
+// Cada URL declara as versões nos três idiomas (mesmo endereço com ?lang=) e o x-default em português.
+function alternates(path: string) {
+  return [
+    ...LOCALES.map(
+      (l) => `<xhtml:link rel="alternate" hreflang="${LOCALE_META[l].html}" href="${xmlEscape(localizedUrl(path, l))}"/>`,
+    ),
+    `<xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(localizedUrl(path, DEFAULT_LOCALE))}"/>`,
+  ].join("");
+}
+
+const xmlEscape = (s: string) => s.replace(/&/g, "&amp;");
+
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: () => {
         const body =
-          `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+          `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
+          // uma <url> por idioma, todas com a mesma lista de alternates (como o Google recomenda)
           entries()
-            .map(
-              (e) =>
-                `  <url><loc>${absoluteUrl(e.path)}</loc><lastmod>${e.lastmod}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`,
+            .flatMap((e) =>
+              LOCALES.map(
+                (l) =>
+                  `  <url><loc>${xmlEscape(localizedUrl(e.path, l))}</loc>${alternates(e.path)}<lastmod>${e.lastmod}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`,
+              ),
             )
             .join("\n") +
           `\n</urlset>\n`;

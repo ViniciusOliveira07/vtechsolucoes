@@ -4,18 +4,77 @@ import { AlertCircle, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { CONSENT_ERROR, Field, Honeypot, PrivacyConsent } from "@/components/site/ContactForm";
 import { Events } from "@/lib/analytics";
-import { formatPhone, HONEYPOT_NAME, leadFields, loadSavedLead, saveLead, sendLead } from "@/lib/leads";
+import { formatPhone, HONEYPOT_NAME, leadFieldsFor, loadSavedLead, saveLead, sendLead } from "@/lib/leads";
 import { absoluteUrl } from "@/lib/site";
+import { LOCALES, useLocale, useT, type L } from "@/lib/i18n";
 import type { Post } from "@/lib/blog";
 
-const schema = z.object(leadFields);
-type Values = z.infer<typeof schema>;
+// Uma versão do schema por idioma, para as mensagens de erro saírem no idioma de quem preenche
+const SCHEMAS = Object.fromEntries(LOCALES.map((l) => [l, z.object(leadFieldsFor(l))])) as L<
+  z.ZodObject<ReturnType<typeof leadFieldsFor>>
+>;
+type Values = z.infer<(typeof SCHEMAS)["pt"]>;
 type Errors = Partial<Record<keyof Values, string>>;
 
 const EMPTY: Values = { name: "", phone: "", email: "" };
 
+const TEXT = {
+  pt: {
+    button: "Baixar em PDF",
+    doneTitle: "Download iniciado",
+    doneDesc: (title: string) =>
+      `O PDF de "${title}" está sendo salvo no seu dispositivo. Se o download não começou, use o botão abaixo.`,
+    again: "Baixar novamente",
+    back: "Voltar ao artigo",
+    kicker: "Material em PDF",
+    title: "Baixe este artigo",
+    desc: (title: string) => `Informe seus dados para receber "${title}" em PDF.`,
+    name: "Nome",
+    email: "Email",
+    phone: "Telefone",
+    error: "Não foi possível gerar o PDF. Verifique sua conexão e tente de novo.",
+    generating: "Gerando PDF…",
+    submit: "Baixar PDF",
+  },
+  en: {
+    button: "Download as PDF",
+    doneTitle: "Download started",
+    doneDesc: (title: string) =>
+      `The PDF of "${title}" is being saved to your device. If the download did not start, use the button below.`,
+    again: "Download again",
+    back: "Back to the article",
+    kicker: "PDF material",
+    title: "Download this article",
+    desc: (title: string) => `Enter your details to get "${title}" as a PDF.`,
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    error: "Could not generate the PDF. Check your connection and try again.",
+    generating: "Generating PDF…",
+    submit: "Download PDF",
+  },
+  es: {
+    button: "Descargar en PDF",
+    doneTitle: "Descarga iniciada",
+    doneDesc: (title: string) =>
+      `El PDF de "${title}" se está guardando en su dispositivo. Si la descarga no comenzó, use el botón de abajo.`,
+    again: "Descargar de nuevo",
+    back: "Volver al artículo",
+    kicker: "Material en PDF",
+    title: "Descargue este artículo",
+    desc: (title: string) => `Ingrese sus datos para recibir "${title}" en PDF.`,
+    name: "Nombre",
+    email: "Email",
+    phone: "Teléfono",
+    error: "No fue posible generar el PDF. Verifique su conexión e intente de nuevo.",
+    generating: "Generando PDF…",
+    submit: "Descargar PDF",
+  },
+};
+
 export function DownloadPostButton({ post, className }: { post: Post; className?: string }) {
   const [open, setOpen] = useState(false);
+  const t = useT(TEXT);
   return (
     <>
       <button
@@ -29,7 +88,7 @@ export function DownloadPostButton({ post, className }: { post: Post; className?
         <svg aria-hidden viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13.5h11" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        Baixar em PDF
+        {t.button}
       </button>
       <DownloadPostDialog post={post} open={open} onOpenChange={setOpen} />
     </>
@@ -45,6 +104,9 @@ function DownloadPostDialog({
   open: boolean;
   onOpenChange: (v: boolean) => void;
 }) {
+  const locale = useLocale();
+  const t = useT(TEXT);
+  const schema = SCHEMAS[locale];
   const [values, setValues] = useState<Values>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
@@ -66,7 +128,7 @@ function DownloadPostDialog({
   }, [open]);
 
   const validate = (name: keyof Values, v: string) => {
-    const r = leadFields[name].safeParse(v.trim());
+    const r = schema.shape[name].safeParse(v.trim());
     setErrors((e) => ({ ...e, [name]: r.success ? undefined : r.error.issues[0].message }));
   };
 
@@ -79,7 +141,7 @@ function DownloadPostDialog({
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const r = schema.safeParse(values);
-    if (!consentAt) setConsentError(CONSENT_ERROR);
+    if (!consentAt) setConsentError(CONSENT_ERROR[locale]);
     if (!r.success) {
       const fe: Errors = {};
       for (const issue of r.error.issues) {
@@ -96,11 +158,13 @@ function DownloadPostDialog({
     Events.generateLead(`download:${post.slug}`);
     saveLead(values);
     // O lead é enviado junto com a geração do arquivo; uma falha de rede não impede o download.
+    // A mensagem vai para o grupo interno da equipe, por isso o rótulo fica em português.
     const leadSent = sendLead(
       { ...values, message: `[Download de material] ${post.title} — ${absoluteUrl(`/blog/${post.slug}`)}` },
       "download",
       honeypot,
       consentAt,
+      locale,
     );
     try {
       const { downloadPostPdf } = await import("@/lib/post-pdf");
@@ -130,16 +194,16 @@ function DownloadPostDialog({
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ok/40 text-ok">
               <Check className="h-5 w-5" />
             </span>
-            <DialogTitle className="text-[1.375rem] font-medium tracking-[-0.02em]">Download iniciado</DialogTitle>
+            <DialogTitle className="text-[1.375rem] font-medium tracking-[-0.02em]">{t.doneTitle}</DialogTitle>
             <DialogDescription className="text-[0.9375rem] text-muted-foreground">
-              O PDF de "{post.title}" está sendo salvo no seu dispositivo. Se o download não começou, use o botão abaixo.
+              {t.doneDesc(post.title)}
             </DialogDescription>
             <div className="mt-2 flex flex-wrap gap-3">
               <button type="button" className="btn" onClick={retry}>
-                Baixar novamente
+                {t.again}
               </button>
               <button type="button" className="btn btn-line" onClick={() => onOpenChange(false)}>
-                Voltar ao artigo
+                {t.back}
               </button>
             </div>
           </div>
@@ -147,16 +211,16 @@ function DownloadPostDialog({
           <form onSubmit={onSubmit} noValidate className="relative grid gap-4">
             <Honeypot />
             <div className="pr-8">
-              <p className="kicker text-signal">Material em PDF</p>
+              <p className="kicker text-signal">{t.kicker}</p>
               <DialogTitle className="mt-3 text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">
-                Baixe este artigo
+                {t.title}
               </DialogTitle>
               <DialogDescription className="mt-2 text-[0.9375rem] text-muted-foreground">
-                Informe seus dados para receber "{post.title}" em PDF.
+                {t.desc(post.title)}
               </DialogDescription>
             </div>
             <Field
-              label="Nome"
+              label={t.name}
               name="dl-name"
               required
               value={values.name}
@@ -169,7 +233,7 @@ function DownloadPostDialog({
               autoComplete="name"
             />
             <Field
-              label="Email"
+              label={t.email}
               name="dl-email"
               type="email"
               required
@@ -184,7 +248,7 @@ function DownloadPostDialog({
               inputMode="email"
             />
             <Field
-              label="Telefone"
+              label={t.phone}
               name="dl-phone"
               type="tel"
               required
@@ -210,11 +274,11 @@ function DownloadPostDialog({
             {status === "error" && (
               <p role="alert" className="flex items-center gap-1.5 text-[0.8125rem] text-destructive">
                 <AlertCircle className="h-3.5 w-3.5 shrink-0" />
-                Não foi possível gerar o PDF. Verifique sua conexão e tente de novo.
+                {t.error}
               </p>
             )}
             <button type="submit" className="btn mt-1 w-full" disabled={status === "loading"}>
-              {status === "loading" ? "Gerando PDF…" : "Baixar PDF"}
+              {status === "loading" ? t.generating : t.submit}
             </button>
           </form>
         )}

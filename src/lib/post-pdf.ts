@@ -1,10 +1,33 @@
 import { jsPDF } from "jspdf";
 import { Lexer, type Token, type Tokens } from "marked";
-import { formatDate, postBody, type Post } from "@/lib/blog";
-import { absoluteUrl, COMPANY } from "@/lib/site";
+import { formatDate, getCategory, postBody, type Post } from "@/lib/blog";
+import { pick } from "@/lib/i18n";
+import { COMPANY, localizedUrl } from "@/lib/site";
 
 // Gera o PDF de um artigo no navegador, a partir do mesmo markdown da página.
 // Carregado sob demanda (import dinâmico) só quando alguém pede o download.
+// O PDF inteiro (textos fixos e conteúdo) sai no idioma do artigo, post.locale.
+
+const TEXT = {
+  pt: {
+    reading: "min de leitura",
+    closingTitle: "Quer aplicar isso na sua operação?",
+    closingBody: (phone: string) =>
+      `Fale com a Vtech pelo WhatsApp ${phone}. Proposta com escopo, prazo e investimento em até 24h úteis.`,
+  },
+  en: {
+    reading: "min read",
+    closingTitle: "Want to apply this to your operation?",
+    closingBody: (phone: string) =>
+      `Talk to Vtech on WhatsApp at ${phone}. Proposal with scope, timeline and investment within 24 business hours.`,
+  },
+  es: {
+    reading: "min de lectura",
+    closingTitle: "¿Quiere aplicar esto en su operación?",
+    closingBody: (phone: string) =>
+      `Hable con Vtech por WhatsApp al ${phone}. Propuesta con alcance, plazo e inversión en hasta 24 horas hábiles.`,
+  },
+};
 
 const PAGE = { w: 595.28, h: 841.89 }; // A4 em pontos
 const M = { x: 56, top: 64, bottom: 64 };
@@ -56,6 +79,9 @@ function segments(tokens: Token[] | undefined, bold = false): Seg[] {
 
 export function buildPostPdf(post: Post) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const locale = post.locale;
+  const t = pick(TEXT, locale);
+  const categoryName = getCategory(post.category.slug, locale)?.name ?? post.category.name;
   let y = M.top;
 
   const font = (s: Seg, size: number) => {
@@ -117,7 +143,7 @@ export function buildPostPdf(post: Post) {
   doc.text("soluções", M.x + doc.getTextWidth("vtech "), 23);
   doc.setFont("courier", "normal");
   doc.setTextColor("#7fd4ff");
-  doc.text(post.category.name.toUpperCase(), PAGE.w - M.x, 23, { align: "right" });
+  doc.text(categoryName.toUpperCase(), PAGE.w - M.x, 23, { align: "right" });
 
   y = 92;
   doc.setFont("helvetica", "bold");
@@ -133,14 +159,14 @@ export function buildPostPdf(post: Post) {
   doc.setFont("courier", "normal");
   doc.setFontSize(9);
   doc.setTextColor(FAINT);
-  doc.text(`${post.author}  ·  ${formatDate(post.publishedAt)}  ·  ${post.readingMinutes} min de leitura`, M.x, y);
+  doc.text(`${post.author}  ·  ${formatDate(post.publishedAt, locale)}  ·  ${post.readingMinutes} ${t.reading}`, M.x, y);
   y += 16;
   doc.setDrawColor(RULE);
   doc.line(M.x, y, PAGE.w - M.x, y);
   y += 26;
 
   // ── Corpo ──
-  const tokens = new Lexer().lex(postBody(post.slug));
+  const tokens = new Lexer().lex(postBody(post.slug, locale));
   for (const t of tokens) {
     switch (t.type) {
       case "heading": {
@@ -233,19 +259,19 @@ export function buildPostPdf(post: Post) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
   doc.setTextColor("#e8eef3");
-  doc.text("Quer aplicar isso na sua operação?", M.x + 20, y + 30);
+  doc.text(clean(t.closingTitle), M.x + 20, y + 30);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor("#a3afbc");
   doc.text(
-    `Fale com a Vtech pelo WhatsApp ${COMPANY.phoneDisplay}. Proposta com escopo, prazo e investimento em até 24h úteis.`,
+    t.closingBody(COMPANY.phoneDisplay),
     M.x + 20,
     y + 50,
     { maxWidth: WIDTH - 40 },
   );
 
   // ── Rodapé em todas as páginas ──
-  const url = absoluteUrl(`/blog/${post.slug}`).replace(/^https:\/\//, "");
+  const url = localizedUrl(`/blog/${post.slug}`, locale).replace(/^https:\/\//, "");
   const total = doc.getNumberOfPages();
   for (let i = 1; i <= total; i++) {
     doc.setPage(i);

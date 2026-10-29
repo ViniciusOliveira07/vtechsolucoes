@@ -5,16 +5,85 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Events } from "@/lib/analytics";
 import { COMPANY } from "@/lib/site";
-import { formatPhone, HONEYPOT_NAME, leadFields, saveLead, sendLead } from "@/lib/leads";
+import { formatPhone, HONEYPOT_NAME, leadFieldsFor, saveLead, sendLead } from "@/lib/leads";
+import { LOCALES, useLocale, useT, type L, type Locale } from "@/lib/i18n";
 
-const contactSchema = z.object({
-  ...leadFields,
-  message: z
-    .string()
-    .trim()
-    .min(10, "Conte um pouco mais sobre o projeto")
-    .max(1000, "Mensagem muito longa"),
-});
+const MESSAGE_ERRORS: L<{ short: string; long: string }> = {
+  pt: { short: "Conte um pouco mais sobre o projeto", long: "Mensagem muito longa" },
+  en: { short: "Tell us a bit more about the project", long: "Message is too long" },
+  es: { short: "Cuéntenos un poco más sobre el proyecto", long: "Mensaje demasiado largo" },
+};
+
+function buildContactSchema(locale: Locale) {
+  const e = MESSAGE_ERRORS[locale];
+  return z.object({
+    ...leadFieldsFor(locale),
+    message: z.string().trim().min(10, e.short).max(1000, e.long),
+  });
+}
+
+// Uma versão do schema por idioma (mensagens de erro no idioma de quem preenche), montada uma vez só
+const CONTACT_SCHEMAS = Object.fromEntries(LOCALES.map((l) => [l, buildContactSchema(l)])) as L<
+  ReturnType<typeof buildContactSchema>
+>;
+
+const TEXT = {
+  pt: {
+    name: "Nome",
+    phone: "Telefone",
+    email: "Email",
+    message: "Conte sobre o projeto",
+    sent: "Mensagem enviada!",
+    sending: "Enviando…",
+    submit: "Enviar mensagem",
+    sentNote: "Seu WhatsApp foi aberto com a mensagem pronta. Basta enviar!",
+  },
+  en: {
+    name: "Name",
+    phone: "Phone",
+    email: "Email",
+    message: "Tell us about the project",
+    sent: "Message ready",
+    sending: "Sending…",
+    submit: "Send message",
+    sentNote: "WhatsApp opened with your message ready. Just hit send.",
+  },
+  es: {
+    name: "Nombre",
+    phone: "Teléfono",
+    email: "Email",
+    message: "Cuéntenos sobre el proyecto",
+    sent: "Mensaje listo",
+    sending: "Enviando…",
+    submit: "Enviar mensaje",
+    sentNote: "Su WhatsApp se abrió con el mensaje listo. Solo tiene que enviarlo.",
+  },
+};
+
+// Mensagem pré-preenchida do WhatsApp, no idioma de quem preenche
+const WHATSAPP_TEXT: L<{ intro: string; name: string; phone: string; email: string; about: string }> = {
+  pt: {
+    intro: "Olá! Vim pelo site da Vtech Soluções e gostaria de iniciar um projeto.",
+    name: "Nome",
+    phone: "Telefone",
+    email: "Email",
+    about: "Sobre o projeto",
+  },
+  en: {
+    intro: "Hi! I came through the Vtech Soluções website and would like to start a project.",
+    name: "Name",
+    phone: "Phone",
+    email: "Email",
+    about: "About the project",
+  },
+  es: {
+    intro: "¡Hola! Llegué por el sitio de Vtech Soluções y me gustaría iniciar un proyecto.",
+    name: "Nombre",
+    phone: "Teléfono",
+    email: "Email",
+    about: "Sobre el proyecto",
+  },
+};
 
 type FormState = {
   name: string;
@@ -27,17 +96,21 @@ type Errors = Partial<Record<keyof FormState, string>>;
 
 const initialState: FormState = { name: "", phone: "", email: "", message: "" };
 
-function buildWhatsAppUrl(values: FormState) {
+function buildWhatsAppUrl(values: FormState, locale: Locale) {
+  const w = WHATSAPP_TEXT[locale];
   const text =
-    `Olá! Vim pelo site da Vtech Soluções e gostaria de iniciar um projeto.\n\n` +
-    `*Nome:* ${values.name}\n` +
-    `*Telefone:* ${values.phone}\n` +
-    `*Email:* ${values.email}\n\n` +
-    `*Sobre o projeto:*\n${values.message}`;
+    `${w.intro}\n\n` +
+    `*${w.name}:* ${values.name}\n` +
+    `*${w.phone}:* ${values.phone}\n` +
+    `*${w.email}:* ${values.email}\n\n` +
+    `*${w.about}:*\n${values.message}`;
   return `https://wa.me/${COMPANY.whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
 export function ContactForm() {
+  const locale = useLocale();
+  const t = useT(TEXT);
+  const contactSchema = CONTACT_SCHEMAS[locale];
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormState, boolean>>>({});
@@ -67,7 +140,7 @@ export function ContactForm() {
     setSubmitError(null);
 
     const result = contactSchema.safeParse(values);
-    if (!consentAt) setConsentError(CONSENT_ERROR);
+    if (!consentAt) setConsentError(CONSENT_ERROR[locale]);
     if (!result.success) {
       const fieldErrors: Errors = {};
       for (const issue of result.error.issues) {
@@ -85,11 +158,11 @@ export function ContactForm() {
 
     // 1–2. Aviso no grupo + planilha (silenciosos: o lead ainda chega pelo WhatsApp)
     const honeypot = String(new FormData(e.currentTarget).get(HONEYPOT_NAME) ?? "");
-    await sendLead(values, "contato", honeypot, consentAt);
+    await sendLead(values, "contato", honeypot, consentAt, locale);
     saveLead(values);
 
     // 3. Abre WhatsApp com a mensagem pré-preenchida
-    window.open(buildWhatsAppUrl(values), "_blank", "noopener,noreferrer");
+    window.open(buildWhatsAppUrl(values, locale), "_blank", "noopener,noreferrer");
 
     setLoading(false);
     setSent(true);
@@ -101,7 +174,7 @@ export function ContactForm() {
       {/* nome e telefone lado a lado até no celular, para o formulário caber numa tela */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <Field
-          label="Nome"
+          label={t.name}
           name="name"
           required
           value={values.name}
@@ -111,7 +184,7 @@ export function ContactForm() {
           autoComplete="name"
         />
         <Field
-          label="Telefone"
+          label={t.phone}
           name="phone"
           type="tel"
           required
@@ -124,7 +197,7 @@ export function ContactForm() {
         />
       </div>
       <Field
-        label="Email"
+        label={t.email}
         name="email"
         type="email"
         required
@@ -136,7 +209,7 @@ export function ContactForm() {
         inputMode="email"
       />
       <Field
-        label="Conte sobre o projeto"
+        label={t.message}
         name="message"
         textarea
         required
@@ -174,23 +247,23 @@ export function ContactForm() {
           {sent ? (
             <>
               <Check className="h-4 w-4" />
-              Mensagem enviada!
+              {t.sent}
             </>
           ) : loading ? (
             <>
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
-              Enviando…
+              {t.sending}
             </>
           ) : (
             <>
-              Enviar mensagem
+              {t.submit}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </>
           )}
         </button>
         {sent && (
           <p className="mt-4 text-sm text-muted-foreground">
-            Seu WhatsApp foi aberto com a mensagem pronta. Basta enviar!
+            {t.sentNote}
           </p>
         )}
       </div>
@@ -198,7 +271,18 @@ export function ContactForm() {
   );
 }
 
-export const CONSENT_ERROR = "Para enviar, aceite a política de privacidade.";
+/** Erro do aceite de privacidade, por idioma: `CONSENT_ERROR[locale]`. */
+export const CONSENT_ERROR: L<string> = {
+  pt: "Para enviar, aceite a política de privacidade.",
+  en: "To submit, please accept the privacy policy.",
+  es: "Para enviar, acepte la política de privacidad.",
+};
+
+const CONSENT_TEXT = {
+  pt: { before: "Li e aceito a", link: "política de privacidade", after: "e autorizo o contato da Vtech Soluções." },
+  en: { before: "I have read and accept the", link: "privacy policy", after: "and authorize Vtech Soluções to contact me." },
+  es: { before: "He leído y acepto la", link: "política de privacidad", after: "y autorizo a Vtech Soluções a contactarme." },
+};
 
 /**
  * Aceite obrigatório da política de privacidade em todo formulário que coleta contato.
@@ -216,6 +300,7 @@ export function PrivacyConsent({
   error?: string;
   onChange: (checked: boolean) => void;
 }) {
+  const t = useT(CONSENT_TEXT);
   return (
     <div className="grid gap-1">
       <div className="flex items-start gap-2.5">
@@ -231,7 +316,7 @@ export function PrivacyConsent({
           )}
         />
         <label htmlFor={id} className="cursor-pointer text-[0.8125rem] leading-snug text-muted-foreground">
-          Li e aceito a{" "}
+          {t.before}{" "}
           <a
             href="/politica-de-privacidade"
             target="_blank"
@@ -239,9 +324,9 @@ export function PrivacyConsent({
             onClick={(e) => e.stopPropagation()}
             className="text-foreground underline underline-offset-2 hover:text-signal"
           >
-            política de privacidade
+            {t.link}
           </a>{" "}
-          e autorizo o contato da Vtech Soluções.
+          {t.after}
         </label>
       </div>
       {error && (
@@ -259,12 +344,18 @@ export function Honeypot() {
   return (
     <div aria-hidden className="absolute -left-[624.9375rem] h-px w-px overflow-hidden">
       <label>
-        Site
+        Website
         <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" defaultValue="" />
       </label>
     </div>
   );
 }
+
+const TEXTAREA_PLACEHOLDER = {
+  pt: "Descreva brevemente o que você precisa…",
+  en: "Briefly describe what you need…",
+  es: "Describa brevemente lo que necesita…",
+};
 
 interface FieldProps {
   label: string;
@@ -280,6 +371,7 @@ interface FieldProps {
   inputMode?: "tel" | "email" | "text" | "numeric";
   maxLength?: number;
   helper?: string;
+  placeholder?: string;
 }
 
 export function Field({
@@ -296,8 +388,10 @@ export function Field({
   inputMode,
   maxLength,
   helper,
+  placeholder,
 }: FieldProps) {
   const [focused, setFocused] = useState(false);
+  const defaultPlaceholder = useT(TEXTAREA_PLACEHOLDER);
   const hasError = Boolean(error);
 
   const inputClass = cn(
@@ -324,7 +418,7 @@ export function Field({
           rows={5}
           value={value}
           maxLength={maxLength}
-          placeholder="Descreva brevemente o que você precisa…"
+          placeholder={placeholder ?? defaultPlaceholder}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur(); }}
           onChange={(e) => onChange(e.target.value)}
@@ -342,6 +436,7 @@ export function Field({
           autoComplete={autoComplete}
           inputMode={inputMode}
           maxLength={maxLength}
+          placeholder={placeholder}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur(); }}
           onChange={(e) => onChange(e.target.value)}

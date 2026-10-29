@@ -1,5 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { useT } from "@/lib/i18n";
+
+const HOME_LABEL = {
+  pt: "Vtech Soluções, página inicial",
+  en: "Vtech Soluções, home page",
+  es: "Vtech Soluções, página de inicio",
+};
 
 /** Monograma "V" com o ponto de sinal — mesma forma do favicon. */
 export function LogoMark({ className }: { className?: string }) {
@@ -21,11 +28,12 @@ export function LogoWord({ className }: { className?: string }) {
 }
 
 export function Logo({ className, onClick }: { className?: string; onClick?: () => void }) {
+  const label = useT(HOME_LABEL);
   return (
     <Link
       to="/"
       onClick={onClick}
-      aria-label="Vtech Soluções, página inicial"
+      aria-label={label}
       className={cn("inline-flex min-h-11 items-center gap-2.5 font-mono text-[1rem] font-medium tracking-tight", className)}
     >
       <LogoMark />

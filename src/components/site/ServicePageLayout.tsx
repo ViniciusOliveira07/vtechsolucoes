@@ -7,7 +7,134 @@ import { ReadMore } from "@/components/site/ReadMore";
 import { RailHint } from "@/components/site/RailHint";
 import { cn } from "@/lib/utils";
 import { Events } from "@/lib/analytics";
-import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/site";
+import { localizedUrl, SITE_NAME, SITE_URL } from "@/lib/site";
+import { pick, useT, type L, type Locale } from "@/lib/i18n";
+
+// Textos fixos do layout (o conteúdo de cada serviço vem da rota, já no idioma certo)
+const TEXT = {
+  pt: {
+    crumbsAria: "Trilha de navegação",
+    home: "início",
+    services: "serviços",
+    proposal: "Solicitar proposta →",
+    seeProcess: "Ver o processo",
+    understand: "Entenda o serviço",
+    problemKicker: "O problema",
+    problemTitle: "Onde a maioria trava, e como destravamos",
+    problemAria: "Problemas e soluções",
+    forWhoKicker: "Para quem é",
+    forWhoTitle: "Empresas que tiram mais valor desse serviço",
+    forWhoAria: "Perfis de empresa",
+    deliverKicker: "O que entregamos",
+    deliverTitle: "Escopo concreto, não promessa",
+    deliverAria: "Entregáveis",
+    casesKicker: "Casos de uso",
+    casesTitle: "Aplicações típicas desse serviço",
+    casesAria: "Casos de uso",
+    stackKicker: "Stack",
+    stackTitle: "Decisões técnicas que envelhecem bem",
+    stackAria: "Tecnologias",
+    processKicker: "Processo",
+    processTitle: "Quatro etapas, cada uma com uma entrega",
+    processAria: "Etapas",
+    step: "Etapa",
+    glossKicker: "Glossário",
+    glossTitle: "Termos que você vai ouvir nesse universo",
+    faqKicker: "Perguntas frequentes",
+    faqTitle: "Dúvidas comuns, respostas diretas",
+    relatedKicker: "Serviços relacionados",
+    relatedTitle: "Combine para um resultado completo",
+    relatedAria: "Serviços relacionados",
+    seeService: "ver serviço →",
+  },
+  en: {
+    crumbsAria: "Breadcrumb",
+    home: "home",
+    services: "services",
+    proposal: "Request a proposal →",
+    seeProcess: "See the process",
+    understand: "Understand the service",
+    problemKicker: "The problem",
+    problemTitle: "Where most teams get stuck, and how we get them moving",
+    problemAria: "Problems and solutions",
+    forWhoKicker: "Who it is for",
+    forWhoTitle: "Companies that get the most out of this service",
+    forWhoAria: "Company profiles",
+    deliverKicker: "What we deliver",
+    deliverTitle: "Concrete scope, not promises",
+    deliverAria: "Deliverables",
+    casesKicker: "Use cases",
+    casesTitle: "Typical applications of this service",
+    casesAria: "Use cases",
+    stackKicker: "Stack",
+    stackTitle: "Technical decisions that age well",
+    stackAria: "Technologies",
+    processKicker: "Process",
+    processTitle: "Four stages, each with a deliverable",
+    processAria: "Stages",
+    step: "Stage",
+    glossKicker: "Glossary",
+    glossTitle: "Terms you will hear in this space",
+    faqKicker: "FAQ",
+    faqTitle: "Common questions, straight answers",
+    relatedKicker: "Related services",
+    relatedTitle: "Combine them for a complete result",
+    relatedAria: "Related services",
+    seeService: "see service →",
+  },
+  es: {
+    crumbsAria: "Ruta de navegación",
+    home: "inicio",
+    services: "servicios",
+    proposal: "Solicitar propuesta →",
+    seeProcess: "Ver el proceso",
+    understand: "Entienda el servicio",
+    problemKicker: "El problema",
+    problemTitle: "Dónde la mayoría se traba, y cómo lo destrabamos",
+    problemAria: "Problemas y soluciones",
+    forWhoKicker: "Para quién es",
+    forWhoTitle: "Empresas que más valor obtienen de este servicio",
+    forWhoAria: "Perfiles de empresa",
+    deliverKicker: "Qué entregamos",
+    deliverTitle: "Alcance concreto, no promesas",
+    deliverAria: "Entregables",
+    casesKicker: "Casos de uso",
+    casesTitle: "Aplicaciones típicas de este servicio",
+    casesAria: "Casos de uso",
+    stackKicker: "Stack",
+    stackTitle: "Decisiones técnicas que envejecen bien",
+    stackAria: "Tecnologías",
+    processKicker: "Proceso",
+    processTitle: "Cuatro etapas, cada una con un entregable",
+    processAria: "Etapas",
+    step: "Etapa",
+    glossKicker: "Glosario",
+    glossTitle: "Términos que va a escuchar en este universo",
+    faqKicker: "Preguntas frecuentes",
+    faqTitle: "Dudas comunes, respuestas directas",
+    relatedKicker: "Servicios relacionados",
+    relatedTitle: "Combínelos para un resultado completo",
+    relatedAria: "Servicios relacionados",
+    seeService: "ver servicio →",
+  },
+};
+
+/** Último item da trilha, no estilo de slug. Em português é o próprio slug da URL. */
+const CRUMB: Record<string, Omit<L<string>, "pt">> = {
+  "automacoes-com-ia": { en: "ai-automations", es: "automatizaciones-con-ia" },
+  "sistemas-web": { en: "web-systems", es: "sistemas-web" },
+  integracoes: { en: "integrations", es: "integraciones" },
+  "sites-institucionais": { en: "corporate-websites", es: "sitios-institucionales" },
+  "consultoria-tech": { en: "tech-consulting", es: "consultoria-tech" },
+};
+
+const BREADCRUMB = {
+  pt: { home: "Início", services: "Serviços" },
+  en: { home: "Home", services: "Services" },
+  es: { home: "Inicio", services: "Servicios" },
+};
+
+const COUNTRY = { pt: "Brasil", en: "Brazil", es: "Brasil" };
 
 export type RelatedService = {
   slug: string;
@@ -52,6 +179,8 @@ function Head({ kicker, title }: { kicker: string; title: string }) {
 const CELL = "px-[clamp(1.125rem,2.4vw,1.5rem)] py-[clamp(1rem,3vh,1.75rem)]";
 
 export function ServicePageLayout({ data }: { data: ServicePageData }) {
+  const t = useT(TEXT);
+  const crumb = useT({ pt: data.slug, en: CRUMB[data.slug]?.en ?? data.slug, es: CRUMB[data.slug]?.es ?? data.slug });
   const withFlow = data.slug === "automacoes-com-ia";
   return (
     <>
@@ -62,15 +191,15 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
           className="grid-lines pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_80%_30%,#000_20%,transparent_75%)]"
         />
         <div className="shell relative">
-          <nav aria-label="Trilha de navegação" className="hero-crumbs hide-short font-mono text-xs text-faint">
+          <nav aria-label={t.crumbsAria} className="hero-crumbs hide-short font-mono text-xs text-faint">
             <Link to="/" className="hover:text-foreground">
-              início
+              {t.home}
             </Link>{" "}
             /{" "}
             <Link to="/servicos" className="hover:text-foreground">
-              serviços
+              {t.services}
             </Link>{" "}
-            / <span className="text-foreground">{data.slug}</span>
+            / <span className="text-foreground">{crumb}</span>
           </nav>
           <div
             className={
@@ -93,14 +222,14 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                   onClick={() => Events.ctaClick("Solicitar proposta", "hero", data.slug)}
                   className="btn max-sm:flex-1 max-sm:basis-full"
                 >
-                  Solicitar proposta →
+                  {t.proposal}
                 </Link>
                 <a
                   href="#processo"
                   onClick={() => Events.ctaClick("Ver processo", "hero", data.slug)}
                   className="btn btn-line max-sm:flex-1 max-sm:basis-full"
                 >
-                  Ver o processo
+                  {t.seeProcess}
                 </a>
               </div>
               <ul className="hero-facts hide-short flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-faint">
@@ -129,7 +258,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         <section className="section">
           <div className="shell grid gap-[clamp(1rem,4vh,2.5rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
             <div className="min-w-0">
-              <p className="kicker hide-short">Entenda o serviço</p>
+              <p className="kicker hide-short">{t.understand}</p>
               <h2 className="h-section mt-[clamp(0.5rem,1.6vh,1rem)]">{data.oQueE.title}</h2>
             </div>
             <ReadMore className="max-w-[68ch]">
@@ -146,8 +275,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {/* Problema → Solução */}
       <section className="section">
         <div className="shell">
-          <Head kicker="O problema" title="Onde a maioria trava, e como destravamos" />
-          <div tabIndex={0} aria-label="Problemas e soluções" className="rail rail-boxed grid border-t border-border">
+          <Head kicker={t.problemKicker} title={t.problemTitle} />
+          <div tabIndex={0} aria-label={t.problemAria} className="rail rail-boxed grid border-t border-border">
             {data.problemas.map((p, i) => (
               <div
                 key={i}
@@ -171,8 +300,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {data.paraQuem && data.paraQuem.length > 0 && (
         <section className="section">
           <div className="shell">
-            <Head kicker="Para quem é" title="Empresas que tiram mais valor desse serviço" />
-            <div tabIndex={0} aria-label="Perfis de empresa" className="rail rail-boxed grid border-l border-t border-border md:grid-cols-2">
+            <Head kicker={t.forWhoKicker} title={t.forWhoTitle} />
+            <div tabIndex={0} aria-label={t.forWhoAria} className="rail rail-boxed grid border-l border-t border-border md:grid-cols-2">
               {data.paraQuem.map((p, i) => (
                 <div key={i} className={cn("border-b border-r border-border", CELL)}>
                   <h3 className="text-[clamp(1.0625rem,2.4vh,1.1875rem)] tracking-[-0.015em]">{p.perfil}</h3>
@@ -188,10 +317,10 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {/* Entregáveis */}
       <section className="section">
         <div className="shell">
-          <Head kicker="O que entregamos" title="Escopo concreto, não promessa" />
+          <Head kicker={t.deliverKicker} title={t.deliverTitle} />
           <ul
             tabIndex={0}
-            aria-label="Entregáveis"
+            aria-label={t.deliverAria}
             className="rail rail-boxed grid overflow-hidden rounded-[0.875rem] border border-border bg-surface md:grid-cols-2 lg:grid-cols-3"
           >
             {data.entregaveis.map((e, i) => (
@@ -214,8 +343,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {data.casosDeUso && data.casosDeUso.length > 0 && (
         <section className="section">
           <div className="shell">
-            <Head kicker="Casos de uso" title="Aplicações típicas desse serviço" />
-            <div tabIndex={0} aria-label="Casos de uso" className="rail grid gap-5 md:grid-cols-2">
+            <Head kicker={t.casesKicker} title={t.casesTitle} />
+            <div tabIndex={0} aria-label={t.casesAria} className="rail grid gap-5 md:grid-cols-2">
               {data.casosDeUso.map((c, i) => (
                 <div key={i} className={cn("panel", CELL)}>
                   <h3 className="text-[1.25rem] tracking-[-0.015em]">{c.title}</h3>
@@ -231,8 +360,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {/* Stack */}
       <section className="section">
         <div className="shell">
-          <Head kicker="Stack" title="Decisões técnicas que envelhecem bem" />
-          <dl tabIndex={0} aria-label="Tecnologias" className="rail rail-boxed grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+          <Head kicker={t.stackKicker} title={t.stackTitle} />
+          <dl tabIndex={0} aria-label={t.stackAria} className="rail rail-boxed grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
             {data.stack.map((s, i) => (
               <div key={i} className={cn("border-b border-r border-border", CELL)}>
                 <dt className="font-mono text-[0.8125rem] text-signal">{s.title}</dt>
@@ -247,11 +376,11 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {/* Processo */}
       <section id="processo" className="section">
         <div className="shell">
-          <Head kicker="Processo" title="Quatro etapas, cada uma com uma entrega" />
-          <ol tabIndex={0} aria-label="Etapas" className="rail rail-boxed grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+          <Head kicker={t.processKicker} title={t.processTitle} />
+          <ol tabIndex={0} aria-label={t.processAria} className="rail rail-boxed grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
             {data.processo.map((p, i) => (
               <li key={p.n} className={cn("border-b border-r border-border", CELL)}>
-                <span className="kicker text-signal">Etapa {i + 1}</span>
+                <span className="kicker text-signal">{t.step} {i + 1}</span>
                 <h3 className="mt-2 text-[1.25rem] tracking-[-0.02em]">{p.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
               </li>
@@ -265,7 +394,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {data.glossario && data.glossario.length > 0 && (
         <section className="section">
           <div className="shell">
-            <Head kicker="Glossário" title="Termos que você vai ouvir nesse universo" />
+            <Head kicker={t.glossKicker} title={t.glossTitle} />
             <dl className="grid border-t border-border">
               {data.glossario.map((g, i) => (
                 <div
@@ -285,8 +414,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       <section className="section">
         <div className="shell grid gap-[clamp(1rem,4vh,2.5rem)] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <div className="min-w-0">
-            <p className="kicker hide-short">Perguntas frequentes</p>
-            <h2 className="h-section mt-[clamp(0.5rem,1.6vh,1rem)]">Dúvidas comuns, respostas diretas</h2>
+            <p className="kicker hide-short">{t.faqKicker}</p>
+            <h2 className="h-section mt-[clamp(0.5rem,1.6vh,1rem)]">{t.faqTitle}</h2>
           </div>
           <div className="min-w-0">
             <ServiceFAQ items={data.faq} serviceSlug={data.slug} />
@@ -297,8 +426,8 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       {/* Serviços relacionados */}
       <section className="section">
         <div className="shell">
-          <Head kicker="Serviços relacionados" title="Combine para um resultado completo" />
-          <div tabIndex={0} aria-label="Serviços relacionados" className="rail grid gap-5 md:grid-cols-3">
+          <Head kicker={t.relatedKicker} title={t.relatedTitle} />
+          <div tabIndex={0} aria-label={t.relatedAria} className="rail grid gap-5 md:grid-cols-3">
             {data.relacionados.map((r) => (
               <Link
                 key={r.slug}
@@ -308,7 +437,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
               >
                 <h3 className="text-[1.25rem] tracking-[-0.015em] group-hover:text-signal">{r.title}</h3>
                 <p className="mt-2.5 text-[0.9375rem] text-muted-foreground">{r.desc}</p>
-                <span className="mt-auto pt-5 font-mono text-[0.8125rem] text-signal">ver serviço →</span>
+                <span className="mt-auto pt-5 font-mono text-[0.8125rem] text-signal">{t.seeService}</span>
               </Link>
             ))}
           </div>
@@ -316,6 +445,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
         </div>
       </section>
 
+      {/* o "?" final vem daqui; em espanhol o "¿" inicial já está no texto da rota */}
       <CtaBand title={`${data.ctaFinalTitle}?`} location="service_footer" slug={data.slug} />
     </>
   );
@@ -324,7 +454,13 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
 /**
  * Helpers de schema JSON-LD usados no head() de cada rota de serviço.
  */
-export function buildServiceSchema(opts: { name: string; description: string; url: string; serviceType: string }) {
+export function buildServiceSchema(opts: {
+  name: string;
+  description: string;
+  url: string;
+  serviceType: string;
+  locale: Locale;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -332,7 +468,7 @@ export function buildServiceSchema(opts: { name: string; description: string; ur
     description: opts.description,
     url: opts.url,
     serviceType: opts.serviceType,
-    areaServed: { "@type": "Country", name: "Brasil" },
+    areaServed: { "@type": "Country", name: COUNTRY[opts.locale] },
     provider: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -353,14 +489,15 @@ export function buildFAQSchema(items: FAQItem[]) {
   };
 }
 
-export function buildBreadcrumbSchema(eyebrow: string, slug: string) {
+export function buildBreadcrumbSchema(eyebrow: string, slug: string, locale: Locale) {
+  const t = pick(BREADCRUMB, locale);
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Início", item: absoluteUrl("/") },
-      { "@type": "ListItem", position: 2, name: "Serviços", item: absoluteUrl("/servicos") },
-      { "@type": "ListItem", position: 3, name: eyebrow, item: absoluteUrl(`/servicos/${slug}`) },
+      { "@type": "ListItem", position: 1, name: t.home, item: localizedUrl("/", locale) },
+      { "@type": "ListItem", position: 2, name: t.services, item: localizedUrl("/servicos", locale) },
+      { "@type": "ListItem", position: 3, name: eyebrow, item: localizedUrl(`/servicos/${slug}`, locale) },
     ],
   };
 }

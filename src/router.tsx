@@ -1,8 +1,31 @@
 import { createRouter, useRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { useT } from "@/lib/i18n";
+
+const ERROR_TEXT = {
+  pt: {
+    title: "Algo deu errado",
+    desc: "Ocorreu um erro inesperado ao carregar esta página. Tente novamente.",
+    retry: "Tentar novamente",
+    home: "Voltar para o início",
+  },
+  en: {
+    title: "Something went wrong",
+    desc: "An unexpected error occurred while loading this page. Please try again.",
+    retry: "Try again",
+    home: "Back to home",
+  },
+  es: {
+    title: "Algo salió mal",
+    desc: "Ocurrió un error inesperado al cargar esta página. Intente de nuevo.",
+    retry: "Intentar de nuevo",
+    home: "Volver al inicio",
+  },
+};
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
+  const t = useT(ERROR_TEXT);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -23,10 +46,8 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-medium tracking-tight text-foreground">Algo deu errado</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Ocorreu um erro inesperado ao carregar esta página. Tente novamente.
-        </p>
+        <h1 className="text-2xl font-medium tracking-tight text-foreground">{t.title}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
         {import.meta.env.DEV && error.message && (
           <pre className="mt-4 max-h-40 overflow-auto rounded-md bg-muted p-3 text-left font-mono text-xs text-destructive">
             {error.message}
@@ -40,10 +61,10 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
             }}
             className="btn"
           >
-            Tentar novamente
+            {t.retry}
           </button>
           <a href="/" className="btn btn-line">
-            Voltar para o início
+            {t.home}
           </a>
         </div>
       </div>

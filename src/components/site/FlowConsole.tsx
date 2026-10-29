@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useT, type L } from "@/lib/i18n";
 
 // Diagrama ilustrativo: canais de entrada → agente → sistemas de destino.
 // O HTML do servidor já sai completo (nós, fios e log); a animação dos pacotes só roda no cliente.
@@ -15,34 +16,109 @@ const WIRES = {
 
 type WireId = keyof typeof WIRES;
 
-const ROUTES: { from: WireId; to: WireId; event: string; result: string }[] = [
-  { from: "w1", to: "w4", event: "lead.recebido", result: "crm.oportunidade_criada" },
-  { from: "w2", to: "w6", event: "formulario.enviado", result: "equipe.resumo_enviado" },
-  { from: "w3", to: "w5", event: "nota_fiscal.recebida", result: "erp.pedido_lancado" },
-  { from: "w1", to: "w6", event: "duvida.cliente", result: "agente.respondeu_com_fonte" },
+const ROUTES: { from: WireId; to: WireId }[] = [
+  { from: "w1", to: "w4" },
+  { from: "w2", to: "w6" },
+  { from: "w3", to: "w5" },
+  { from: "w1", to: "w6" },
 ];
 
-const SOURCES = [
-  { y: 40, title: "WhatsApp", sub: "canal" },
-  { y: 130, title: "Site", sub: "formulário" },
-  { y: 220, title: "E-mail", sub: "documentos" },
-];
-const TARGETS = [
-  { y: 40, title: "CRM", sub: "oportunidade" },
-  { y: 130, title: "ERP", sub: "pedido" },
-  { y: 220, title: "Equipe", sub: "resumo" },
-];
+// Textos do diagrama; `log` segue a ordem de ROUTES (evento → resultado).
+const TEXT: L<{
+  log: { event: string; result: string }[];
+  sources: { title: string; sub: string }[];
+  targets: { title: string; sub: string }[];
+  agent: [string, string, string];
+  bar: string;
+  live: string;
+  aria: string;
+  caption: string;
+}> = {
+  pt: {
+    log: [
+      { event: "lead.recebido", result: "crm.oportunidade_criada" },
+      { event: "formulario.enviado", result: "equipe.resumo_enviado" },
+      { event: "nota_fiscal.recebida", result: "erp.pedido_lancado" },
+      { event: "duvida.cliente", result: "agente.respondeu_com_fonte" },
+    ],
+    sources: [
+      { title: "WhatsApp", sub: "canal" },
+      { title: "Site", sub: "formulário" },
+      { title: "E-mail", sub: "documentos" },
+    ],
+    targets: [
+      { title: "CRM", sub: "oportunidade" },
+      { title: "ERP", sub: "pedido" },
+      { title: "Equipe", sub: "resumo" },
+    ],
+    agent: ["Agente", "qualifica", "e decide"],
+    bar: "fluxo: atendimento → crm",
+    live: "ao vivo",
+    aria: "Canais de entrada (WhatsApp, site e e-mail) ligados a um agente, que atualiza CRM e ERP e envia um resumo para a equipe",
+    caption: "Simulação ilustrativa de um fluxo típico. Não representa um cliente.",
+  },
+  en: {
+    log: [
+      { event: "lead.received", result: "crm.opportunity_created" },
+      { event: "form.submitted", result: "team.summary_sent" },
+      { event: "invoice.received", result: "erp.order_posted" },
+      { event: "customer.question", result: "agent.answered_with_source" },
+    ],
+    sources: [
+      { title: "WhatsApp", sub: "channel" },
+      { title: "Website", sub: "form" },
+      { title: "Email", sub: "documents" },
+    ],
+    targets: [
+      { title: "CRM", sub: "opportunity" },
+      { title: "ERP", sub: "order" },
+      { title: "Team", sub: "summary" },
+    ],
+    agent: ["Agent", "qualifies", "and decides"],
+    bar: "flow: support → crm",
+    live: "live",
+    aria: "Inbound channels (WhatsApp, website and email) connected to an agent that updates the CRM and ERP and sends a summary to the team",
+    caption: "Illustrative simulation of a typical flow. Does not represent a client.",
+  },
+  es: {
+    log: [
+      { event: "lead.recibido", result: "crm.oportunidad_creada" },
+      { event: "formulario.enviado", result: "equipo.resumen_enviado" },
+      { event: "factura.recibida", result: "erp.pedido_registrado" },
+      { event: "duda.cliente", result: "agente.respondio_con_fuente" },
+    ],
+    sources: [
+      { title: "WhatsApp", sub: "canal" },
+      { title: "Sitio", sub: "formulario" },
+      { title: "Correo", sub: "documentos" },
+    ],
+    targets: [
+      { title: "CRM", sub: "oportunidad" },
+      { title: "ERP", sub: "pedido" },
+      { title: "Equipo", sub: "resumen" },
+    ],
+    agent: ["Agente", "califica", "y decide"],
+    bar: "flujo: atención → crm",
+    live: "en vivo",
+    aria: "Canales de entrada (WhatsApp, sitio y correo) conectados a un agente que actualiza el CRM y el ERP y envía un resumen al equipo",
+    caption: "Simulación ilustrativa de un flujo típico. No representa a un cliente.",
+  },
+};
 
-type Line = { t: string; event: string; result: string };
+const NODE_Y = [40, 130, 220];
+
+// Cada linha guarda só a rota; o texto sai do idioma atual na hora de desenhar.
+type Line = { t: string; route: number };
 
 const START = 9 * 3600 + 14 * 60 + 2; // 09:14:02
 const fmt = (s: number) =>
   [Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60].map((n) => String(n).padStart(2, "0")).join(":");
 
-const INITIAL: Line[] = ROUTES.map((r, i) => ({ t: fmt(START + i * 7), event: r.event, result: r.result }));
+const INITIAL: Line[] = ROUTES.map((_, i) => ({ t: fmt(START + i * 7), route: i }));
 
 /** `compact`: só o diagrama (sem o log de eventos), para caber em telas de celular. */
 export function FlowConsole({ compact = false }: { compact?: boolean }) {
+  const tx = useT(TEXT);
   const [lines, setLines] = useState<Line[]>(INITIAL);
   const [pulse, setPulse] = useState(false);
   const pktLayer = useRef<SVGGElement>(null);
@@ -90,13 +166,14 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
         timers.push(window.setTimeout(loop, 1500));
         return;
       }
-      const r = ROUTES[i++ % ROUTES.length];
+      const route = i++ % ROUTES.length;
+      const r = ROUTES[route];
       travel(r.from, 900, () => {
         setPulse(true);
         timers.push(window.setTimeout(() => setPulse(false), 260));
         travel(r.to, 900, () => {
           clock += 3 + Math.floor(Math.random() * 9);
-          setLines((ls) => [...ls, { t: fmt(clock), event: r.event, result: r.result }].slice(-5));
+          setLines((ls) => [...ls, { t: fmt(clock), route }].slice(-5));
         });
       });
       timers.push(window.setTimeout(loop, 1500));
@@ -117,14 +194,14 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
             <i className="h-2 w-2 rounded-full bg-border-strong" />
             <i className="h-2 w-2 rounded-full bg-border-strong" />
           </span>
-          <span>fluxo: atendimento → crm</span>
-          <span>ao vivo</span>
+          <span>{tx.bar}</span>
+          <span>{tx.live}</span>
         </div>
         <svg
           viewBox="0 0 520 300"
           className="flow-svg block h-auto w-full"
           role="img"
-          aria-label="Canais de entrada (WhatsApp, site e e-mail) ligados a um agente, que atualiza CRM e ERP e envia um resumo para a equipe"
+          aria-label={tx.aria}
         >
           {(Object.keys(WIRES) as WireId[]).map((id) => (
             <path
@@ -138,11 +215,11 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
               strokeWidth={1.2}
             />
           ))}
-          {SOURCES.map((n) => (
-            <Node key={n.title} x={18} {...n} />
+          {tx.sources.map((n, i) => (
+            <Node key={i} x={18} y={NODE_Y[i]} {...n} />
           ))}
-          {TARGETS.map((n) => (
-            <Node key={n.title} x={402} {...n} />
+          {tx.targets.map((n, i) => (
+            <Node key={i} x={402} y={NODE_Y[i]} {...n} />
           ))}
           <g>
             <rect
@@ -156,13 +233,13 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
               style={{ transition: "fill .2s" }}
             />
             <text x={234} y={146} fill="var(--foreground)" fontFamily="var(--font-mono)" fontSize={11} fontWeight={500}>
-              Agente
+              {tx.agent[0]}
             </text>
             <text x={234} y={160} fill="var(--faint)" fontFamily="var(--font-mono)" fontSize={9}>
-              qualifica
+              {tx.agent[1]}
             </text>
             <text x={234} y={171} fill="var(--faint)" fontFamily="var(--font-mono)" fontSize={9}>
-              e decide
+              {tx.agent[2]}
             </text>
           </g>
           <g ref={pktLayer} />
@@ -177,17 +254,17 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
           {/* só as 4 últimas; a mais antiga delas aparece apenas em telas altas */}
           {lines.slice(-4).map((l, i, arr) => (
             <div
-              key={`${l.t}-${l.event}`}
+              key={`${l.t}-${l.route}`}
               className={cn("overflow-hidden text-ellipsis whitespace-nowrap", arr.length === 4 && i === 0 && "flow-log-extra")}
             >
-              <span className="text-faint">{l.t}</span> <span className="text-signal">{l.event}</span> → agente →{" "}
-              <span className="text-ok">{l.result}</span>
+              <span className="text-faint">{l.t}</span> <span className="text-signal">{tx.log[l.route].event}</span> →{" "}
+              {tx.agent[0].toLowerCase()} → <span className="text-ok">{tx.log[l.route].result}</span>
             </div>
           ))}
         </div>
       </div>
       <figcaption className="mt-2 font-mono text-[max(11px,0.6875rem)] text-faint">
-        Simulação ilustrativa de um fluxo típico. Não representa um cliente.
+        {tx.caption}
       </figcaption>
     </figure>
   );

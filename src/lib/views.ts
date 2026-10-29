@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { LOCALE_META, type L, type Locale } from "@/lib/i18n";
 
 // Contador de acessos dos artigos no Abacus (abacus.jasoncameron.dev): serviço público e gratuito,
 // sem conta. GET /get/<namespace>/<slug> lê e /hit/<namespace>/<slug> soma 1.
@@ -94,8 +95,27 @@ export function trackView(slug: string) {
   });
 }
 
-const compact = new Intl.NumberFormat("pt-BR", { notation: "compact", maximumFractionDigits: 1 });
+// Um formatador por idioma: "1,2 mil" em português, "1.2K" em inglês, "1,2 mil" em espanhol.
+const compact = new Map<Locale, Intl.NumberFormat>();
 
-export function formatViews(n: number) {
-  return n < 1000 ? String(n) : compact.format(n);
+export function formatViews(n: number, locale: Locale) {
+  if (n < 1000) return String(n);
+  let f = compact.get(locale);
+  if (!f) {
+    f = new Intl.NumberFormat(LOCALE_META[locale].intl, { notation: "compact", maximumFractionDigits: 1 });
+    compact.set(locale, f);
+  }
+  return f.format(n);
+}
+
+const VIEW_WORD: L<[string, string]> = {
+  pt: ["acesso", "acessos"],
+  en: ["view", "views"],
+  es: ["visita", "visitas"],
+};
+
+/** "1.234 acessos" / "1,234 views" / "1.234 visitas", com o número completo. */
+export function viewsLabel(n: number, locale: Locale) {
+  const [one, many] = VIEW_WORD[locale];
+  return `${n.toLocaleString(LOCALE_META[locale].intl)} ${n === 1 ? one : many}`;
 }

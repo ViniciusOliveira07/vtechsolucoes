@@ -21,10 +21,14 @@ const bodySchema = z.object({
   // Aceite da política de privacidade: obrigatório, sem ele o lead é recusado.
   consent: z.literal(true),
   consentAt: z.string().datetime(),
+  // Idioma em que a pessoa navegava no site (a equipe responde no mesmo idioma).
+  locale: z.enum(["pt", "en", "es"]).optional(),
 });
 
 const dataHoraSP = (iso: string) =>
   new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" });
+
+const IDIOMAS = { en: "inglês 🇺🇸", es: "espanhol 🇪🇸" } as const;
 
 const TITLES = {
   contato: "Forms Vtech Soluções",
@@ -69,6 +73,7 @@ export const Route = createFileRoute("/api/lead")({
           (lead.source === "contato" ? `*Sobre o projeto:*\n` : `*Material:*\n`) +
           `${lead.message}` +
           (lead.page ? `\n\n*Página:* ${lead.page}` : "") +
+          (lead.locale && lead.locale !== "pt" ? `\n*Idioma:* ${IDIOMAS[lead.locale]}` : "") +
           `\n*Privacidade:* aceitou a política em ${dataHoraSP(lead.consentAt)}`;
 
         const headers: Record<string, string> = { "Content-Type": "application/json", apikey: EVO_API_KEY };
