@@ -1,5 +1,6 @@
 ---
 title: "Software a la medida o ERP listo: cómo decidir sin equivocarse"
+seoTitle: "Software a la medida o ERP listo: cómo decidir | Vtech"
 description: "¿Software a la medida o ERP listo? Cuándo conviene cada uno, el camino híbrido, los costos que no aparecen en la propuesta y las preguntas que deciden."
 category: sistemas-sob-medida
 tags: [sistema-sob-medida, erp, desenvolvimento-de-sistemas, custo-total, integracao]

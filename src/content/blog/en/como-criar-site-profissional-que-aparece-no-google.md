@@ -1,5 +1,6 @@
 ---
 title: "How to build a professional website that ranks on Google"
+seoTitle: "How to build a website that ranks on Google | Vtech"
 description: "From planning to technical SEO: a step-by-step guide to a small business website that ranks on Google, loads fast and turns visitors into quote requests."
 category: sites-e-seo
 tags: [criar-site, seo, google, site-para-empresa, geracao-de-leads]

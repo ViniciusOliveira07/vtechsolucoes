@@ -213,6 +213,8 @@ export type Post = {
   slug: string;
   locale: Locale;
   title: string;
+  /** Título para o Google (até 60 caracteres); sem ele, vale `title | Vtech`. */
+  seoTitle?: string;
   description: string;
   category: Category;
   tags: string[];
@@ -284,6 +286,7 @@ function parsePost(entry: (typeof INDEX)[number]): Post {
     slug,
     locale,
     title: String(data.title),
+    seoTitle: typeof data.seoTitle === "string" && data.seoTitle ? data.seoTitle : undefined,
     description: String(data.description),
     category,
     tags: Array.isArray(data.tags) ? data.tags : [],

@@ -1,5 +1,6 @@
 ---
 title: "How to hire a software development company without regrets"
+seoTitle: "How to hire a software company without regrets | Vtech"
 description: "How to hire a software development company: warning signs, what a good proposal includes, contract clauses that protect you and questions for the first meeting."
 category: gestao-de-tecnologia
 tags: [contratar-software, fabrica-de-software, desenvolvimento-de-software, fornecedor-de-tecnologia, contrato-de-software]

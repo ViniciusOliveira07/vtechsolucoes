@@ -1,5 +1,6 @@
 ---
 title: "No website, lost customers: how to build credibility and sales"
+seoTitle: "No website, lost customers: what to do | Vtech"
 description: "Customers google your company before they buy. See why social media can't replace a small business website and what it needs to build credibility and sales."
 category: sites-e-seo
 tags: [site-para-empresa, autoridade, credibilidade, geracao-de-leads, seo]

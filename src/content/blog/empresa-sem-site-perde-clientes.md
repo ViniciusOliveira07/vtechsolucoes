@@ -1,5 +1,6 @@
 ---
 title: "Empresa sem site perde clientes: como gerar autoridade e vendas"
+seoTitle: "Empresa sem site perde clientes: o que fazer | Vtech"
 description: "Seu cliente pesquisa a sua empresa no Google antes de fechar. Veja por que rede social não substitui um site e o que ele precisa ter para gerar confiança e vendas."
 category: sites-e-seo
 tags: [site-para-empresa, autoridade, credibilidade, geracao-de-leads, seo]

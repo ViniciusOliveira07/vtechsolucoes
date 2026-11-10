@@ -1,5 +1,6 @@
 ---
 title: "AI agent on WhatsApp: automated customer service for businesses"
+seoTitle: "AI agent on WhatsApp for businesses | Vtech"
 description: "How an AI agent on your company's WhatsApp works: what it handles, official API or not, what drives the cost and how to roll it out without risk."
 category: automacao-com-ia
 tags: [whatsapp, agentes, atendimento, automacao, llm]

@@ -1,5 +1,6 @@
 ---
 title: "Cuánto cuesta mantener un agente de IA en producción"
+seoTitle: "Cuánto cuesta un agente de IA en producción | Vtech"
 description: "Tokens, infraestructura, monitoreo y mantenimiento: cómo estimar el costo mensual de un agente de IA antes de aprobar el proyecto."
 category: automacao-com-ia
 tags: [custos, llm, agentes]

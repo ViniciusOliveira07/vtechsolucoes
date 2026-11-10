@@ -65,10 +65,12 @@ type SeoInput = {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  /** true deixa a página fora do Google (meta robots noindex, follow). */
+  noindex?: boolean;
 };
 
 /** Gera meta tags, canonical e hreflang consistentes para o head() de uma rota. */
-export function seo({ title, description, path, locale: given, image, type = "website", publishedTime, modifiedTime }: SeoInput) {
+export function seo({ title, description, path, locale: given, image, type = "website", publishedTime, modifiedTime, noindex }: SeoInput) {
   const locale = given ?? DEFAULT_LOCALE;
   const url = localizedUrl(path, locale);
   const img = image ? absoluteUrl(image) : OG_IMAGE[locale];
@@ -99,6 +101,8 @@ export function seo({ title, description, path, locale: given, image, type = "we
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: img },
   ];
+  // página que ainda não tem conteúdo (ex.: categoria sem artigo publicado) fica fora do índice
+  if (noindex) meta.push({ name: "robots", content: "noindex, follow" });
   if (publishedTime) meta.push({ property: "article:published_time", content: publishedTime });
   if (modifiedTime) meta.push({ property: "article:modified_time", content: modifiedTime });
   const links = [

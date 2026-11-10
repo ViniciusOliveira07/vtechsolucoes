@@ -1,5 +1,6 @@
 ---
 title: "API, base de datos u hoja de cálculo: cómo integrarse con su ERP"
+seoTitle: "Cómo integrarse con su ERP: API o base de datos | Vtech"
 description: "Las formas de conectar sistemas al ERP, cuándo tiene sentido cada una y las prácticas que evitan pedidos duplicados y datos perdidos."
 category: integracoes
 tags: [erp, api, integracao]

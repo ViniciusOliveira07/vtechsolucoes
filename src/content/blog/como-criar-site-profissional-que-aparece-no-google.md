@@ -1,5 +1,6 @@
 ---
 title: "Como criar um site profissional que aparece no Google: passo a passo"
+seoTitle: "Como criar um site que aparece no Google | Vtech"
 description: "Do planejamento ao SEO técnico: o passo a passo para criar um site de empresa que aparece no Google, carrega rápido e transforma visitas em pedidos de orçamento."
 category: sites-e-seo
 tags: [criar-site, seo, google, site-para-empresa, geracao-de-leads]

@@ -1,5 +1,6 @@
 ---
 title: "API, database, or spreadsheet: how to integrate with your ERP"
+seoTitle: "How to integrate with your ERP: API or database | Vtech"
 description: "The ways to connect systems to your ERP, when each one makes sense, and the practices that prevent duplicate orders and lost data."
 category: integracoes
 tags: [erp, api, integracao]

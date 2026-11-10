@@ -1,5 +1,6 @@
 ---
 title: "Cómo aparecer en Google Maps: guía de SEO local para empresas"
+seoTitle: "Cómo aparecer en Google Maps: SEO local | Vtech"
 description: "Cómo aparecer en Google Maps cuando el cliente busca su servicio cerca: Perfil de Empresa, reseñas, sitio web y datos estructurados. Guía de SEO local."
 category: sites-e-seo
 tags: [seo-local, google-maps, perfil-da-empresa, avaliacoes, seo]

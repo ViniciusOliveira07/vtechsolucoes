@@ -1,5 +1,6 @@
 ---
 title: "How much does a business website cost? What drives the price"
+seoTitle: "How much does a business website cost? | Vtech"
 description: "How much does a business website cost? See what drives the price, the hidden costs and how to compare proposals so the cheapest one doesn't end up costing more."
 category: sites-e-seo
 tags: [quanto-custa-site, site-institucional, site-para-empresa, orcamento, seo]

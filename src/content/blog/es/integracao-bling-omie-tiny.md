@@ -1,5 +1,6 @@
 ---
 title: "Integración de Bling, Omie y Tiny con CRM y tienda en línea"
+seoTitle: "Integración de Bling, Omie y Tiny con CRM | Vtech"
 description: "Cómo integrar Bling, Omie o Tiny con su tienda en línea, CRM, WhatsApp y BI: conector listo o API, cómo evitar errores de inventario y cómo definir el alcance."
 category: integracoes
 tags: [bling, omie, tiny, erp, integracao, api, e-commerce, crm]

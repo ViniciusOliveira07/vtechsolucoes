@@ -1,5 +1,6 @@
 ---
 title: "Quanto custa um site institucional: o que define o preço"
+seoTitle: "Quanto custa um site institucional? | Vtech"
 description: "Quanto custa um site institucional para empresa? Veja o que pesa no preço, os custos escondidos e como comparar propostas sem cair na mais barata que sai cara."
 category: sites-e-seo
 tags: [quanto-custa-site, site-institucional, site-para-empresa, orcamento, seo]

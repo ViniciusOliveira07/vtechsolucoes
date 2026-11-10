@@ -1,5 +1,6 @@
 ---
 title: "Como contratar empresa de software sem cair em armadilhas"
+seoTitle: "Como contratar empresa de software sem errar | Vtech"
 description: "Como contratar empresa de desenvolvimento de software: sinais de alerta, o que a proposta deve ter, cláusulas que protegem você e perguntas para a 1ª reunião."
 category: gestao-de-tecnologia
 tags: [contratar-software, fabrica-de-software, desenvolvimento-de-software, fornecedor-de-tecnologia, contrato-de-software]

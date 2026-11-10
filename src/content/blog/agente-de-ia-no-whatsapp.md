@@ -1,5 +1,6 @@
 ---
 title: "Agente de IA no WhatsApp: atendimento automático para empresas"
+seoTitle: "Agente de IA no WhatsApp para empresas | Vtech"
 description: "Como funciona um agente de IA no WhatsApp da sua empresa: o que ele resolve, API oficial ou não, o que define o custo e como implantar sem riscos."
 category: automacao-com-ia
 tags: [whatsapp, agentes, atendimento, automacao, llm]

@@ -1,5 +1,6 @@
 ---
 title: "API, banco de dados ou planilha: como integrar com o seu ERP"
+seoTitle: "Como integrar com ERP: API, banco ou planilha | Vtech"
 description: "As formas de conectar sistemas ao ERP, quando cada uma faz sentido e as práticas que evitam pedidos duplicados e dados perdidos."
 category: integracoes
 tags: [erp, api, integracao]

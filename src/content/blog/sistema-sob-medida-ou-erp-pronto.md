@@ -1,5 +1,6 @@
 ---
 title: "Sistema sob medida ou ERP pronto: como decidir sem errar"
+seoTitle: "Sistema sob medida ou ERP pronto: como decidir | Vtech"
 description: "Sistema sob medida ou ERP pronto? Quando cada um vale a pena, o caminho híbrido, os custos que não aparecem na proposta e as perguntas que decidem."
 category: sistemas-sob-medida
 tags: [sistema-sob-medida, erp, desenvolvimento-de-sistemas, custo-total, integracao]

@@ -1,5 +1,6 @@
 ---
 title: "Slow website? How to make your site faster with Core Web Vitals"
+seoTitle: "Slow website? Speed it up with Core Web Vitals | Vtech"
 description: "Is your website slow? Understand LCP, INP and CLS, learn to measure speed the right way and see the most common causes of a slow site with the fix for each."
 category: sites-e-seo
 tags: [site-lento, core-web-vitals, velocidade-do-site, seo, pagespeed]

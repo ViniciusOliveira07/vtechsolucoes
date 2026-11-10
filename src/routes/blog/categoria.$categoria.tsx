@@ -19,7 +19,14 @@ export const Route = createFileRoute("/blog/categoria/$categoria")({
     if (!category) return {};
     const path = `/blog/categoria/${category.slug}`;
     return {
-      ...seo({ title: `${category.name}: ${pick(GUIDES, locale)} | Blog Vtech`, description: category.description, path, locale }),
+      ...seo({
+        title: `${category.name}: ${pick(GUIDES, locale)} | Blog Vtech`,
+        description: category.description,
+        path,
+        locale,
+        // categoria sem artigo publicado ainda é uma página vazia: fica fora do Google até o primeiro artigo
+        noindex: postsInCategory(category.slug, locale).length === 0,
+      }),
       scripts: [
         jsonLd(
           breadcrumbSchema([

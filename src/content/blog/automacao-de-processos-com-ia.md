@@ -1,5 +1,6 @@
 ---
 title: "Automação de processos com IA: o que automatizar na empresa"
+seoTitle: "Automação de processos com IA: o que automatizar | Vtech"
 description: "Sete tarefas que empresas já automatizam com IA, o que fica com as pessoas, como escolher o primeiro processo e como medir o retorno sem chute."
 category: automacao-com-ia
 tags: [automacao, processos, agentes, llm, produtividade]

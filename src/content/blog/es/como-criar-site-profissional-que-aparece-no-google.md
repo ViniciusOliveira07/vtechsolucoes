@@ -1,5 +1,6 @@
 ---
 title: "Cómo crear un sitio web profesional que aparezca en Google"
+seoTitle: "Cómo hacer que tu sitio web aparezca en Google | Vtech"
 description: "De la planificación al SEO técnico: el paso a paso para crear una página web para empresa que aparezca en Google, cargue rápido y genere cotizaciones."
 category: sites-e-seo
 tags: [criar-site, seo, google, site-para-empresa, geracao-de-leads]

@@ -1,5 +1,6 @@
 ---
 title: "Sitio web lento: cómo hacerlo más rápido con Core Web Vitals"
+seoTitle: "Sitio web lento: acelérelo con Core Web Vitals | Vtech"
 description: "¿Su sitio web está lento? Entienda LCP, INP y CLS, aprenda a medir la velocidad correctamente y vea las causas más comunes de lentitud y cómo corregirlas."
 category: sites-e-seo
 tags: [site-lento, core-web-vitals, velocidade-do-site, seo, pagespeed]

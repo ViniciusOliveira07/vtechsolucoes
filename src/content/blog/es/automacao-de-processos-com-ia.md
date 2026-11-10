@@ -1,5 +1,6 @@
 ---
 title: "Automatización de procesos con IA: qué se puede automatizar"
+seoTitle: "Automatización de procesos con IA: qué automatizar | Vtech"
 description: "Siete tareas que las empresas ya automatizan con IA, qué queda en manos de las personas, cómo elegir el primer proceso y cómo medir el retorno sin adivinar."
 category: automacao-com-ia
 tags: [automacao, processos, agentes, llm, produtividade]

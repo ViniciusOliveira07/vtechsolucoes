@@ -1,5 +1,6 @@
 ---
 title: "RAG en la práctica: cuándo su empresa lo necesita, y cuándo no"
+seoTitle: "RAG en la práctica: cuándo su empresa lo necesita | Vtech"
 description: "Qué es RAG, en qué situaciones resuelve, cuándo basta una solución más simple y cómo evaluar si las respuestas son correctas."
 category: automacao-com-ia
 tags: [rag, llm, base-de-conhecimento]

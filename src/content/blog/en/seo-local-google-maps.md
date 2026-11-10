@@ -1,5 +1,6 @@
 ---
 title: "How to show up on Google Maps: a local SEO guide for businesses"
+seoTitle: "How to show up on Google Maps: local SEO | Vtech"
 description: "How to show up on Google Maps when customers search for your service nearby: Business Profile, reviews, website and structured data. A local SEO guide."
 category: sites-e-seo
 tags: [seo-local, google-maps, perfil-da-empresa, avaliacoes, seo]

@@ -1,5 +1,6 @@
 ---
 title: "AI process automation: what you can automate in your business"
+seoTitle: "AI process automation: what to automate | Vtech"
 description: "Seven tasks companies already automate with AI, what stays with people, how to pick the first process and how to measure the return without guesswork."
 category: automacao-com-ia
 tags: [automacao, processos, agentes, llm, produtividade]
