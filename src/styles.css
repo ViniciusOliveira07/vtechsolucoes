@@ -1051,6 +1051,11 @@
   .vt-footer .vt-brand {
     color: #e8eef6;
   }
+  /* sobre fundo escuro o azul da marca não passa no contraste (WCAG): mesmo azul, tom mais claro */
+  .vt-footer .logo-word-tail,
+  .vt-nav[data-dark="true"] .logo-word-tail {
+    color: #6ba4ff;
+  }
   .vt-footer-map {
     display: grid;
     gap: 2rem 1.5rem;
