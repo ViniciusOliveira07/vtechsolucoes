@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useT, type L } from "@/lib/i18n";
-import { STACK } from "@/components/site/sections/Credentials";
+import { STACK } from "@/lib/stack";
 import { Ico, type IcoName } from "./Ico";
 import { clamp01, useReducedMotion, useScrollFrame } from "./hooks";
 

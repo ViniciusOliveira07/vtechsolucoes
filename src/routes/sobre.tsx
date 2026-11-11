@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { breadcrumbSchema, jsonLd, seo } from "@/lib/site";
+import { COMPANY, breadcrumbSchema, jsonLd, seo } from "@/lib/site";
 import { pick, useT, type L } from "@/lib/i18n";
-import { SectionHead } from "@/components/site/SectionHead";
-import { RailHint } from "@/components/site/RailHint";
-import { Credentials } from "@/components/site/sections/Credentials";
-import { Layers } from "@/components/site/sections/Layers";
+import { PageHero, SecHead } from "@/components/site/vt/Page";
+import { STACK } from "@/lib/stack";
+import { LayerStack } from "@/components/site/home/LayerStack";
 import { CtaBand } from "@/components/site/sections/CtaBand";
+import { Ico, type IcoName } from "@/components/site/home/Ico";
 
 const PRINCIPLES: L<{ title: string; desc: string }[]> = {
   pt: [
@@ -84,6 +84,17 @@ const TEXT = {
     principles: "Princípios",
     before: "Veja como funciona cada etapa em",
     link: "nosso método",
+    kicker: "sobre a vtech",
+    pKicker: "princípios",
+    pTitle: "O que guia cada projeto",
+    cKicker: "credenciais",
+    cTitle: "Dados verificáveis da empresa e das tecnologias",
+    company: "empresa",
+    keys: ["razão social", "cnpj", "sede", "atendimento"],
+    clients: "Exclusivo B2B",
+    crumbs: "Trilha de navegação",
+    home: "início",
+    here: "sobre",
   },
   en: {
     title: "Software engineering and applied AI for B2B operations.",
@@ -92,6 +103,17 @@ const TEXT = {
     principles: "Principles",
     before: "See how each step works in",
     link: "our method",
+    kicker: "about vtech",
+    pKicker: "principles",
+    pTitle: "What guides every project",
+    cKicker: "credentials",
+    cTitle: "Verifiable company details and technologies",
+    company: "company",
+    keys: ["legal name", "cnpj", "headquarters", "clients"],
+    clients: "B2B only",
+    crumbs: "Breadcrumb",
+    home: "home",
+    here: "about",
   },
   es: {
     title: "Ingeniería de software e IA aplicada para operaciones B2B.",
@@ -100,6 +122,17 @@ const TEXT = {
     principles: "Principios",
     before: "Vea cómo funciona cada etapa en",
     link: "nuestro método",
+    kicker: "sobre vtech",
+    pKicker: "principios",
+    pTitle: "Lo que guía cada proyecto",
+    cKicker: "credenciales",
+    cTitle: "Datos verificables de la empresa y de las tecnologías",
+    company: "empresa",
+    keys: ["razón social", "cnpj", "sede", "atención"],
+    clients: "Exclusivo B2B",
+    crumbs: "Ruta de navegación",
+    home: "inicio",
+    here: "nosotros",
   },
 };
 
@@ -122,40 +155,86 @@ export const Route = createFileRoute("/sobre")({
   component: SobrePage,
 });
 
+const P_ICONS: IcoName[] = ["file", "bot", "shield"];
+
 function SobrePage() {
   const t = useT(TEXT);
   const principles = useT(PRINCIPLES);
+  const stack = useT(STACK);
+  const facts: [string, string][] = [
+    [t.keys[0], COMPANY.legalName],
+    [t.keys[1], COMPANY.cnpj],
+    [t.keys[2], `${COMPANY.city}, ${COMPANY.state}`],
+    [t.keys[3], t.clients],
+  ];
   return (
     <>
-      <section className="section">
-        <div className="shell">
-          <SectionHead as="h1" title={t.title} detailClassName="hide-short">
-            {t.intro}
-          </SectionHead>
-          <div
-            tabIndex={0}
-            aria-label={t.principles}
-            className="rail rail-boxed grid gap-px overflow-hidden rounded-[0.875rem] border border-border bg-border md:grid-cols-3"
-          >
-            {principles.map((p) => (
-              <article key={p.title} className="bg-background p-[clamp(1.25rem,3.6vh,1.75rem)]">
-                <h2 className="text-[clamp(1.1875rem,2.8vh,1.375rem)] tracking-[-0.02em]">{p.title}</h2>
-                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{p.desc}</p>
+      <PageHero
+        crumbsLabel={t.crumbs}
+        crumbs={[{ label: t.home, to: "/" }, { label: t.here }]}
+        kicker={t.kicker}
+        title={t.title}
+        sub={t.intro}
+      />
+      <section className="vt-sec vt-screen">
+        <div className="vt-wrap">
+          <SecHead kicker={t.pKicker} title={t.pTitle} />
+          <div className="vt-tiles vt-tiles-3">
+            {principles.map((p, i) => (
+              <article key={p.title} className="vt-tile">
+                <i>
+                  <Ico name={P_ICONS[i] ?? "checkc"} />
+                </i>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
               </article>
             ))}
           </div>
-          <RailHint />
-          <p className="mt-[clamp(1rem,3vh,2rem)] text-muted-foreground">
+          <p className="mt-6 text-muted-foreground">
             {t.before}{" "}
-            <Link to="/metodo" className="text-signal underline underline-offset-4">
+            <Link to="/metodo" className="font-semibold text-signal underline underline-offset-4">
               {t.link}
             </Link>
             .
           </p>
         </div>
       </section>
-      <Credentials />
-      <Layers />
+      <section className="vt-sec vt-screen">
+        <div className="vt-wrap vt-spec-grid">
+          <SecHead kicker={t.cKicker} title={t.cTitle} />
+          <div className="vt-sheet2">
+            <div className="vt-sheet2-h" aria-hidden>
+              <span>{t.company}</span>
+              <span>vtech soluções</span>
+            </div>
+            <dl>
+              {facts.map(([k, v]) => (
+                <div key={k} className="vt-row">
+                  <dt>{k}</dt>
+                  <dd>
+                    <span className="vt-v" style={{ fontSize: "1.1rem" }}>
+                      {v}
+                    </span>
+                  </dd>
+                </div>
+              ))}
+              {stack.map(([group, items]) => (
+                <div key={group} className="vt-row">
+                  <dt>{group}</dt>
+                  <dd className="flex flex-wrap gap-1.5">
+                    {items.map((x) => (
+                      <span key={x} className="vt-badge">
+                        {x}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+      <LayerStack />
       <CtaBand location="sobre" />
     </>
   );

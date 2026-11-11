@@ -6,7 +6,7 @@ import { LOCALE_META, pick, useLocale, useT, type Locale } from "@/lib/i18n";
 import { breadcrumbSchema, jsonLd, localizedUrl, seo, SITE_NAME, SITE_URL } from "@/lib/site";
 import { trackView } from "@/lib/views";
 import { PostCard, ViewCount } from "@/components/site/PostCard";
-import { RailHint } from "@/components/site/RailHint";
+import { Crumbs, SecHead } from "@/components/site/vt/Page";
 import { DownloadPostButton } from "@/components/site/DownloadPostDialog";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 import { PostOffer } from "@/components/site/PostOffer";
@@ -119,39 +119,23 @@ function PostPage() {
 
   return (
     <>
-      <article className="section-flow">
-        <div className="shell">
-          <nav aria-label={t.breadcrumb} className="mb-8 font-mono text-xs text-faint">
-            <Link to="/" className="hover:text-foreground">
-              {t.home}
-            </Link>{" "}
-            /{" "}
-            <Link to="/blog" className="hover:text-foreground">
-              blog
-            </Link>{" "}
-            /{" "}
-            <Link
-              to="/blog/categoria/$categoria"
-              params={{ categoria: post.category.slug }}
-              className="hover:text-foreground"
-            >
-              {slugify(category.name)}
-            </Link>
-          </nav>
-
-          <header className="max-w-[53.75rem]">
-            <Link
-              to="/blog/categoria/$categoria"
-              params={{ categoria: post.category.slug }}
-              className="kicker -my-3 inline-flex min-h-11 items-center text-signal hover:underline"
-            >
+      <section className="vt-hero vt-page-hero">
+        <div className="vt-wrap">
+          <Crumbs
+            label={t.breadcrumb}
+            items={[
+              { label: t.home, to: "/" },
+              { label: "blog", to: "/blog" },
+              { label: slugify(category.name), to: `/blog/categoria/${post.category.slug}` },
+            ]}
+          />
+          <header className="max-w-[54rem]">
+            <Link to="/blog/categoria/$categoria" params={{ categoria: post.category.slug }} className="vt-kicker">
               {category.name}
             </Link>
-            <h1 className="mt-4 text-[clamp(2.125rem,4.4vw,3.625rem)] font-medium leading-[1.05] tracking-[-0.035em]">
-              {post.title}
-            </h1>
-            <p className="mt-5 max-w-[62ch] text-lg text-muted-foreground">{post.description}</p>
-            <p className="mt-6 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-faint">
+            <h1 className="vt-h1 vt-page-title">{post.title}</h1>
+            <p className="vt-hero-sub">{post.description}</p>
+            <p className="vt-meta-row">
               <span>{post.author}</span>
               <span>
                 {t.published} <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
@@ -161,34 +145,34 @@ function PostPage() {
                   {t.updated} <time dateTime={post.updatedAt}>{formatDate(post.updatedAt, locale)}</time>
                 </span>
               )}
-              <span>{post.readingMinutes} {t.reading}</span>
+              <span>
+                {post.readingMinutes} {t.reading}
+              </span>
               <ViewCount slug={post.slug} />
             </p>
-            <div className="mt-7">
+            <div className="mt-6">
               <DownloadPostButton post={post} />
             </div>
           </header>
+        </div>
+      </section>
 
-          <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_17.5rem]">
-            <div className="min-w-0 max-w-[70ch]">
+      <article className="vt-article">
+        <div className="vt-wrap">
+          <div className="vt-article-grid">
+            <div className="vt-article-body">
               <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug, post.locale, body) }} />
             </div>
-
             {post.headings.length > 2 && (
               <aside className="hidden lg:block" aria-label={t.toc}>
-                <div className="sticky top-24">
-                  <p className="kicker mb-3">{t.toc}</p>
-                  <ol className="grid gap-1 border-l border-border text-sm">
+                <div className="vt-toc">
+                  <span className="vt-eyebrow">{t.toc}</span>
+                  <ol>
                     {post.headings
                       .filter((h) => h.level === 2)
                       .map((h) => (
                         <li key={h.id}>
-                          <a
-                            href={`#${h.id}`}
-                            className="-ml-px block border-l border-transparent py-1 pl-4 text-muted-foreground hover:border-signal hover:text-foreground"
-                          >
-                            {h.text}
-                          </a>
+                          <a href={`#${h.id}`}>{h.text}</a>
                         </li>
                       ))}
                   </ol>
@@ -196,21 +180,19 @@ function PostPage() {
               </aside>
             )}
           </div>
-
           <PostOffer post={post} service={service} />
         </div>
       </article>
 
       {related.length > 0 && (
-        <section className="section">
-          <div className="shell">
-            <h2 className="h-section mb-[clamp(1.25rem,5vh,2.5rem)]">{t.readAlso}</h2>
-            <div tabIndex={0} aria-label={t.relatedArticles} className="rail grid gap-5 md:grid-cols-3">
+        <section className="vt-sec">
+          <div className="vt-wrap">
+            <SecHead kicker="blog" title={t.readAlso} />
+            <div aria-label={t.relatedArticles} className="vt-posts">
               {related.map((p) => (
                 <PostCard key={p.slug} post={p} />
               ))}
             </div>
-            <RailHint />
           </div>
         </section>
       )}

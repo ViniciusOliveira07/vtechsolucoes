@@ -23,13 +23,13 @@ const SKIP = { pt: "Pular para o conteúdo", en: "Skip to content", es: "Saltar 
 function NotFoundComponent() {
   const t = useT(NOT_FOUND);
   return (
-    <section className="section">
-      <div className="shell grid min-h-[50vh] content-center gap-5">
-        <p className="kicker">
-          <span className="text-signal">{t.tag}</span> {t.route}
-        </p>
-        <h1 className="h-section max-w-[18ch]">{t.title}</h1>
-        <div className="flex flex-wrap gap-3">
+    <section className="vt-hero vt-page-hero vt-screen">
+      <div className="vt-wrap">
+        <span className="vt-kicker">
+          {t.tag} · {t.route}
+        </span>
+        <h1 className="vt-h1 vt-page-title vt-dot">{t.title.replace(/\.$/, "")}</h1>
+        <div className="vt-ctas">
           <Link to="/" className="btn">
             {t.home}
           </Link>

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { breadcrumbSchema, jsonLd, seo } from "@/lib/site";
 import { pick, useT, type L } from "@/lib/i18n";
-import { SectionHead } from "@/components/site/SectionHead";
-import { RailHint } from "@/components/site/RailHint";
-import { SpecSheet } from "@/components/site/sections/SpecSheet";
+import { PageHero } from "@/components/site/vt/Page";
+import { Pipeline } from "@/components/site/home/Pipeline";
+import { SpecTable } from "@/components/site/home/SpecTable";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 
 const STEPS: L<{ title: string; desc: string; out: string }[]> = {
@@ -106,6 +106,12 @@ const TEXT = {
       "Cada etapa termina com algo concreto nas suas mãos. Você sabe o que vai receber, quando e por quanto antes de aprovar.",
     steps: "Etapas",
     step: "Etapa",
+    kicker: "método",
+    crumbs: "Trilha de navegação",
+    home: "início",
+    here: "método",
+    pKicker: "etapas",
+    pTitle: "Cada etapa termina com uma entrega",
   },
   en: {
     title: "From diagnosis to a system in production, in four steps.",
@@ -113,6 +119,12 @@ const TEXT = {
       "Each step ends with something concrete in your hands. You know what you will get, when and for how much before you approve.",
     steps: "Steps",
     step: "Step",
+    kicker: "method",
+    crumbs: "Breadcrumb",
+    home: "home",
+    here: "method",
+    pKicker: "stages",
+    pTitle: "Every stage ends with a deliverable",
   },
   es: {
     title: "Del diagnóstico al sistema en producción, en cuatro etapas.",
@@ -120,6 +132,12 @@ const TEXT = {
       "Cada etapa termina con algo concreto en sus manos. Usted sabe qué va a recibir, cuándo y por cuánto antes de aprobar.",
     steps: "Etapas",
     step: "Etapa",
+    kicker: "método",
+    crumbs: "Ruta de navegación",
+    home: "inicio",
+    here: "método",
+    pKicker: "etapas",
+    pTitle: "Cada etapa termina con un entregable",
   },
 };
 
@@ -147,32 +165,20 @@ function MetodoPage() {
   const steps = useT(STEPS);
   return (
     <>
-      <section className="section">
-        <div className="shell">
-          <SectionHead as="h1" title={t.title} detailClassName="hide-short">
-            {t.intro}
-          </SectionHead>
-          <ol tabIndex={0} aria-label={t.steps} className="rail rail-boxed grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li
-                key={s.title}
-                className="flex flex-col border-b border-r border-border px-6 py-[clamp(1rem,3.4vh,1.75rem)]"
-              >
-                <span className="kicker text-signal">
-                  {t.step} {i + 1}
-                </span>
-                <h2 className="mt-2 text-[clamp(1.25rem,3vh,1.5rem)] tracking-[-0.025em]">{s.title}</h2>
-                <p className="mt-2 text-[0.9375rem] text-muted-foreground">{s.desc}</p>
-                <p className="mt-auto pt-[clamp(0.75rem,2.6vh,1.5rem)] font-mono text-xs text-faint">
-                  <span className="text-signal">→</span> {s.out}
-                </p>
-              </li>
-            ))}
-          </ol>
-          <RailHint />
-        </div>
-      </section>
-      <SpecSheet />
+      <PageHero
+        crumbsLabel={t.crumbs}
+        crumbs={[{ label: t.home, to: "/" }, { label: t.here }]}
+        kicker={t.kicker}
+        title={t.title}
+        sub={t.intro}
+      />
+      <Pipeline
+        kicker={t.pKicker}
+        title={t.pTitle}
+        sub=""
+        stages={steps.map((x) => [x.title, x.desc, x.out] as [string, string, string])}
+      />
+      <SpecTable />
       <CtaBand location="metodo" />
     </>
   );

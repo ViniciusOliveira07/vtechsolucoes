@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { COMPANY, whatsappUrl } from "@/lib/site";
 import { useLocale, useT, type L } from "@/lib/i18n";
+import { noDot } from "@/components/site/vt/Page";
 
 export interface LegalSection {
   title: string;
@@ -44,43 +45,35 @@ export function LegalPage({ eyebrow, title, intro, updatedAt, sections }: LegalP
   const t = useT(TEXT);
   const locale = useLocale();
   return (
-    <section className="section-flow">
-      <div className="shell grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
-        <header className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-          <p className="kicker">{eyebrow}</p>
-          <h1 className="h-section mt-4">{title}</h1>
+    <section className="vt-hero vt-page-hero">
+      <div className="vt-wrap vt-legal">
+        <header className="vt-legal-aside min-w-0">
+          <span className="vt-kicker">{eyebrow}</span>
+          <h1 className="vt-h1 vt-page-title vt-dot">{noDot(title)}</h1>
           {t.notice && (
-            <p lang={locale} className="mt-5 max-w-[46ch] border-l-2 border-signal pl-3 text-xs leading-relaxed text-muted-foreground">
+            <p lang={locale} className="vt-note">
               {t.notice}
             </p>
           )}
-          <p className="mt-5 max-w-[46ch] text-muted-foreground">{intro}</p>
-          <p className="mt-6 font-mono text-xs text-faint">
+          <p className="vt-hero-sub">{intro}</p>
+          <p className="vt-meta-row">
             {t.updated} {updatedAt}
           </p>
         </header>
 
-        <div className="min-w-0 max-w-[70ch]">
+        <div className="vt-article-body">
           {sections.map((section, i) => (
-            <article key={section.title} className="border-t border-border py-8 first:border-t-0 first:pt-0">
-              <h2 className="flex items-baseline gap-4 text-[1.375rem] tracking-[-0.02em]">
-                <span className="font-mono text-xs text-signal tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+            <article key={section.title} className="vt-legal-sec">
+              <h2>
+                <span>{String(i + 1).padStart(2, "0")}</span>
                 {section.title}
               </h2>
-              <div className="mt-4 space-y-4 text-[0.9375rem] leading-relaxed text-muted-foreground sm:pl-9 [&_a]:text-signal [&_a]:underline [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
-                {section.body}
-              </div>
+              <div>{section.body}</div>
             </article>
           ))}
-
-          <div className="panel mt-6 p-6 text-sm text-muted-foreground">
+          <div className="vt-note">
             {t.questions}{" "}
-            <a
-              href={whatsappUrl(t.whatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-signal underline underline-offset-4"
-            >
+            <a href={whatsappUrl(t.whatsapp)} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-4">
               {COMPANY.phoneDisplay}
             </a>
             .

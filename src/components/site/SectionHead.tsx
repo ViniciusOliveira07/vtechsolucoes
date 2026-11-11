@@ -1,28 +1,23 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { SecHead } from "@/components/site/vt/Page";
 
-/**
- * Título de seção à esquerda e texto de apoio à direita (empilha no celular).
- * O espaçamento abaixo acompanha a altura da tela para a seção caber numa tela só.
- * `detailClassName` permite esconder o texto de apoio onde a altura não comporta (ex.: "hide-phone").
- */
+/** Título de seção no layout novo (rótulo opcional, título com o ponto da marca e texto de apoio). */
 export function SectionHead({
   title,
   children,
-  as: Tag = "h2",
-  detailClassName,
+  as = "h2",
+  kicker,
 }: {
   title: ReactNode;
   children?: ReactNode;
   as?: "h1" | "h2";
+  kicker?: string;
+  /** mantido por compatibilidade; o texto de apoio aparece em todas as telas */
   detailClassName?: string;
 }) {
   return (
-    <div className="mb-[clamp(1.25rem,5vh,3.5rem)] grid gap-[clamp(0.75rem,2.5vh,1.5rem)] md:grid-cols-2 md:items-end md:gap-8">
-      <Tag className="h-section min-w-0">{title}</Tag>
-      {children && (
-        <p className={cn("min-w-0 max-w-[48ch] text-muted-foreground md:justify-self-end", detailClassName)}>{children}</p>
-      )}
-    </div>
+    <SecHead as={as} title={title} kicker={kicker}>
+      {children}
+    </SecHead>
   );
 }

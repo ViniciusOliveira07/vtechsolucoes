@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/site";
 import { pick } from "@/lib/i18n";
 import { Contact } from "@/components/site/sections/Contact";
-import { SpecSheet } from "@/components/site/sections/SpecSheet";
+import { SpecTable } from "@/components/site/home/SpecTable";
 
 const HEAD = {
   pt: {
@@ -35,7 +35,7 @@ function ContatoPage() {
   return (
     <>
       <Contact headingAs="h1" />
-      <SpecSheet />
+      <SpecTable />
     </>
   );
 }
