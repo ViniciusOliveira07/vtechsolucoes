@@ -147,7 +147,7 @@ export function organizationSchema(locale: Locale) {
       "@type": "ContactPoint",
       telephone: "+55-11-5444-1926",
       contactType: "sales",
-      availableLanguage: ["Portuguese", "English", "Spanish"],
+      availableLanguage: ["Portuguese"],
     },
   };
 }
