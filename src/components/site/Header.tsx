@@ -16,9 +16,9 @@ const MENU: { href: string; label: L<string> }[] = [
 ];
 
 const TEXT = {
-  pt: { nav: "Principal", open: "Abrir menu", close: "Fechar menu", cta: "Iniciar diagnóstico" },
-  en: { nav: "Main", open: "Open menu", close: "Close menu", cta: "Start diagnosis" },
-  es: { nav: "Principal", open: "Abrir menú", close: "Cerrar menú", cta: "Iniciar diagnóstico" },
+  pt: { nav: "Principal", open: "Abrir menu", close: "Fechar menu", cta: "Falar com um consultor" },
+  en: { nav: "Main", open: "Open menu", close: "Close menu", cta: "Talk to a consultant" },
+  es: { nav: "Principal", open: "Abrir menú", close: "Cerrar menú", cta: "Hablar con un consultor" },
 };
 
 /**
@@ -77,7 +77,7 @@ export function Header() {
     target: "_blank",
     rel: "noopener noreferrer",
     onClick: () => {
-      Events.ctaClick("Iniciar diagnóstico", where);
+      Events.ctaClick("Falar com um consultor", where);
       Events.whatsappClick(pathname);
     },
   });

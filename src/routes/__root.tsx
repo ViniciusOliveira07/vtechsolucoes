@@ -6,7 +6,6 @@ import geistLatin from "../assets/fonts/geist-latin.woff2?url";
 import geistMonoLatin from "../assets/fonts/geist-mono-latin.woff2?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { SITE_DESCRIPTION, SITE_NAME, jsonLd, organizationSchema } from "@/lib/site";
 import { LOCALE_META, LocaleContext, isLocale, saveLocaleCookie, useLocale, useT } from "@/lib/i18n";
 import { initAnalytics, trackPageView } from "@/lib/analytics";
@@ -131,7 +130,6 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 }
