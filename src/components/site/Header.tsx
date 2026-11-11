@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
-import { NAV, WHATSAPP_GREETING, whatsappUrl } from "@/lib/site";
+import { useLocation } from "@tanstack/react-router";
+import { WHATSAPP_GREETING, whatsappUrl } from "@/lib/site";
 import { Events } from "@/lib/analytics";
-import { useLocale, useT } from "@/lib/i18n";
+import { useLocale, useT, type L } from "@/lib/i18n";
 import { Logo } from "@/components/site/Logo";
 import { ArrowDot } from "@/components/site/home/Ico";
+
+/** Itens do menu (iguais ao artifact aprovado): seções da home e o blog. */
+const MENU: { href: string; label: L<string> }[] = [
+  { href: "/#servicos", label: { pt: "Serviços", en: "Services", es: "Servicios" } },
+  { href: "/#como-funciona", label: { pt: "Como funciona", en: "How it works", es: "Cómo funciona" } },
+  { href: "/#processo", label: { pt: "Processo", en: "Process", es: "Proceso" } },
+  { href: "/blog", label: { pt: "Blog", en: "Blog", es: "Blog" } },
+  { href: "/#perguntas", label: { pt: "FAQ", en: "FAQ", es: "FAQ" } },
+];
 
 const TEXT = {
   pt: { nav: "Principal", open: "Abrir menu", close: "Fechar menu", cta: "Iniciar diagnóstico" },
@@ -22,8 +31,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
   const { pathname } = useLocation();
-  const locale = useLocale();
   const t = useT(TEXT);
+  const locale = useLocale();
+  const menu = MENU.map((m) => ({ href: m.href, label: m.label[locale] }));
   const greeting = useT(WHATSAPP_GREETING);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -61,7 +71,7 @@ export function Header() {
     };
   }, [pathname]);
 
-  const isActive = (to: string) => pathname === to || pathname.startsWith(`${to}/`);
+  const isActive = (href: string) => !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
   const cta = (where: string) => ({
     href: whatsappUrl(greeting),
     target: "_blank",
@@ -78,10 +88,10 @@ export function Header() {
         <div className="vt-pill">
           <Logo />
           <nav aria-label={t.nav} className="vt-nav-links">
-            {NAV.map((item) => (
-              <Link key={item.to} to={item.to} aria-current={isActive(item.to) ? "page" : undefined}>
-                {item.label[locale]}
-              </Link>
+            {menu.map((item) => (
+              <a key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
             ))}
           </nav>
           <div className="vt-nav-cta">
@@ -103,11 +113,16 @@ export function Header() {
         </div>
         {open && (
           <nav id="menu-movel" aria-label={t.nav} className="vt-sheet">
-            {NAV.map((item) => (
-              <Link key={item.to} to={item.to} aria-current={isActive(item.to) ? "page" : undefined}>
-                {item.label[locale]}
+            {menu.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
                 <span aria-hidden>→</span>
-              </Link>
+              </a>
             ))}
             <a className="btn btn-arrow" {...cta("menu_mobile")}>
               {t.cta}

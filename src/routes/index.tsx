@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/site";
 import { pick } from "@/lib/i18n";
@@ -38,7 +39,33 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+/** Blocos que surgem ao entrar na tela; o que já está visível no carregamento não anima. */
+const RISE = ".vt-head, .vt-card-txt, .vt-lay-list, .vt-stage, .vt-sheet2, .vt-stg, .vt-bar2, .vt-bpost, .vt-bnext, .vt-help, .vt-acc, .vt-final";
+
+function useRise() {
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(
+      (es) =>
+        es.forEach((e) => {
+          if (!e.isIntersecting) return;
+          (e.target as HTMLElement).dataset.pre = "false";
+          io.unobserve(e.target);
+        }),
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    document.querySelectorAll<HTMLElement>(RISE).forEach((el) => {
+      if (el.getBoundingClientRect().top <= window.innerHeight) return;
+      el.classList.add("vt-rise");
+      el.dataset.pre = "true";
+      io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+}
+
 function HomePage() {
+  useRise();
   return (
     <>
       <HomeHero />

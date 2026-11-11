@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Events } from "@/lib/analytics";
 import { COMPANY, WHATSAPP_GREETING, whatsappUrl } from "@/lib/site";
 import { useT } from "@/lib/i18n";
@@ -13,8 +14,18 @@ export function FinalCta() {
   const t = useT(TEXT);
   const greeting = useT(WHATSAPP_GREETING);
   const href = whatsappUrl(greeting);
+  // altura real do rodapé, para a chamada final + rodapé ocuparem exatamente uma tela
+  useEffect(() => {
+    const set = () => {
+      const f = document.querySelector("footer");
+      if (f) document.documentElement.style.setProperty("--footer-h", `${f.offsetHeight}px`);
+    };
+    set();
+    window.addEventListener("resize", set);
+    return () => window.removeEventListener("resize", set);
+  }, []);
   return (
-    <section id="diagnostico" className="vt-sec vt-screen">
+    <section id="diagnostico" className="vt-final-sec">
       <div className="vt-wrap">
         <div className="vt-final vt-grid-bg">
           <div>

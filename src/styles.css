@@ -849,7 +849,7 @@
   /* ---------- seções: uma seção = uma tela do tablet em diante ---------- */
   .vt-sec {
     position: relative;
-    padding-block: 4.5rem;
+    padding-block: calc(var(--header-h) + 1rem) 3.5rem;
   }
   .vt-head {
     display: grid;
@@ -864,19 +864,60 @@
   }
   @media (min-width: 48rem) {
     .vt-screen {
-      min-height: var(--screen-h);
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-block: clamp(2rem, 6vh, 5rem);
-      scroll-snap-align: start;
+      padding-block: calc(var(--header-h) + 1.25rem) clamp(2rem, 6vh, 5rem);
     }
+    .vt-hero.vt-screen {
+      padding-top: calc(var(--header-h) + 1.5rem);
+      padding-bottom: 2rem;
+    }
+    #servicos.vt-sec {
+      padding-top: calc(var(--header-h) + 1.25rem);
+    }
+    /* chamada final + rodapé fecham exatamente uma tela */
+    .vt-final-sec {
+      min-height: calc(100svh - var(--footer-h, 14rem));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: calc(var(--header-h) + 1.25rem) 2rem;
+    }
+  }
+  .vt-final-sec {
+    padding-block: 2rem 4rem;
+  }
+  /* o menu é fixo: as páginas internas descem o conteúdo pela altura dele; a home não (o menu passa por cima) */
+  main#conteudo {
+    padding-top: var(--header-h);
+  }
+  main#conteudo:has(> .vt-hero) {
+    padding-top: 0;
+  }
+  /* sem encaixe automático na home (ele puxava a rolagem de volta e brigava com os cartões empilhados) */
+  html:has(.vt-hero) {
+    scroll-snap-type: none !important;
+    scroll-padding-top: 0;
+  }
+  /* entrada das seções ao rolar (só o que começa fora da tela; o resto já nasce visível) */
+  .vt-rise {
+    transition:
+      transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.9s;
+  }
+  .vt-rise[data-pre="true"] {
+    transform: translateY(24px);
+    opacity: 0.001;
   }
 
   /* ---------- menu em pílula ---------- */
   .vt-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     height: var(--header-h);
     padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
@@ -1117,7 +1158,7 @@
 
   /* ---------- 1. primeira dobra ---------- */
   .vt-hero {
-    padding-block: 2.5rem 4rem;
+    padding-block: calc(var(--header-h) + 2rem) 4rem;
   }
   .vt-hero-grid {
     display: grid;
@@ -3248,6 +3289,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .vt-rise[data-pre="true"] {
+      transform: none;
+      opacity: 1;
+    }
     .vt-card {
       transform: none !important;
     }
