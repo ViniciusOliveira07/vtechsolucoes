@@ -224,7 +224,7 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
 
   return (
     <figure ref={figRef} className="flow m-0 min-w-0">
-      <div className="overflow-hidden rounded-[0.875rem] border border-border-strong bg-gradient-to-b from-surface to-background shadow-[0_2.5rem_5rem_-2.5rem_#000]">
+      <div className="overflow-hidden rounded-[0.875rem] border border-border-strong bg-gradient-to-b from-surface to-background shadow-[0_2.5rem_5rem_-2.5rem_rgba(11,40,90,0.35)] bg-surface">
         <div className="flex items-center justify-between border-b border-border px-3.5 py-2.5 font-mono text-[max(11px,0.6875rem)] text-faint">
           <span aria-hidden className="flex gap-1.5">
             <i className="h-2 w-2 rounded-full bg-border-strong" />
@@ -265,17 +265,17 @@ export function FlowConsole({ compact = false }: { compact?: boolean }) {
               width={80}
               height={64}
               rx={10}
-              fill={pulse ? "#123447" : "#0f2230"}
+              fill={pulse ? "#1460e8" : "#0b4bc4"}
               stroke="var(--signal)"
               style={{ transition: "fill .2s" }}
             />
-            <text x={234} y={146} fill="var(--foreground)" fontFamily="var(--font-mono)" fontSize={11} fontWeight={500}>
+            <text x={234} y={146} fill="#ffffff" fontFamily="var(--font-mono)" fontSize={11} fontWeight={500}>
               {tx.agent[0]}
             </text>
-            <text x={234} y={160} fill="var(--faint)" fontFamily="var(--font-mono)" fontSize={9}>
+            <text x={234} y={160} fill="#cfe0ff" fontFamily="var(--font-mono)" fontSize={9}>
               {tx.agent[1]}
             </text>
-            <text x={234} y={171} fill="var(--faint)" fontFamily="var(--font-mono)" fontSize={9}>
+            <text x={234} y={171} fill="#cfe0ff" fontFamily="var(--font-mono)" fontSize={9}>
               {tx.agent[2]}
             </text>
           </g>

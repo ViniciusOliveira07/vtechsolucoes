@@ -64,7 +64,7 @@ export const Route = createRootRoute({
         { title: SITE_NAME },
         { name: "description", content: SITE_DESCRIPTION[locale] },
         { name: "author", content: SITE_NAME },
-        { name: "theme-color", content: "#0a0d11" },
+        { name: "theme-color", content: "#edf2f8" },
       ],
       links: [
         // fontes do próprio site (ver @font-face em styles.css), pedidas junto com o CSS

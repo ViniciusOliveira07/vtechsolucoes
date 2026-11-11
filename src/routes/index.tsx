@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/site";
 import { pick } from "@/lib/i18n";
-import { Hero } from "@/components/site/sections/Hero";
-import { Layers } from "@/components/site/sections/Layers";
-import { ServicesExplorer } from "@/components/site/sections/ServicesExplorer";
-import { SpecSheet } from "@/components/site/sections/SpecSheet";
-import { Credentials } from "@/components/site/sections/Credentials";
-import { CtaBand } from "@/components/site/sections/CtaBand";
-import { BlogPreview } from "@/components/site/sections/BlogPreview";
-import { Contact } from "@/components/site/sections/Contact";
+import { HomeHero } from "@/components/site/home/HomeHero";
+import { ProcessRouter } from "@/components/site/home/ProcessRouter";
+import { ServiceStack } from "@/components/site/home/ServiceStack";
+import { LayerStack } from "@/components/site/home/LayerStack";
+import { SpecTable } from "@/components/site/home/SpecTable";
+import { Pipeline } from "@/components/site/home/Pipeline";
+import { HomeBlog } from "@/components/site/home/HomeBlog";
+import { HomeFaq } from "@/components/site/home/HomeFaq";
+import { FinalCta } from "@/components/site/home/FinalCta";
 
 const HEAD = {
   pt: {
@@ -40,14 +41,15 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <>
-      <Hero />
-      <Layers withFlow />
-      <ServicesExplorer />
-      <SpecSheet />
-      <Credentials />
-      <CtaBand />
-      <BlogPreview />
-      <Contact />
+      <HomeHero />
+      <ProcessRouter />
+      <ServiceStack />
+      <LayerStack />
+      <SpecTable />
+      <Pipeline />
+      <HomeBlog />
+      <HomeFaq />
+      <FinalCta />
     </>
   );
 }

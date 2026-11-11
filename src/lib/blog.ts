@@ -332,6 +332,13 @@ export function getPosts(locale: Locale) {
   return POSTS_BY_LOCALE[locale].filter(isLive);
 }
 
+/** Próximo artigo agendado (ainda não publicado), para o aviso "próximo artigo" da home. */
+export function nextScheduledPost(locale: Locale) {
+  return POSTS_BY_LOCALE[locale]
+    .filter((p) => !isLive(p))
+    .sort((a, b) => (a.publishedAt < b.publishedAt ? -1 : 1))[0];
+}
+
 export function getPost(slug: string, locale: Locale) {
   return getPosts(locale).find((p) => p.slug === slug);
 }

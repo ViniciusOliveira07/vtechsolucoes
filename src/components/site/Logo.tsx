@@ -13,12 +13,12 @@ export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden className={cn("h-[1.375rem] w-[1.375rem]", className)}>
       <path d="M3 4h4l5 12 5-12h4l-7 16h-4z" fill="currentColor" />
-      <circle cx="20" cy="20" r="2" fill="var(--signal)" />
+      <circle cx="20" cy="20" r="2" fill="var(--cyan)" />
     </svg>
   );
 }
 
-/** Nome "vtech soluções": o branco do "vtech" se mescla no azul da marca ao longo da palavra. */
+/** Nome "vtech soluções": "vtech" na cor do texto e "soluções" no azul da marca. */
 export function LogoWord({ className }: { className?: string }) {
   return (
     <span className={cn("logo-word", className)}>

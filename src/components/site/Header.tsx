@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { cn } from "@/lib/utils";
-import { NAV } from "@/lib/site";
+import { NAV, WHATSAPP_GREETING, whatsappUrl } from "@/lib/site";
 import { Events } from "@/lib/analytics";
 import { useLocale, useT } from "@/lib/i18n";
 import { Logo } from "@/components/site/Logo";
-import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
+import { ArrowDot } from "@/components/site/home/Ico";
 
 const TEXT = {
-  pt: { nav: "Principal", menuNav: "Menu", open: "Recebendo novos projetos", cta: "Iniciar diagnóstico", menu: "MENU", close: "FECHAR" },
-  en: { nav: "Main", menuNav: "Menu", open: "Taking on new projects", cta: "Start diagnosis", menu: "MENU", close: "CLOSE" },
-  es: { nav: "Principal", menuNav: "Menú", open: "Recibiendo nuevos proyectos", cta: "Iniciar diagnóstico", menu: "MENÚ", close: "CERRAR" },
+  pt: { nav: "Principal", open: "Abrir menu", close: "Fechar menu", cta: "Iniciar diagnóstico" },
+  en: { nav: "Main", open: "Open menu", close: "Close menu", cta: "Start diagnosis" },
+  es: { nav: "Principal", open: "Abrir menú", close: "Cerrar menú", cta: "Iniciar diagnóstico" },
 };
 
+/**
+ * Menu em pílula flutuante: transparente no topo, ganha fundo ao rolar e escurece sobre as
+ * faixas escuras (qualquer elemento com data-nav-dark). Sem seletor de idioma: o português é o
+ * padrão e as versões em inglês e espanhol ficam no rodapé.
+ */
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(false);
   const { pathname } = useLocation();
   const locale = useLocale();
   const t = useT(TEXT);
+  const greeting = useT(WHATSAPP_GREETING);
 
-  // Fecha o menu ao trocar de rota
   useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
@@ -29,78 +35,86 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 16);
+      const y = 40;
+      let d = false;
+      document.querySelectorAll<HTMLElement>("[data-nav-dark]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < y && r.bottom > y) d = true;
+      });
+      setDark(d);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [pathname]);
+
   const isActive = (to: string) => pathname === to || pathname.startsWith(`${to}/`);
+  const cta = (where: string) => ({
+    href: whatsappUrl(greeting),
+    target: "_blank",
+    rel: "noopener noreferrer",
+    onClick: () => {
+      Events.ctaClick("Iniciar diagnóstico", where);
+      Events.whatsappClick(pathname);
+    },
+  });
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="shell flex h-16 items-center gap-7">
-        <Logo />
-
-        <nav aria-label={t.nav} className="ml-3 hidden items-center gap-1 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              aria-current={isActive(item.to) ? "page" : undefined}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm transition-colors hover:bg-surface-elevated hover:text-foreground",
-                isActive(item.to) ? "text-foreground" : "text-muted-foreground",
-              )}
-            >
-              {item.label[locale]}
-            </Link>
-          ))}
-        </nav>
-
-        <span className="ml-auto hidden items-center gap-2 whitespace-nowrap font-mono text-xs text-muted-foreground xl:inline-flex">
-          <i aria-hidden className="h-1.5 w-1.5 rounded-full bg-ok shadow-[0_0_0_0.1875rem_#8fe3b022]" />
-          {t.open}
-        </span>
-        {/* idioma: no celular fica ao lado do botão do menu, no desktop antes do CTA */}
-        <div className="ml-auto flex items-center gap-3 lg:ml-auto xl:ml-0">
-          <LanguageSwitcher />
-          <Link
-            to="/contato"
-            onClick={() => Events.ctaClick("Iniciar diagnóstico", "header")}
-            className="btn hidden lg:inline-flex"
-          >
-            {t.cta}
-          </Link>
+    <header className="vt-nav" data-scrolled={scrolled} data-dark={dark && !open} data-open={open}>
+      <div className="vt-wrap">
+        <div className="vt-pill">
+          <Logo />
+          <nav aria-label={t.nav} className="vt-nav-links">
+            {NAV.map((item) => (
+              <Link key={item.to} to={item.to} aria-current={isActive(item.to) ? "page" : undefined}>
+                {item.label[locale]}
+              </Link>
+            ))}
+          </nav>
+          <div className="vt-nav-cta">
+            <a className="btn btn-line btn-arrow" {...cta("header")}>
+              {t.cta}
+              <ArrowDot />
+            </a>
+          </div>
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border-strong px-3.5 font-mono text-xs font-medium lg:hidden"
+            className="vt-burger"
             aria-expanded={open}
             aria-controls="menu-movel"
+            aria-label={open ? t.close : t.open}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? t.close : t.menu}
+            <span />
           </button>
         </div>
-      </div>
-
-      <div id="menu-movel" hidden={!open} className="border-t border-border bg-background lg:hidden">
-        <nav aria-label={t.menuNav} className="shell grid pb-5 pt-2">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              aria-current={isActive(item.to) ? "page" : undefined}
-              className="flex min-h-[3.25rem] items-center justify-between border-b border-border text-lg"
-            >
-              {item.label[locale]}
-              <span aria-hidden className="font-mono text-faint">
-                →
-              </span>
-            </Link>
-          ))}
-          <Link
-            to="/contato"
-            onClick={() => Events.ctaClick("Iniciar diagnóstico", "menu_mobile")}
-            className="btn mt-5"
-          >
-            {t.cta}
-          </Link>
-        </nav>
+        {open && (
+          <nav id="menu-movel" aria-label={t.nav} className="vt-sheet">
+            {NAV.map((item) => (
+              <Link key={item.to} to={item.to} aria-current={isActive(item.to) ? "page" : undefined}>
+                {item.label[locale]}
+                <span aria-hidden>→</span>
+              </Link>
+            ))}
+            <a className="btn btn-arrow" {...cta("menu_mobile")}>
+              {t.cta}
+              <ArrowDot />
+            </a>
+          </nav>
+        )}
       </div>
     </header>
   );
