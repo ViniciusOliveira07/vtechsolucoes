@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { COMPANY, WHATSAPP_GREETING, useServices, whatsappUrl } from "@/lib/site";
 import { getCategories } from "@/lib/blog";
-import { LOCALES, LOCALE_META, useLocale, useSetLocale, useT, type L } from "@/lib/i18n";
+import { useLocale, useT, type L } from "@/lib/i18n";
 import { Events } from "@/lib/analytics";
 import { Logo } from "@/components/site/Logo";
 
@@ -27,7 +27,6 @@ const TEXT = {
 /** Rodapé escuro com mapa do site: serviços, categorias do blog, empresa, legal e idiomas (links internos para o Google). */
 export function Footer() {
   const locale = useLocale();
-  const setLocale = useSetLocale();
   const t = useT(TEXT);
   const services = useServices();
   const greeting = useT(WHATSAPP_GREETING);
@@ -86,18 +85,6 @@ export function Footer() {
                 <Link key={l.to} to={l.to}>
                   {l.label[locale]}
                 </Link>
-              ))}
-              <h2 className="mt-5">{t.lang}</h2>
-              {LOCALES.map((l) => (
-                <button
-                  key={l}
-                  type="button"
-                  aria-current={l === locale}
-                  lang={LOCALE_META[l].html}
-                  onClick={() => l !== locale && void setLocale(l)}
-                >
-                  {LOCALE_META[l].label}
-                </button>
               ))}
             </div>
             <div>

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CATEGORIES, getPosts } from "@/lib/blog";
 import { localizedUrl, SERVICES } from "@/lib/site";
-import { DEFAULT_LOCALE, LOCALE_META, LOCALES } from "@/lib/i18n";
+import { DEFAULT_LOCALE } from "@/lib/i18n";
 
 // Data da última revisão das páginas institucionais. Atualize ao mudar o conteúdo delas.
 const PAGES_UPDATED = "2026-10-27";
@@ -38,16 +38,6 @@ function entries(): Entry[] {
   ];
 }
 
-// Cada URL declara as versões nos três idiomas (mesmo endereço com ?lang=) e o x-default em português.
-function alternates(path: string) {
-  return [
-    ...LOCALES.map(
-      (l) => `<xhtml:link rel="alternate" hreflang="${LOCALE_META[l].html}" href="${xmlEscape(localizedUrl(path, l))}"/>`,
-    ),
-    `<xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(localizedUrl(path, DEFAULT_LOCALE))}"/>`,
-  ].join("");
-}
-
 const xmlEscape = (s: string) => s.replace(/&/g, "&amp;");
 
 export const Route = createFileRoute("/sitemap.xml")({
@@ -55,14 +45,12 @@ export const Route = createFileRoute("/sitemap.xml")({
     handlers: {
       GET: () => {
         const body =
-          `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
-          // uma <url> por idioma, todas com a mesma lista de alternates (como o Google recomenda)
+          `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+          // site só em português: uma <url> por página
           entries()
-            .flatMap((e) =>
-              LOCALES.map(
-                (l) =>
-                  `  <url><loc>${xmlEscape(localizedUrl(e.path, l))}</loc>${alternates(e.path)}<lastmod>${e.lastmod}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`,
-              ),
+            .map(
+              (e) =>
+                `  <url><loc>${xmlEscape(localizedUrl(e.path, DEFAULT_LOCALE))}</loc><lastmod>${e.lastmod}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`,
             )
             .join("\n") +
           `\n</urlset>\n`;

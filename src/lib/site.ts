@@ -1,7 +1,7 @@
 // Dados institucionais e helpers de SEO usados por todas as rotas.
 // O domínio oficial é o que está no CNAME (vtechsolucoes.ia.br). Trocar aqui reflete em
 // canonical, Open Graph, Schema.org e sitemap.
-import { DEFAULT_LOCALE, LOCALE_META, LOCALES, pick, useLocale, type L, type Locale } from "@/lib/i18n";
+import { DEFAULT_LOCALE, LOCALE_META, pick, useLocale, type L, type Locale } from "@/lib/i18n";
 
 export const SITE_URL = "https://vtechsolucoes.ia.br";
 export const SITE_NAME = "Vtech Soluções";
@@ -81,7 +81,6 @@ export function seo({ title, description, path, locale: given, image, type = "we
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
     { property: "og:locale", content: LOCALE_META[locale].og },
-    ...LOCALES.filter((l) => l !== locale).map((l) => ({ property: "og:locale:alternate", content: LOCALE_META[l].og })),
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:url", content: url },
@@ -105,11 +104,8 @@ export function seo({ title, description, path, locale: given, image, type = "we
   if (noindex) meta.push({ name: "robots", content: "noindex, follow" });
   if (publishedTime) meta.push({ property: "article:published_time", content: publishedTime });
   if (modifiedTime) meta.push({ property: "article:modified_time", content: modifiedTime });
-  const links = [
-    { rel: "canonical", href: url },
-    ...LOCALES.map((l) => ({ rel: "alternate", hrefLang: LOCALE_META[l].html, href: localizedUrl(path, l) })),
-    { rel: "alternate", hrefLang: "x-default", href: absoluteUrl(path) },
-  ];
+  // site só em português: sem hreflang para outros idiomas
+  const links = [{ rel: "canonical", href: url }];
   return { meta, links };
 }
 

@@ -7,7 +7,7 @@ import geistMonoLatin from "../assets/fonts/geist-mono-latin.woff2?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SITE_DESCRIPTION, SITE_NAME, jsonLd, organizationSchema } from "@/lib/site";
-import { LOCALE_META, LocaleContext, isLocale, saveLocaleCookie, useLocale, useT } from "@/lib/i18n";
+import { LOCALE_META, LocaleContext, useLocale, useT } from "@/lib/i18n";
 import { initAnalytics, trackPageView } from "@/lib/analytics";
 import { resolveLocale } from "@/lib/resolve-locale";
 
@@ -104,10 +104,7 @@ function RootComponent() {
   const locale = useLocale();
   const { href } = useLocation();
 
-  // Quem chega por um link com ?lang= continua nesse idioma ao navegar pelo site.
   useEffect(() => {
-    const lang = new URLSearchParams(window.location.search).get("lang");
-    if (isLocale(lang)) saveLocaleCookie(lang);
     initAnalytics();
   }, []);
 
