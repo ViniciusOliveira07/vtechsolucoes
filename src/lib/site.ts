@@ -142,7 +142,21 @@ export function organizationSchema(locale: Locale) {
       addressRegion: COMPANY.state,
       addressCountry: "BR",
     },
-    areaServed: { "@type": "Country", name: locale === "en" ? "Brazil" : "Brasil" },
+    areaServed: [
+      { "@type": "City", name: "São Paulo" },
+      { "@type": "Country", name: locale === "en" ? "Brazil" : "Brasil" },
+    ],
+    // temas em que a empresa atua: ajudam buscadores e assistentes de IA a ligar a marca às buscas
+    knowsAbout: [
+      "Agente de IA para WhatsApp",
+      "Chatbot com inteligência artificial",
+      "Automação de processos com IA",
+      "RAG (retrieval-augmented generation)",
+      "Integração de ERP e CRM",
+      "Desenvolvimento de sistemas web sob medida",
+      "Criação de sites institucionais",
+      "SEO técnico",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+55-11-5444-1926",

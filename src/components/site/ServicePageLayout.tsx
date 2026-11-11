@@ -7,7 +7,7 @@ import { CtaBand } from "@/components/site/sections/CtaBand";
 import { PageHero, SecHead } from "@/components/site/vt/Page";
 import { FaqSection } from "@/components/site/vt/FaqSection";
 import { Pipeline } from "@/components/site/home/Pipeline";
-import { ServiceVignette } from "@/components/site/home/ServiceStack";
+import { ServiceVignette, type VignetteSlug } from "@/components/site/home/ServiceStack";
 import { ArrowDot, Ico } from "@/components/site/home/Ico";
 import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
@@ -38,6 +38,10 @@ export type RelatedService = {
 
 export type ServicePageData = {
   slug: string;
+  /** Página de "Soluções" (trilha /solucoes) em vez de serviço (trilha /servicos). */
+  section?: "servicos" | "solucoes";
+  /** Ilustração da primeira dobra (padrão: a do próprio serviço). */
+  vignette?: VignetteSlug;
   eyebrow: string;
   h1: string;
   subheadline: string;
@@ -69,11 +73,15 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
       <PageHero
         full
         crumbsLabel={t.crumbsAria}
-        crumbs={[{ label: t.home, to: "/" }, { label: t.services, to: "/servicos" }, { label: crumb }]}
+        crumbs={[
+          { label: t.home, to: "/" },
+          data.section === "solucoes" ? { label: "soluções", to: "/solucoes" } : { label: t.services, to: "/servicos" },
+          { label: crumb },
+        ]}
         kicker={data.eyebrow}
         title={data.h1}
         sub={data.subheadline}
-        aside={<ServiceVignette slug={data.slug as ServiceSlug} />}
+        aside={<ServiceVignette slug={data.vignette ?? (data.slug as ServiceSlug)} />}
       >
         <div className="vt-ctas">
           <a
@@ -83,7 +91,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
             rel="noopener noreferrer"
             onClick={() => {
               Events.ctaClick("Iniciar diagnóstico", "hero", data.slug);
-              Events.whatsappClick(`/servicos/${data.slug}`);
+              Events.whatsappClick(`/${data.section ?? "servicos"}/${data.slug}`);
             }}
           >
             {t.cta}

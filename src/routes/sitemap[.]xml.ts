@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CATEGORIES, getPosts } from "@/lib/blog";
 import { localizedUrl, SERVICES } from "@/lib/site";
 import { DEFAULT_LOCALE } from "@/lib/i18n";
+import { SOLUCOES } from "@/lib/solucoes";
+
+// Páginas de soluções (lançadas em 2026-11-11)
+const SOLUCOES_UPDATED = "2026-11-11";
 
 // Data da última revisão das páginas institucionais. Atualize ao mudar o conteúdo delas.
 const PAGES_UPDATED = "2026-10-27";
@@ -18,6 +22,13 @@ function entries(): Entry[] {
     ...SERVICES.map((s) => ({
       path: `/servicos/${s.slug}`,
       lastmod: PAGES_UPDATED,
+      changefreq: "monthly",
+      priority: "0.9",
+    })),
+    { path: "/solucoes", lastmod: SOLUCOES_UPDATED, changefreq: "monthly", priority: "0.9" },
+    ...SOLUCOES.map((s) => ({
+      path: `/solucoes/${s.data.slug}`,
+      lastmod: SOLUCOES_UPDATED,
       changefreq: "monthly",
       priority: "0.9",
     })),

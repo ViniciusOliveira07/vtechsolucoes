@@ -4,6 +4,7 @@ import { getCategories } from "@/lib/blog";
 import { useLocale, useT, type L } from "@/lib/i18n";
 import { Events } from "@/lib/analytics";
 import { Logo } from "@/components/site/Logo";
+import { SOLUCOES } from "@/lib/solucoes";
 
 const EMPRESA = [
   { to: "/sobre", label: { pt: "Sobre", en: "About", es: "Nosotros" } },
@@ -67,6 +68,14 @@ export function Footer() {
               {services.map((s) => (
                 <Link key={s.slug} to={`/servicos/${s.slug}`}>
                   {s.title}
+                </Link>
+              ))}
+            </div>
+            <div>
+              <h2>Soluções</h2>
+              {SOLUCOES.map((s) => (
+                <Link key={s.data.slug} to="/solucoes/$slug" params={{ slug: s.data.slug }}>
+                  {s.data.eyebrow}
                 </Link>
               ))}
             </div>

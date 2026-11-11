@@ -4209,3 +4209,44 @@
     }
   }
 }
+
+/* rodapé com a coluna "Soluções": 3 colunas no tablet, 5 em telas largas */
+@layer components {
+  @media (min-width: 48rem) {
+    .vt-footer-map {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 80rem) {
+    .vt-footer-map {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+}
+
+/* rodapé: link que quebra em duas linhas não cola no seguinte */
+@layer components {
+  .vt-footer-map a {
+    line-height: 1.35;
+    padding-block: 0.3rem;
+  }
+}
+
+/* artigo: atalho para a página de solução relacionada */
+@layer components {
+  .vt-sol-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+  }
+  .vt-sol-link h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .vt-sol-link p {
+    margin: 0;
+  }
+}

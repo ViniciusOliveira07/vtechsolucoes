@@ -10,6 +10,8 @@ import { Crumbs, SecHead } from "@/components/site/vt/Page";
 import { DownloadPostButton } from "@/components/site/DownloadPostDialog";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 import { PostOffer } from "@/components/site/PostOffer";
+import { Ico } from "@/components/site/home/Ico";
+import { solucaoForPost } from "@/lib/solucoes";
 
 const TEXT = {
   pt: {
@@ -114,6 +116,7 @@ function PostPage() {
   const service = serviceFor(category, locale);
   // relacionados na lista do idioma da página (o artigo pode ter vindo em português por falta de tradução)
   const related = relatedPosts({ ...post, locale });
+  const solucao = solucaoForPost(post.slug, post.category.slug);
 
   useEffect(() => trackView(post.slug), [post.slug]);
 
@@ -162,6 +165,16 @@ function PostPage() {
           <div className="vt-article-grid">
             <div className="vt-article-body">
               <div className="prose-vt" dangerouslySetInnerHTML={{ __html: renderPost(post.slug, post.locale, body) }} />
+              {solucao && (
+                <Link to="/solucoes/$slug" params={{ slug: solucao.data.slug }} className="vt-tile vt-tile-link vt-sol-link">
+                  <span className="vt-kicker">solução relacionada</span>
+                  <h2>{solucao.data.eyebrow}</h2>
+                  <p>{solucao.card}</p>
+                  <span className="vt-rd">
+                    Ver a solução <Ico name="arrow" />
+                  </span>
+                </Link>
+              )}
             </div>
             {post.headings.length > 2 && (
               <aside className="hidden lg:block" aria-label={t.toc}>

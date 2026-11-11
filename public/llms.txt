@@ -1,0 +1,29 @@
+# Vtech Soluções
+
+> Empresa de tecnologia de São Paulo (Vtech Soluções Ltda., CNPJ 66.428.598/0001-22) que constrói agentes de IA para WhatsApp, chatbots com IA, automações de processos, RAG, integrações de ERP e CRM, sistemas web sob medida e sites institucionais para empresas B2B de todo o Brasil. Projetos com escopo fechado, proposta em até 24 horas úteis após o diagnóstico e código entregue ao cliente.
+
+Atendimento em português. Contato: WhatsApp +55 11 5444-1926 ou https://vtechsolucoes.ia.br/contato
+
+## Soluções
+
+- [Agente de IA para WhatsApp](https://vtechsolucoes.ia.br/solucoes/agente-de-ia-para-whatsapp): agente que atende no WhatsApp, consulta ERP e CRM, agenda e passa para humano com o histórico.
+- [Chatbot com IA para empresas](https://vtechsolucoes.ia.br/solucoes/chatbot-com-ia): chatbot que entende linguagem natural, no site e no WhatsApp, com base nos dados da empresa.
+- [Agência de automação com IA](https://vtechsolucoes.ia.br/solucoes/agencia-de-automacao-com-ia): agentes, integrações e fluxos que tiram o trabalho repetitivo da equipe.
+- [RAG para empresas](https://vtechsolucoes.ia.br/solucoes/rag-para-empresas): IA que responde a partir dos documentos da empresa e cita a fonte.
+- [Sistema web sob medida](https://vtechsolucoes.ia.br/solucoes/sistema-web-sob-medida): a planilha vira sistema, com permissões, painéis, aprovações e integrações.
+- [Criação de site em São Paulo](https://vtechsolucoes.ia.br/solucoes/criacao-de-site-em-sao-paulo): sites institucionais rápidos, com SEO técnico e contato direto no WhatsApp ou CRM.
+
+## Serviços
+
+- [Automações com IA](https://vtechsolucoes.ia.br/servicos/automacoes-com-ia)
+- [Sistemas web](https://vtechsolucoes.ia.br/servicos/sistemas-web)
+- [Integrações de sistemas](https://vtechsolucoes.ia.br/servicos/integracoes)
+- [Sites institucionais](https://vtechsolucoes.ia.br/servicos/sites-institucionais)
+- [Consultoria tech](https://vtechsolucoes.ia.br/servicos/consultoria-tech)
+
+## Empresa
+
+- [Sobre a Vtech](https://vtechsolucoes.ia.br/sobre)
+- [Método de trabalho](https://vtechsolucoes.ia.br/metodo)
+- [Blog](https://vtechsolucoes.ia.br/blog): artigos sobre IA, automação, integrações e sites.
+- [Contato](https://vtechsolucoes.ia.br/contato)

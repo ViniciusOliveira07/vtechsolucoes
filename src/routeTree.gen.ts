@@ -18,11 +18,14 @@ import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cook
 import { Route as MetodoRouteImport } from './routes/metodo'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CartaoRouteImport } from './routes/cartao'
+import { Route as SolucoesRouteRouteImport } from './routes/solucoes/route'
 import { Route as ServicosRouteRouteImport } from './routes/servicos/route'
 import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SolucoesIndexRouteImport } from './routes/solucoes/index'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as SolucoesSlugRouteImport } from './routes/solucoes/$slug'
 import { Route as ServicosSitesInstitucionaisRouteImport } from './routes/servicos/sites-institucionais'
 import { Route as ServicosSistemasWebRouteImport } from './routes/servicos/sistemas-web'
 import { Route as ServicosIntegracoesRouteImport } from './routes/servicos/integracoes'
@@ -78,6 +81,11 @@ const CartaoRoute = CartaoRouteImport.update({
   path: '/cartao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolucoesRouteRoute = SolucoesRouteRouteImport.update({
+  id: '/solucoes',
+  path: '/solucoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosRouteRoute = ServicosRouteRouteImport.update({
   id: '/servicos',
   path: '/servicos',
@@ -93,6 +101,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolucoesIndexRoute = SolucoesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SolucoesRouteRoute,
+} as any)
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -102,6 +115,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRouteRoute,
+} as any)
+const SolucoesSlugRoute = SolucoesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SolucoesRouteRoute,
 } as any)
 const ServicosSitesInstitucionaisRoute =
   ServicosSitesInstitucionaisRouteImport.update({
@@ -154,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteRouteWithChildren
   '/servicos': typeof ServicosRouteRouteWithChildren
+  '/solucoes': typeof SolucoesRouteRouteWithChildren
   '/cartao': typeof CartaoRoute
   '/contato': typeof ContatoRoute
   '/metodo': typeof MetodoRoute
@@ -171,8 +190,10 @@ export interface FileRoutesByFullPath {
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/solucoes/$slug': typeof SolucoesSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/solucoes/': typeof SolucoesIndexRoute
   '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRoutesByTo {
@@ -194,8 +215,10 @@ export interface FileRoutesByTo {
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/solucoes/$slug': typeof SolucoesSlugRoute
   '/blog': typeof BlogIndexRoute
   '/servicos': typeof ServicosIndexRoute
+  '/solucoes': typeof SolucoesIndexRoute
   '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRoutesById {
@@ -203,6 +226,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteRouteWithChildren
   '/servicos': typeof ServicosRouteRouteWithChildren
+  '/solucoes': typeof SolucoesRouteRouteWithChildren
   '/cartao': typeof CartaoRoute
   '/contato': typeof ContatoRoute
   '/metodo': typeof MetodoRoute
@@ -220,8 +244,10 @@ export interface FileRoutesById {
   '/servicos/integracoes': typeof ServicosIntegracoesRoute
   '/servicos/sistemas-web': typeof ServicosSistemasWebRoute
   '/servicos/sites-institucionais': typeof ServicosSitesInstitucionaisRoute
+  '/solucoes/$slug': typeof SolucoesSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/solucoes/': typeof SolucoesIndexRoute
   '/blog/categoria/$categoria': typeof BlogCategoriaCategoriaRoute
 }
 export interface FileRouteTypes {
@@ -230,6 +256,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/servicos'
+    | '/solucoes'
     | '/cartao'
     | '/contato'
     | '/metodo'
@@ -247,8 +274,10 @@ export interface FileRouteTypes {
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/solucoes/$slug'
     | '/blog/'
     | '/servicos/'
+    | '/solucoes/'
     | '/blog/categoria/$categoria'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -270,14 +299,17 @@ export interface FileRouteTypes {
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/solucoes/$slug'
     | '/blog'
     | '/servicos'
+    | '/solucoes'
     | '/blog/categoria/$categoria'
   id:
     | '__root__'
     | '/'
     | '/blog'
     | '/servicos'
+    | '/solucoes'
     | '/cartao'
     | '/contato'
     | '/metodo'
@@ -295,8 +327,10 @@ export interface FileRouteTypes {
     | '/servicos/integracoes'
     | '/servicos/sistemas-web'
     | '/servicos/sites-institucionais'
+    | '/solucoes/$slug'
     | '/blog/'
     | '/servicos/'
+    | '/solucoes/'
     | '/blog/categoria/$categoria'
   fileRoutesById: FileRoutesById
 }
@@ -304,6 +338,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRouteRoute: typeof BlogRouteRouteWithChildren
   ServicosRouteRoute: typeof ServicosRouteRouteWithChildren
+  SolucoesRouteRoute: typeof SolucoesRouteRouteWithChildren
   CartaoRoute: typeof CartaoRoute
   ContatoRoute: typeof ContatoRoute
   MetodoRoute: typeof MetodoRoute
@@ -382,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solucoes': {
+      id: '/solucoes'
+      path: '/solucoes'
+      fullPath: '/solucoes'
+      preLoaderRoute: typeof SolucoesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos': {
       id: '/servicos'
       path: '/servicos'
@@ -403,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solucoes/': {
+      id: '/solucoes/'
+      path: '/'
+      fullPath: '/solucoes/'
+      preLoaderRoute: typeof SolucoesIndexRouteImport
+      parentRoute: typeof SolucoesRouteRoute
+    }
     '/servicos/': {
       id: '/servicos/'
       path: '/'
@@ -416,6 +465,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRouteRoute
+    }
+    '/solucoes/$slug': {
+      id: '/solucoes/$slug'
+      path: '/$slug'
+      fullPath: '/solucoes/$slug'
+      preLoaderRoute: typeof SolucoesSlugRouteImport
+      parentRoute: typeof SolucoesRouteRoute
     }
     '/servicos/sites-institucionais': {
       id: '/servicos/sites-institucionais'
@@ -521,10 +577,25 @@ const ServicosRouteRouteWithChildren = ServicosRouteRoute._addFileChildren(
   ServicosRouteRouteChildren,
 )
 
+interface SolucoesRouteRouteChildren {
+  SolucoesSlugRoute: typeof SolucoesSlugRoute
+  SolucoesIndexRoute: typeof SolucoesIndexRoute
+}
+
+const SolucoesRouteRouteChildren: SolucoesRouteRouteChildren = {
+  SolucoesSlugRoute: SolucoesSlugRoute,
+  SolucoesIndexRoute: SolucoesIndexRoute,
+}
+
+const SolucoesRouteRouteWithChildren = SolucoesRouteRoute._addFileChildren(
+  SolucoesRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRouteRoute: BlogRouteRouteWithChildren,
   ServicosRouteRoute: ServicosRouteRouteWithChildren,
+  SolucoesRouteRoute: SolucoesRouteRouteWithChildren,
   CartaoRoute: CartaoRoute,
   ContatoRoute: ContatoRoute,
   MetodoRoute: MetodoRoute,

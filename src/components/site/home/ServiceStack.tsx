@@ -45,9 +45,16 @@ const VIN = {
 };
 
 /** Ilustração de cada serviço (a mesma da home), usada também na primeira dobra da página do serviço. */
-const VIG: Record<ServiceSlug, number> = { "automacoes-com-ia": 0, integracoes: 1, "sistemas-web": 2, "sites-institucionais": 3, "consultoria-tech": 4 };
+const VIG: Record<VignetteSlug, number> = { "automacoes-com-ia": 0, integracoes: 1, "sistemas-web": 2, "sites-institucionais": 3, "consultoria-tech": 4, whatsapp: 5, chatbot: 6 };
 
-export function ServiceVignette({ slug }: { slug: ServiceSlug }) {
+/** Ilustrações extras das páginas de soluções (conversa no WhatsApp e chat do site). Site só em português. */
+export type VignetteSlug = ServiceSlug | "whatsapp" | "chatbot";
+const CHAT_VIN = {
+  5: { h: "Agente no WhatsApp", badge: "IA", q: "Oi! Meu pedido 4821 já saiu?", a: "Saiu hoje às 14h pela transportadora. Seu código de rastreio é BR48210SP. Quer que eu avise quando chegar?", src: "consultado no ERP · pedido 4821", ok: "resolvido na hora ✓" },
+  6: { h: "Chat do site", badge: "IA", q: "Vocês entregam em Campinas?", a: "Entregamos sim, em até 2 dias úteis. Me passa seu CEP que eu calculo o frete agora.", src: "politica_de_entrega.pdf · seção 2", ok: "lead salvo no CRM ✓" },
+} as const;
+
+export function ServiceVignette({ slug }: { slug: VignetteSlug }) {
   const reduce = useReducedMotion();
   return (
     <div className="vt-card-vis vt-hero-vis">
@@ -181,6 +188,27 @@ function Vignette({ kind, reduce }: { kind: number; reduce: boolean }) {
         </ol>
       </div>
     );
+  if (kind === 5 || kind === 6) {
+    const c = CHAT_VIN[kind];
+    return (
+      <div className="vt-vin">
+        <div className="vt-vin-h">
+          <b>{c.h}</b>
+          <span className="vt-badge">{c.badge}</span>
+        </div>
+        <div className="vt-q">{c.q}</div>
+        <div className="vt-a">{c.a}</div>
+        <div className="vt-src">
+          <Ico name="file" />
+          {c.src}
+        </div>
+        <div className="vt-meter">
+          <span>{v.ex}</span>
+          <span>{c.ok}</span>
+        </div>
+      </div>
+    );
+  }
   if (kind === 0)
     return (
       <div className="vt-vin">
