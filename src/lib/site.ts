@@ -142,10 +142,7 @@ export function organizationSchema(locale: Locale) {
       addressRegion: COMPANY.state,
       addressCountry: "BR",
     },
-    areaServed: [
-      { "@type": "City", name: "São Paulo" },
-      { "@type": "Country", name: locale === "en" ? "Brazil" : "Brasil" },
-    ],
+    areaServed: { "@type": "Country", name: locale === "en" ? "Brazil" : "Brasil" },
     // temas em que a empresa atua: ajudam buscadores e assistentes de IA a ligar a marca às buscas
     knowsAbout: [
       "Agente de IA para WhatsApp",

@@ -2,7 +2,7 @@
 
 > Empresa de tecnologia de São Paulo (Vtech Soluções Ltda., CNPJ 66.428.598/0001-22) que constrói agentes de IA para WhatsApp, chatbots com IA, automações de processos, RAG, integrações de ERP e CRM, sistemas web sob medida e sites institucionais para empresas B2B de todo o Brasil. Projetos com escopo fechado, proposta em até 24 horas úteis após o diagnóstico e código entregue ao cliente.
 
-Atendimento em português. Contato: WhatsApp +55 11 5444-1926 ou https://vtechsolucoes.ia.br/contato
+Atendimento online em português para empresas de todo o Brasil. Contato: WhatsApp +55 11 5444-1926 ou https://vtechsolucoes.ia.br/contato
 
 ## Soluções
 
@@ -11,7 +11,7 @@ Atendimento em português. Contato: WhatsApp +55 11 5444-1926 ou https://vtechso
 - [Agência de automação com IA](https://vtechsolucoes.ia.br/solucoes/agencia-de-automacao-com-ia): agentes, integrações e fluxos que tiram o trabalho repetitivo da equipe.
 - [RAG para empresas](https://vtechsolucoes.ia.br/solucoes/rag-para-empresas): IA que responde a partir dos documentos da empresa e cita a fonte.
 - [Sistema web sob medida](https://vtechsolucoes.ia.br/solucoes/sistema-web-sob-medida): a planilha vira sistema, com permissões, painéis, aprovações e integrações.
-- [Criação de site em São Paulo](https://vtechsolucoes.ia.br/solucoes/criacao-de-site-em-sao-paulo): sites institucionais rápidos, com SEO técnico e contato direto no WhatsApp ou CRM.
+- [Criação de site para empresas](https://vtechsolucoes.ia.br/solucoes/criacao-de-site-para-empresas): sites institucionais rápidos, com SEO técnico e contato direto no WhatsApp ou CRM, para empresas de qualquer cidade do Brasil.
 
 ## Serviços
 

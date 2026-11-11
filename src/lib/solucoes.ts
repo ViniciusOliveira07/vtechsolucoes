@@ -3,7 +3,7 @@ import type { VignetteSlug } from "@/components/site/home/ServiceStack";
 
 /**
  * Páginas de "Soluções": uma página comercial por busca principal (agente de IA no WhatsApp,
- * chatbot com IA, agência de automação, RAG, sistema sob medida, site em São Paulo).
+ * chatbot com IA, agência de automação, RAG, sistema sob medida, criação de site).
  * As páginas de serviço continuam amplas; estas respondem direto a uma intenção de busca.
  * Regra de conteúdo: nada de números, clientes ou promessas que a Vtech não possa comprovar.
  */
@@ -401,27 +401,27 @@ export const SOLUCOES: Solucao[] = [
     },
   },
   {
-    title: "Criação de site em São Paulo para empresas | Vtech",
+    title: "Criação de site para empresas em todo o Brasil | Vtech",
     description:
-      "Criação de site em São Paulo para empresas B2B: rápido, acessível, com SEO técnico e lead direto no WhatsApp ou CRM. Proposta fechada em até 24h úteis.",
-    schemaName: "Criação de site institucional em São Paulo",
+      "Criação de site para empresas de qualquer cidade do Brasil: rápido, com SEO técnico e contato direto no WhatsApp ou CRM. Atendimento online, proposta em 24h úteis.",
+    schemaName: "Criação de site para empresas",
     serviceType: "Website development",
     card: "Site rápido, que aparece no Google e leva o contato direto para o seu WhatsApp.",
     data: {
       section: "solucoes",
       vignette: "sites-institucionais",
-      slug: "criacao-de-site-em-sao-paulo",
-      eyebrow: "Criação de site em São Paulo",
-      h1: "Criação de site em São Paulo para empresas que querem ser encontradas.",
+      slug: "criacao-de-site-para-empresas",
+      eyebrow: "Criação de site para empresas",
+      h1: "Criação de site para empresas que querem ser encontradas, em qualquer lugar do Brasil.",
       subheadline:
-        "Criamos sites institucionais rápidos, acessíveis e preparados para o Google, com o contato indo direto para o seu WhatsApp ou CRM. Empresa de São Paulo, atendimento para todo o Brasil.",
+        "Criamos sites institucionais rápidos, acessíveis e preparados para o Google, com o contato indo direto para o seu WhatsApp ou CRM. Atendimento online para empresas de todo o Brasil.",
       trust: ["Nota alta no PageSpeed", "SEO técnico desde o início", "Lead direto no WhatsApp ou CRM"],
       oQueE: {
         title: "O que um site de empresa precisa ter para gerar contatos",
         paragrafos: [
           "Um site de empresa precisa ser encontrado, carregar rápido e transformar visita em contato. Isso depende de três coisas: SEO técnico (estrutura que o Google entende), conteúdo que responde ao que o cliente procura e um caminho curto até o contato, como o WhatsApp ou um formulário ligado ao CRM.",
           "Velocidade e acessibilidade não são detalhe. O Google usa a experiência no celular para ordenar os resultados, e um site lento perde o visitante antes de ele ler a primeira linha. Por isso medimos o PageSpeed durante o projeto e entregamos o site com as métricas no verde.",
-          "A Vtech é uma empresa de tecnologia de São Paulo. Atendemos empresas da capital, da Grande São Paulo e de todo o Brasil, com reuniões online e proposta fechada por escrito antes de começar.",
+          "A Vtech atende empresas de qualquer cidade do Brasil. Todo o projeto acontece online, do diagnóstico à publicação, com proposta fechada por escrito antes de começar. Para negócios locais, o site é preparado para aparecer nas buscas da sua cidade e da sua região.",
         ],
       },
       problemas: [
@@ -458,8 +458,9 @@ export const SOLUCOES: Solucao[] = [
       ],
       processo: PROCESSO,
       faq: [
-        { q: "Quanto custa criar um site em São Paulo?", a: "Depende do número de páginas, do conteúdo e das integrações. Você recebe uma proposta fechada com escopo, prazo e investimento em até 24 horas úteis após a conversa de diagnóstico." },
-        { q: "Vocês atendem empresas fora de São Paulo?", a: "Sim. A Vtech é de São Paulo e atende empresas de todo o Brasil, com reuniões online." },
+        { q: "Quanto custa criar um site para empresa?", a: "Depende do número de páginas, do conteúdo e das integrações. Você recebe uma proposta fechada com escopo, prazo e investimento em até 24 horas úteis após a conversa de diagnóstico." },
+        { q: "Vocês atendem empresas de qualquer cidade?", a: "Sim. Atendemos empresas de todo o Brasil, com reuniões online. A sede da Vtech fica em São Paulo, mas nenhuma etapa do projeto exige presença física." },
+        { q: "O site aparece nas buscas da minha cidade?", a: "Para negócios locais, o site é preparado com as informações de cidade e região, e indicamos como ligar o site ao Perfil da Empresa no Google." },
         { q: "O site já sai otimizado para o Google?", a: "Sim. O SEO técnico faz parte do projeto: estrutura de páginas, títulos, dados estruturados, sitemap e velocidade." },
         { q: "Posso receber os contatos no WhatsApp?", a: "Sim. O site pode levar o contato direto para o WhatsApp ou registrar no seu CRM." },
         { q: "O site fica no meu nome?", a: "Sim. Domínio, hospedagem e código ficam com a sua empresa." },
@@ -495,7 +496,7 @@ const CATEGORY_SOLUCAO: Record<string, string> = {
   integracoes: "agencia-de-automacao-com-ia",
   "sistemas-sob-medida": "sistema-web-sob-medida",
   "gestao-de-tecnologia": "sistema-web-sob-medida",
-  "sites-e-seo": "criacao-de-site-em-sao-paulo",
+  "sites-e-seo": "criacao-de-site-para-empresas",
 };
 export const solucaoForPost = (postSlug: string, categorySlug: string) =>
   getSolucao(POST_SOLUCAO[postSlug] ?? CATEGORY_SOLUCAO[categorySlug] ?? "");

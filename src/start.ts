@@ -6,6 +6,10 @@ import { SITE_URL } from "@/lib/site";
 
 const HOST = new URL(SITE_URL).hostname;
 
+const MOVIDAS: Record<string, string> = {
+  "/solucoes/criacao-de-site-em-sao-paulo": "/solucoes/criacao-de-site-para-empresas",
+};
+
 const enderecoUnico = createMiddleware({ type: "request" }).server(({ request, next }) => {
   const url = new URL(request.url);
   const doSite = url.hostname === HOST || url.hostname === `www.${HOST}`;
@@ -19,6 +23,11 @@ const enderecoUnico = createMiddleware({ type: "request" }).server(({ request, n
       status: 301,
       headers: { Location: `${destino}${url.pathname}${url.search}`, "Cache-Control": "public, max-age=86400" },
     });
+  }
+  // páginas que mudaram de endereço (o antigo já foi enviado ao Google)
+  const novo = MOVIDAS[url.pathname.replace(/\/$/, "")];
+  if (novo) {
+    return new Response(null, { status: 301, headers: { Location: `${SITE_URL}${novo}${url.search}`, "Cache-Control": "public, max-age=86400" } });
   }
   return next();
 });

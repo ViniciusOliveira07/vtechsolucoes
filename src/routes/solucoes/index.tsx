@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/site/sections/CtaBand";
 
 const TITLE = "Soluções com IA, automação e sites para empresas | Vtech";
 const DESCRIPTION =
-  "Agente de IA para WhatsApp, chatbot com IA, automação, RAG, sistema web sob medida e criação de site em São Paulo. Escolha o que a sua empresa precisa resolver.";
+  "Agente de IA para WhatsApp, chatbot com IA, automação, RAG, sistema web sob medida e criação de site para empresas de todo o Brasil. Escolha o que a sua empresa precisa resolver.";
 
 export const Route = createFileRoute("/solucoes/")({
   head: ({ match }) => ({
