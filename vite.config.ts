@@ -26,6 +26,9 @@ export default defineConfig(({ command }) => ({
   ],
   // Lightning CSS também no dev, para o CSS do preview ser igual ao do build.
   css: { transformer: "lightningcss" },
+  // O build da Cloudflare falhava com EMFILE (arquivos abertos demais) ao ler os ~1.500 ícones
+  // do lucide-react em paralelo. Limitar a leitura simultânea evita o estouro sem mudar o resultado.
+  build: { rollupOptions: { maxParallelFileOps: 32 } },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
