@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
 });
 
 /** Blocos que surgem ao entrar na tela; o que já está visível no carregamento não anima. */
-const RISE = ".vt-head, .vt-card-txt, .vt-lay-list, .vt-stage, .vt-sheet2, .vt-stg, .vt-bar2, .vt-bpost, .vt-bnext, .vt-help, .vt-acc, .vt-final";
+const RISE = ".vt-head, .vt-lay-list, .vt-stage, .vt-sheet2, .vt-stg, .vt-bar2, .vt-bpost, .vt-bnext, .vt-help, .vt-acc, .vt-final";
 
 function useRise() {
   useEffect(() => {

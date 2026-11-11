@@ -130,9 +130,11 @@ export function ServiceStack({ all = false, hideHead = false }: { all?: boolean;
                     <Ico name="checkc" />
                     {c.closing}
                   </p>
-                  <Link className="vt-link" to={`/servicos/${c.slug}`}>
-                    {t.more} <Ico name="arrow" />
-                  </Link>
+                  {all && (
+                    <Link className="vt-link" to={`/servicos/${c.slug}`}>
+                      {t.more} <Ico name="arrow" />
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className="vt-card-vis">
