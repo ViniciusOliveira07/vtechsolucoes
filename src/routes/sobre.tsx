@@ -6,6 +6,7 @@ import { STACK } from "@/lib/stack";
 import { LayerStack } from "@/components/site/home/LayerStack";
 import { CtaBand } from "@/components/site/sections/CtaBand";
 import { Ico, type IcoName } from "@/components/site/home/Ico";
+import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
 const PRINCIPLES: L<{ title: string; desc: string }[]> = {
   pt: [
@@ -190,6 +191,7 @@ function SobrePage() {
               </article>
             ))}
           </div>
+          <SwipeDots count={principles.length} />
           <p className="mt-6 text-muted-foreground">
             {t.before}{" "}
             <Link to="/metodo" className="font-semibold text-signal underline underline-offset-4">

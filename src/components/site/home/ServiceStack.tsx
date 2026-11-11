@@ -4,6 +4,7 @@ import { useT, type L } from "@/lib/i18n";
 import type { ServiceSlug } from "@/lib/site";
 import { Ico, type IcoName } from "./Ico";
 import { clamp01, useReducedMotion, useScrollFrame, useSeen } from "./hooks";
+import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
 type Card = { slug: ServiceSlug; icon: IcoName; name: string; kicker: string; title: string; lead: string; items: [IcoName, string, string][]; closing: string };
 
@@ -144,6 +145,7 @@ export function ServiceStack({ all = false, hideHead = false }: { all?: boolean;
             </article>
           ))}
         </div>
+        <SwipeDots count={cards.length} />
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useT, type L } from "@/lib/i18n";
 import { Ico } from "./Ico";
 import { clamp01, useReducedMotion, useScrollFrame } from "./hooks";
+import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
 const TEXT = {
   pt: { kicker: "processo", title: "Do primeiro contato ao código na sua mão", sub: "Cada projeto anda como um deploy: uma etapa só começa quando a anterior foi aprovada.", project: "projeto · sua empresa", running: "em andamento", delivered: "entregue", stage: "ETAPA", done: "concluída", run: "em andamento", queued: "na fila", consult: "Precisa decidir stack, arquitetura ou fornecedor?", consultText: "A consultoria tech faz o diagnóstico e o roadmap com você.", consultCta: "Conhecer a consultoria" },
@@ -92,6 +93,7 @@ export function Pipeline({
               );
             })}
           </ol>
+          <SwipeDots count={stages.length} />
         </div>
         {consult && <div className="vt-bar2">
           <p>

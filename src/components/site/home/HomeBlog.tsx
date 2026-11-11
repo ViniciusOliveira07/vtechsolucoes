@@ -3,6 +3,7 @@ import { formatDate, getPosts, nextScheduledPost, type Post } from "@/lib/blog";
 import { useLocale, useT } from "@/lib/i18n";
 import { ArrowDot, Ico } from "./Ico";
 import { BlogCover } from "./BlogCover";
+import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
 const TEXT = {
   pt: { kicker: "blog da vtech", title: "Aprenda antes de contratar", sub: "Guias diretos sobre IA, integrações, sistemas e sites. Escritos por quem constrói, para quem decide.", all: "Ver todos os artigos", read: "Ler artigo", min: "min", next: "próximo", go: "Ir para o blog" },
@@ -40,6 +41,7 @@ export function HomeBlog() {
             ))}
           </div>
         </div>
+        <SwipeDots count={posts.length} />
         {next && (
           <div className="vt-bnext">
             <span>

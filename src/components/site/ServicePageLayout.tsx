@@ -9,6 +9,7 @@ import { FaqSection } from "@/components/site/vt/FaqSection";
 import { Pipeline } from "@/components/site/home/Pipeline";
 import { ServiceVignette } from "@/components/site/home/ServiceStack";
 import { ArrowDot, Ico } from "@/components/site/home/Ico";
+import { SwipeDots } from "@/components/site/vt/SwipeDots";
 
 // Textos fixos do layout (o conteúdo de cada serviço vem da rota, já no idioma certo)
 const TEXT = {
@@ -137,6 +138,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
               </li>
             ))}
           </ul>
+          <SwipeDots count={data.problemas.length} />
         </div>
       </section>
 
@@ -155,6 +157,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                 </article>
               ))}
             </div>
+            <SwipeDots count={data.paraQuem.length} />
           </div>
         </section>
       )}
@@ -174,6 +177,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
               );
             })}
           </ul>
+          <SwipeDots count={data.entregaveis.length} />
         </div>
       </section>
 
@@ -190,6 +194,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                 </article>
               ))}
             </div>
+            <SwipeDots count={data.casosDeUso.length} />
           </div>
         </section>
       )}
@@ -205,6 +210,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
               </div>
             ))}
           </dl>
+          <SwipeDots count={data.stack.length} />
         </div>
       </section>
 
@@ -267,6 +273,7 @@ export function ServicePageLayout({ data }: { data: ServicePageData }) {
                 </Link>
               ))}
             </div>
+            <SwipeDots count={data.relacionados.length} />
           </div>
         </section>
       )}
